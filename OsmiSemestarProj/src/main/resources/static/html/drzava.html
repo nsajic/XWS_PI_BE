@@ -1,0 +1,55 @@
+<div ng-cloak ng-controller="drzavaCtrl as $ctrl">
+	<div>
+		<h1>Drzava</h1>
+		<!--<a ng-click="logOut()" href="">Izloguj se</a>-->
+	</div>
+
+	<div>
+		<div id="tabs">
+			<ul>
+				<li ng-class="{active: isSet(0)}"><a ng-click="setTab(0)"
+					href=""><span>Drzave</span></a></li>
+				<li ng-class="{active: isSet(1)}"><a ng-click="setTab(1)"
+					href=""><span>Dodaj drzavu</span></a></li>
+			</ul>
+		</div>
+
+		<div ng-show="isSet(0)">
+			<h2>Drzave</h2>
+			<table ng-repeat='drzava in drzave'>
+				<tr >
+					<td style = "width:120px; heigth: 70px">{{drzava.nazivDrzave}}</td>
+					<td><button ng-click="obrisiDrzavu(drzava.id)">Obrisi</button></td>
+					<td><button ng-click="setDrzavaZaIzmenu(drzava)">Izmeni</button></td>
+				</tr>
+				<tr ng-show = 'idDrzaveZaIzmenu == drzava.id'>
+					<td colspan = 3>
+						<hr/>
+					<td>
+				</tr>
+				<tr ng-show = 'idDrzaveZaIzmenu == drzava.id'>
+					<td><input style = "width:100px; heigth: 70px" type=text ng-model="$ctrl.nazivDrzaveIzmena"></td>
+					<td><button ng-click="izmeniDrzavu(drzava.id)">Potvrdi</button></td>				
+				</tr>
+				<tr ng-show = 'idDrzaveZaIzmenu == drzava.id'>
+					<td colspan = 3>
+						<hr/>
+					<td>
+				</tr>
+			</table>
+		</div>
+		<div ng-show="isSet(1)">
+			<div>
+				<h2>Unesite podatke o drzavi:</h2>
+				<table>
+					<tr>
+						<td>Naziv:</td>
+						<td><input type=text ng-model="nazivDrzave"></td>
+					<tr>
+				</table>
+				<button ng-click="dodajDrzavu()">Dodaj</button>
+			</div>
+		</div>
+	</div>
+</div>
+

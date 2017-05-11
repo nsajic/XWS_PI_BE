@@ -1,4 +1,4 @@
-package xws_pi_bezb.models;
+/*package xws_pi_bezb.models;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -37,10 +37,10 @@ public class DnevnoStanjeRacuna implements Serializable {
 	@Column(name = "novo_stanje", nullable = false)
 	private double novoStanje;
 
-	@OneToMany(mappedBy = "dnevno_stanje_racuna")
+	@OneToMany(mappedBy = "dnevnoStanjeRacuna")
 	private Set<AnalitikaIzvoda> analitikeIzvoda;
 
-	@OneToMany(mappedBy = "dnevno_stanje_racuna")
+	@OneToMany(mappedBy = "dnevnoStanjeRacuna")
 	private Set<PrenosIzvoda> prenosiIzvoda;
 
 	@ManyToOne // TODO: PK
@@ -106,4 +106,4 @@ public class DnevnoStanjeRacuna implements Serializable {
 	}
 	
 	
-}
+}*/

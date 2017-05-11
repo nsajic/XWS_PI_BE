@@ -1,4 +1,4 @@
-package xws_pi_bezb.models;
+/*package xws_pi_bezb.models;
 
 import java.io.Serializable;
 import java.time.ZonedDateTime;
@@ -20,61 +20,56 @@ public class PrenosIzvoda implements Serializable {
 
 	@Id
 	@GeneratedValue
-	private Long id; // sifra mesta
-	
+	private Long prenosIzvodaId; // sifra mesta
+
 	@Column(name = "datum_naloga", nullable = false)
 	private ZonedDateTime datumNaloga;
-	
+
 	@Column(name = "broj_preseka", nullable = false)
 	private int brojPreseka;
-	
+
 	@Column(name = "promena_u_korist", nullable = false)
 	private int promenaUKorist;
-	
+
 	@Column(name = "ukupno_u_korist", nullable = false)
 	private double ukupnoUKorist;
-	
+
 	@Column(name = "broj_promena_teret", nullable = false)
 	private int brojPromenaTeret;
-	
+
 	@Column(name = "ukupno_na_teret", nullable = false)
 	private double ukupnoNaTeret;
-	
+
 	@Column(name = "broj_pogresnih_stavki_u_korist", nullable = false)
 	private int brojPogresnihStavkiUKorist;
-	
+
 	@Column(name = "broj_pogresnih_stavki_na_teret", nullable = false)
 	private int brojPogresnihStavkiNaTeret;
-	
+
 	@Column(name = "status_naloga", nullable = false)
 	private String statusNaloga;
-	
-	@OneToMany(mappedBy="prenos_izvoda")
+
+	@OneToMany(mappedBy = "prenosIzvoda")
 	private Set<AnalitikaPreseka> analitikePreseka;
-	
-	
-	
+
 	@ManyToOne
 	private DnevnoStanjeRacuna dnevnoStanjeRacuna;
-	
-	
-	
+
 	@ManyToOne
 	private PravnoLice pravnoLice;
-	
+
 	@ManyToOne
 	private RacunPravnihLica racunPravnihLica;
-	
-	
-	
-	public PrenosIzvoda() {}
+
+	public PrenosIzvoda() {
+	}
 
 	public Long getId() {
-		return id;
+		return prenosIzvodaId;
 	}
 
 	public void setId(Long id) {
-		this.id = id;
+		this.prenosIzvodaId = id;
 	}
 
 	public ZonedDateTime getDatumNaloga() {
@@ -176,6 +171,5 @@ public class PrenosIzvoda implements Serializable {
 	public void setRacunPravnihLica(RacunPravnihLica racunPravnihLica) {
 		this.racunPravnihLica = racunPravnihLica;
 	}
-	
-	
-}
+
+}*/

@@ -19,14 +19,16 @@ public class Drzava  implements Serializable {
 
 	@Id
 	@GeneratedValue
-	private Long id; // TODO: Konceptualni
+	private Long id;
 	
 	@Column(name = "naziv_drzave", nullable = false)
 	private String nazivDrzave;
 
+	//TODO: Odkomentarisati kad se otkomentarisu klase
+/*
 	@OneToMany(mappedBy = "drzava", fetch = FetchType.EAGER)
 	private Set<Valuta> valute;
-	
+	*/
 	@OneToMany(mappedBy = "drzava", fetch = FetchType.EAGER)
 	private Set<NaseljenoMesto> naseljenaMesta;
 	
@@ -39,14 +41,16 @@ public class Drzava  implements Serializable {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	
+
 	public String getNazivDrzave() {
 		return nazivDrzave;
 	}
-	
+
 	public void setNazivDrzave(String nazivDrzave) {
 		this.nazivDrzave = nazivDrzave;
 	}
+	
+
 	
 	
 }

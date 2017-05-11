@@ -1,4 +1,4 @@
-package xws_pi_bezb.models;
+/*package xws_pi_bezb.models;
 
 import java.io.Serializable;
 import java.util.Set;
@@ -10,7 +10,6 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
 
 @Entity
@@ -21,7 +20,7 @@ public class VrstaPlacanja implements Serializable{
 	
 	@Id
 	@GeneratedValue
-	private Long id; // oznaka vrste
+	private Long vrstaPlacanjaId; // oznaka vrste
 	
 	@NotNull
     @Column(name = "oznaka_vrste_placanja", nullable = false)
@@ -31,17 +30,17 @@ public class VrstaPlacanja implements Serializable{
     @Column(name = "naziv_vrste_placanja", nullable = false)
     private String nazivVrstePlacanja;
     
-    @OneToMany(mappedBy="vrsta_placanja")
+    @OneToMany(mappedBy="vrstaPlacanja")
     private Set<AnalitikaIzvoda> analitikeIzvoda;
     
     public VrstaPlacanja(){}
 	
     public Long getId() {
-        return id;
+        return vrstaPlacanjaId;
     }
 
     public void setId(Long id) {
-        this.id = id;
+        this.vrstaPlacanjaId = id;
     }
 
     public Integer getOznakaVrstePlacanja() {
@@ -61,4 +60,4 @@ public class VrstaPlacanja implements Serializable{
     }
     
     
-}
+}*/

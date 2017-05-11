@@ -1,4 +1,4 @@
-package xws_pi_bezb.models;
+/*package xws_pi_bezb.models;
 
 import java.io.Serializable;
 import java.util.Set;
@@ -18,7 +18,7 @@ public class PravnoLice implements Serializable {
  
 	@Id
 	@GeneratedValue
-	private long id;
+	private long pravnoLiceId;
 	
 	@Column(name = "pib", nullable = false)
 	private String PIB;
@@ -44,30 +44,30 @@ public class PravnoLice implements Serializable {
 	@Column(name = "tip", nullable = false)
 	int tip; //TODO: Tamo je boolean
 	
-	@OneToMany(mappedBy = "pravno_lice")
+	@OneToMany(mappedBy = "pravnoLice")
 	private Set<KursnaLista> kursneListe;
 	
-	@OneToMany(mappedBy = "pravno_lice")
+	@OneToMany(mappedBy = "pravnoLice")
 	private Set<KodBanke> kodoviBanke;
 	
-	@OneToMany(mappedBy = "pravno_lice")
+	@OneToMany(mappedBy = "pravnoLice")
 	private Set<PrenosIzvoda> prenosiIzvoda;
 	
-	@OneToMany(mappedBy = "pravno_lice_poslovna_banka")
+	@OneToMany(mappedBy = "pravnoLicePoslovnaBanka")
 	private Set<RacunPravnihLica> poslovneBanke;
 	
-	@OneToMany(mappedBy = "pravno_lice_vlasnik_racuna")
+	@OneToMany(mappedBy = "pravnoLiceVlasnikRacuna")
 	private Set<RacunPravnihLica> vlasniciRacuna;
 	
 	
 	public PravnoLice() {}
 
 	public long getId() {
-		return id;
+		return pravnoLiceId;
 	}
 
 	public void setId(long id) {
-		this.id = id;
+		this.pravnoLiceId = id;
 	}
 
 	public String getPIB() {
@@ -140,4 +140,4 @@ public class PravnoLice implements Serializable {
 
 	
 
-}
+}*/

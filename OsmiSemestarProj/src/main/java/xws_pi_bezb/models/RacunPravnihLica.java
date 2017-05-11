@@ -1,4 +1,4 @@
-package xws_pi_bezb.models;
+/*package xws_pi_bezb.models;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -20,7 +20,7 @@ public class RacunPravnihLica implements Serializable {
 
 	@Id
 	@GeneratedValue
-	private Long id; // broj racuna
+	private Long racunPravnihLicaId; // broj racuna
 	
 	@Column(name = "datum_otvaranja", nullable = false)
 	private Date datumOtvaranja;
@@ -37,16 +37,16 @@ public class RacunPravnihLica implements Serializable {
 	@ManyToOne
 	private Valuta valuta;
 	
-	@OneToMany(mappedBy="racun_pravnih_lica")
+	@OneToMany(mappedBy="racunPravnihLica")
 	private Set<Ukidanje> ukidanja;
 	
-	@OneToMany(mappedBy="racun_pravnih_lica")
+	@OneToMany(mappedBy="racunPravnihLica")
 	private Set<PrenosIzvoda> prenosiIzvoda;
 	
-	@OneToMany(mappedBy="racun_pravnih_lica")
+	@OneToMany(mappedBy="racunPravnihLica")
 	private Set<AnalitikaPreseka> analitikePreseka;
 	
-	@OneToMany(mappedBy="racun_pravnih_lica")
+	@OneToMany(mappedBy="racunPravnihLica")
 	private Set<DnevnoStanjeRacuna> dnevnaStanjaRacuna;
 	
 	
@@ -54,11 +54,11 @@ public class RacunPravnihLica implements Serializable {
 	public RacunPravnihLica(){}
 
 	public Long getId() {
-		return id;
+		return racunPravnihLicaId;
 	}
 
 	public void setId(Long id) {
-		this.id = id;
+		this.racunPravnihLicaId = id;
 	}
 
 	public Date getDatumOtvaranja() {
@@ -102,4 +102,4 @@ public class RacunPravnihLica implements Serializable {
 	}	
 	
 	
-}
+}*/

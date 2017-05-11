@@ -1,4 +1,4 @@
-package xws_pi_bezb.models;
+/*package xws_pi_bezb.models;
 
 import java.io.Serializable;
 import java.time.ZonedDateTime;
@@ -12,9 +12,6 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -23,74 +20,57 @@ import javax.xml.bind.annotation.XmlTransient;
 public class AnalitikaIzvoda implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    
-    @XmlTransient
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @XmlElement
     @Column(name = "duznik", nullable = false)
     private String duznik;
 
-    @XmlElement
     @Column(name = "svrha", nullable = false)
     private String svrha;
 
-    @XmlElement
     @Column(name = "poverilac", nullable = false)
     private String poverilac;
 
-    @XmlElement
     @Column(name = "datum_prijema", nullable = false)
     private ZonedDateTime datumPrijema;
 
-    @XmlElement
     @Column(name = "datum_valute", nullable = false)
     private ZonedDateTime datumValute;
 
-    @XmlElement
     @Column(name = "racun_duznika", nullable = false)
     private String racunDuznika;
 
-    @XmlElement
     @Column(name = "model_zaduzenja")
     private Integer modelZaduzenja;
 
-    @XmlElement
     @Column(name = "poziv_na_broj_zaduzenja")
     private String pozivNaBrojZaduzenja;
 
-    @XmlElement
     @Column(name = "racun_poverioca")
     private String racunPoverioca;
 
-    @XmlElement
     @Column(name = "model_odobrenja")
     private Integer modelOdobrenja;
 
-    @XmlElement
     @Column(name = "poziv_na_broj_odobrenja")
     private String pozivNaBrojOdobrenja;
 
-    @XmlElement
     @Column(name = "is_hitno", nullable = false)
     private Boolean isHitno;
 
-    @XmlElement
+
     @Column(name = "iznos", nullable = false)
     private Double iznos;
 
-    @XmlTransient
     @Column(name = "tip_greske", nullable = false)
     private Integer tipGreske;
 
-    @XmlTransient
-    @Column(name = "tip_greske", nullable = false)
+    @Column(name = "smer", nullable = false)
     private String Smer;
 
-    
-    @XmlTransient
     @Column(name = "status")
     private String status;
     
@@ -106,7 +86,7 @@ public class AnalitikaIzvoda implements Serializable {
     @ManyToOne
     private Valuta valuta;
     
-    @OneToMany(mappedBy="analitika_izvoda")
+    @OneToMany(mappedBy="analitikaIzvoda")
     private Set<AnalitikaPreseka> analitikePreseka;
     
     
@@ -287,3 +267,5 @@ public class AnalitikaIzvoda implements Serializable {
 	
 	
 }
+
+*/

@@ -1,4 +1,4 @@
-package xws_pi_bezb.models;
+/*package xws_pi_bezb.models;
 
 import java.io.Serializable;
 import java.time.ZonedDateTime;
@@ -6,7 +6,6 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -23,7 +22,7 @@ public class KursnaLista implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id;
+	private Long kursnaListaId;
 
 	@NotNull
 	@Column(name = "datum", nullable = false)
@@ -37,7 +36,7 @@ public class KursnaLista implements Serializable {
 	@Column(name = "datum_primene", nullable = false)
 	private ZonedDateTime primenjujeSeOd;
 	
-	@OneToMany(mappedBy = "kursna_lista")
+	@OneToMany(mappedBy = "kursnaLista")
     private Set<KursUValuti> kurseviUValuti;
 	
 	@ManyToOne //TODO:PK
@@ -47,11 +46,11 @@ public class KursnaLista implements Serializable {
 	}
 
 	public Long getId() {
-		return id;
+		return kursnaListaId;
 	}
 
 	public void setId(Long id) {
-		this.id = id;
+		this.kursnaListaId = id;
 	}
 
 	public ZonedDateTime getDatum() {
@@ -91,4 +90,4 @@ public class KursnaLista implements Serializable {
 	}
 	
 	
-}
+}*/

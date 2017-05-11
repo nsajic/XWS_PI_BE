@@ -1,4 +1,4 @@
-package xws_pi_bezb.models;
+/*package xws_pi_bezb.models;
 
 import java.io.Serializable;
 
@@ -17,7 +17,7 @@ public class KursUValuti implements Serializable{
 	
 	@Id
 	@GeneratedValue
-	private Long id; // redni broj
+	private Long KursUValutiId; // redni broj
 	
 	@Column(name = "kupovni", nullable = false)
 	private double kupovni;
@@ -40,11 +40,11 @@ public class KursUValuti implements Serializable{
 	public KursUValuti(){}
 
 	public Long getId() {
-		return id;
+		return KursUValutiId;
 	}
 
 	public void setId(Long id) {
-		this.id = id;
+		this.KursUValutiId = id;
 	}
 
 	public double getKupovni() {
@@ -96,4 +96,4 @@ public class KursUValuti implements Serializable{
 	}
 	
 	
-}
+}*/

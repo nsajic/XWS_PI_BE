@@ -1,4 +1,4 @@
-package xws_pi_bezb.models;
+/*package xws_pi_bezb.models;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -18,7 +18,7 @@ public class Ukidanje  implements Serializable {
 
 	@Id
 	@GeneratedValue
-	private Long id;
+	private Long ukidanjeId;
 	
 	@Column(name = "datum_ukidanja", nullable = false)
 	private Date datumUkidanja;
@@ -48,11 +48,11 @@ public class Ukidanje  implements Serializable {
 	}
 
 	public Long getId() {
-		return id;
+		return ukidanjeId;
 	}
 
 	public void setId(Long id) {
-		this.id = id;
+		this.ukidanjeId = id;
 	}
 
 	public RacunPravnihLica getRacunPravnihLica() {
@@ -64,4 +64,4 @@ public class Ukidanje  implements Serializable {
 	}
 	
 	
-}
+}*/

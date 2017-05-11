@@ -1,7 +1,6 @@
 package xws_pi_bezb.models;
 
 import java.io.Serializable;
-import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,7 +8,6 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -20,8 +18,7 @@ public class NaseljenoMesto implements Serializable {
 
 	@Id
 	@GeneratedValue
-	private Long id; // TODO: Konceptualni
-
+	private Long id;
 	
 	@Column(name = "naziv", nullable = false)
 	private String naziv;
@@ -29,11 +26,14 @@ public class NaseljenoMesto implements Serializable {
 	@Column(name = "ptt_oznaka", nullable = false)
 	private String pttOznaka;
 
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.EAGER, optional = false)
 	private Drzava drzava;
-
-	@OneToMany(mappedBy="naseljeno_mesto")
+	
+	//TODO: Odkomentarisati kad se otkomentarisu klase
+/*
+	@OneToMany(mappedBy="naseljenoMesto")
 	private Set<AnalitikaIzvoda> analitikeIzvoda;
+	*/
 	
 	public NaseljenoMesto() {
 	}

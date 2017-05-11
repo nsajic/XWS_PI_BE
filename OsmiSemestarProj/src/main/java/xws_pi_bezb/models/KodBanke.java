@@ -1,4 +1,4 @@
-package xws_pi_bezb.models;
+/*package xws_pi_bezb.models;
 
 import java.io.Serializable;
 
@@ -14,9 +14,12 @@ import javax.persistence.Table;
 public class KodBanke  implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-
+	
 	@Id
 	@GeneratedValue
+	private Long kodBankeId;
+	
+	@Column(name = "sifra_banke", nullable = false)
 	private int sifraBanke;
 	
 	@Column(name = "swift_kod", nullable = false)
@@ -52,4 +55,4 @@ public class KodBanke  implements Serializable {
 	}
 	
 	
-}
+}*/

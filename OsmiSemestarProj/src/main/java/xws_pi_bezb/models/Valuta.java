@@ -1,4 +1,4 @@
-package xws_pi_bezb.models;
+/*package xws_pi_bezb.models;
 
 import java.io.Serializable;
 import java.util.Set;
@@ -19,7 +19,7 @@ public class Valuta  implements Serializable {
 
 	@Id
 	@GeneratedValue
-	private Long id; // id valute
+	private Long valutaId; // id valute
 	
 	@Column(name = "zvanicna_sifra", nullable = false)
 	private String zvanicnaSifra; // TODO: proveriti koji je tip A3
@@ -30,10 +30,10 @@ public class Valuta  implements Serializable {
 	@Column(name = "domicilna", nullable = false)
 	private boolean domicilna; // TODO: proveriti sta je domicilna
 	
-	@OneToMany(mappedBy = "osnovna_valuta")
+	@OneToMany(mappedBy = "osnovnaValuta")
 	private Set<KursUValuti> kurseviUValutiOsnovni;
 	
-	@OneToMany(mappedBy = "prema_valuti")
+	@OneToMany(mappedBy = "premaValuti")
 	private Set<KursUValuti> kurseviUValutiPrema;
 	
 	@OneToMany(mappedBy = "valuta")
@@ -49,11 +49,11 @@ public class Valuta  implements Serializable {
 	public Valuta(){}
 	
 	public Long getId() {
-		return id;
+		return valutaId;
 	}
 	
 	public void setId(Long id) {
-		this.id = id;
+		this.valutaId = id;
 	}
 	
 	public String getZvanicnaSifra() {
@@ -89,4 +89,4 @@ public class Valuta  implements Serializable {
 	}
 	
 	
-}
+}*/
