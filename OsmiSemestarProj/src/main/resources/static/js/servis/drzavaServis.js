@@ -19,6 +19,10 @@ drzavaServis.factory('drzavaServis', function($http) {
 	temp.izlistajDrzave = function(data) {
 		return $http.get('/drzavaKontroler/izlistajDrzave');
 	}
+
+	temp.pretraziDrzave = function(data) {
+		return $http.post('/drzavaKontroler/pretraziDrzave', data);
+	}	
 	
 	return temp;
 

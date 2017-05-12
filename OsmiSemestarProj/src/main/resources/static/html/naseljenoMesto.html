@@ -15,6 +15,13 @@
 
 		<div ng-show="isSet(0)">
 			<h2>Naseljena mesta</h2>
+			<table>
+				<tr>
+					<td><input type= "text" ng-model = "naseljenaMestaSearch"></td>
+					<td><button ng-click = "pretraziNaseljenaMesta()">Pretrazi</td>
+				</tr>
+			</table>
+			<hr/>
 			<table ng-repeat='naseljenoMesto in naseljenaMesta'>
 				<tr>
 					<td style = "width:120px; heigth: 70px">{{naseljenoMesto.naziv}}</td>
@@ -24,15 +31,37 @@
 					<td><button ng-click="setNaseljenoMestoZaIzmenu(naseljenoMesto)">Izmeni</button></td>
 				</tr>
 				<tr ng-show = 'idNaseljenogMestaZaIzmenu == naseljenoMesto.id'>
-					<td colspan = 3>
+					<td colspan = 5>
 						<hr/>
 					<td>
 				</tr>
-				<tr ng-show = 'idNaseljenogMestaZaIzmenu == naseljenoMesto.id'>
+				<tr ng-show = 'idNaseljenogMestaZaIzmenu == naseljenoMesto.id '>
 					<td><input style = "width:100px" type=text ng-model="$ctrl.nazivNaseljenogMestaIzmena"></td>
 					<td><input style = "width:100px" type=text ng-model="$ctrl.pttOznakaNaseljenogMestaIzmena"></td>
-					<td><select style = "width:100px" ng-options="drzava.nazivDrzave for drzava in drzave" ng-model="$ctrl.drzavaNaseljenogMestaIzmena"></select></td>
-					<td><button ng-click="izmeniNaseljenoMesto(naseljenoMesto.id)">Potvrdi</button></td>				
+					<td>
+						<select style = "width:100px" ng-options="drzava.nazivDrzave for drzava in drzave" ng-model="$ctrl.drzavaNaseljenogMestaIzmena"></select>
+					</td>
+					<td><button ng-click = "prikaziDrzaveIzmena()">Prikazi</button></td>
+					<td><button ng-click = "izmeniNaseljenoMesto(naseljenoMesto.id)">Potvrdi</button></td>				
+				</tr>
+				<tr ng-show = "daLiDaPrikazeDrzaveIzmenaZoom()">
+					<td colspan = 5>
+						<hr>
+						<table  ng-repeat='drzava in drzave'>
+							<tr >
+								<td style = "width:120px; heigth: 70px">{{drzava.nazivDrzave}}</td>
+								<td>
+									<button ng-click="odaberiDrzavuIzmena(drzava)">Odaberi</button>
+								</td>
+							</tr>
+						</table>
+						<hr>
+					</td>
+				</tr>
+				<tr ng-show = "daLiDaPrikazeDrzaveIzmenaZoom()">
+					<td>
+						<button ng-click = "skloniIzmena()">Skloni</button>
+					</td>
 				</tr>
 				<tr ng-show = 'idNaseljenogMestaZaIzmenu == naseljenoMesto.id'>
 					<td colspan = 3>
@@ -48,17 +77,34 @@
 					<tr>
 						<td>Naziv:</td>
 						<td><input style = "width:100px" type=text ng-model="nazivNaseljenogMesta"></td>
-					<tr>
 					</tr>
+					<tr>
+					
 						<td>PTT Oznaka</td>
 						<td><input style = "width:100px" type=text ng-model="pttOznakaNaseljenogMesta"></td>
-					<tr>
 					</tr>
+					<tr>
 						<td>Drzava:</td>
-						<td><select style = "width:100px" ng-options="drzava.nazivDrzave for drzava in drzave" ng-model="drzavaNaseljenogMesta"></select></td>
+						<td>
+							<select style="width: 100px" ng-options="drzava.nazivDrzave for drzava in drzave" ng-model="drzavaNaseljenogMesta"></select></td>
+						<td>
+							<button class="btn" ng-click="prikaziDrzaveBool = true">Prikazi drzave</button>
+						</td>
 					</tr>
 				</table>
 				<button ng-click="dodajNaseljenoMesto()">Dodaj</button>
+				
+				<div ng-show = "prikaziDrzaveBool == true" >
+					<hr>
+					<table  ng-repeat='drzava in drzave'>
+						<tr >
+							<td style = "width:120px; heigth: 70px">{{drzava.nazivDrzave}}</td>
+							<td><button ng-click="odaberiDrzavu(drzava)">Odaberi</button></td>
+						</tr>
+					</table>
+					<hr>
+					<button ng-click="skloni()">Skloni</button>
+				</div>
 			</div>
 		</div>
 	</div>

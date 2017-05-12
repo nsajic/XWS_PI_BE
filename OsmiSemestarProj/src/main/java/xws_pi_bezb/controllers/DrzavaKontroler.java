@@ -43,5 +43,11 @@ public class DrzavaKontroler {
 	public ResponseEntity<List<Drzava>> izlistajDrzave() {
 		return new ResponseEntity<List<Drzava>>(drzavaService.findAll(), HttpStatus.OK);
 	}
+	
+	@RequestMapping(value = "/pretraziDrzave", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<List<Drzava>> pretraziDrzave(@RequestBody String searchText) {
+		return new ResponseEntity<List<Drzava>>(drzavaService.getBySearchText(searchText), HttpStatus.OK);
+	}
+
 
 }

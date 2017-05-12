@@ -55,8 +55,6 @@ drzavaKontroler.controller('drzavaCtrl', function($scope, drzavaServis, $window,
 			id : id,
 			nazivDrzave : controller.nazivDrzaveIzmena
 		}
-		//TODO Ispraviti jer uzima samo setovano na pocetku 
-		console.log(drzava);
 		drzavaServis.izmeniDrzavu(drzava).success(function(data) {
 			$scope.drzave = data;
 			$location.path('/drzava');
@@ -77,6 +75,26 @@ drzavaKontroler.controller('drzavaCtrl', function($scope, drzavaServis, $window,
 			controller.nazivDrzaveIzmena = drzava.nazivDrzave;
 		}
 
+	}
+	
+	//PRETRAGA
+	$scope.pretraziDrzave = function (){
+		if($scope.drzavaSearch == null || $scope.drzavaSearch == ""){
+			drzavaServis.izlistajDrzave().success(function(data) {
+				$scope.drzave = data;
+			}).error(function(data) {
+				alert("Neuspesno izlistavanje drzava!");
+			});
+		} else {
+			drzavaServis.pretraziDrzave($scope.drzavaSearch).success(function(data) {
+				$scope.drzave = data;
+				$location.path('/drzava');
+				$scope.idDrzaveZaIzmenu = -1;
+				$scope.setTab(0);
+			}).error(function(data) {
+				alert("Problem prilikom pretrage");
+			});
+		}
 	}
 	
 

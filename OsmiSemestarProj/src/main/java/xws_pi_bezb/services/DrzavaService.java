@@ -1,5 +1,6 @@
 package xws_pi_bezb.services;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +34,17 @@ public class DrzavaService implements IDrzavaService {
 	public void delete(Long id) {
 		drzavaRepository.delete(id);
 
+	}
+
+	@Override
+	public List<Drzava> getBySearchText(String searchText) {
+		List<Drzava> drzave = new ArrayList<Drzava>();
+		for(Drzava drzava : drzavaRepository.findAll()){
+			if(drzava.getNazivDrzave().toLowerCase().contains(searchText.toLowerCase())){
+				drzave.add(drzava);
+			}
+		}
+		return drzave;
 	}
 
 }

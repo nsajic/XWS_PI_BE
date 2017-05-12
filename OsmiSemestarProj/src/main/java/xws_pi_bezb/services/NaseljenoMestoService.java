@@ -1,10 +1,9 @@
 package xws_pi_bezb.services;
 
+import java.util.ArrayList;
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import xws_pi_bezb.irepositories.INaseljenoMestoRepository;
 import xws_pi_bezb.iservices.INaseljenoMestoService;
 import xws_pi_bezb.models.NaseljenoMesto;
@@ -33,5 +32,18 @@ public class NaseljenoMestoService implements INaseljenoMestoService{
 	@Override
 	public void save(NaseljenoMesto naseljenoMesto) {
 		naseljenoMestoRepository.save(naseljenoMesto);
+	}
+
+	@Override
+	public List<NaseljenoMesto> getBySearchText(String serachText) {
+		List<NaseljenoMesto> naseljenaMesta = new ArrayList<NaseljenoMesto>();
+		for(NaseljenoMesto naseljenoMesto : naseljenoMestoRepository.findAll()){
+			if(naseljenoMesto.getNaziv().toLowerCase().contains(serachText.toLowerCase())||
+				naseljenoMesto.getPttOznaka().toLowerCase().contains(serachText.toLowerCase())||
+				naseljenoMesto.getDrzava().getNazivDrzave().toLowerCase().contains(serachText.toLowerCase())){
+				naseljenaMesta.add(naseljenoMesto);
+			}
+		}
+		return naseljenaMesta;
 	}
 }

@@ -24,6 +24,11 @@ naseljenoMestoServis.factory('naseljenoMestoServis', function($http) {
 		return $http.get('/drzavaKontroler/izlistajDrzave');
 	}
 	
+	temp.pretraziNaseljenaMesta = function(data) {
+		return $http.post('/naseljenoMestoKontroler/pretraziNaseljenaMesta', data);
+	}	
+	
+	
 	return temp;
 
 })

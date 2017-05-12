@@ -8,10 +8,13 @@ public interface IDrzavaService {
 
 	List<Drzava> findAll();
 
+	List<Drzava> getBySearchText(String searchText);
+	
 	Drzava findOne(Long id);
 
 	void save(Drzava drzava);
 
 	void delete(Long id);
 
+	
 }

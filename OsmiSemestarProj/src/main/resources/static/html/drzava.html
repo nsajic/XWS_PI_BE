@@ -16,6 +16,13 @@
 
 		<div ng-show="isSet(0)">
 			<h2>Drzave</h2>
+			<table>
+				<tr>
+					<td><input type= "text" ng-model = "drzavaSearch"></td>
+					<td><button ng-click = "pretraziDrzave()">Pretrazi</td>
+				</tr>
+			</table>
+			<hr/>
 			<table ng-repeat='drzava in drzave'>
 				<tr >
 					<td style = "width:120px; heigth: 70px">{{drzava.nazivDrzave}}</td>

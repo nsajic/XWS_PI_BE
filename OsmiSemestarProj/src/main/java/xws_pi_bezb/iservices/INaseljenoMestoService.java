@@ -8,6 +8,8 @@ public interface INaseljenoMestoService {
 	
 	List<NaseljenoMesto> findAll();
 
+	List<NaseljenoMesto> getBySearchText(String serachText);
+	
 	NaseljenoMesto findOne(Long id);
 
 	void save(NaseljenoMesto naseljenoMesto);

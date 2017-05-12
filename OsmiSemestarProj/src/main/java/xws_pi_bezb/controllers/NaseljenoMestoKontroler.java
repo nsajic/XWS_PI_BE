@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import xws_pi_bezb.models.Drzava;
 import xws_pi_bezb.models.NaseljenoMesto;
 import xws_pi_bezb.services.NaseljenoMestoService;
 
@@ -43,5 +44,9 @@ public class NaseljenoMestoKontroler {
 	public ResponseEntity<List<NaseljenoMesto>> izlistajNaseljenaMesta() {
 		return new ResponseEntity<List<NaseljenoMesto>>(naseljenoMestoService.findAll(), HttpStatus.OK);
 	}
-
+	
+	@RequestMapping(value = "/pretraziNaseljenaMesta", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<List<NaseljenoMesto>> pretraziNaseljenaMesta(@RequestBody String searchText) {
+		return new ResponseEntity<List<NaseljenoMesto>>(naseljenoMestoService.getBySearchText(searchText), HttpStatus.OK);
+	}
 }
