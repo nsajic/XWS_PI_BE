@@ -28,6 +28,12 @@
 					<td style = "width:120px; heigth: 70px">{{drzava.nazivDrzave}}</td>
 					<td><button ng-click="obrisiDrzavu(drzava.id)">Obrisi</button></td>
 					<td><button ng-click="setDrzavaZaIzmenu(drzava)">Izmeni</button></td>
+					<td><button ng-click="setDrzavaZaNext(drzava)">Next</button></td>
+				</tr>
+				<tr ng-show = 'idDrzaveZaIzmenu == drzava.id'>
+					<td colspan = 3>
+						Izmena drzave {{drzava.nazivDrzave}}
+					</td>
 				</tr>
 				<tr ng-show = 'idDrzaveZaIzmenu == drzava.id'>
 					<td colspan = 3>
@@ -40,6 +46,31 @@
 				</tr>
 				<tr ng-show = 'idDrzaveZaIzmenu == drzava.id'>
 					<td colspan = 3>
+						<hr/>
+					<td>
+				</tr>
+				
+				<tr ng-show = 'idDrzaveZaNext == drzava.id'>
+					<td ng-show = "naseljenaMestaZaNext.length == 0" colspan = 4>
+						{{drzava.nazivDrzave}} nema naseljenih mesta
+					</td>
+					<td ng-show = "naseljenaMestaZaNext.length != 0"  colspan = 4>
+						Naseljena mesta drzave {{drzava.nazivDrzave}}
+					</td>
+
+				</tr>
+				<tr ng-show = 'idDrzaveZaNext == drzava.id'>
+					<td ng-show ="naseljenaMestaZaNext.length != 0" colspan = 4>
+						<hr/>
+					</td>
+				</tr>
+				<tr ng-repeat='naseljenoMesto in naseljenaMestaZaNext' ng-show = 'idDrzaveZaNext == drzava.id'>
+					<td style = "width:120px; heigth: 70px">{{naseljenoMesto.naziv}}</td>
+					<td style = "width:60px; heigth: 70px">{{naseljenoMesto.pttOznaka}}</td>
+					<td style = "width:60px; heigth: 70px">{{naseljenoMesto.drzava.nazivDrzave}}</td>
+				</tr>
+				<tr ng-show = 'idDrzaveZaNext == drzava.id'>
+					<td ng-show = "naseljenaMestaZaNext.length != 0" colspan = 3>
 						<hr/>
 					<td>
 				</tr>

@@ -24,6 +24,11 @@ drzavaServis.factory('drzavaServis', function($http) {
 		return $http.post('/drzavaKontroler/pretraziDrzave', data);
 	}	
 	
+	temp.izlistajNaseljenaNext = function (data){
+		return $http.post ('/drzavaKontroler/izlistajNaseljenaNext', data);
+	}
+	
+	
 	return temp;
 
 })

@@ -1,6 +1,7 @@
 package xws_pi_bezb.iservices;
 import java.util.List;
 
+import xws_pi_bezb.models.Drzava;
 import xws_pi_bezb.models.NaseljenoMesto;
 
 
@@ -9,6 +10,8 @@ public interface INaseljenoMestoService {
 	List<NaseljenoMesto> findAll();
 
 	List<NaseljenoMesto> getBySearchText(String serachText);
+	
+	List<NaseljenoMesto> getByDrzava(Drzava drzava);
 	
 	NaseljenoMesto findOne(Long id);
 

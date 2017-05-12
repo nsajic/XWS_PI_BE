@@ -11,6 +11,7 @@ drzavaKontroler.controller('drzavaCtrl', function($scope, drzavaServis, $window,
 	$scope.setTab(0);
 
 	$scope.idDrzaveZaIzmenu = -1;
+	$scope.idDrzaveZaNext = -1;
 	
 	drzavaServis.izlistajDrzave().success(function(data) {
 		$scope.drzave = data;
@@ -74,6 +75,28 @@ drzavaKontroler.controller('drzavaCtrl', function($scope, drzavaServis, $window,
 			$scope.idDrzaveZaIzmenu = drzava.id;
 			controller.nazivDrzaveIzmena = drzava.nazivDrzave;
 		}
+		$scope.idDrzaveZaNext = -1;
+		$scope.naseljenaMestaZaNext = null;
+	}
+	
+	$scope.setDrzavaZaNext = function(drzava) {
+		if ($scope.idDrzaveZaNext == drzava.id){			
+			$scope.idDrzaveZaNext = -1;
+			$scope.naseljenaMestaZaNext = null;
+		}
+		else 
+		{
+			$scope.idDrzaveZaNext = drzava.id;
+			
+			drzavaServis.izlistajNaseljenaNext(drzava).success(function(data) {
+				$scope.naseljenaMestaZaNext = data;
+			}).error(function(data) {
+				alert("Neuspesno izlistavanje naseljenih mesta!");
+			});
+		}
+		
+		$scope.idDrzaveZaIzmenu = -1;
+		controller.nazivDrzaveIzmena = null;
 
 	}
 	
