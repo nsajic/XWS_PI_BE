@@ -1,24 +1,16 @@
-/*package xws_pi_bezb.models;
+package xws_pi_bezb.models;
 
 import java.io.Serializable;
-import java.util.Set;
 
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
 
 @Entity
-@Table(name = "pravno_lice")
-public class PravnoLice implements Serializable {
+@DiscriminatorValue("P")
+public class PravnoLice extends Klijent implements Serializable {
 
 	private static final long serialVersionUID = 1L;
- 
-	@Id
-	@GeneratedValue
-	private long pravnoLiceId;
 	
 	@Column(name = "pib", nullable = false)
 	private String PIB;
@@ -26,25 +18,17 @@ public class PravnoLice implements Serializable {
 	@Column(name = "naziv", nullable = false)
 	private String naziv;
 	
-	@Column(name = "adresa", nullable = false)
-	private String adresa;
-	
 	@Column(name = "email", nullable = true)
 	private String email;
 	
 	@Column(name = "web", nullable = true)
 	private String web;
 	
-	@Column(name = "telefon", nullable = true)
-	private String telefon;
-	
 	@Column(name = "fax", nullable = true)
 	private String fax;
 	
-	@Column(name = "tip", nullable = false)
-	int tip; //TODO: Tamo je boolean
 	
-	@OneToMany(mappedBy = "pravnoLice")
+	/*@OneToMany(mappedBy = "pravnoLice")
 	private Set<KursnaLista> kursneListe;
 	
 	@OneToMany(mappedBy = "pravnoLice")
@@ -58,17 +42,9 @@ public class PravnoLice implements Serializable {
 	
 	@OneToMany(mappedBy = "pravnoLiceVlasnikRacuna")
 	private Set<RacunPravnihLica> vlasniciRacuna;
-	
+	*/
 	
 	public PravnoLice() {}
-
-	public long getId() {
-		return pravnoLiceId;
-	}
-
-	public void setId(long id) {
-		this.pravnoLiceId = id;
-	}
 
 	public String getPIB() {
 		return PIB;
@@ -84,14 +60,6 @@ public class PravnoLice implements Serializable {
 
 	public void setNaziv(String naziv) {
 		this.naziv = naziv;
-	}
-
-	public String getAdresa() {
-		return adresa;
-	}
-
-	public void setAdresa(String adresa) {
-		this.adresa = adresa;
 	}
 
 	public String getEmail() {
@@ -110,14 +78,6 @@ public class PravnoLice implements Serializable {
 		this.web = web;
 	}
 
-	public String getTelefon() {
-		return telefon;
-	}
-
-	public void setTelefon(String telefon) {
-		this.telefon = telefon;
-	}
-
 	public String getFax() {
 		return fax;
 	}
@@ -126,18 +86,8 @@ public class PravnoLice implements Serializable {
 		this.fax = fax;
 	}
 
-	public int getTip() {
-		return tip;
-	}
-
-	public void setTip(int tip) {
-		this.tip = tip;
-	}
-
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
 
-	
-
-}*/
+}
