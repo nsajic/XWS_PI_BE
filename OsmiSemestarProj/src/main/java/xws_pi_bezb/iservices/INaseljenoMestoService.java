@@ -1,4 +1,4 @@
-package xws_pi_bezb.iservices;
+/*package xws_pi_bezb.iservices;
 import java.util.List;
 
 import xws_pi_bezb.models.Drzava;
@@ -19,3 +19,4 @@ public interface INaseljenoMestoService {
 
 	void delete(Long id);
 }
+*/

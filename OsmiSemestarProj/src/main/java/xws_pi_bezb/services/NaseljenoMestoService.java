@@ -1,4 +1,4 @@
-package xws_pi_bezb.services;
+/*package xws_pi_bezb.services;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -59,3 +59,4 @@ public class NaseljenoMestoService implements INaseljenoMestoService{
 		return naseljenaMesta;
 	}
 }
+*/

@@ -1,4 +1,4 @@
-package xws_pi_bezb.irepositories;
+/*package xws_pi_bezb.irepositories;
 
 import java.util.List;
 
@@ -18,3 +18,4 @@ public interface INaseljenoMestoRepository extends JpaRepository<NaseljenoMesto,
 	List<NaseljenoMesto> findByDrzava(Drzava drzavaId);
 
 }
+*/

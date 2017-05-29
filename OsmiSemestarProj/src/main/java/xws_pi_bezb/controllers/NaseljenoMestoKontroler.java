@@ -1,4 +1,4 @@
-package xws_pi_bezb.controllers;
+/*package xws_pi_bezb.controllers;
 
 import java.util.List;
 
@@ -50,3 +50,4 @@ public class NaseljenoMestoKontroler {
 		return new ResponseEntity<List<NaseljenoMesto>>(naseljenoMestoService.getBySearchText(searchText), HttpStatus.OK);
 	}
 }
+*/

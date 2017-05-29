@@ -2,11 +2,12 @@ package xws_pi_bezb.iservices;
 
 import java.util.List;
 
-import xws_pi_bezb.models.Drzava;
+import xws_pi_bezb.models.Delatnost;
 
-public interface IDrzavaService {
 
-	List<Drzava> findAll();
+public interface IDelatnostService {
+
+	List<Delatnost> findAll();
 
 	List<Drzava> getBySearchText(String searchText);
 	

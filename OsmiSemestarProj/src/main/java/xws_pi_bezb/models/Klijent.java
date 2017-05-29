@@ -1,6 +1,7 @@
 package xws_pi_bezb.models;
 
 import java.util.Date;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
@@ -10,6 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.springframework.stereotype.Component;
@@ -42,6 +44,9 @@ public class Klijent {
 	
 	@Column(name = "adresa", nullable = false)
 	private String adresa;
+	
+	@OneToMany(mappedBy = "klijent")
+	private Set<Racun> racuni;
 	
 	public Klijent(){}
 

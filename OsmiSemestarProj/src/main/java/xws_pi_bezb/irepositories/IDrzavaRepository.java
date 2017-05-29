@@ -1,4 +1,4 @@
-package xws_pi_bezb.irepositories;
+/*package xws_pi_bezb.irepositories;
 
 import javax.transaction.Transactional;
 
@@ -12,3 +12,4 @@ import xws_pi_bezb.models.Drzava;
 public interface IDrzavaRepository extends JpaRepository<Drzava, Long>{
 	Drzava findById(Long id);
 }
+*/

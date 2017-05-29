@@ -5,6 +5,7 @@ import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 
 @Entity
 @DiscriminatorValue("P")
@@ -24,27 +25,25 @@ public class PravnoLice extends Klijent implements Serializable {
 	@Column(name = "web", nullable = true)
 	private String web;
 	
+	@Column(name = "maticni_broj", nullable = true)
+	private String maticniBroj;
+	
 	@Column(name = "fax", nullable = true)
 	private String fax;
 	
+	@Column(name = "apr", nullable = true)
+	private boolean APR;
 	
-	/*@OneToMany(mappedBy = "pravnoLice")
-	private Set<KursnaLista> kursneListe;
+	@Column(name = "op", nullable = true)
+	private boolean OP;
 	
-	@OneToMany(mappedBy = "pravnoLice")
-	private Set<KodBanke> kodoviBanke;
+	@ManyToOne
+	private Delatnost delatnost;
 	
-	@OneToMany(mappedBy = "pravnoLice")
-	private Set<PrenosIzvoda> prenosiIzvoda;
-	
-	@OneToMany(mappedBy = "pravnoLicePoslovnaBanka")
-	private Set<RacunPravnihLica> poslovneBanke;
-	
-	@OneToMany(mappedBy = "pravnoLiceVlasnikRacuna")
-	private Set<RacunPravnihLica> vlasniciRacuna;
-	*/
-	
-	public PravnoLice() {}
+	public PravnoLice()
+	{
+		
+	}
 
 	public String getPIB() {
 		return PIB;
@@ -78,6 +77,14 @@ public class PravnoLice extends Klijent implements Serializable {
 		this.web = web;
 	}
 
+	public String getMaticniBroj() {
+		return maticniBroj;
+	}
+
+	public void setMaticniBroj(String maticniBroj) {
+		this.maticniBroj = maticniBroj;
+	}
+
 	public String getFax() {
 		return fax;
 	}
@@ -86,8 +93,23 @@ public class PravnoLice extends Klijent implements Serializable {
 		this.fax = fax;
 	}
 
-	public static long getSerialversionuid() {
-		return serialVersionUID;
+	public boolean isAPR() {
+		return APR;
 	}
 
+	public void setAPR(boolean aPR) {
+		APR = aPR;
+	}
+
+	public boolean isOP() {
+		return OP;
+	}
+
+	public void setOP(boolean oP) {
+		OP = oP;
+	}
+	
+	
+	
+	
 }

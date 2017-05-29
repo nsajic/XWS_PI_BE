@@ -1,4 +1,4 @@
-/*package xws_pi_bezb.models;
+package xws_pi_bezb.models;
 
 import java.io.Serializable;
 import java.util.Set;
@@ -15,78 +15,51 @@ import javax.persistence.Table;
 @Table(name = "valuta")
 public class Valuta  implements Serializable {
 
-	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue
-	private Long valutaId; // id valute
+	private Long id;
 	
-	@Column(name = "zvanicna_sifra", nullable = false)
-	private String zvanicnaSifra; // TODO: proveriti koji je tip A3
-	
-	@Column(name = "naziv", nullable = false)
-	private  String naziv;
-	
-	@Column(name = "domicilna", nullable = false)
-	private boolean domicilna; // TODO: proveriti sta je domicilna
-	
-	@OneToMany(mappedBy = "osnovnaValuta")
-	private Set<KursUValuti> kurseviUValutiOsnovni;
-	
-	@OneToMany(mappedBy = "premaValuti")
-	private Set<KursUValuti> kurseviUValutiPrema;
+	@Column(name = "sifra_valute", nullable = false)
+	private String sifraValute;
+
+	@Column(name = "naziv_valute", nullable = false)
+	private String nazivValute;
 	
 	@OneToMany(mappedBy = "valuta")
-	private Set<RacunPravnihLica> racuniPravnihLista;
+	private Set<MedjubankarskiPrenos> medjubankarskiPrenosi; 
 	
-	@OneToMany(mappedBy="valuta")
+	@OneToMany(mappedBy = "valuta")
 	private Set<AnalitikaIzvoda> analitikeIzvoda;
 	
-	@ManyToOne
-	private Drzava drzava;
-	
-	
-	public Valuta(){}
-	
+	@OneToMany(mappedBy = "valuta")
+	private Set<Racun> racuni;
+
 	public Long getId() {
-		return valutaId;
+		return id;
 	}
-	
+
 	public void setId(Long id) {
-		this.valutaId = id;
-	}
-	
-	public String getZvanicnaSifra() {
-		return zvanicnaSifra;
-	}
-	
-	public void setZvanicnaSifra(String zvanicnaSifra) {
-		this.zvanicnaSifra = zvanicnaSifra;
-	}
-	
-	public String getNaziv() {
-		return naziv;
-	}
-	
-	public void setNaziv(String naziv) {
-		this.naziv = naziv;
-	}
-	
-	public boolean isDomicilna() {
-		return domicilna;
-	}
-	
-	public void setDomicilna(boolean domicilna) {
-		this.domicilna = domicilna;
+		this.id = id;
 	}
 
-	public Drzava getDrzava() {
-		return drzava;
+	public String getSifraValute() {
+		return sifraValute;
 	}
 
-	public void setDrzava(Drzava drzava) {
-		this.drzava = drzava;
+	public void setSifraValute(String sifraValute) {
+		this.sifraValute = sifraValute;
 	}
+
+	public String getNazivValute() {
+		return nazivValute;
+	}
+
+	public void setNazivValute(String nazivValute) {
+		this.nazivValute = nazivValute;
+	} 
 	
 	
-}*/
+
+	
+}

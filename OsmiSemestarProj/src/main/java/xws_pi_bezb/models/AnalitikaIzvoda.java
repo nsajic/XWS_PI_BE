@@ -1,97 +1,90 @@
-/*package xws_pi_bezb.models;
+package xws_pi_bezb.models;
 
 import java.io.Serializable;
-import java.time.ZonedDateTime;
+import java.util.Date;
 import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlTransient;
+
 
 @Entity
 @Table(name = "analitika_izvoda")
 public class AnalitikaIzvoda implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6764947838323803049L;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-
-    @Column(name = "duznik", nullable = false)
-    private String duznik;
-
-    @Column(name = "svrha", nullable = false)
-    private String svrha;
-
-    @Column(name = "poverilac", nullable = false)
-    private String poverilac;
-
-    @Column(name = "datum_prijema", nullable = false)
-    private ZonedDateTime datumPrijema;
-
-    @Column(name = "datum_valute", nullable = false)
-    private ZonedDateTime datumValute;
-
-    @Column(name = "racun_duznika", nullable = false)
-    private String racunDuznika;
-
-    @Column(name = "model_zaduzenja")
-    private Integer modelZaduzenja;
-
-    @Column(name = "poziv_na_broj_zaduzenja")
-    private String pozivNaBrojZaduzenja;
-
-    @Column(name = "racun_poverioca")
-    private String racunPoverioca;
-
-    @Column(name = "model_odobrenja")
-    private Integer modelOdobrenja;
-
-    @Column(name = "poziv_na_broj_odobrenja")
-    private String pozivNaBrojOdobrenja;
-
-    @Column(name = "is_hitno", nullable = false)
-    private Boolean isHitno;
-
-
-    @Column(name = "iznos", nullable = false)
-    private Double iznos;
-
-    @Column(name = "tip_greske", nullable = false)
-    private Integer tipGreske;
-
-    @Column(name = "smer", nullable = false)
-    private String Smer;
-
-    @Column(name = "status")
-    private String status;
-    
-    @ManyToOne //TODO:PK
-    private DnevnoStanjeRacuna dnevnoStanjeRacuna;
-    
-    @ManyToOne
-    private NaseljenoMesto naseljenoMesto;
-    
-    @ManyToOne
-    private VrstaPlacanja vrstaPlacanja;
-    
-    @ManyToOne
-    private Valuta valuta;
-    
-    @OneToMany(mappedBy="analitikaIzvoda")
-    private Set<AnalitikaPreseka> analitikePreseka;
-    
-    
-    public AnalitikaIzvoda(){}
-
+	@Id
+	@GeneratedValue
+	private Long id;
+	
+	@Column(name = "datum_analitike", nullable = false)
+	private Date datumAnalitike;
+	
+	@Column(name = "smer", nullable = false)
+	private String smer;
+	
+	@Column(name = "duznik_nalogodavac", nullable = false)
+	private String duznikNalogodavac;
+	
+	@Column(name = "svrha_placanja", nullable = false)
+	private String svrhaPlacanja;
+	
+	@Column(name = "primalac_poverilac", nullable = false)
+	private String primalacPoverilac;
+	
+	@Column(name = "datum_naloga", nullable = false)
+	private Date datumNaloga;
+	
+	@Column(name = "datum_valute", nullable = false)
+	private Date datumValute;
+	
+	@Column(name = "racun_duznika", nullable = false)
+	private String racunDuznika;
+	
+	@Column(name = "model_zaduzenja", nullable = false)
+	private int modelZaduzenja;
+	
+	@Column(name = "poziv_na_broj_zaduzenja", nullable = false)
+	private String pozivNaBrojZaduzenja;
+	
+	@Column(name = "racun_poverioca", nullable = false)
+	private String racunPoverioca;
+	
+	@Column(name = "model_odobrenja", nullable = false)
+	private int modelOdobrenja;
+	
+	@Column(name = "poziv_na_broj_odobrenja", nullable = false)
+	private String pozivNaBrojOdobrenja;
+	
+	@Column(name = "iznos", nullable = false)
+	private double iznos;
+	
+	@ManyToOne
+	private DnevnoStanjeRacuna dnevnoStanjeRacuna;
+	
+	@ManyToOne
+	private Valuta valuta;
+	
+	@OneToMany(mappedBy = "analitikaIzvoda")
+	private Set<StavkaPrenosa> stavkePrenosa; 
+	
+	@OneToMany(mappedBy = "analitikaIzvoda")
+	private Set<ZatvaranjeRacuna> zatvaranjeRacuna;
+	
+	public AnalitikaIzvoda()
+	{
+		
+	}
+	
 	public Long getId() {
 		return id;
 	}
@@ -100,43 +93,59 @@ public class AnalitikaIzvoda implements Serializable {
 		this.id = id;
 	}
 
-	public String getDuznik() {
-		return duznik;
+	public Date getDatumAnalitike() {
+		return datumAnalitike;
 	}
 
-	public void setDuznik(String duznik) {
-		this.duznik = duznik;
+	public void setDatumAnalitike(Date datumAnalitike) {
+		this.datumAnalitike = datumAnalitike;
 	}
 
-	public String getSvrha() {
-		return svrha;
+	public String getSmer() {
+		return smer;
 	}
 
-	public void setSvrha(String svrha) {
-		this.svrha = svrha;
+	public void setSmer(String smer) {
+		this.smer = smer;
 	}
 
-	public String getPoverilac() {
-		return poverilac;
+	public String getDuznikNalogodavac() {
+		return duznikNalogodavac;
 	}
 
-	public void setPoverilac(String poverilac) {
-		this.poverilac = poverilac;
+	public void setDuznikNalogodavac(String duznikNalogodavac) {
+		this.duznikNalogodavac = duznikNalogodavac;
 	}
 
-	public ZonedDateTime getDatumPrijema() {
-		return datumPrijema;
+	public String getSvrhaPlacanja() {
+		return svrhaPlacanja;
 	}
 
-	public void setDatumPrijema(ZonedDateTime datumPrijema) {
-		this.datumPrijema = datumPrijema;
+	public void setSvrhaPlacanja(String svrhaPlacanja) {
+		this.svrhaPlacanja = svrhaPlacanja;
 	}
 
-	public ZonedDateTime getDatumValute() {
+	public String getPrimalacPoverilac() {
+		return primalacPoverilac;
+	}
+
+	public void setPrimalacPoverilac(String primalacPoverilac) {
+		this.primalacPoverilac = primalacPoverilac;
+	}
+
+	public Date getDatumNaloga() {
+		return datumNaloga;
+	}
+
+	public void setDatumNaloga(Date datumNaloga) {
+		this.datumNaloga = datumNaloga;
+	}
+
+	public Date getDatumValute() {
 		return datumValute;
 	}
 
-	public void setDatumValute(ZonedDateTime datumValute) {
+	public void setDatumValute(Date datumValute) {
 		this.datumValute = datumValute;
 	}
 
@@ -148,11 +157,11 @@ public class AnalitikaIzvoda implements Serializable {
 		this.racunDuznika = racunDuznika;
 	}
 
-	public Integer getModelZaduzenja() {
+	public int getModelZaduzenja() {
 		return modelZaduzenja;
 	}
 
-	public void setModelZaduzenja(Integer modelZaduzenja) {
+	public void setModelZaduzenja(int modelZaduzenja) {
 		this.modelZaduzenja = modelZaduzenja;
 	}
 
@@ -172,11 +181,11 @@ public class AnalitikaIzvoda implements Serializable {
 		this.racunPoverioca = racunPoverioca;
 	}
 
-	public Integer getModelOdobrenja() {
+	public int getModelOdobrenja() {
 		return modelOdobrenja;
 	}
 
-	public void setModelOdobrenja(Integer modelOdobrenja) {
+	public void setModelOdobrenja(int modelOdobrenja) {
 		this.modelOdobrenja = modelOdobrenja;
 	}
 
@@ -188,48 +197,12 @@ public class AnalitikaIzvoda implements Serializable {
 		this.pozivNaBrojOdobrenja = pozivNaBrojOdobrenja;
 	}
 
-	public Boolean getIsHitno() {
-		return isHitno;
-	}
-
-	public void setIsHitno(Boolean isHitno) {
-		this.isHitno = isHitno;
-	}
-
-	public Double getIznos() {
+	public double getIznos() {
 		return iznos;
 	}
 
-	public void setIznos(Double iznos) {
+	public void setIznos(double iznos) {
 		this.iznos = iznos;
-	}
-
-	public Integer getTipGreske() {
-		return tipGreske;
-	}
-
-	public void setTipGreske(Integer tipGreske) {
-		this.tipGreske = tipGreske;
-	}
-
-	public String getStatus() {
-		return status;
-	}
-
-	public void setStatus(String status) {
-		this.status = status;
-	}
-
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
-
-	public String getSmer() {
-		return Smer;
-	}
-
-	public void setSmer(String smer) {
-		Smer = smer;
 	}
 
 	public DnevnoStanjeRacuna getDnevnoStanjeRacuna() {
@@ -240,32 +213,18 @@ public class AnalitikaIzvoda implements Serializable {
 		this.dnevnoStanjeRacuna = dnevnoStanjeRacuna;
 	}
 
-	public NaseljenoMesto getNaseljenoMesto() {
-		return naseljenoMesto;
-	}
-
-	public void setNaseljenoMesto(NaseljenoMesto naseljenoMesto) {
-		this.naseljenoMesto = naseljenoMesto;
-	}
-
-	public VrstaPlacanja getVrstaPlacanja() {
-		return vrstaPlacanja;
-	}
-
-	public void setVrstaPlacanja(VrstaPlacanja vrstaPlacanja) {
-		this.vrstaPlacanja = vrstaPlacanja;
-	}
-
 	public Valuta getValuta() {
 		return valuta;
 	}
 
 	public void setValuta(Valuta valuta) {
 		this.valuta = valuta;
-	}
+	} 
+	
 
+	
+	
 	
 	
 }
 
-*/
