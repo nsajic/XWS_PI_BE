@@ -1,0 +1,96 @@
+<div ng-cloak ng-controller="bankaCtrl as $ctrl">
+	<div>
+		<h1>Banka</h1>
+		<!--<a ng-click="logOut()" href="">Izloguj se</a>-->
+	</div>
+
+	<div>
+		<div id="tabs">
+			<ul>
+				<li ng-class="{active: isSet(0)}"><a ng-click="setTab(0)"
+					href=""><span>Banke</span></a></li>
+				<li ng-class="{active: isSet(1)}"><a ng-click="setTab(1)"
+					href=""><span>Dodaj banke</span></a></li>
+			</ul>
+		</div>
+
+		<div ng-show="isSet(0)">
+			<h2>Banke</h2>	
+			<table>
+				<tr>
+					<td style = "width:120px; heigth: 70px">Naziv</td>
+					<td style = "width:120px; heigth: 70px">Sifra</td>
+					<td style = "width:120px; heigth: 70px">Swift kod</td>
+					<td style = "width:120px; heigth: 70px">Obracunski racun</td>
+				</tr>
+			</table>		
+			<table ng-repeat='banka in banke'>
+
+				<tr>
+					<td style = "width:120px; heigth: 70px">{{banka.nazivBanke}}</td>
+					<td style = "width:120px; heigth: 70px">{{banka.sifraBanke}}</td>
+					<td style = "width:120px; heigth: 70px">{{banka.swiftKod}}</td>
+					<td style = "width:120px; heigth: 70px">{{banka.obracunskiRacun}}</td>
+					<td><button ng-click="obrisiBanku(banka.id)">Obrisi</button></td>
+					<td><button ng-click="setBankaZaIzmenu(banka)">Izmeni</button></td>
+					<td><button ng-click="setBankaZaNext(banka)">Next</button></td>
+				</tr>
+				<tr ng-show = 'idBankaZaIzmenu == banka.id'>
+					<td colspan = 6>
+						Izmena banke {{banka.nazivBanke}}
+					</td>
+				</tr>
+				<tr ng-show = 'idBankaZaIzmenu == banka.id'>
+					<td colspan = 6>
+						<hr/>
+					<td>
+				</tr>
+				<tr ng-show = 'idBankeZaIzmenu == banka.id'>
+					<td><input style = "width:100px; heigth: 70px" type=text ng-model="$ctrl.nazivBankeIzmena"></td>
+					<td><input style = "width:100px; heigth: 70px" type=text ng-model="$ctrl.sifraBankeIzmena"></td>
+					<td><input style = "width:100px; heigth: 70px" type=text ng-model="$ctrl.swiftKodIzmena"></td>
+					<td><input style = "width:100px; heigth: 70px" type=text ng-model="$ctrl.obracunskiRacunIzmena"></td>
+					<td><button ng-click="izmeniBanku(banka.id)">Potvrdi</button></td>				
+				</tr>
+				
+				
+				<tr ng-show = 'idBankeZaIzmenu == banka.id'>
+					<td colspan = 3>
+						<hr/>
+					<td>
+				</tr>
+				
+
+				<tr ng-show = 'idBankaZaNext == banka.id'>
+					<td>
+						OVA
+					<td>
+				</tr>
+			</table>
+		</div>
+		<div ng-show="isSet(1)">
+			<div>
+				<h2>Unesite podatke o banci:</h2>
+				<table>
+					<tr>
+						<td>Naziv:</td>
+						<td><input type=text ng-model="nazivBanke"></td>
+					<tr>
+					<tr>
+						<td>Sifra:</td>
+						<td><input type=text ng-model="sifraBanke"></td>
+					<tr>
+					<tr>
+						<td>Swift kod:</td>
+						<td><input type=text ng-model="swiftKodBanke"></td>
+					<tr>
+					<tr>
+						<td>Obracunski racun:</td>
+						<td><input type=text ng-model="obracunskiRacunBanke"></td>
+					<tr>
+				</table>
+				<button ng-click="dodajBanku()">Dodaj</button>
+			</div>
+		</div>
+	</div>
+</div>

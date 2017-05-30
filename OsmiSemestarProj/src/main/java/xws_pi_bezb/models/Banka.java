@@ -15,14 +15,19 @@ import javax.persistence.Table;
 @Table(name = "banka")
 public class Banka implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5328904002193386606L;
+
 	@Id
 	@GeneratedValue
 	private Long id;
 	
-	@Column(name = "datum_analitike", nullable = false)
+	@Column(name = "naziv_banke", nullable = false)
 	private String nazivBanke;
 	
-	@Column(name = "smer", nullable = false)
+	@Column(name = "sifra_banke", nullable = false)
 	private int sifraBanke;
 	
 	@Column(name = "swift_kod", nullable = false)

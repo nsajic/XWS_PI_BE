@@ -1,6 +1,6 @@
-var drzavaKontroler = angular.module('xws_pi_bezb.welcomeKontroler', []);
+var welcomeKontroler = angular.module('xws_pi_bezb.welcomeKontroler', []);
 
-drzavaKontroler.controller('welcomeCtrl', function($scope) {
+welcomeKontroler.controller('welcomeCtrl', function($scope) {
 
 
 
