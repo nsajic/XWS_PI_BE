@@ -7,7 +7,7 @@
 	<div>
 		<div id="tabs">
 			<ul>
-				<li ng-class="{active: isSet(0)}"><a ng-click="setTab(0)"
+				<li ng-class="{active: isSet(0)}"><a ng-click="setTab(0); prikaziPretragu = false"
 					href=""><span>Banke</span></a></li>
 				<li ng-class="{active: isSet(1)}"><a ng-click="setTab(1)"
 					href=""><span>Dodaj banke</span></a></li>
@@ -16,7 +16,43 @@
 
 		<div ng-show="isSet(0)">
 			<h2>Banke</h2>	
-			<table>
+		
+		
+			<button ng-show = "banke.length != 0 || prikaziPretragu" ng-click="prikaziPretragu = true">Pretraga</button>
+			<div ng-show = "prikaziPretragu">
+				<h2>Unesite podatke o banci:</h2>
+				<table>
+					<tr>
+						<td>Naziv:</td>
+						<td><input type=text ng-model="nazivBankePretraga"></td>
+					<tr>
+					<tr>
+						<td>Sifra:</td>
+						<td><input type=text ng-model="sifraBankePretraga"></td>
+					<tr>
+					<tr>
+						<td>Swift kod:</td>
+						<td><input type=text ng-model="swiftKodBankePretraga"></td>
+					<tr>
+					<tr>
+						<td>Obracunski racun:</td>
+						<td><input type=text ng-model="obracunskiRacunBankePretraga"></td>
+					<tr>
+					<tr>
+						<td>
+						<td>
+						<td>
+							<button ng-click="pretragaPoPoljima()">Pretrazi</button>
+							
+						</td>
+						<td>
+							<button ng-click="prikaziPretragu = false; ponistiPretragu()">Iskljuci</button>
+						</td>
+					</tr>
+				</table>
+			</div>
+			
+			<table ng-show = "banke.length != 0">
 				<tr>
 					<td style = "width:120px; heigth: 70px">Naziv</td>
 					<td style = "width:120px; heigth: 70px">Sifra</td>
@@ -25,7 +61,6 @@
 				</tr>
 			</table>		
 			<table ng-repeat='banka in banke'>
-
 				<tr>
 					<td style = "width:120px; heigth: 70px">{{banka.nazivBanke}}</td>
 					<td style = "width:120px; heigth: 70px">{{banka.sifraBanke}}</td>
@@ -35,16 +70,6 @@
 					<td><button ng-click="setBankaZaIzmenu(banka)">Izmeni</button></td>
 					<td><button ng-click="setBankaZaNext(banka)">Next</button></td>
 				</tr>
-				<tr ng-show = 'idBankaZaIzmenu == banka.id'>
-					<td colspan = 6>
-						Izmena banke {{banka.nazivBanke}}
-					</td>
-				</tr>
-				<tr ng-show = 'idBankaZaIzmenu == banka.id'>
-					<td colspan = 6>
-						<hr/>
-					<td>
-				</tr>
 				<tr ng-show = 'idBankeZaIzmenu == banka.id'>
 					<td><input style = "width:100px; heigth: 70px" type=text ng-model="$ctrl.nazivBankeIzmena"></td>
 					<td><input style = "width:100px; heigth: 70px" type=text ng-model="$ctrl.sifraBankeIzmena"></td>
@@ -52,18 +77,9 @@
 					<td><input style = "width:100px; heigth: 70px" type=text ng-model="$ctrl.obracunskiRacunIzmena"></td>
 					<td><button ng-click="izmeniBanku(banka.id)">Potvrdi</button></td>				
 				</tr>
-				
-				
-				<tr ng-show = 'idBankeZaIzmenu == banka.id'>
-					<td colspan = 3>
-						<hr/>
+				<tr ng-show = 'idBankeZaNext == banka.id'>
 					<td>
-				</tr>
-				
-
-				<tr ng-show = 'idBankaZaNext == banka.id'>
-					<td>
-						OVA
+						TODO 1: Implementirati
 					<td>
 				</tr>
 			</table>

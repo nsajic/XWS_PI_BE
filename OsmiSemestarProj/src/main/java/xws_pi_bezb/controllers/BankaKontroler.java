@@ -26,7 +26,7 @@ public class BankaKontroler {
 		bankaService.save(banka);
 		return new ResponseEntity<List<Banka>>(bankaService.findAll(), HttpStatus.OK);
 	}
-	
+
 	@RequestMapping(value = "/izmeniBanku", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<Banka>> izmeniBanku(@RequestBody Banka banka) {
 		bankaService.save(banka);
@@ -43,8 +43,11 @@ public class BankaKontroler {
 	public ResponseEntity<List<Banka>> izlistajBanku() {
 		return new ResponseEntity<List<Banka>>(bankaService.findAll(), HttpStatus.OK);
 	}
-	
 
-
+	@RequestMapping(value = "/pretraziBanke", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<List<Banka>> pretraziBanke(@RequestBody Banka banka) {
+		System.out.println("usao");
+		return new ResponseEntity<List<Banka>>(bankaService.getBySearch(banka), HttpStatus.OK);
+	}
 
 }

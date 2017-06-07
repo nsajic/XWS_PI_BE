@@ -29,8 +29,6 @@ public class Delatnost {
 	
 	public Delatnost(){}
 
-	
-
 	public Long getId() {
 		return id;
 	}

@@ -20,6 +20,9 @@ bankaServis.factory('bankaServis', function($http) {
 		return $http.get('/bankaKontroler/izlistajBanke');
 	}
 	
+	temp.pretraziBanke = function(data) {
+		return $http.post('/bankaKontroler/pretraziBanke', data);
+	}
 	return temp;
 
 })

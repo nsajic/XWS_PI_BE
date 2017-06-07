@@ -1,18 +1,53 @@
-/*package xws_pi_bezb.services;
+package xws_pi_bezb.services;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import xws_pi_bezb.irepositories.INaseljenoMestoRepository;
-import xws_pi_bezb.iservices.INaseljenoMestoService;
-import xws_pi_bezb.models.Drzava;
-import xws_pi_bezb.models.NaseljenoMesto;
+
+import xws_pi_bezb.irepositories.IRacunRepository;
+import xws_pi_bezb.iservices.IRacunService;
+import xws_pi_bezb.models.Racun;
+
 
 @Service
-public class NaseljenoMestoService implements INaseljenoMestoService{
-
+public class RacunService implements IRacunService{
+	
 	@Autowired
+	private IRacunRepository racunRepository;
+	
+	@Override
+	public List<Racun> findAll() {
+		// TODO Auto-generated method stub
+		return racunRepository.findAll();
+	}
+
+	/*@Override
+	public List<Racun> getBySearchText(String serachText) {
+		// TODO Auto-generated method stub
+		return null;
+	}*/
+
+	@Override
+	public Racun findOne(Long id) {
+		// TODO Auto-generated method stub
+		return racunRepository.findById(id);
+	}
+
+	@Override
+	public void save(Racun racun) {
+		racunRepository.save(racun);
+		
+	}
+
+	@Override
+	public void delete(Long id) {
+		racunRepository.delete(id);
+		
+	}
+
+	/*@Autowired
 	private INaseljenoMestoRepository naseljenoMestoRepository;
 
 	@Override
@@ -57,6 +92,5 @@ public class NaseljenoMestoService implements INaseljenoMestoService{
 			}
 		}
 		return naseljenaMesta;
-	}
+	}*/
 }
-*/
