@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import xws_pi_bezb.iservices.IBankaService;
-import xws_pi_bezb.models.Banka;
+import xws_pi_bezb.models.Banka;	
 
 @Controller
 @RequestMapping("/bankaKontroler")
@@ -46,7 +46,6 @@ public class BankaKontroler {
 
 	@RequestMapping(value = "/pretraziBanke", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<Banka>> pretraziBanke(@RequestBody Banka banka) {
-		System.out.println("usao");
 		return new ResponseEntity<List<Banka>>(bankaService.getBySearch(banka), HttpStatus.OK);
 	}
 

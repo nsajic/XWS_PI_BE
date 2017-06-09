@@ -30,7 +30,7 @@ public class Racun {
 	
 	@ManyToOne
 	private Banka banka;
-	
+	/*
 	@ManyToOne
 	private Valuta valuta;
 	
@@ -39,7 +39,7 @@ public class Racun {
 	
 	@OneToMany(mappedBy = "racun")
 	private Set<DnevnoStanjeRacuna> dnevnjaStanjaRacuna;
-
+*/
 	public Racun()
 	{
 		
@@ -84,7 +84,7 @@ public class Racun {
 	public void setBanka(Banka banka) {
 		this.banka = banka;
 	}
-
+/*
 	public Valuta getValuta() {
 		return valuta;
 	}
@@ -92,7 +92,7 @@ public class Racun {
 	public void setValuta(Valuta valuta) {
 		this.valuta = valuta;
 	} 
-	
+	*/
 	
 	
 }

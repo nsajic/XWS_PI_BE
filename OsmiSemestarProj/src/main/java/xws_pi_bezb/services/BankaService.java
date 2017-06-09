@@ -41,30 +41,45 @@ public class BankaService implements IBankaService {
 		List<Banka> banke = new ArrayList<Banka>();
 
 		String sifraString = (banka.getSifraBanke() == 0) ? null : Integer.toString(banka.getSifraBanke());
-		System.out.println(banka.getNazivBanke() + " naziv");
-		System.out.println(banka.getObracunskiRacun() + " obr rac");
-		System.out.println(sifraString + " sifra banke");
-		System.out.println(banka.getSwiftKod() + " swift");
 
 
+		boolean praznaPretraga = true;
+		
 		for (Banka bankaFor : bankaRepository.findAll()) {
 			if (!banka.getNazivBanke().isEmpty()) {
+				praznaPretraga = false;
 				if (bankaFor.getNazivBanke().toLowerCase().contains(banka.getNazivBanke().toLowerCase())) {
-					banke.add(bankaFor);
+					if(!banke.contains(bankaFor)){
+						banke.add(bankaFor);
+					}
 				}
-			} else if (banka.getSwiftKod() != null) {
+			}
+			if (banka.getSwiftKod() != null) {
+				praznaPretraga = false;
 				if (bankaFor.getSwiftKod().toLowerCase().contains(banka.getSwiftKod().toLowerCase())) {
-					banke.add(bankaFor);
+					if(!banke.contains(bankaFor)){
+						banke.add(bankaFor);
+					}
 				}
-			} else if (banka.getObracunskiRacun() != null) {
+			}
+			if (banka.getObracunskiRacun() != null) {
+				praznaPretraga = false;
 				if (bankaFor.getObracunskiRacun().toLowerCase().contains(banka.getObracunskiRacun().toLowerCase())) {
-					banke.add(bankaFor);
+					if(!banke.contains(bankaFor)){
+						banke.add(bankaFor);
+					}
 				}
-			} else if (sifraString != null) {
+			}
+			if (sifraString != null) {
+				praznaPretraga = false;
 				if (Integer.toString(bankaFor.getSifraBanke()).toLowerCase().contains(sifraString.toLowerCase())) {
-					banke.add(bankaFor);
+					if(!banke.contains(bankaFor)){
+						banke.add(bankaFor);
+					}
 				}
-			} else {
+			}
+			
+			if(praznaPretraga){
 				banke = bankaRepository.findAll();
 			}
 		}

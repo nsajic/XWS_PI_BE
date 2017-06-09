@@ -1,4 +1,4 @@
-package xws_pi_bezb.models;
+/*package xws_pi_bezb.models;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -43,3 +43,4 @@ public class DnevnoStanjeRacuna implements Serializable {
 	@OneToMany(mappedBy = "dnevnoStanjeRacuna")
 	private Set<AnalitikaIzvoda> analitikeIzvoda; 
 }
+*/

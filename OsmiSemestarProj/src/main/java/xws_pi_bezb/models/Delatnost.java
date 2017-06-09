@@ -17,9 +17,6 @@ public class Delatnost {
 	@GeneratedValue
 	private Long id;
 	
-	@Column(name = "sifra_delatnosti", nullable = false)
-	private int sifraDelatnosti;
-	
 	@Column(name = "naziv_delatnosti", nullable = false)
 	private String nazivDelatnosti;
 	
@@ -35,14 +32,6 @@ public class Delatnost {
 
 	public void setId(Long id) {
 		this.id = id;
-	}
-
-	public int getSifraDelatnosti() {
-		return sifraDelatnosti;
-	}
-
-	public void setSifraDelatnosti(int sifraDelatnosti) {
-		this.sifraDelatnosti = sifraDelatnosti;
 	}
 
 	public String getNazivDelatnosti() {

@@ -1,4 +1,4 @@
-package xws_pi_bezb.models;
+/*package xws_pi_bezb.models;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -17,9 +17,6 @@ import javax.persistence.Table;
 @Table(name = "analitika_izvoda")
 public class AnalitikaIzvoda implements Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -6764947838323803049L;
 
 	@Id
@@ -228,3 +225,4 @@ public class AnalitikaIzvoda implements Serializable {
 	
 }
 
+*/

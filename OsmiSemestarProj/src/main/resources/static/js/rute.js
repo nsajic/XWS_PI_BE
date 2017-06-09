@@ -8,6 +8,12 @@ app.config(function($routeProvider, $locationProvider) {
     .when("/banka", {
         templateUrl : "html/banka.html"
     })
+    .when("/pravnoLice", {
+        templateUrl : "html/pravnoLice.html"
+    })
+    .when("/delatnost", {
+        templateUrl : "html/delatnost.html"
+    })
     .when("/naseljenoMesto", {
         templateUrl : "html/naseljenoMesto.html"
     });

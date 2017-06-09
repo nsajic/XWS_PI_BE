@@ -11,39 +11,63 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import xws_pi_bezb.iservices.IDelatnostService;
 import xws_pi_bezb.iservices.IKlijentService;
-import xws_pi_bezb.models.Klijent;
+import xws_pi_bezb.models.Delatnost;
+import xws_pi_bezb.models.PravnoLice;
 
 
 @Controller
 @RequestMapping("/klijentKontroler")
 public class KlijentKontroler {
 
-	
+
 	@Autowired
 	public IKlijentService klijentService;
 	
-	@RequestMapping(value = "/dodajKlijenta", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<List<Klijent>> dodajKlijenta(@RequestBody Klijent klijent) {
-		klijentService.save(klijent);
-		return new ResponseEntity<List<Klijent>>(klijentService.findAll(), HttpStatus.OK);
+	@Autowired
+	public IDelatnostService delatnostService;
+	
+	@RequestMapping(value = "/dodajPravnoLice", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<List<PravnoLice>> dodajPravnoLice(@RequestBody PravnoLice pravnoLice) {
+		System.out.println(pravnoLice.getDelatnost()+" sss");
+		klijentService.save(pravnoLice);
+		
+		return new ResponseEntity<List<PravnoLice>>(klijentService.getPravnaLica(), HttpStatus.OK);
+		
 	}
 	
-	@RequestMapping(value = "/izmeniKlijenta", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<List<Klijent>> izmeniKlijenta(@RequestBody Klijent klijent) {
-		klijentService.save(klijent);
-		return new ResponseEntity<List<Klijent>>(klijentService.findAll(), HttpStatus.OK);
+	@RequestMapping(value = "/izmeniPravnoLice", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<List<PravnoLice>> izmeniKlijenta(@RequestBody PravnoLice pravnoLice) {
+		klijentService.save(pravnoLice);
+		return new ResponseEntity<List<PravnoLice>>(klijentService.getPravnaLica(), HttpStatus.OK);
 	}
 
-	@RequestMapping(value = "/izbrisiKlijenta", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<List<Klijent>> izbrisiKlijenta(@RequestBody Long klijentId) {
+	@RequestMapping(value = "/izbrisiPravnoLice", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<List<PravnoLice>> izbrisiKlijenta(@RequestBody Long klijentId) {
 		klijentService.delete(klijentId);
-		return new ResponseEntity<List<Klijent>>(klijentService.findAll(), HttpStatus.OK);
+		return new ResponseEntity<List<PravnoLice>>(klijentService.getPravnaLica(), HttpStatus.OK);
 	}
 
-	@RequestMapping(value = "/izlistajKlijente", method = RequestMethod.GET)
-	public ResponseEntity<List<Klijent>> izlistajKlijente() {
-		return new ResponseEntity<List<Klijent>>(klijentService.findAll(), HttpStatus.OK);
+	@RequestMapping(value = "/izlistajPravnaLica", method = RequestMethod.GET)
+	public ResponseEntity<List<PravnoLice>> izlistajKlijente() {
+		return new ResponseEntity<List<PravnoLice>>(klijentService.getPravnaLica(), HttpStatus.OK);
 	}
 	
+
+	@RequestMapping(value = "/pretraziPravnaLica", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<List<PravnoLice>> pretraziPravnaLica(@RequestBody PravnoLice pravnoLice) {
+		return new ResponseEntity<List<PravnoLice>>(klijentService.getPravnaLicaBySearch(pravnoLice), HttpStatus.OK);
+	}
+	
+
+	@RequestMapping(value = "/ucitajPravnoLice", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<PravnoLice> ucitajPravnoLice(@RequestBody PravnoLice pravnoLice) {
+		return new ResponseEntity<PravnoLice>((PravnoLice) klijentService.findOne(pravnoLice.getId()), HttpStatus.OK);
+	}
+	
+	@RequestMapping(value = "/ucitajDelatnosti", method = RequestMethod.GET)
+	public ResponseEntity<List<Delatnost>> ucitajDelatnosti() {
+		return new ResponseEntity<List<Delatnost>>(delatnostService.findAll(), HttpStatus.OK);
+	}
 }

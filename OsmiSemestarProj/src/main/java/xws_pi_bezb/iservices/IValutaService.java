@@ -1,4 +1,4 @@
-package xws_pi_bezb.iservices;
+/*package xws_pi_bezb.iservices;
 
 import java.util.List;
 
@@ -18,3 +18,4 @@ public interface IValutaService {
 
 	void delete(Long id);
 }
+*/

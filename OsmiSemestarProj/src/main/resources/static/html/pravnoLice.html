@@ -1,0 +1,385 @@
+<div ng-cloak ng-controller="pravnoLiceCtrl as $ctrl">
+	<div>
+		<h1>Pravno lice</h1>
+		<!--<a ng-click="logOut()" href="">Izloguj se</a>-->
+	</div>
+
+	<div>
+		<div id="tabs">
+			<ul>
+				<li ng-class="{active: isSet(0)}"><a ng-click="setTab(0); prikaziPretraguPravnaLica = false"
+					href=""><span>Pravna lica</span></a></li>
+				<li ng-class="{active: isSet(1)}"><a ng-click="setTab(1)"
+					href=""><span>Dodaj pravno lice</span></a></li>
+				<li ng-class="{active: isSet(2)}"><a ng-click="setTab(2)"
+					href=""><span>Izmeni pravno lice</span></a></li>
+			</ul>
+		</div>
+
+		<div ng-show="isSet(0)">
+			<div ng-show ="idPravnogLicaZaDetalje == -1" >
+				<h2>Pravna lica</h2>
+					
+				<button ng-show = "pravnaLica.length != 0 || prikaziPretraguPravnaLica" ng-click="prikaziPretraguPravnaLica = true">Pretraga</button>
+				<div ng-show = "prikaziPretraguPravnaLica">
+					<h2>Unesite podatke o klijentu:</h2>
+					<table>
+						<tr>
+							<td>Ime vlasnika:</td>
+							<td><input type=text ng-model="imePravnogLicaPretraga"></td>
+						</tr>
+						<tr>
+							<td>Prezime vlasnika:</td>
+							<td><input type=text ng-model="prezimePravnogLicaPretraga"></td>
+						</tr>
+						<tr>
+							<td>Broj licne karte vlasnika:</td>
+							<td><input type=number ng-model="brojLicneKartePravnogLicaPretraga"></td>
+						</tr>
+						<!-- <tr>
+							<td>Datum isteka licne karte vlasnika:</td>
+							<td><input type="date" ng-model="datumIstekaLicneKartePravnogLicaPretraga"></td>
+						</tr> -->
+						<tr>
+							<td>Telefon:</td>
+							<td><input type="text" ng-model="telefonPravnogLicaPretraga"></td>
+						</tr>
+						<tr>
+							<td>Adresa:</td>
+							<td><input type="text" ng-model="adresaPravnogLicaPretraga"></td>
+						</tr>
+						<!-- KRAJ ZAJEDNICKOG -->
+						<tr>
+							<td>PIB:</td>
+							<td><input type="number" ng-model="pibPravnogLicaPretraga"></td>
+						</tr>
+						<tr>
+							<td>Naziv:</td>
+							<td><input type="text" ng-model="nazivPravnogLicaPretraga"></td>
+						</tr>
+						<tr>
+							<td>Email:</td>
+							<td><input type="email" ng-model="emailPravnogLicaPretraga"></td>
+						</tr>
+						<tr>
+							<td>Web:</td>
+							<td><input type="text" ng-model="webPravnogLicaPretraga"></td>
+						</tr>
+						<tr>
+							<td>Maticni broj:</td>
+							<td><input type="number" ng-model="maticniBrojPravnogLicaPretraga"></td>
+						</tr>
+						<tr>
+							<td>FAX:</td>
+							<td><input type="text" ng-model="faxPravnogLicaPretraga"></td>
+						</tr>
+						<tr>
+							<td>APR:</td>
+							<td><input type="checkbox" ng-model="aprPravnogLicaPretraga"></td>
+						</tr>
+						<tr>
+							<td>OP:</td>
+							<td><input type="checkbox" ng-model="opPravnogLicaPretraga"></td>
+						</tr>
+						<tr>
+							<td>Delatnosti:</td>
+							<td>
+								<select style="width: 100px" ng-options="delatnost.nazivDelatnosti for delatnost in delatnosti" ng-model="delatnostPravnogLicaPretraga"></select></td>
+							<td>
+						</tr>
+						
+						
+						<tr>
+							<td>
+							<td>
+							<td>
+								<button ng-click="pretragaPravnihLicaPoPoljima()">Pretrazi</button>
+								
+							</td>
+							<td>
+								<button ng-click="prikaziPretraguPravnaLica = false; ponistiPretraguPravnihLica()">Iskljuci</button>
+							</td>
+						</tr>
+					</table>
+				</div>
+						
+				<table>
+					<tr>
+						<td style = "width:130px; heigth: 70px">Ime vlasnika</td>
+						<td style = "width:130px; heigth: 70px">Prezime vlasnika</td>
+						<td style = "width:130px; heigth: 70px">Telefon</td>
+						<td style = "width:130px; heigth: 70px">Adresa</td>
+						<td style = "width:130px; heigth: 70px">Naziv</td>
+						<td style = "width:130px; heigth: 70px">PIB</td>
+						<td style = "width:130px; heigth: 70px">Email</td>
+					</tr>
+					<tr  ng-repeat='pravnoLice in pravnaLica'>
+						<td style = "width:130px; heigth: 70px">{{pravnoLice.ime}}</td>
+						<td style = "width:130px; heigth: 70px">{{pravnoLice.prezime}}</td>
+						<td style = "width:130px; heigth: 70px">{{pravnoLice.telefon}}</td>
+						<td style = "width:130px; heigth: 70px">{{pravnoLice.adresa}}</td>
+						<td style = "width:130px; heigth: 70px">{{pravnoLice.naziv}}</td>
+						<td style = "width:130px; heigth: 70px">{{pravnoLice.pib}}</td>
+						<td style = "width:130px; heigth: 70px">{{pravnoLice.email}}</td>
+						<td><button ng-click="obrisiPravnoLice(pravnoLice.id)">Obrisi</button></td>
+						<td><button ng-click="setPravnoLiceZaIzmenu(pravnoLice)">Izmeni</button></td>
+						<td><button ng-click="setPravnoLiceZaDetalje(pravnoLice)">Detalji</button></td>
+						<td><button ng-click="setPravnoLiceZaNext(pravnoLice)">Next</button></td>
+					</tr>
+	
+					<tr ng-show = 'idPravnogLicaZaNext == pravnoLice.id'>
+						<td>
+							TODO 1: Implementirati
+						<td>
+					</tr>
+				</table>
+			</div>
+			<div ng-show = "idPravnogLicaZaDetalje != -1">
+				<table>
+						<tr>
+							<td>Ime vlasnika:</td>
+							<td>{{pravnoLiceZaDetalje.ime}}</td>
+						</tr>
+						<tr>
+							<td>Prezime vlasnika:</td>
+							<td>{{pravnoLiceZaDetalje.prezime}}</td>
+						</tr>
+						<tr>
+							<td>Broj licne karte vlasnika:</td>
+							<td>{{pravnoLiceZaDetalje.brojLicneKarte}}</td>
+						</tr>
+						<!-- <tr>
+							<td>Datum isteka licne karte vlasnika:</td>
+							<td>{{pravnoLiceZaDetalje.datumIstekaLicneKarte}}</td>
+						</tr> -->
+						<tr>
+							<td>Telefon:</td>
+							<td>{{pravnoLiceZaDetalje.telefon}}</td>
+						</tr>
+						<tr>
+							<td>Adresa:</td>
+							<td>{{pravnoLiceZaDetalje.adresa}}</td>
+						</tr>
+						<!-- KRAJ ZAJEDNICKOG -->
+						<tr>
+							<td>PIB:</td>
+							<td>{{pravnoLiceZaDetalje.pib}}</td>
+						</tr>
+						<tr>
+							<td>Naziv:</td>
+							<td>{{pravnoLiceZaDetalje.naziv}}</td>
+						</tr>
+						<tr>
+							<td>Email:</td>
+							<td>{{pravnoLiceZaDetalje.email}}</td>
+						</tr>
+						<tr>
+							<td>Web::</td>
+							<td>{{pravnoLiceZaDetalje.web}}</td>
+						</tr>
+						<tr>
+							<td>Maticni broj:</td>
+							<td>{{pravnoLiceZaDetalje.maticniBroj}}</td>
+						</tr>
+						<tr>
+							<td>FAX:</td>
+							<td>{{pravnoLiceZaDetalje.fax}}</td>
+						</tr>
+						<tr>
+							<td>APR:</td>
+							<td>{{pravnoLiceZaDetalje.apr}}</td>
+						</tr>
+						<tr>
+							<td>OP:</td>
+							<td>{{pravnoLiceZaDetalje.op}}</td>
+						</tr>
+						<tr>
+							<td>Delatnost:</td>
+							<td>{{pravnoLiceZaDetalje.delatnost.nazivDelatnosti}}</td>
+						</tr>
+						
+					</table>
+			
+			 	<button ng-click = "idPravnogLicaZaDetalje = -1; pravnoLiceZaDetalje = null;">Nazad</button>
+			</div>
+		</div>
+		<div ng-show="isSet(1)">
+			<div>
+				<h2>Unesite podatke o pravnom licu:</h2>
+				<table>
+					<tr>
+						<td>Ime vlasnika:</td>
+						<td><input type=text ng-model="imePravnogLica"></td>
+					</tr>
+					<tr>
+						<td>Prezime vlasnika:</td>
+						<td><input type=text ng-model="prezimePravnogLica"></td>
+					</tr>
+					<tr>
+						<td>Broj licne karte vlasnika:</td>
+						<td><input type=number ng-model="brojLicneKartePravnogLica"></td>
+					</tr>
+					<tr>
+						<td>Datum isteka licne karte vlasnika:</td>
+						<td><input type="date" ng-model="datumIstekaLicneKartePravnogLica"></td>
+					</tr>
+					<tr>
+						<td>Telefon:</td>
+						<td><input type="text" ng-model="telefonPravnogLica"></td>
+					</tr>
+					<tr>
+						<td>Adresa:</td>
+						<td><input type="text" ng-model="adresaPravnogLica"></td>
+					</tr>
+					<!-- KRAJ ZAJEDNICKOG -->
+					<tr>
+						<td>PIB:</td>
+						<td><input type="number" ng-model="pibPravnogLica"></td>
+					</tr>
+					<tr>
+						<td>Naziv:</td>
+						<td><input type="text" ng-model="nazivPravnogLica"></td>
+					</tr>
+					<tr>
+						<td>Email:</td>
+						<td><input type="email" ng-model="emailPravnogLica"></td>
+					</tr>
+					<tr>
+						<td>Web::</td>
+						<td><input type="text" ng-model="webPravnogLica"></td>
+					</tr>
+					<tr>
+						<td>Maticni broj:</td>
+						<td><input type="number" ng-model="maticniBrojPravnogLica"></td>
+					</tr>
+					<tr>
+						<td>FAX:</td>
+						<td><input type="text" ng-model="faxPravnogLica"></td>
+					</tr>
+					<tr>
+						<td>APR:</td>
+						<td><input type="checkbox" ng-model="aprPravnogLica"></td>
+					</tr>
+					<tr>
+						<td>OP:</td>
+						<td><input type="checkbox" ng-model="opPravnogLica"></td>
+					</tr>
+					<tr>
+						<td>Delatnosti:</td>
+						<td>
+							<select style="width: 180px" ng-options="delatnost.nazivDelatnosti for delatnost in delatnosti" ng-model="delatnostPravnogLica"></select>
+						</td>
+						<td>
+							<button class="btn" ng-click="prikaziDelatnostiBool = true">Prikazi delatnosti</button>
+						</td>
+					</tr>
+				</table>
+				<button ng-click="dodajPravnoLice()">Dodaj</button>
+				
+				<div ng-show = "prikaziDelatnostiBool == true" >
+					<hr>
+					<table  ng-repeat='delatnost in delatnosti'>
+						<tr >
+							<td style = "width:120px; heigth: 70px">{{delatnost.nazivDelatnosti}}</td>
+							<td><button ng-click="odaberiDelatnost(delatnost)">Odaberi</button></td>
+						</tr>
+					</table>
+					<hr>
+					<button ng-click="skloni()">Skloni</button>
+				</div>
+			</div>
+		</div>
+		
+		<div ng-show="isSet(2)">
+			<div>
+				<h2>Izmena podataka o pravnom licu:</h2>
+				<table>
+					<tr>
+						<td>Ime vlasnika:</td>
+						<td><input type=text ng-model="$ctrl.imePravnogLicaIzmena"></td>
+					</tr>
+					<tr>
+						<td>Prezime vlasnika:</td>
+						<td><input type=text ng-model="$ctrl.prezimePravnogLicaIzmena"></td>
+					</tr>
+					<tr>
+						<td>Broj licne karte vlasnika:</td>
+						<td><input type=number ng-model="$ctrl.brojLicneKartePravnogLicaIzmena"></td>
+					</tr>
+					<!-- <tr>
+						<td>Datum isteka licne karte vlasnika:</td>
+						<td><input type="date" ng-model="$ctrl.datumIstekaLicneKartePravnogLicaIzmena"></td>
+					</tr> -->
+					<tr>
+						<td>Telefon:</td>
+						<td><input type="text" ng-model="$ctrl.telefonPravnogLicaIzmena"></td>
+					</tr>
+					<tr>
+						<td>Adresa:</td>
+						<td><input type="text" ng-model="$ctrl.adresaPravnogLicaIzmena"></td>
+					</tr>
+					<!-- KRAJ ZAJEDNICKOG -->
+					<tr>
+						<td>PIB:</td>
+						<td><input type="number" ng-model="$ctrl.pibPravnogLicaIzmena"></td>
+					</tr>
+					<tr>
+						<td>Naziv:</td>
+						<td><input type="text" ng-model="$ctrl.nazivPravnogLicaIzmena"></td>
+					</tr>
+					<tr>
+						<td>Email:</td>
+						<td><input type="email" ng-model="$ctrl.emailPravnogLicaIzmena"></td>
+					</tr>
+					<tr>
+						<td>Web::</td>
+						<td><input type="text" ng-model="$ctrl.webPravnogLicaIzmena"></td>
+					</tr>
+					<tr>
+						<td>Maticni broj:</td>
+						<td><input type="number" ng-model="$ctrl.maticniBrojPravnogLicaIzmena"></td>
+					</tr>
+					<tr>
+						<td>FAX:</td>
+						<td><input type="text" ng-model="$ctrl.faxPravnogLicaIzmena"></td>
+					</tr>
+					<tr>
+						<td>APR:</td>
+						<td><input type="checkbox" ng-model="$ctrl.aprPravnogLicaIzmena"></td>
+					</tr>
+					<tr>
+						<td>OP:</td>
+						<td><input type="checkbox" ng-model="$ctrl.opPravnogLicaIzmena"></td>
+					</tr>
+					<tr>
+						<td>Delatnosti:</td>
+						<td>
+							<select style="width: 180px" ng-options="delatnost.nazivDelatnosti for delatnost in delatnosti" ng-model="$ctrl.delatnostPravnogLicaIzmena"></select>
+						</td>
+						<td>
+							<button class="btn" ng-click="prikaziDelatnostiBoolIzmena = true">Prikazi delatnosti</button>
+						</td>
+					</tr>
+
+
+				</table>
+				<button ng-click="izmeniPravnoLice()">Potvrdi</button>
+				
+				<div ng-show = "prikaziDelatnostiBoolIzmena == true" >
+					<hr>
+					<table  ng-repeat='delatnost in delatnosti'>
+						<tr >
+							<td style = "width:120px; heigth: 70px">{{delatnost.nazivDelatnosti}}</td>
+							<td><button ng-click="odaberiDelatnostIzmena(delatnost)">Odaberi</button></td>
+						</tr>
+					</table>
+					<hr>
+					<button ng-click="skloniIzmena()">Skloni</button>
+				</div>
+				
+				<button ng-click="idPravnogLicaZaIzmenu = -1; setTab(0);">Nazad</button>
+			</div>
+		</div>
+		
+	</div>
+</div>

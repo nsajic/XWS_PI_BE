@@ -1,4 +1,4 @@
-package xws_pi_bezb.models;
+/*package xws_pi_bezb.models;
 
 import java.io.Serializable;
 import java.util.Set;
@@ -63,3 +63,4 @@ public class Valuta  implements Serializable {
 
 	
 }
+*/

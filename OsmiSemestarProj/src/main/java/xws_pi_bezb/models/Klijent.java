@@ -20,7 +20,7 @@ import org.springframework.stereotype.Component;
 @Table(name = "klijent")
 @Component
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name="ctype", discriminatorType=DiscriminatorType.STRING)
+@DiscriminatorColumn(name="tip_klijenta", discriminatorType=DiscriminatorType.STRING)
 public class Klijent {
 
 	@Id
@@ -39,7 +39,7 @@ public class Klijent {
 	@Column(name = "datum_isteka_licne", nullable = false)
 	private Date datumIstekaLicneKarte;
 	
-	@Column(name = "telefon", nullable = true)
+	@Column(name = "telefon", nullable = false)
 	private String telefon;
 	
 	@Column(name = "adresa", nullable = false)

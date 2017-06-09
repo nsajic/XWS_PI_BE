@@ -1,5 +1,6 @@
 package xws_pi_bezb.services;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,7 +9,6 @@ import org.springframework.stereotype.Service;
 import xws_pi_bezb.irepositories.IDelatnostRepository;
 import xws_pi_bezb.iservices.IDelatnostService;
 import xws_pi_bezb.models.Delatnost;
-import xws_pi_bezb.models.Valuta;
 @Service
 public class DelatnostService implements IDelatnostService{
 
@@ -37,6 +37,22 @@ public class DelatnostService implements IDelatnostService{
 	public void delete(Long id) {
 		// TODO Auto-generated method stub
 		delatnostRepository.delete(id);
+	}
+
+	@Override
+	public List<Delatnost> getBySearch(Delatnost delatnost) {
+		List<Delatnost> delatnosti = new ArrayList<Delatnost>();
+		
+		for (Delatnost delatnostFor : delatnostRepository.findAll()) {
+			if (!delatnost.getNazivDelatnosti().isEmpty()) {
+				if (delatnostFor.getNazivDelatnosti().toLowerCase().contains(delatnost.getNazivDelatnosti().toLowerCase())) {
+					if(!delatnosti.contains(delatnostFor)){
+						delatnosti.add(delatnostFor);
+					}
+				}
+			}
+		}
+		return delatnosti;
 	}
 
 }
