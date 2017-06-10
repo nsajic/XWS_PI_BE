@@ -90,13 +90,8 @@ pravnoLiceKontroler.controller('pravnoLiceCtrl', function($scope, klijentServis,
 	$scope.idPravnogLicaZaNext = -1;
 	$scope.idPravnogLicaZaDetalje = -1;
 	$scope.pravnoLiceZaDetalje = null;
-	$scope.prikaziDrzaveBool = false;
-	$scope.prikaziDrzaveBoolIzmena = false;
-	
 
-	
 	//INIT END
-	
 	
 	
 	$scope.isSet = function(tabNum) {
@@ -117,7 +112,6 @@ pravnoLiceKontroler.controller('pravnoLiceCtrl', function($scope, klijentServis,
 	}
 	
 	$scope.dodajPravnoLice = function() {
-
 		var pravnoLice = {
 				ime : $scope.imePravnogLica,
 				prezime : $scope.prezimePravnogLica,
@@ -193,14 +187,8 @@ pravnoLiceKontroler.controller('pravnoLiceCtrl', function($scope, klijentServis,
 		controller.faxPravnogLicaIzmena = pravnoLice.fax;
 		controller.aprPravnogLicaIzmena = pravnoLice.apr;
 		controller.opPravnogLicaIzmena = pravnoLice.op;
-		$scope.ucitajDelatnosti();
-		for (var i = 0; i < $scope.delatnosti.length; i++) {
-			if ($scope.delatnosti[i].id == pravnoLice.delatnost.id) {
-				console.log("usao jednom barem");
-				//TODO: Nece i nece
-				controller.delatnostPravnogLicaIzmena = $scope.delatnosti[i];
-			}
-		}
+		controller.delatnostPravnogLicaIzmena = pravnoLice.delatnost;
+
 		$scope.setTab(2);
 	}
 	
@@ -250,6 +238,7 @@ pravnoLiceKontroler.controller('pravnoLiceCtrl', function($scope, klijentServis,
 				apr : $scope.aprPravnogLicaPretraga,
 				op : $scope.opPravnogLicaPretraga
 			}
+			console.log(pravnoLice);
 		klijentServis.pretraziPravnaLica(pravnoLice).success(function(data) {
 			$scope.pravnaLica = data;
 			$scope.idPravnogLicaZaIzmenu = -1;
@@ -308,14 +297,6 @@ pravnoLiceKontroler.controller('pravnoLiceCtrl', function($scope, klijentServis,
 		$scope.prikaziDelatnostiBoolIzmena = false;
 	}	
 
-	
-	$scope.daLiDaPrikazeDelatnostiIzmenaZoom = function(){
-		return $scope.prikaziDelatnostiIzmenaBool
-	}
-	
-	$scope.prikaziDelatnostiIzmena = function(){
-		$scope.prikaziDelatnostiIzmenaBool = true;
-	}
 
 	
 

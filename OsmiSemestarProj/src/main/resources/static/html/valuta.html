@@ -1,0 +1,92 @@
+<div ng-cloak ng-controller="valutaCtrl as $ctrl">
+	<div>
+		<h1>Valute</h1>
+		<!--<a ng-click="logOut()" href="">Izloguj se</a>-->
+	</div>
+
+	<div>
+		<div id="tabs">
+			<ul>
+				<li ng-class="{active: isSet(0)}"><a ng-click="setTab(0); prikaziPretragu = false"
+					href=""><span>Valute</span></a></li>
+				<li ng-class="{active: isSet(1)}"><a ng-click="setTab(1)"
+					href=""><span>Dodaj valutu</span></a></li>
+			</ul>
+		</div>
+
+		<div ng-show="isSet(0)">
+			<h2>Valute</h2>	
+		
+		
+			<button ng-show = "valute.length != 0 || prikaziPretragu" ng-click="prikaziPretragu = true">Pretraga</button>
+			<div ng-show = "prikaziPretragu">
+				<h2>Unesite podatke o valuti:</h2>
+				<table>
+					<tr>
+						<td>Naziv:</td>
+						<td><input type=text ng-model="nazivValutePretraga"></td>
+					<tr>
+					<tr>
+						<td>Sifra:</td>
+						<td><input type=text ng-model="sifraValutePretraga"></td>
+					<tr>
+
+					<tr>
+						<td>
+						<td>
+						<td>
+							<button ng-click="pretragaPoPoljima()">Pretrazi</button>
+							
+						</td>
+						<td>
+							<button ng-click="prikaziPretragu = false; ponistiPretragu()">Iskljuci</button>
+						</td>
+					</tr>
+				</table>
+			</div>
+			
+			<table ng-show = "valute.length != 0">
+				<tr>
+					<td style = "width:120px; heigth: 70px">Naziv</td>
+					<td style = "width:120px; heigth: 70px">Sifra</td>
+				</tr>
+			</table>		
+			<table ng-repeat='valuta in valute'>
+				<tr>
+					<td style = "width:120px; heigth: 70px">{{valuta.nazivValute}}</td>
+					<td style = "width:120px; heigth: 70px">{{valuta.sifraValute}}</td>
+					<td><button ng-click="obrisiValutu(valuta.id)">Obrisi</button></td>
+					<td><button ng-click="setValutuZaIzmenu(valuta)">Izmeni</button></td>
+					<td><button ng-click="setValutuZaNext(valuta)">Next</button></td>
+				</tr>
+				<tr ng-show = 'idValuteZaIzmenu == valuta.id'>
+					<td><input style = "width:100px; heigth: 70px" type=text ng-model="$ctrl.nazivValuteIzmena"></td>
+					<td><input style = "width:100px; heigth: 70px" type=text ng-model="$ctrl.sifraValuteIzmena"></td>
+					<td><button ng-click="izmeniValutu(valuta.id)">Potvrdi</button></td>				
+				</tr>
+				<tr ng-show = 'idValuteZaNext == valuta.id'>
+					<td>
+						TODO 1: Implementirati
+					<td>
+				</tr>
+			</table>
+		</div>
+		<div ng-show="isSet(1)">
+			<div>
+				<h2>Unesite podatke o valuti:</h2>
+				<table>
+					<tr>
+						<td>Naziv:</td>
+						<td><input type=text ng-model="nazivValute"></td>
+					<tr>
+					<tr>
+						<td>Sifra:</td>
+						<td><input type=text ng-model="sifraValute"></td>
+					<tr>
+
+				</table>
+				<button ng-click="dodajValutu()">Dodaj</button>
+			</div>
+		</div>
+	</div>
+</div>

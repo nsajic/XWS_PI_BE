@@ -10,6 +10,9 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+//NE TREBA CRUD
+ 
 @Entity
 @Table(name = "medjubankarski_prenos")
 public class MedjubankarskiPrenos {

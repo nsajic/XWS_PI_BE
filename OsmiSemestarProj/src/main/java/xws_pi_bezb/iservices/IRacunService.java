@@ -8,13 +8,11 @@ public interface IRacunService {
 	
 	List<Racun> findAll();
 
-	//List<Racun> getBySearchText(String serachText);
-	
-	//List<Racun> getByDrzava(Drzava drzava);
-	
 	Racun findOne(Long id);
 
 	void save(Racun racun);
 
 	void delete(Long id);
+
+	List<Racun> getRacunBySearch(Racun racun);
 }

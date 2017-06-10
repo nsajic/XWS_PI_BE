@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import xws_pi_bezb.helpers.Helpers;
 import xws_pi_bezb.irepositories.IRacunRepository;
 import xws_pi_bezb.iservices.IRacunService;
 import xws_pi_bezb.models.Racun;
@@ -22,12 +23,6 @@ public class RacunService implements IRacunService{
 		// TODO Auto-generated method stub
 		return racunRepository.findAll();
 	}
-
-	/*@Override
-	public List<Racun> getBySearchText(String serachText) {
-		// TODO Auto-generated method stub
-		return null;
-	}*/
 
 	@Override
 	public Racun findOne(Long id) {
@@ -47,50 +42,30 @@ public class RacunService implements IRacunService{
 		
 	}
 
-	/*@Autowired
-	private INaseljenoMestoRepository naseljenoMestoRepository;
-
 	@Override
-	public void delete(Long id) {
-		naseljenoMestoRepository.delete(id);
-	}
+	public List<Racun> getRacunBySearch(Racun racun) {
+		List<Racun> racuni = new ArrayList<Racun>();
 
-	@Override
-	public List<NaseljenoMesto> findAll() {
-		return naseljenoMestoRepository.findAll();
-	}
+		boolean praznaPretraga = true;
 
-	@Override
-	public NaseljenoMesto findOne(Long id) {
-		return naseljenoMestoRepository.findById(id);
-	}
-
-	@Override
-	public void save(NaseljenoMesto naseljenoMesto) {
-		naseljenoMestoRepository.save(naseljenoMesto);
-	}
-
-	@Override
-	public List<NaseljenoMesto> getBySearchText(String serachText) {
-		List<NaseljenoMesto> naseljenaMesta = new ArrayList<NaseljenoMesto>();
-		for(NaseljenoMesto naseljenoMesto : naseljenoMestoRepository.findAll()){
-			if(naseljenoMesto.getNaziv().toLowerCase().contains(serachText.toLowerCase())||
-				naseljenoMesto.getPttOznaka().toLowerCase().contains(serachText.toLowerCase())||
-				naseljenoMesto.getDrzava().getNazivDrzave().toLowerCase().contains(serachText.toLowerCase())){
-				naseljenaMesta.add(naseljenoMesto);
+		for (Racun racunFor : findAll()) {
+			if (!Helpers.isNullOrEmpty(racun.getBrojRacuna())) {
+				praznaPretraga = false;
+				if (racunFor.getBrojRacuna().toLowerCase().contains(racun.getBrojRacuna().toLowerCase())) {
+					if (!racuni.contains(racunFor)) {
+						racuni.add(racunFor);
+					}
+				}
+			}
+			//TODO: Search for non text field attributes
+			
+			if (praznaPretraga) {
+				racuni = findAll();
 			}
 		}
-		return naseljenaMesta;
+		
+		
+		return racuni;
 	}
 
-	@Override
-	public List<NaseljenoMesto> getByDrzava(Drzava drzava) {
-		List<NaseljenoMesto> naseljenaMesta = new ArrayList<NaseljenoMesto>();
-		for(NaseljenoMesto naseljenoMesto : naseljenoMestoRepository.findAll()){
-			if(naseljenoMesto.getDrzava().getId() == drzava.getId()){
-				naseljenaMesta.add(naseljenoMesto);
-			}
-		}
-		return naseljenaMesta;
-	}*/
 }

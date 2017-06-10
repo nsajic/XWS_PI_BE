@@ -12,6 +12,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+// NE TREBA CRUD
+
 @Entity
 @Table(name = "dnevno_stanje_racuna")
 public class DnevnoStanjeRacuna implements Serializable {

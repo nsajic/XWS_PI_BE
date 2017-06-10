@@ -12,7 +12,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-
+// NE TREBA CRUD
 @Entity
 @Table(name = "analitika_izvoda")
 public class AnalitikaIzvoda implements Serializable {

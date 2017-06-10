@@ -1,4 +1,4 @@
-/*package xws_pi_bezb.irepositories;
+package xws_pi_bezb.irepositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -8,4 +8,3 @@ public interface IValutaRepository extends JpaRepository<Valuta, Long>{
 	Valuta findById(Long id);
 }
 
-*/

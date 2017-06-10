@@ -11,8 +11,17 @@ app.config(function($routeProvider, $locationProvider) {
     .when("/pravnoLice", {
         templateUrl : "html/pravnoLice.html"
     })
+    .when("/fizickoLice", {
+        templateUrl : "html/fizickoLice.html"
+    })
     .when("/delatnost", {
         templateUrl : "html/delatnost.html"
+    })
+    .when("/valuta", {
+        templateUrl : "html/valuta.html"
+    })
+    .when("/racun", {
+        templateUrl : "html/racun.html"
     })
     .when("/naseljenoMesto", {
         templateUrl : "html/naseljenoMesto.html"

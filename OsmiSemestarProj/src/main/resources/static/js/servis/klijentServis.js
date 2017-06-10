@@ -32,6 +32,32 @@ klijentServis.factory('klijentServis', function($http) {
 		return $http.get('/klijentKontroler/ucitajDelatnosti');
 	}
 	
+// FIZICKA ISPOD
+	
+	temp.dodajFizickoLice = function(data) {
+		return $http.post('/klijentKontroler/dodajFizickoLice', data);
+	}
+
+	temp.izbrisiFizickoLice = function(data) {
+		return $http.post('/klijentKontroler/izbrisiFizickoLice', data);
+	}
+
+	temp.izmeniFizickoLice = function(data) {
+		return $http.post('/klijentKontroler/izmeniFizickoLice', data);
+	}
+
+	temp.izlistajFizickaLica = function(data) {
+		return $http.get('/klijentKontroler/izlistajFizickaLica');
+	}
+
+	temp.pretraziFizickaLica = function(data) {
+		return $http.post('/klijentKontroler/pretraziFizickaLica', data);
+	}
+
+	temp.ucitajFizickoLice = function(data) {
+		return $http.post('/klijentKontroler/ucitajFizickoLice', data);
+	}
+
 	return temp;
 
 })

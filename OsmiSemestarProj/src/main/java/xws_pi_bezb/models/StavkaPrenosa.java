@@ -20,5 +20,14 @@ public class StavkaPrenosa implements Serializable{
 	
 	@ManyToOne
 	private AnalitikaIzvoda analitikaIzvoda;
+	
+	public AnalitikaIzvoda getAnalitikaIzvoda() {
+		return analitikaIzvoda;
+	}
+	
+	public void setAnalitikaIzvoda(AnalitikaIzvoda analitikaIzvoda) {
+		this.analitikaIzvoda = analitikaIzvoda;
+	}
 }
+
 */

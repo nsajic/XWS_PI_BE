@@ -9,6 +9,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+//NE TREBA CRUD
 @Entity
 @Table(name = "zatvaranje_racuna")
 public class ZatvaranjeRacuna implements Serializable{

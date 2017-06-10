@@ -143,8 +143,8 @@ bankaKontroler.controller('bankaCtrl', function($scope, bankaServis, $window, $l
 		var banka = {
 			nazivBanke : $scope.nazivBankePretraga,
 			sifraBanke : $scope.sifraBankePretraga,
-			swiftKod : $scope.swiftKodPretraga,
-			obracunskiRacun : $scope.obracunskiRacunPretraga
+			swiftKod : $scope.swiftKodBankePretraga,
+			obracunskiRacun : $scope.obracunskiRacunBankePretraga
 		}
 		bankaServis.pretraziBanke(banka).success(function(data) {
 			$scope.banke = data;

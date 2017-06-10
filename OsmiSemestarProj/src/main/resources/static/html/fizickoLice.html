@@ -1,0 +1,210 @@
+<div ng-cloak ng-controller="fizickoLiceCtrl as $ctrl">
+	<div>
+		<h1>Fizicko lice</h1>
+		<!--<a ng-click="logOut()" href="">Izloguj se</a>-->
+	</div>
+
+	<div>
+		<div id="tabs">
+			<ul>
+				<li ng-class="{active: isSet(0)}"><a ng-click="setTab(0); prikaziPretraguFizickaLica = false"
+					href=""><span>Fizicka lica</span></a></li>
+				<li ng-class="{active: isSet(1)}"><a ng-click="setTab(1)"
+					href=""><span>Dodaj fizicko lice</span></a></li>
+				<li ng-class="{active: isSet(2)}"><a ng-click="setTab(2)"
+					href=""><span>Izmeni fizicko lice</span></a></li>
+			</ul>
+		</div>
+
+		<div ng-show="isSet(0)">
+			<div ng-show ="idFizickogLicaZaDetalje == -1" >
+				<h2>Fizicka lica</h2>
+					
+				<button ng-show = "fizickaLica.length != 0 || prikaziPretraguFizickaLica" ng-click="prikaziPretraguFizickaLica = true">Pretraga</button>
+				<div ng-show = "prikaziPretraguFizickaLica">
+					<h2>Unesite podatke o klijentu:</h2>
+					<table>
+						<tr>
+							<td>Ime:</td>
+							<td><input type=text ng-model="imeFizickogLicaPretraga"></td>
+						</tr>
+						<tr>
+							<td>Prezime:</td>
+							<td><input type=text ng-model="prezimeFizickogLicaPretraga"></td>
+						</tr>
+						<tr>
+							<td>Broj licne karte:</td>
+							<td><input type=number ng-model="brojLicneKarteFizickogLicaPretraga"></td>
+						</tr>
+						<tr>
+							<td>Telefon:</td>
+							<td><input type="text" ng-model="telefonFizickogLicaPretraga"></td>
+						</tr>
+						<tr>
+							<td>Adresa:</td>
+							<td><input type="text" ng-model="adresaFizickogLicaPretraga"></td>
+						</tr>
+						<!-- KRAJ ZAJEDNICKOG -->
+						<tr>
+							<td>JMBG:</td>
+							<td><input type="number" ng-model="jmbgFizickogLicaPretraga"></td>
+						</tr>
+						<tr>
+							<td>Ime roditelja:</td>
+							<td><input type="text" ng-model="imeRoditeljaFizickogLicaPretraga"></td>
+						</tr>					
+						<tr>
+							<td>
+							<td>
+							<td>
+								<button ng-click="pretragaFizickihLicaPoPoljima()">Pretrazi</button>
+								
+							</td>
+							<td>
+								<button ng-click="prikaziPretraguFizickaLica = false; ponistiPretraguFizickihLica()">Iskljuci</button>
+							</td>
+						</tr>
+					</table>
+				</div>
+						
+				<table>
+					<tr>
+						<td style = "width:130px; heigth: 70px">Ime</td>
+						<td style = "width:130px; heigth: 70px">Prezime</td>
+						<td style = "width:130px; heigth: 70px">Telefon</td>
+						<td style = "width:130px; heigth: 70px">Adresa</td>
+					</tr>
+					<tr  ng-repeat='fizickoLice in fizickaLica'>
+						<td style = "width:130px; heigth: 70px">{{fizickoLice.ime}}</td>
+						<td style = "width:130px; heigth: 70px">{{fizickoLice.prezime}}</td>
+						<td style = "width:130px; heigth: 70px">{{fizickoLice.telefon}}</td>
+						<td style = "width:130px; heigth: 70px">{{fizickoLice.adresa}}</td>
+						<td><button ng-click="obrisiFizickoLice(fizickoLice.id)">Obrisi</button></td>
+						<td><button ng-click="setFizickoLiceZaIzmenu(fizickoLice)">Izmeni</button></td>
+						<td><button ng-click="setFizickoLiceZaDetalje(fizickoLice)">Detalji</button></td>
+						<td><button ng-click="setFizickoLiceZaNext(fizickoLice)">Next</button></td>
+					</tr>
+	
+					<tr ng-show = 'idFizickogLicaZaNext == fizickoLice.id'>
+						<td>
+							TODO 1: Implementirati
+						<td>
+					</tr>
+				</table>
+			</div>
+			<div ng-show = "idFizickogLicaZaDetalje != -1">
+				<table>
+						<tr>
+							<td>Ime:</td>
+							<td>{{fizickoLiceZaDetalje.ime}}</td>
+						</tr>
+						<tr>
+							<td>Prezime:</td>
+							<td>{{fizickoLiceZaDetalje.prezime}}</td>
+						</tr>
+						<tr>
+							<td>Broj licne karte:</td>
+							<td>{{fizickoLiceZaDetalje.brojLicneKarte}}</td>
+						</tr>
+						<tr>
+							<td>Telefon:</td>
+							<td>{{fizickoLiceZaDetalje.telefon}}</td>
+						</tr>
+						<tr>
+							<td>Adresa:</td>
+							<td>{{fizickoLiceZaDetalje.adresa}}</td>
+						</tr>
+						<!-- KRAJ ZAJEDNICKOG -->
+						<tr>
+							<td>JMBG:</td>
+							<td>{{fizickoLiceZaDetalje.jmbg}}</td>
+						</tr>
+						<tr>
+							<td>Ime roditelja:</td>
+							<td>{{fizickoLiceZaDetalje.imeRoditelja}}</td>
+						</tr>						
+					</table>
+			
+			 	<button ng-click = "idFizickogLicaZaDetalje = -1; fizickoLiceZaDetalje = null;">Nazad</button>
+			</div>
+		</div>
+		<div ng-show="isSet(1)">
+			<div>
+				<h2>Unesite podatke o fizickom licu:</h2>
+				<table>
+					<tr>
+						<td>Ime:</td>
+						<td><input type=text ng-model="imeFizickogLica"></td>
+					</tr>
+					<tr>
+						<td>Prezime:</td>
+						<td><input type=text ng-model="prezimeFizickogLica"></td>
+					</tr>
+					<tr>
+						<td>Broj licne karte:</td>
+						<td><input type=number ng-model="brojLicneKarteFizickogLica"></td>
+					</tr>
+					<tr>
+						<td>Telefon:</td>
+						<td><input type="text" ng-model="telefonFizickogLica"></td>
+					</tr>
+					<tr>
+						<td>Adresa:</td>
+						<td><input type="text" ng-model="adresaFizickogLica"></td>
+					</tr>
+					<!-- KRAJ ZAJEDNICKOG -->
+					<tr>
+						<td>JMBG:</td>
+						<td><input type="number" ng-model="jmbgFizickogLica"></td>
+					</tr>
+					<tr>
+						<td>Ime roditelja:</td>
+						<td><input type="text" ng-model="imeRoditeljaFizickogLica"></td>
+					</tr>
+				</table>
+				<button ng-click="dodajFizickoLice()">Dodaj</button>
+
+			</div>
+		</div>
+		
+		<div ng-show="isSet(2)">
+			<div>
+				<h2>Izmena podataka o fizickom licu:</h2>
+				<table>
+					<tr>
+						<td>Ime:</td>
+						<td><input type=text ng-model="$ctrl.imeFizickogLicaIzmena"></td>
+					</tr>
+					<tr>
+						<td>Prezime:</td>
+						<td><input type=text ng-model="$ctrl.prezimeFizickogLicaIzmena"></td>
+					</tr>
+					<tr>
+						<td>Broj licne karte:</td>
+						<td><input type=number ng-model="$ctrl.brojLicneKarteFizickogLicaIzmena"></td>
+					</tr>
+					<tr>
+						<td>Telefon:</td>
+						<td><input type="text" ng-model="$ctrl.telefonFizickogLicaIzmena"></td>
+					</tr>
+					<tr>
+						<td>Adresa:</td>
+						<td><input type="text" ng-model="$ctrl.adresaFizickogLicaIzmena"></td>
+					</tr>
+					<!-- KRAJ ZAJEDNICKOG -->
+					<tr>
+						<td>JMBG:</td>
+						<td><input type="number" ng-model="$ctrl.jmbgFizickogLicaIzmena"></td>
+					</tr>
+					<tr>
+						<td>Ime roditelja:</td>
+						<td><input type="text" ng-model="$ctrl.imeRoditeljaFizickogLicaIzmena"></td>
+					</tr>
+				</table>
+				<button ng-click="izmeniFizickoLice()">Potvrdi</button>
+				<button ng-click="idFizickogLicaZaIzmenu = -1; setTab(0);">Nazad</button>
+			</div>
+		</div>
+		
+	</div>
+</div>

@@ -36,10 +36,6 @@
 							<td>Broj licne karte vlasnika:</td>
 							<td><input type=number ng-model="brojLicneKartePravnogLicaPretraga"></td>
 						</tr>
-						<!-- <tr>
-							<td>Datum isteka licne karte vlasnika:</td>
-							<td><input type="date" ng-model="datumIstekaLicneKartePravnogLicaPretraga"></td>
-						</tr> -->
 						<tr>
 							<td>Telefon:</td>
 							<td><input type="text" ng-model="telefonPravnogLicaPretraga"></td>
@@ -75,11 +71,23 @@
 						</tr>
 						<tr>
 							<td>APR:</td>
-							<td><input type="checkbox" ng-model="aprPravnogLicaPretraga"></td>
+							<td>
+								<form>
+									<input type="radio" ng-model="aprPravnogLicaPretraga" value = "true" />True
+									<input type="radio" ng-model="aprPravnogLicaPretraga" value = "false"/>False
+									<input class = btn type="reset"/>
+								</form>
+							</td>
 						</tr>
 						<tr>
 							<td>OP:</td>
-							<td><input type="checkbox" ng-model="opPravnogLicaPretraga"></td>
+							<td>
+								<form>
+									<input type="radio" ng-model="opPravnogLicaPretraga" value = "true" />True
+									<input type="radio" ng-model="opPravnogLicaPretraga" value = "false" />False
+									<input type="reset"/>
+								</form>
+							</td>
 						</tr>
 						<tr>
 							<td>Delatnosti:</td>
@@ -148,10 +156,6 @@
 							<td>Broj licne karte vlasnika:</td>
 							<td>{{pravnoLiceZaDetalje.brojLicneKarte}}</td>
 						</tr>
-						<!-- <tr>
-							<td>Datum isteka licne karte vlasnika:</td>
-							<td>{{pravnoLiceZaDetalje.datumIstekaLicneKarte}}</td>
-						</tr> -->
 						<tr>
 							<td>Telefon:</td>
 							<td>{{pravnoLiceZaDetalje.telefon}}</td>
@@ -220,10 +224,6 @@
 						<td><input type=number ng-model="brojLicneKartePravnogLica"></td>
 					</tr>
 					<tr>
-						<td>Datum isteka licne karte vlasnika:</td>
-						<td><input type="date" ng-model="datumIstekaLicneKartePravnogLica"></td>
-					</tr>
-					<tr>
 						<td>Telefon:</td>
 						<td><input type="text" ng-model="telefonPravnogLica"></td>
 					</tr>
@@ -278,6 +278,13 @@
 				
 				<div ng-show = "prikaziDelatnostiBool == true" >
 					<hr>
+					<table>
+						<tr>
+							<td style = "width:120px; heigth: 70px">
+								Naziv
+							</td>
+						</tr>
+					</table>
 					<table  ng-repeat='delatnost in delatnosti'>
 						<tr >
 							<td style = "width:120px; heigth: 70px">{{delatnost.nazivDelatnosti}}</td>
@@ -306,10 +313,6 @@
 						<td>Broj licne karte vlasnika:</td>
 						<td><input type=number ng-model="$ctrl.brojLicneKartePravnogLicaIzmena"></td>
 					</tr>
-					<!-- <tr>
-						<td>Datum isteka licne karte vlasnika:</td>
-						<td><input type="date" ng-model="$ctrl.datumIstekaLicneKartePravnogLicaIzmena"></td>
-					</tr> -->
 					<tr>
 						<td>Telefon:</td>
 						<td><input type="text" ng-model="$ctrl.telefonPravnogLicaIzmena"></td>
@@ -367,6 +370,14 @@
 				
 				<div ng-show = "prikaziDelatnostiBoolIzmena == true" >
 					<hr>
+					
+					<table>
+						<tr>
+							<td style = "width:120px; heigth: 70px">
+								Naziv
+							</td>
+						</tr>
+					</table>
 					<table  ng-repeat='delatnost in delatnosti'>
 						<tr >
 							<td style = "width:120px; heigth: 70px">{{delatnost.nazivDelatnosti}}</td>

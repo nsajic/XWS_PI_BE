@@ -2,7 +2,6 @@ package xws_pi_bezb.iservices;
 
 import java.util.List;
 
-import xws_pi_bezb.models.Banka;
 import xws_pi_bezb.models.FizickoLice;
 import xws_pi_bezb.models.Klijent;
 import xws_pi_bezb.models.PravnoLice;
@@ -23,6 +22,6 @@ public interface IKlijentService {
 
 	List<PravnoLice> getPravnaLicaBySearch(PravnoLice pravnoLice);
 	
-	List<PravnoLice> getPravnaLicaBySearch(FizickoLice fizickoLice);
+	List<FizickoLice> getFizickaLicaBySearch(FizickoLice fizickoLice);
 	
 }

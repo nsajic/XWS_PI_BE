@@ -1,13 +1,10 @@
 package xws_pi_bezb.models;
 
-import java.util.Set;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 
@@ -23,17 +20,17 @@ public class Racun {
 	private String brojRacuna;
 
 	@Column(name = "status_racuna", nullable = false)
-	private String statusRacuna;
+	private int statusRacuna;
 	
 	@ManyToOne
 	private Klijent klijent;
 	
 	@ManyToOne
 	private Banka banka;
-	/*
+	
 	@ManyToOne
 	private Valuta valuta;
-	
+	/*
 	@OneToMany(mappedBy = "racun")
 	private Set<ZatvaranjeRacuna> zatvaranjaRacuna; 
 	
@@ -61,11 +58,11 @@ public class Racun {
 		this.brojRacuna = brojRacuna;
 	}
 
-	public String getStatusRacuna() {
+	public int getStatusRacuna() {
 		return statusRacuna;
 	}
 
-	public void setStatusRacuna(String statusRacuna) {
+	public void setStatusRacuna(int statusRacuna) {
 		this.statusRacuna = statusRacuna;
 	}
 
@@ -84,7 +81,7 @@ public class Racun {
 	public void setBanka(Banka banka) {
 		this.banka = banka;
 	}
-/*
+
 	public Valuta getValuta() {
 		return valuta;
 	}
@@ -92,7 +89,6 @@ public class Racun {
 	public void setValuta(Valuta valuta) {
 		this.valuta = valuta;
 	} 
-	*/
 	
 	
 }
