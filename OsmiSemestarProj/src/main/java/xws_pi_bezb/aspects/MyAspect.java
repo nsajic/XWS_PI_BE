@@ -4,9 +4,8 @@ import java.sql.SQLException;
 
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
-import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
@@ -15,7 +14,8 @@ import xws_pi_bezb.iservices.IPrivilegijaService;
 import xws_pi_bezb.models.korisnici.Korisnik;
 
 @Aspect
-public class MyAspect {
+@Component
+public class MyAspect{
 
 	//@Before("execution(* xws_pi_bezb.controllers.BankaKontroler.dodajBanku(..))")
 	//@Before("@annotation(xws_pi_bezb.annotations.MyAnotation)")
@@ -42,4 +42,5 @@ public class MyAspect {
 		
 		//return result;
 	}
+
 }

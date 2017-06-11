@@ -42,6 +42,9 @@ public class KlijentKontroler {
 
 	@RequestMapping(value = "/izmeniPravnoLice", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<PravnoLice>> izmeniKlijenta(@RequestBody PravnoLice pravnoLice) {
+		pravnoLice.setEmail(klijentService.findOne(pravnoLice.getId()).getEmail());
+		pravnoLice.setUsername(klijentService.findOne(pravnoLice.getId()).getUsername());
+		pravnoLice.setSifra(klijentService.findOne(pravnoLice.getId()).getSifra());
 		klijentService.save(pravnoLice);
 		return new ResponseEntity<List<PravnoLice>>(klijentService.getPravnaLica(), HttpStatus.OK);
 	}
@@ -84,6 +87,9 @@ public class KlijentKontroler {
 
 	@RequestMapping(value = "/izmeniFizickoLice", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<FizickoLice>> izmeniKlijenta(@RequestBody FizickoLice fizickoLice) {
+		fizickoLice.setEmail(klijentService.findOne(fizickoLice.getId()).getEmail());
+		fizickoLice.setUsername(klijentService.findOne(fizickoLice.getId()).getUsername());
+		fizickoLice.setSifra(klijentService.findOne(fizickoLice.getId()).getSifra());
 		klijentService.save(fizickoLice);
 		return new ResponseEntity<List<FizickoLice>>(klijentService.getFizickaLica(), HttpStatus.OK);
 	}

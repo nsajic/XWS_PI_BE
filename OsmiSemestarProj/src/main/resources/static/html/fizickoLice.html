@@ -33,6 +33,14 @@
 							<td><input type=text ng-model="prezimeFizickogLicaPretraga"></td>
 						</tr>
 						<tr>
+							<td>Username:</td>
+							<td><input type=text ng-model="usernameFizickogLicaPretraga"></td>
+						</tr>
+						<tr>
+							<td>Email:</td>
+							<td><input type=text ng-model="emailFizickogLicaPretraga"></td>
+						</tr>
+						<tr>
 							<td>Broj licne karte:</td>
 							<td><input type=number ng-model="brojLicneKarteFizickogLicaPretraga"></td>
 						</tr>
@@ -44,7 +52,6 @@
 							<td>Adresa:</td>
 							<td><input type="text" ng-model="adresaFizickogLicaPretraga"></td>
 						</tr>
-						<!-- KRAJ ZAJEDNICKOG -->
 						<tr>
 							<td>JMBG:</td>
 							<td><input type="number" ng-model="jmbgFizickogLicaPretraga"></td>
@@ -103,6 +110,14 @@
 							<td>{{fizickoLiceZaDetalje.prezime}}</td>
 						</tr>
 						<tr>
+							<td>Username:</td>
+							<td>{{fizickoLiceZaDetalje.username}}</td>
+						</tr>
+						<tr>
+							<td>Email:</td>
+							<td>{{fizickoLiceZaDetalje.email}}</td>
+						</tr>
+						<tr>
 							<td>Broj licne karte:</td>
 							<td>{{fizickoLiceZaDetalje.brojLicneKarte}}</td>
 						</tr>
@@ -114,7 +129,6 @@
 							<td>Adresa:</td>
 							<td>{{fizickoLiceZaDetalje.adresa}}</td>
 						</tr>
-						<!-- KRAJ ZAJEDNICKOG -->
 						<tr>
 							<td>JMBG:</td>
 							<td>{{fizickoLiceZaDetalje.jmbg}}</td>
@@ -141,6 +155,18 @@
 						<td><input type=text ng-model="prezimeFizickogLica"></td>
 					</tr>
 					<tr>
+						<td>Username:</td>
+						<td><input type=text ng-model="usernameFizickogLica"></td>
+					</tr>
+					<tr>
+						<td>Email:</td>
+						<td><input type=email ng-model="emailFizickogLica"></td>
+					</tr>
+					<tr>
+						<td>Sifra:</td>
+						<td><input type=password ng-model="sifraFizickogLica"></td>
+					</tr>
+					<tr>
 						<td>Broj licne karte:</td>
 						<td><input type=number ng-model="brojLicneKarteFizickogLica"></td>
 					</tr>
@@ -152,7 +178,6 @@
 						<td>Adresa:</td>
 						<td><input type="text" ng-model="adresaFizickogLica"></td>
 					</tr>
-					<!-- KRAJ ZAJEDNICKOG -->
 					<tr>
 						<td>JMBG:</td>
 						<td><input type="number" ng-model="jmbgFizickogLica"></td>
@@ -191,7 +216,6 @@
 						<td>Adresa:</td>
 						<td><input type="text" ng-model="$ctrl.adresaFizickogLicaIzmena"></td>
 					</tr>
-					<!-- KRAJ ZAJEDNICKOG -->
 					<tr>
 						<td>JMBG:</td>
 						<td><input type="number" ng-model="$ctrl.jmbgFizickogLicaIzmena"></td>

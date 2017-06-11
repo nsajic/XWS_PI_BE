@@ -7,10 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import xws_pi_bezb.helpers.Helpers;
-import xws_pi_bezb.irepositories.IKlijentRepository;
 import xws_pi_bezb.irepositories.IValutaRepository;
 import xws_pi_bezb.iservices.IValutaService;
-import xws_pi_bezb.models.Delatnost;
 import xws_pi_bezb.models.Valuta;
 
 @Service

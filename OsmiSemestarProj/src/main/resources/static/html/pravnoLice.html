@@ -33,6 +33,14 @@
 							<td><input type=text ng-model="prezimePravnogLicaPretraga"></td>
 						</tr>
 						<tr>
+							<td>Username:</td>
+							<td><input type=text ng-model="usernamePravnogLicaPretraga"></td>
+						</tr>
+						<tr>
+							<td>Email:</td>
+							<td><input type=text ng-model="emailPravnogLicaPretraga"></td>
+						</tr>
+						<tr>
 							<td>Broj licne karte vlasnika:</td>
 							<td><input type=number ng-model="brojLicneKartePravnogLicaPretraga"></td>
 						</tr>
@@ -52,10 +60,6 @@
 						<tr>
 							<td>Naziv:</td>
 							<td><input type="text" ng-model="nazivPravnogLicaPretraga"></td>
-						</tr>
-						<tr>
-							<td>Email:</td>
-							<td><input type="email" ng-model="emailPravnogLicaPretraga"></td>
 						</tr>
 						<tr>
 							<td>Web:</td>
@@ -153,6 +157,14 @@
 							<td>{{pravnoLiceZaDetalje.prezime}}</td>
 						</tr>
 						<tr>
+							<td>Username:</td>
+							<td>{{pravnoLiceZaDetalje.username}}</td>
+						</tr>
+						<tr>
+							<td>Email:</td>
+							<td>{{pravnoLiceZaDetalje.email}}</td>
+						</tr>
+						<tr>
 							<td>Broj licne karte vlasnika:</td>
 							<td>{{pravnoLiceZaDetalje.brojLicneKarte}}</td>
 						</tr>
@@ -172,10 +184,6 @@
 						<tr>
 							<td>Naziv:</td>
 							<td>{{pravnoLiceZaDetalje.naziv}}</td>
-						</tr>
-						<tr>
-							<td>Email:</td>
-							<td>{{pravnoLiceZaDetalje.email}}</td>
 						</tr>
 						<tr>
 							<td>Web::</td>
@@ -220,6 +228,18 @@
 						<td><input type=text ng-model="prezimePravnogLica"></td>
 					</tr>
 					<tr>
+						<td>Username:</td>
+						<td><input type=text ng-model="usernamePravnogLica"></td>
+					</tr>
+					<tr>
+						<td>Email:</td>
+						<td><input type=email ng-model="emailPravnogLica"></td>
+					</tr>
+					<tr>
+						<td>Sifra:</td>
+						<td><input type=password ng-model="sifraPravnogLica"></td>
+					</tr>
+					<tr>
 						<td>Broj licne karte vlasnika:</td>
 						<td><input type=number ng-model="brojLicneKartePravnogLica"></td>
 					</tr>
@@ -241,11 +261,7 @@
 						<td><input type="text" ng-model="nazivPravnogLica"></td>
 					</tr>
 					<tr>
-						<td>Email:</td>
-						<td><input type="email" ng-model="emailPravnogLica"></td>
-					</tr>
-					<tr>
-						<td>Web::</td>
+						<td>Web:</td>
 						<td><input type="text" ng-model="webPravnogLica"></td>
 					</tr>
 					<tr>
@@ -331,11 +347,7 @@
 						<td><input type="text" ng-model="$ctrl.nazivPravnogLicaIzmena"></td>
 					</tr>
 					<tr>
-						<td>Email:</td>
-						<td><input type="email" ng-model="$ctrl.emailPravnogLicaIzmena"></td>
-					</tr>
-					<tr>
-						<td>Web::</td>
+						<td>Web:</td>
 						<td><input type="text" ng-model="$ctrl.webPravnogLicaIzmena"></td>
 					</tr>
 					<tr>

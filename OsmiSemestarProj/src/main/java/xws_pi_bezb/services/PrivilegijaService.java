@@ -3,17 +3,20 @@ package xws_pi_bezb.services;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
+import xws_pi_bezb.irepositories.IPrivilegijaRepository;
 import xws_pi_bezb.iservices.IPrivilegijaService;
 import xws_pi_bezb.models.Privilegija;
 import xws_pi_bezb.models.Rola;
 
 @Service
+@Component
 public class PrivilegijaService implements IPrivilegijaService{
 
 	@Autowired
-	private IPrivilegijaService privilegijaService;
+	private IPrivilegijaRepository privilegijaService;
 	
 	
 	@Override
@@ -34,12 +37,12 @@ public class PrivilegijaService implements IPrivilegijaService{
 
 	@Override
 	public List<Privilegija> getByRole(Rola role) {
-		return privilegijaService.getByRole(role);
+		return privilegijaService.findByRole(role);
 	}
 
 	@Override
 	public Privilegija getByNaziv(String value) {
-		return privilegijaService.getByNaziv(value);
+		return privilegijaService.findByNaziv(value);
 	}
 
 }

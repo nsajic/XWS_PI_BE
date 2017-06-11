@@ -5,6 +5,8 @@ fizickoLiceKontroler.controller('fizickoLiceCtrl', function($scope, klijentServi
 	$scope.resetujPoljaPretragaFizickaLica = function(){
 		$scope.imeFizickogLicaPretraga = null;
 		$scope.prezimeFizickogLicaPretraga = null;
+		$scope.usernameFizickogLicaPretraga = null;
+		$scope.emailFizickogLicaPretraga = null;
 		$scope.brojLicneKarteFizickogLicaPretraga = null;
 		$scope.datumIstekaLicneKarteFizickogLicaPretraga = null;
 		$scope.telefonFizickogLicaPretraga = null;
@@ -16,6 +18,9 @@ fizickoLiceKontroler.controller('fizickoLiceCtrl', function($scope, klijentServi
 	$scope.resetujPoljaDodavanjeFizickaLica = function() {
 		$scope.imeFizickogLica = null;
 		$scope.prezimeFizickogLica = null;
+		$scope.usernameFizickogLica = null;
+		$scope.emailFizickogLica = null;
+		$scope.sifraFizickogLica = null;
 		$scope.brojLicneKarteFizickogLica = null;
 		$scope.datumIstekaLicneKarteFizickogLica = null;
 		$scope.telefonFizickogLica = null;
@@ -93,8 +98,10 @@ fizickoLiceKontroler.controller('fizickoLiceCtrl', function($scope, klijentServi
 		var fizickoLice = {
 				ime : $scope.imeFizickogLica,
 				prezime : $scope.prezimeFizickogLica,
+				username: $scope.usernameFizickogLica,
+				email: $scope.emailFizickogLica,
+				sifra: $scope.sifraFizickogLica,
 				brojLicneKarte : $scope.brojLicneKarteFizickogLica,
-				datumIstekaLicneKarte : $scope.datumIstekaLicneKarteFizickogLica,
 				telefon : $scope.telefonFizickogLica,
 				adresa : $scope.adresaFizickogLica,
 				jmbg : $scope.jmbgFizickogLica,
@@ -116,7 +123,6 @@ fizickoLiceKontroler.controller('fizickoLiceCtrl', function($scope, klijentServi
 			ime : controller.imeFizickogLicaIzmena,
 			prezime : controller.prezimeFizickogLicaIzmena,
 			brojLicneKarte : controller.brojLicneKarteFizickogLicaIzmena,
-			datumIstekaLicneKarte : controller.datumIstekaLicneKarteFizickogLicaIzmena,
 			telefon : controller.telefonFizickogLicaIzmena,
 			adresa : controller.adresaFizickogLicaIzmena,
 			jmbg : controller.jmbgFizickogLicaIzmena,
@@ -139,7 +145,6 @@ fizickoLiceKontroler.controller('fizickoLiceCtrl', function($scope, klijentServi
 		controller.imeFizickogLicaIzmena = fizickoLice.ime;
 		controller.prezimeFizickogLicaIzmena = fizickoLice.prezime;
 		controller.brojLicneKarteFizickogLicaIzmena = fizickoLice.brojLicneKarte;
-		controller.datumIstekaLicneKarteFizickogLicaIzmena = fizickoLice.datumIstekaLicneKarte;
 		controller.telefonFizickogLicaIzmena = fizickoLice.telefon;
 		controller.adresaFizickogLicaIzmena = fizickoLice.adresa;
 		controller.jmbgFizickogLicaIzmena = fizickoLice.jmbg;
@@ -173,15 +178,15 @@ fizickoLiceKontroler.controller('fizickoLiceCtrl', function($scope, klijentServi
 		
 		$scope.idFizickogLicaZaIzmenu = -1;
 		$scope.resetujPoljaIzmenaFizickaLica();
-
 	}
 	
 	$scope.pretragaFizickihLicaPoPoljima = function() {
 		var fizickoLice = {
 				ime : $scope.imeFizickogLicaPretraga,
 				prezime : $scope.prezimeFizickogLicaPretraga,
+				username: $scope.usernameFizickogLicaPretraga,
+				email: $scope.emailFizickogLicaPretraga,
 				brojLicneKarte : $scope.brojLicneKarteFizickogLicaPretraga,
-				datumIstekaLicneKarte : $scope.datumIstekaLicneKarteFizickogLicaPretraga,
 				telefon : $scope.telefonFizickogLicaPretraga,
 				adresa : $scope.adresaFizickogLicaPretraga,
 				jmbg : $scope.jmbgFizickogLicaPretraga,
@@ -203,8 +208,4 @@ fizickoLiceKontroler.controller('fizickoLiceCtrl', function($scope, klijentServi
 			alert("Neuspesno izlistavanje fizickih lica!");
 		});
 	}
-	
-	
-
-
 });

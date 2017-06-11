@@ -87,8 +87,8 @@
 						</td>
 						
 						<td style = "width:190px; heigth: 70px">
-							<div ng-show = "racun.klijent.naziv != null">{{racun.klijent.naziv}}</div>
-							<div ng-show = "racun.klijent.naziv == null">{{racun.klijent.ime}} {{racun.klijent.prezime}}</div>
+							<div ng-show = "racun.klijent.rola.naziv == 'PravnoLice'">{{racun.klijent.naziv}}</div>
+							<div ng-show = "racun.klijent.rola.naziv == 'FizickoLice'">{{racun.klijent.ime}} {{racun.klijent.prezime}}</div>
 						</td> 
 						<td style = "width:130px; heigth: 70px">{{racun.banka.nazivBanke}}</td>
 						<td style = "width:130px; heigth: 70px">{{racun.valuta.nazivValute}}</td>

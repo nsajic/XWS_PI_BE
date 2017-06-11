@@ -18,5 +18,6 @@ public interface IPrivilegijaRepository extends JpaRepository<Privilegija, Long>
 	
 	List<Privilegija> findByRole(Rola rola);
 	
+	Privilegija findByNaziv(String naziv);
 	
 }

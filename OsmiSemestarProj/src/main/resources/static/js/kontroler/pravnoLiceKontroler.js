@@ -5,13 +5,13 @@ pravnoLiceKontroler.controller('pravnoLiceCtrl', function($scope, klijentServis,
 	$scope.resetujPoljaPretragaPravnaLica = function(){
 		$scope.imePravnogLicaPretraga = null;
 		$scope.prezimePravnogLicaPretraga = null;
+		$scope.usernamePravnogLicaPretraga = null;
+		$scope.emailPravnogLicaPretraga = null;
 		$scope.brojLicneKartePravnogLicaPretraga = null;
-		$scope.datumIstekaLicneKartePravnogLicaPretraga = null;
 		$scope.telefonPravnogLicaPretraga = null;
 		$scope.adresaPravnogLicaPretraga = null;
 		$scope.pibPravnogLicaPretraga = null;
 		$scope.nazivPravnogLicaPretraga = null;
-		$scope.emailPravnogLicaPretraga = null;
 		$scope.webPravnogLicaPretraga = null;
 		$scope.maticniBrojPravnogLicaPretraga = null;
 		$scope.faxPravnogLicaPretraga = null;
@@ -22,13 +22,14 @@ pravnoLiceKontroler.controller('pravnoLiceCtrl', function($scope, klijentServis,
 	$scope.resetujPoljaDodavanjePravnaLica = function() {
 		$scope.imePravnogLica = null;
 		$scope.prezimePravnogLica = null;
+		$scope.usernamePravnogLica = null;
+		$scope.emailPravnogLica = null;
+		$scope.sifraPravnogLica = null;
 		$scope.brojLicneKartePravnogLica = null;
-		$scope.datumIstekaLicneKartePravnogLica = null;
 		$scope.telefonPravnogLica = null;
 		$scope.adresaPravnogLica = null;
 		$scope.pibPravnogLica = null;
 		$scope.nazivPravnogLica = null;
-		$scope.emailPravnogLica = null;
 		$scope.webPravnogLica = null;
 		$scope.maticniBrojPravnogLica = null;
 		$scope.faxPravnogLica = null;
@@ -39,12 +40,10 @@ pravnoLiceKontroler.controller('pravnoLiceCtrl', function($scope, klijentServis,
 		$scope.imePravnogLicaIzmena = null;
 		$scope.prezimePravnogLicaIzmena = null;
 		$scope.brojLicneKartePravnogLicaIzmena = null;
-		$scope.datumIstekaLicneKartePravnogLicaIzmena = null;
 		$scope.telefonPravnogLicaIzmena = null;
 		$scope.adresaPravnogLicaIzmena = null;
 		$scope.pibPravnogLicaIzmena = null;
 		$scope.nazivPravnogLicaIzmena = null;
-		$scope.emailPravnogLicaIzmena = null;
 		$scope.webPravnogLicaIzmena = null;
 		$scope.maticniBrojPravnogLicaIzmena = null;
 		$scope.faxPravnogLicaIzmena = null;
@@ -115,13 +114,15 @@ pravnoLiceKontroler.controller('pravnoLiceCtrl', function($scope, klijentServis,
 		var pravnoLice = {
 				ime : $scope.imePravnogLica,
 				prezime : $scope.prezimePravnogLica,
+				username: $scope.usernamePravnogLica,
+				email: $scope.emailPravnogLica,
+				sifra: $scope.sifraPravnogLica,
 				brojLicneKarte : $scope.brojLicneKartePravnogLica,
 				datumIstekaLicneKarte : $scope.datumIstekaLicneKartePravnogLica,
 				telefon : $scope.telefonPravnogLica,
 				adresa : $scope.adresaPravnogLica,
 				pib : $scope.pibPravnogLica,
 				naziv : $scope.nazivPravnogLica,
-				email : $scope.emailPravnogLica,
 				web : $scope.webPravnogLica,
 				maticniBroj : $scope.maticniBrojPravnogLica,
 				fax : $scope.faxPravnogLica,
@@ -150,7 +151,6 @@ pravnoLiceKontroler.controller('pravnoLiceCtrl', function($scope, klijentServis,
 			adresa : controller.adresaPravnogLicaIzmena,
 			pib : controller.pibPravnogLicaIzmena,
 			naziv : controller.nazivPravnogLicaIzmena,
-			email : controller.emailPravnogLicaIzmena,
 			web : controller.webPravnogLicaIzmena,
 			maticniBroj : controller.maticniBrojPravnogLicaIzmena,
 			fax : controller.faxPravnogLicaIzmena,
@@ -181,7 +181,6 @@ pravnoLiceKontroler.controller('pravnoLiceCtrl', function($scope, klijentServis,
 		controller.adresaPravnogLicaIzmena = pravnoLice.adresa;
 		controller.pibPravnogLicaIzmena = pravnoLice.pib;
 		controller.nazivPravnogLicaIzmena = pravnoLice.naziv;
-		controller.emailPravnogLicaIzmena = pravnoLice.email;
 		controller.webPravnogLicaIzmena = pravnoLice.web;
 		controller.maticniBrojPravnogLicaIzmena = pravnoLice.maticniBroj;
 		controller.faxPravnogLicaIzmena = pravnoLice.fax;
@@ -225,6 +224,8 @@ pravnoLiceKontroler.controller('pravnoLiceCtrl', function($scope, klijentServis,
 		var pravnoLice = {
 				ime : $scope.imePravnogLicaPretraga,
 				prezime : $scope.prezimePravnogLicaPretraga,
+				username: $scope.usernamePravnogLicaPretraga,
+				email: $scope.emailPravnogLicaPretraga,
 				brojLicneKarte : $scope.brojLicneKartePravnogLicaPretraga,
 				datumIstekaLicneKarte : $scope.datumIstekaLicneKartePravnogLicaPretraga,
 				telefon : $scope.telefonPravnogLicaPretraga,

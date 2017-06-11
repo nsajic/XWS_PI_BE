@@ -96,6 +96,24 @@ public class KlijentService implements IKlijentService {
 					}
 				}
 			}
+			
+			if (!Helpers.isNullOrEmpty(pravnoLice.getUsername())) {
+				praznaPretraga = false;
+				if (pravnoLiceFor.getUsername().toLowerCase().contains(pravnoLice.getUsername().toLowerCase())) {
+					if (!pravnaLica.contains(pravnoLiceFor)) {
+						pravnaLica.add(pravnoLiceFor);
+					}
+				}
+			}
+			
+			if (!Helpers.isNullOrEmpty(pravnoLice.getEmail())) {
+				praznaPretraga = false;
+				if (pravnoLiceFor.getEmail().toLowerCase().contains(pravnoLice.getEmail().toLowerCase())) {
+					if (!pravnaLica.contains(pravnoLiceFor)) {
+						pravnaLica.add(pravnoLiceFor);
+					}
+				}
+			}
 
 			if (!Helpers.isNullOrEmpty(pravnoLice.getTelefon())) {
 				praznaPretraga = false;
@@ -201,6 +219,24 @@ public class KlijentService implements IKlijentService {
 			if (!Helpers.isNullOrEmpty(fizickoLice.getPrezime())) {
 				praznaPretraga = false;
 				if (fizickoLiceFor.getPrezime().toLowerCase().contains(fizickoLice.getPrezime().toLowerCase())) {
+					if (!fizickaLica.contains(fizickoLiceFor)) {
+						fizickaLica.add(fizickoLiceFor);
+					}
+				}
+			}
+			
+			if (!Helpers.isNullOrEmpty(fizickoLice.getUsername())) {
+				praznaPretraga = false;
+				if (fizickoLiceFor.getUsername().toLowerCase().contains(fizickoLice.getUsername().toLowerCase())) {
+					if (!fizickaLica.contains(fizickoLiceFor)) {
+						fizickaLica.add(fizickoLiceFor);
+					}
+				}
+			}
+			
+			if (!Helpers.isNullOrEmpty(fizickoLice.getEmail())) {
+				praznaPretraga = false;
+				if (fizickoLiceFor.getEmail().toLowerCase().contains(fizickoLice.getEmail().toLowerCase())) {
 					if (!fizickaLica.contains(fizickoLiceFor)) {
 						fizickaLica.add(fizickoLiceFor);
 					}
