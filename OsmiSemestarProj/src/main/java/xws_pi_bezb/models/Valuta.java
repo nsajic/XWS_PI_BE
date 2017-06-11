@@ -25,7 +25,7 @@ public class Valuta  implements Serializable {
 
 	@Column(name = "naziv_valute", nullable = false)
 	private String nazivValute;
-	
+	/*
 	@OneToMany(mappedBy = "valuta")
 	private Set<MedjubankarskiPrenos> medjubankarskiPrenosi; 
 	
@@ -35,6 +35,7 @@ public class Valuta  implements Serializable {
 	@OneToMany(mappedBy = "valuta")
 	private Set<Racun> racuni;
 
+	*/
 	public Long getId() {
 		return id;
 	}

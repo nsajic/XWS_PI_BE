@@ -8,7 +8,6 @@ import xws_pi_bezb.models.Klijent;
 
 @Repository
 @Transactional
-public interface IKorisnikRepository extends JpaRepository<Klijent, Long>{
+public interface IKlijentRepository extends JpaRepository<Klijent, Long>{
 	Klijent findById(Long id);
-	
 }

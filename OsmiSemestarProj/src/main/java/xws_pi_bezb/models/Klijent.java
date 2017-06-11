@@ -1,6 +1,5 @@
 package xws_pi_bezb.models;
 
-import java.util.Date;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -17,16 +16,21 @@ import javax.persistence.Table;
 
 import org.springframework.stereotype.Component;
 
+//import xws_pi_bezb.helpers.KlijentType;
+
 @Entity
 @Table(name = "klijent")
 @Component
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name="ctype", discriminatorType=DiscriminatorType.STRING)
+@DiscriminatorColumn(name="tip_klijenta", discriminatorType=DiscriminatorType.STRING)
 public class Klijent {
 
 	@Id
 	@GeneratedValue
 	private Long id;
+	
+	/*@Column(name = "tip", nullable = false)
+	private KlijentType tip;*/
 	
 	@Column(name = "ime", nullable = false)
 	private String ime;
@@ -40,10 +44,7 @@ public class Klijent {
 	@Column(name = "broj_licne_karte", nullable = false)
 	private int brojLicneKarte;
 	
-	@Column(name = "datum_isteka_licne", nullable = false)
-	private Date datumIstekaLicneKarte;
-	
-	@Column(name = "telefon", nullable = true)
+	@Column(name = "telefon", nullable = false)
 	private String telefon;
 	
 	@Column(name = "adresa", nullable = false)
@@ -59,19 +60,6 @@ public class Klijent {
 	private Rola rola;
 	
 	public Klijent(){}
-
-	public Klijent(Long id, String ime, String email, String prezime, int brojLicneKarte, Date datumIstekaLicneKarte, String telefon, String adresa, String sifra) {
-		super();
-		this.id = id;
-		this.ime = ime;
-		this.email = email;
-		this.prezime = prezime;
-		this.brojLicneKarte = brojLicneKarte;
-		this.datumIstekaLicneKarte = datumIstekaLicneKarte;
-		this.telefon = telefon;
-		this.adresa = adresa;
-		this.sifra = sifra;
-	}
 
 	public Long getId() {
 		return id;
@@ -105,14 +93,6 @@ public class Klijent {
 		this.brojLicneKarte = brojLicneKarte;
 	}
 
-	public Date getDatumIstekaLicneKarte() {
-		return datumIstekaLicneKarte;
-	}
-
-	public void setDatumIstekaLicneKarte(Date datumIstekaLicneKarte) {
-		this.datumIstekaLicneKarte = datumIstekaLicneKarte;
-	}
-
 	public String getTelefon() {
 		return telefon;
 	}
@@ -120,7 +100,6 @@ public class Klijent {
 	public void setTelefon(String telefon) {
 		this.telefon = telefon;
 	}
-	
 
 	public String getAdresa() {
 		return adresa;
@@ -129,6 +108,13 @@ public class Klijent {
 	public void setAdresa(String adresa) {
 		this.adresa = adresa;
 	}
+	
+	/*public KlijentType getTip() {
+		return tip;
+	}
+	public void setTip(KlijentType tip) {
+		this.tip = tip;
+	}*/
 
 	public String getEmail() {
 		return email;

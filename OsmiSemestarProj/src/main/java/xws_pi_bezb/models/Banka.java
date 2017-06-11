@@ -1,7 +1,6 @@
 package xws_pi_bezb.models;
 
 import java.io.Serializable;
-import java.util.Date;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -14,10 +13,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "banka")
 public class Banka implements Serializable {
-	
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = -5328904002193386606L;
 
 	@Id
@@ -35,20 +31,17 @@ public class Banka implements Serializable {
 	
 	@Column(name = "obracunski_racun", nullable = false)
 	private String obracunskiRacun;
-	
+	/*
 	@OneToMany(mappedBy = "obracunskiPeriodBankeDuznika")
 	private Set<MedjubankarskiPrenos> bankePosiljaoci; 
 	
 	@OneToMany(mappedBy = "obracunskiPeriodBankePoverioca")
 	private Set<MedjubankarskiPrenos> bankePrimaoci; 
-	
+	*/
 	@OneToMany(mappedBy = "banka")
 	private Set<Racun> racuni;
 	
-	public Banka()
-	{
-		
-	}
+	public Banka(){}
 	
 	public Long getId() {
 		return id;

@@ -1,4 +1,4 @@
-package xws_pi_bezb.models;
+/*package xws_pi_bezb.models;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -9,6 +9,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+//NE TREBA CRUD
 @Entity
 @Table(name = "zatvaranje_racuna")
 public class ZatvaranjeRacuna implements Serializable{
@@ -28,4 +30,4 @@ public class ZatvaranjeRacuna implements Serializable{
 	
 	@ManyToOne
 	private AnalitikaIzvoda analitikaIzvoda;
-}
+}*/

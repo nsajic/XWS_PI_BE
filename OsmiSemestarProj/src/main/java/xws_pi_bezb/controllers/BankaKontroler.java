@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import xws_pi_bezb.annotations.MyAnotation;
 import xws_pi_bezb.iservices.IBankaService;
-import xws_pi_bezb.models.Banka;
+import xws_pi_bezb.models.Banka;	
 
 @Controller
 @RequestMapping("/bankaKontroler")
@@ -32,7 +32,7 @@ public class BankaKontroler {
 		bankaService.save(banka);
 		return new ResponseEntity<List<Banka>>(bankaService.findAll(), HttpStatus.OK);
 	}
-	
+
 	@RequestMapping(value = "/izmeniBanku", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<Banka>> izmeniBanku(@RequestBody Banka banka) {
 		bankaService.save(banka);
@@ -49,8 +49,10 @@ public class BankaKontroler {
 	public ResponseEntity<List<Banka>> izlistajBanku() {
 		return new ResponseEntity<List<Banka>>(bankaService.findAll(), HttpStatus.OK);
 	}
-	
 
-
+	@RequestMapping(value = "/pretraziBanke", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<List<Banka>> pretraziBanke(@RequestBody Banka banka) {
+		return new ResponseEntity<List<Banka>>(bankaService.getBySearch(banka), HttpStatus.OK);
+	}
 
 }

@@ -1,4 +1,4 @@
-package xws_pi_bezb.models;
+/*package xws_pi_bezb.models;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -11,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+// NE TREBA CRUD
 
 @Entity
 @Table(name = "dnevno_stanje_racuna")
@@ -43,3 +45,4 @@ public class DnevnoStanjeRacuna implements Serializable {
 	@OneToMany(mappedBy = "dnevnoStanjeRacuna")
 	private Set<AnalitikaIzvoda> analitikeIzvoda; 
 }
+*/

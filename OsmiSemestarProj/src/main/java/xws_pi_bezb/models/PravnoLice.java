@@ -12,45 +12,43 @@ import javax.persistence.ManyToOne;
 public class PravnoLice extends Klijent implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
-	@Column(name = "pib", nullable = false)
-	private String PIB;
-	
-	@Column(name = "naziv", nullable = false)
+
+	@Column(name = "pib", nullable = true)
+	private int PIB;
+
+	@Column(name = "naziv", nullable = true)
 	private String naziv;
-	
+
 	@Column(name = "email", nullable = true)
 	private String email;
-	
+
 	@Column(name = "web", nullable = true)
 	private String web;
-	
+
 	@Column(name = "maticni_broj", nullable = true)
-	private String maticniBroj;
-	
+	private int maticniBroj;
+
 	@Column(name = "fax", nullable = true)
 	private String fax;
-	
+
 	@Column(name = "apr", nullable = true)
 	private boolean APR;
-	
+
 	@Column(name = "op", nullable = true)
 	private boolean OP;
-	
-	@ManyToOne
+
+	@ManyToOne(optional = true)
 	private Delatnost delatnost;
-	
-	public PravnoLice()
-	{
-		
+
+	public PravnoLice() {
 	}
 
-	public String getPIB() {
+	public int getPIB() {
 		return PIB;
 	}
 
-	public void setPIB(String pIB) {
-		PIB = pIB;
+	public void setPIB(int PIB) {
+		this.PIB = PIB;
 	}
 
 	public String getNaziv() {
@@ -77,11 +75,11 @@ public class PravnoLice extends Klijent implements Serializable {
 		this.web = web;
 	}
 
-	public String getMaticniBroj() {
+	public int getMaticniBroj() {
 		return maticniBroj;
 	}
 
-	public void setMaticniBroj(String maticniBroj) {
+	public void setMaticniBroj(int maticniBroj) {
 		this.maticniBroj = maticniBroj;
 	}
 
@@ -108,8 +106,13 @@ public class PravnoLice extends Klijent implements Serializable {
 	public void setOP(boolean oP) {
 		OP = oP;
 	}
-	
-	
-	
-	
+
+	public Delatnost getDelatnost() {
+		return delatnost;
+	}
+
+	public void setDelatnost(Delatnost delatnost) {
+		this.delatnost = delatnost;
+	}
+
 }

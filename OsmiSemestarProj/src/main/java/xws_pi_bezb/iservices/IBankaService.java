@@ -14,6 +14,8 @@ public interface IBankaService {
 	void save(Banka banka);
 
 	void delete(Long id);
+	
+	List<Banka> getBySearch(Banka banka);
 
 	
 }
