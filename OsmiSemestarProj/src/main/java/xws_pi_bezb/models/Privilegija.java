@@ -1,6 +1,7 @@
 package xws_pi_bezb.models;
 
 import java.util.Collection;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,7 +11,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "privilegijе")
+@Table(name = "privilegija")
 public class Privilegija {
 
 	@Id
@@ -24,7 +25,7 @@ public class Privilegija {
 	private Rola rola;*/
 	
 	@ManyToMany(mappedBy = "privilegije")
-    private Collection<Rola> role;
+    private Set<Rola> role;
 	
 	public Privilegija() {}
 

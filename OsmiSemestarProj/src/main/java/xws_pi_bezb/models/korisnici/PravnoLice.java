@@ -1,15 +1,20 @@
-package xws_pi_bezb.models;
+package xws_pi_bezb.models.korisnici;
 
 import java.io.Serializable;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+
+import xws_pi_bezb.models.Delatnost;
+import xws_pi_bezb.models.Racun;
 
 @Entity
 @DiscriminatorValue("P")
-public class PravnoLice extends Klijent implements Serializable {
+public class PravnoLice extends Korisnik implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -18,9 +23,6 @@ public class PravnoLice extends Klijent implements Serializable {
 
 	@Column(name = "naziv", nullable = true)
 	private String naziv;
-
-	@Column(name = "email", nullable = true)
-	private String email;
 
 	@Column(name = "web", nullable = true)
 	private String web;
@@ -36,6 +38,9 @@ public class PravnoLice extends Klijent implements Serializable {
 
 	@Column(name = "op", nullable = true)
 	private boolean OP;
+	
+	@OneToMany(mappedBy = "pravnoLice")
+	private Set<Racun> racuni;
 
 	@ManyToOne(optional = true)
 	private Delatnost delatnost;
@@ -57,14 +62,6 @@ public class PravnoLice extends Klijent implements Serializable {
 
 	public void setNaziv(String naziv) {
 		this.naziv = naziv;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
 	}
 
 	public String getWeb() {

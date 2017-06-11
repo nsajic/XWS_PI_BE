@@ -1,6 +1,4 @@
-package xws_pi_bezb.models;
-
-import java.util.Set;
+package xws_pi_bezb.models.korisnici;
 
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
@@ -11,26 +9,23 @@ import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.springframework.stereotype.Component;
 
-//import xws_pi_bezb.helpers.KlijentType;
+import xws_pi_bezb.models.Rola;
 
 @Entity
-@Table(name = "klijent")
+@Table(name = "korisnik")
 @Component
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name="tip_klijenta", discriminatorType=DiscriminatorType.STRING)
-public class Klijent {
-
+@DiscriminatorColumn(name="tip_korisnika", discriminatorType=DiscriminatorType.STRING)
+public class Korisnik {
+	
 	@Id
 	@GeneratedValue
 	private Long id;
-	
-	/*@Column(name = "tip", nullable = false)
-	private KlijentType tip;*/
+
 	
 	@Column(name = "ime", nullable = false)
 	private String ime;
@@ -38,8 +33,14 @@ public class Klijent {
 	@Column(name = "prezime", nullable = false)
 	private String prezime;
 	
+	@Column(name = "username", nullable = false)
+	private String username;
+	
 	@Column(name = "email", nullable = false)
 	private String email;
+
+	@Column(name = "sifra", nullable = false)
+	private String sifra;
 	
 	@Column(name = "broj_licne_karte", nullable = false)
 	private int brojLicneKarte;
@@ -50,17 +51,35 @@ public class Klijent {
 	@Column(name = "adresa", nullable = false)
 	private String adresa;
 	
-	@Column(name = "sifra", nullable = false)
-	private String sifra;
-	
-	@OneToMany(mappedBy = "klijent")
-	private Set<Racun> racuni;
-	
 	@ManyToOne
 	private Rola rola;
 	
-	public Klijent(){}
+	public Korisnik() {}
 
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getSifra() {
+		return sifra;
+	}
+
+	public void setSifra(String sifra) {
+		this.sifra = sifra;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+	
 	public Long getId() {
 		return id;
 	}
@@ -108,27 +127,12 @@ public class Klijent {
 	public void setAdresa(String adresa) {
 		this.adresa = adresa;
 	}
-	
-	/*public KlijentType getTip() {
-		return tip;
-	}
-	public void setTip(KlijentType tip) {
-		this.tip = tip;
-	}*/
 
-	public String getEmail() {
-		return email;
+	public Rola getRola() {
+		return rola;
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public String getSifra() {
-		return sifra;
-	}
-
-	public void setSifra(String sifra) {
-		this.sifra = sifra;
+	public void setRola(Rola rola) {
+		this.rola = rola;
 	}
 }

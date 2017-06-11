@@ -9,6 +9,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import xws_pi_bezb.models.korisnici.PravnoLice;
+
 @Entity
 @Table(name = "delatnost")
 public class Delatnost {

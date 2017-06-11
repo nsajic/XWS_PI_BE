@@ -11,12 +11,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import xws_pi_bezb.helpers.KlijentType;
+import xws_pi_bezb.helpers.Strings;
 import xws_pi_bezb.iservices.IDelatnostService;
 import xws_pi_bezb.iservices.IKlijentService;
+import xws_pi_bezb.iservices.IRolaService;
 import xws_pi_bezb.models.Delatnost;
-import xws_pi_bezb.models.FizickoLice;
-import xws_pi_bezb.models.PravnoLice;
+import xws_pi_bezb.models.korisnici.FizickoLice;
+import xws_pi_bezb.models.korisnici.PravnoLice;
 
 @Controller
 @RequestMapping("/klijentKontroler")
@@ -27,10 +28,13 @@ public class KlijentKontroler {
 
 	@Autowired
 	public IDelatnostService delatnostService;
+	
+	@Autowired
+	public IRolaService rolaService;
 
 	@RequestMapping(value = "/dodajPravnoLice", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<PravnoLice>> dodajPravnoLice(@RequestBody PravnoLice pravnoLice) {
-		pravnoLice.setTip(KlijentType.PravnoLice);
+		pravnoLice.setRola(rolaService.findByNaziv(Strings.pravnoLice));
 		klijentService.save(pravnoLice);
 		return new ResponseEntity<List<PravnoLice>>(klijentService.getPravnaLica(), HttpStatus.OK);
 
@@ -72,7 +76,7 @@ public class KlijentKontroler {
 
 	@RequestMapping(value = "/dodajFizickoLice", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<FizickoLice>> dodajFizickoLice(@RequestBody FizickoLice fizickoLice) {
-		fizickoLice.setTip(KlijentType.FizickoLice);
+		fizickoLice.setRola(rolaService.findByNaziv(Strings.fizickoLice));
 		klijentService.save(fizickoLice);
 		return new ResponseEntity<List<FizickoLice>>(klijentService.getFizickaLica(), HttpStatus.OK);
 

@@ -1,10 +1,16 @@
+insert into rola (naziv) values ('FizickoLice');
+insert into rola (naziv) values ('PravnoLice');
+
+insert into privilegija (naziv) values ('Banka:Dodaj');
+
+insert into rola_privilegija values (1, 1);
 
 --insert into delatnost(naziv_delatnosti) values ('Ugostiteljstvo');
 --insert into delatnost(naziv_delatnosti) values ('Turizam');
 --insert into delatnost(naziv_delatnosti) values ('Poljoprivreda');
 --insert into delatnost(naziv_delatnosti) values ('IT');
 
---insert into klijent (tip, tip_klijenta, ime, prezime, broj_licne_karte, telefon, adresa, jmbg, pib, delatnost_id) values (1, 'F','Sima1', 'Simic1', 112345, '1111', 'adresa1', 11111, null, null);
+insert into korisnik (tip_korisnika, ime, prezime, broj_licne_karte, telefon, adresa, jmbg, rola_id, email, sifra, username) values ('F','Sima1', 'Simic1', 112345, '1111', 'adresa1', 11111, 1, 'kor@kor.com', 'kor123', 'kor');
 --insert into klijent (tip, tip_klijenta, ime, prezime, broj_licne_karte, telefon, adresa, jmbg, pib, delatnost_id) values (1, 'F','Sima2', 'Simic2', 212345, '2222', 'adresa1', 22222, null, null);
 
 --insert into banka (naziv_banke, sifra_banke, swift_kod, obracunski_racun) values ('Banka1', 111, '111', '111');

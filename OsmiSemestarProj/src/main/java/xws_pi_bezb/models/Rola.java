@@ -1,5 +1,6 @@
 package xws_pi_bezb.models;
 
+import java.io.Serializable;
 import java.util.Collection;
 import java.util.Set;
 
@@ -13,9 +14,13 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import xws_pi_bezb.models.korisnici.Korisnik;
+
 @Entity
-@Table(name = "rolе")
-public class Rola {
+@Table(name = "rola")
+public class Rola implements Serializable  {
+
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue
@@ -29,22 +34,17 @@ public class Rola {
 	
 	@ManyToMany
     @JoinTable(
-        name = "role_privilegije", 
+        name = "rola_privilegija", 
         joinColumns = @JoinColumn(
-          name = "role_id", referencedColumnName = "id"), 
+          name = "rola_id", referencedColumnName = "id"), 
         inverseJoinColumns = @JoinColumn(
-          name = "privilegije_id", referencedColumnName = "id"))
-    private Collection<Privilegija> privilegije;  
+          name = "privilegija_id", referencedColumnName = "id"))
+    private Set<Privilegija> privilegije;  
 	
 	@OneToMany(mappedBy = "rola")
-	private Set<Klijent> klijenti;
+	private Set<Korisnik> korisnici;
 	
 	public Rola() {}
-	
-	public Rola(String naziv) {
-		super();
-		this.naziv = naziv;
-	}
 
 	public String getNaziv() {
 		return naziv;

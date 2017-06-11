@@ -2,26 +2,28 @@ package xws_pi_bezb.iservices;
 
 import java.util.List;
 
-import xws_pi_bezb.models.FizickoLice;
-import xws_pi_bezb.models.Klijent;
-import xws_pi_bezb.models.PravnoLice;
+import xws_pi_bezb.models.korisnici.FizickoLice;
+import xws_pi_bezb.models.korisnici.Korisnik;
+import xws_pi_bezb.models.korisnici.PravnoLice;
 
 public interface IKlijentService {
 	
-	List<Klijent> findAll();
+	List<Korisnik> findAll();
 	
 	List<PravnoLice> getPravnaLica();
 	
 	List<FizickoLice> getFizickaLica();
 	
-	Klijent findOne(Long id);
+	Korisnik findOne(Long id);
 
-	void save(Klijent klijent);
+	void save(Korisnik klijent);
 
 	void delete(Long id);
 
 	List<PravnoLice> getPravnaLicaBySearch(PravnoLice pravnoLice);
 	
 	List<FizickoLice> getFizickaLicaBySearch(FizickoLice fizickoLice);
+
+	Korisnik findByEmail(String email);
 	
 }

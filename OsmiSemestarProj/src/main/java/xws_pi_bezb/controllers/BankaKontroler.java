@@ -25,10 +25,8 @@ public class BankaKontroler {
 	public IBankaService bankaService;
 
 	@RequestMapping(value = "/dodajBanku", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-	@MyAnotation("Banke:add")
-	public ResponseEntity<List<Banka>> dodajBanku(@RequestBody Banka banka, HttpSession session) {
-		System.out.println("rrrrr");
-		session.setAttribute("user", "Nikola");
+	@MyAnotation("Banka:Dodaj")
+	public ResponseEntity<List<Banka>> dodajBanku(@RequestBody Banka banka) {
 		bankaService.save(banka);
 		return new ResponseEntity<List<Banka>>(bankaService.findAll(), HttpStatus.OK);
 	}
@@ -40,6 +38,7 @@ public class BankaKontroler {
 	}
 
 	@RequestMapping(value = "/izbrisiBanku", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+	@MyAnotation("Banka:Obrisi")
 	public ResponseEntity<List<Banka>> izbrisiBanku(@RequestBody Long bankaId) {
 		bankaService.delete(bankaId);
 		return new ResponseEntity<List<Banka>>(bankaService.findAll(), HttpStatus.OK);

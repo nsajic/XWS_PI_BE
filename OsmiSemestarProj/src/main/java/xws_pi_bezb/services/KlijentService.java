@@ -9,10 +9,9 @@ import org.springframework.stereotype.Service;
 import xws_pi_bezb.helpers.Helpers;
 import xws_pi_bezb.irepositories.IKlijentRepository;
 import xws_pi_bezb.iservices.IKlijentService;
-import xws_pi_bezb.models.Banka;
-import xws_pi_bezb.models.FizickoLice;
-import xws_pi_bezb.models.Klijent;
-import xws_pi_bezb.models.PravnoLice;
+import xws_pi_bezb.models.korisnici.FizickoLice;
+import xws_pi_bezb.models.korisnici.Korisnik;
+import xws_pi_bezb.models.korisnici.PravnoLice;
 
 @Service
 public class KlijentService implements IKlijentService {
@@ -21,19 +20,19 @@ public class KlijentService implements IKlijentService {
 	private IKlijentRepository klijentRepository;
 
 	@Override
-	public List<Klijent> findAll() {
+	public List<Korisnik> findAll() {
 		// TODO Auto-generated method stub
 		return klijentRepository.findAll();
 	}
 
 	@Override
-	public Klijent findOne(Long id) {
+	public Korisnik findOne(Long id) {
 		// TODO Auto-generated method stub
 		return klijentRepository.findById(id);
 	}
 
 	@Override
-	public void save(Klijent klijent) {
+	public void save(Korisnik klijent) {
 		klijentRepository.save(klijent);
 
 	}
@@ -47,7 +46,7 @@ public class KlijentService implements IKlijentService {
 	@Override
 	public List<PravnoLice> getPravnaLica() {
 		List<PravnoLice> pravnaLica = new ArrayList<PravnoLice>();
-		for (Klijent klijent : klijentRepository.findAll()) {
+		for (Korisnik klijent : klijentRepository.findAll()) {
 			if (klijent instanceof PravnoLice) {
 				pravnaLica.add((PravnoLice) klijent);
 			}
@@ -58,7 +57,7 @@ public class KlijentService implements IKlijentService {
 	@Override
 	public List<FizickoLice> getFizickaLica() {
 		List<FizickoLice> fizickaLica = new ArrayList<FizickoLice>();
-		for (Klijent klijent : klijentRepository.findAll()) {
+		for (Korisnik klijent : klijentRepository.findAll()) {
 			if (klijent instanceof FizickoLice) {
 				fizickaLica.add((FizickoLice) klijent);
 			}
@@ -259,6 +258,11 @@ public class KlijentService implements IKlijentService {
 			}
 		}
 		return fizickaLica;
+	}
+
+	@Override
+	public Korisnik findByEmail(String email) {
+		return klijentRepository.findByEmail(email);
 	}
 
 }

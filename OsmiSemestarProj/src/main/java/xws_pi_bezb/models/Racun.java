@@ -7,6 +7,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import xws_pi_bezb.models.korisnici.FizickoLice;
+
 
 @Entity
 @Table(name = "racun")
@@ -23,7 +25,10 @@ public class Racun {
 	private int statusRacuna;
 	
 	@ManyToOne
-	private Klijent klijent;
+	private FizickoLice fizickoLice;
+	
+	@ManyToOne
+	private FizickoLice pravnoLice;
 	
 	@ManyToOne
 	private Banka banka;
@@ -66,14 +71,6 @@ public class Racun {
 		this.statusRacuna = statusRacuna;
 	}
 
-	public Klijent getKlijent() {
-		return klijent;
-	}
-
-	public void setKlijent(Klijent klijent) {
-		this.klijent = klijent;
-	}
-
 	public Banka getBanka() {
 		return banka;
 	}
@@ -88,7 +85,21 @@ public class Racun {
 
 	public void setValuta(Valuta valuta) {
 		this.valuta = valuta;
+	}
+
+	public FizickoLice getFizickoLice() {
+		return fizickoLice;
+	}
+
+	public void setFizickoLice(FizickoLice fizickoLice) {
+		this.fizickoLice = fizickoLice;
+	}
+
+	public FizickoLice getPravnoLice() {
+		return pravnoLice;
+	}
+
+	public void setPravnoLice(FizickoLice pravnoLice) {
+		this.pravnoLice = pravnoLice;
 	} 
-	
-	
 }

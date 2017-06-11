@@ -43,7 +43,11 @@ logovanjeKontroler.controller('logovanjeKontroler', function($window, $location,
 		var str = JSON.stringify(korisnik);
 		
 		logovanjeServis.ulogujKorisnika(str).success(function(data) {
-			alert(data.message);
+			if(data.message != "NePostoji"){	
+				console.log(data);
+				$location.path('/welcome');
+				
+			}
 			/*if(data.message != "NePostoji"){
 				if(data.obj.tipKorisnika == 'GOST' && data.message == "Ulogovan"){
 					$location.path('/gostGlavnaStrana');
