@@ -11,6 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -33,6 +34,9 @@ public class Klijent {
 	@Column(name = "prezime", nullable = false)
 	private String prezime;
 	
+	@Column(name = "email", nullable = false)
+	private String email;
+	
 	@Column(name = "broj_licne_karte", nullable = false)
 	private int brojLicneKarte;
 	
@@ -45,20 +49,28 @@ public class Klijent {
 	@Column(name = "adresa", nullable = false)
 	private String adresa;
 	
+	@Column(name = "sifra", nullable = false)
+	private String sifra;
+	
 	@OneToMany(mappedBy = "klijent")
 	private Set<Racun> racuni;
 	
+	@ManyToOne
+	private Rola rola;
+	
 	public Klijent(){}
 
-	public Klijent(Long id, String ime, String prezime, int brojLicneKarte, Date datumIstekaLicneKarte, String telefon, String adresa) {
+	public Klijent(Long id, String ime, String email, String prezime, int brojLicneKarte, Date datumIstekaLicneKarte, String telefon, String adresa, String sifra) {
 		super();
 		this.id = id;
 		this.ime = ime;
+		this.email = email;
 		this.prezime = prezime;
 		this.brojLicneKarte = brojLicneKarte;
 		this.datumIstekaLicneKarte = datumIstekaLicneKarte;
 		this.telefon = telefon;
 		this.adresa = adresa;
+		this.sifra = sifra;
 	}
 
 	public Long getId() {
@@ -118,4 +130,19 @@ public class Klijent {
 		this.adresa = adresa;
 	}
 
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getSifra() {
+		return sifra;
+	}
+
+	public void setSifra(String sifra) {
+		this.sifra = sifra;
+	}
 }

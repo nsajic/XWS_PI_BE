@@ -2,6 +2,8 @@ package xws_pi_bezb.controllers;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import xws_pi_bezb.annotations.MyAnotation;
 import xws_pi_bezb.iservices.IBankaService;
 import xws_pi_bezb.models.Banka;
 
@@ -22,7 +25,10 @@ public class BankaKontroler {
 	public IBankaService bankaService;
 
 	@RequestMapping(value = "/dodajBanku", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<List<Banka>> dodajBanku(@RequestBody Banka banka) {
+	@MyAnotation("Banke:add")
+	public ResponseEntity<List<Banka>> dodajBanku(@RequestBody Banka banka, HttpSession session) {
+		System.out.println("rrrrr");
+		session.setAttribute("user", "Nikola");
 		bankaService.save(banka);
 		return new ResponseEntity<List<Banka>>(bankaService.findAll(), HttpStatus.OK);
 	}
