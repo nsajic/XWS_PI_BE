@@ -35,21 +35,21 @@ public class RacunKontroler {
 	public IBankaService bankaService;
 
 	@RequestMapping(value = "/dodajRacun", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<List<Racun>> dodajRacun(@RequestBody Racun racun) {
+	public ResponseEntity<Object> dodajRacun(@RequestBody Racun racun) {
 		racunService.save(racun);
-		return new ResponseEntity<List<Racun>>(racunService.findAll(), HttpStatus.OK);
+		return new ResponseEntity<Object>(racunService.findAll(), HttpStatus.OK);
 	}
 	
 	@RequestMapping(value = "/izmeniRacun", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<List<Racun>> izmeniRacun(@RequestBody Racun racun) {
+	public ResponseEntity<Object> izmeniRacun(@RequestBody Racun racun) {
 		racunService.save(racun);
-		return new ResponseEntity<List<Racun>>(racunService.findAll(), HttpStatus.OK);
+		return new ResponseEntity<Object>(HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/izbrisiRacun", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<List<Racun>> izbrisiRacun(@RequestBody Long racunId) {
+	public ResponseEntity<Object> izbrisiRacun(@RequestBody Long racunId) {
 		racunService.delete(racunId);
-		return new ResponseEntity<List<Racun>>(racunService.findAll(), HttpStatus.OK);
+		return new ResponseEntity<Object>(HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/izlistajRacune", method = RequestMethod.GET)

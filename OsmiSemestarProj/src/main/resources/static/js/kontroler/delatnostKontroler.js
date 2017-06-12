@@ -1,6 +1,6 @@
 var delatnostKontroler = angular.module('xws_pi_bezb.delatnostKontroler', []);
 
-delatnostKontroler.controller('delatnostCtrl', function($scope, delatnostServis, $window, $location) {
+delatnostKontroler.controller('delatnostCtrl', function($scope, klijentServis, delatnostServis, $window, $location) {
 
 	$scope.resetujPoljaPretraga = function(){
 		$scope.nazivDelatnostiPretraga = null;
@@ -21,6 +21,7 @@ delatnostKontroler.controller('delatnostCtrl', function($scope, delatnostServis,
 			alert("Neuspesno izlistavanje delatnosti!");
 		});
 	}
+
 	
 	var controller = this;
 	$scope.setTab = function(newTab) {
@@ -36,9 +37,19 @@ delatnostKontroler.controller('delatnostCtrl', function($scope, delatnostServis,
 
 	$scope.idDelatnostiZaIzmenu = -1;
 	$scope.idDelatnostiZaNext = -1;
+	$scope.delatnostZaNext = null;
+	$scope.pravnaLicaDelatnosti = [];
+	$scope.setovanDiv = -1;
+	
+	$scope.idPravnogLicaZaIzmenu = -1;
+	$scope.idPravnogLicaZaDetalje = -1;
+	$scope.pravnoLiceZaDetalje = null;
 	
 	//INIT END
 
+	$scope.setujDiv = function (divNum){
+		$scope.setovanDiv = divNum;
+	}
 	
 	$scope.isSet = function(tabNum) {
 		return $scope.tab === tabNum;
@@ -96,30 +107,24 @@ delatnostKontroler.controller('delatnostCtrl', function($scope, delatnostServis,
 			$scope.idDelatnostiZaIzmenu = delatnost.id;
 			controller.nazivDelatnostiIzmena = delatnost.nazivDelatnosti;
 		}
-		$scope.idDelatnostiZaNext = -1;
 	}
 	
-	
+	$scope.ucitajPravnaLicaDelatnosti = function(){
+		klijentServis.izlistajPravnaLicaDelatnosti($scope.idDelatnostiZaNext).success(function(data) {
+
+			console.log("Success izlistavanja");
+			$scope.pravnaLicaDelatnosti = data;
+		}).error(function(data) {
+			alert("Neuspesno izlistavanje pravnih lica!");
+		});		
+		
+	}
 	
 	$scope.setDelatnostZaNext = function(delatnost) {
-		if ($scope.idDelatnostiZaNext == delatnost.id){			
-			$scope.idDelatnostiZaNext = -1;
-		}
-		else 
-		{
-			$scope.idDelatnostiZaNext = delatnost.id;
-			
-			
-			/*drzavaServis.izlistajNaseljenaNext(delatnost).success(function(data) {
-				$scope.naseljenaMestaZaNext = data;
-			}).error(function(data) {
-				alert("Neuspesno izlistavanje naseljenih mesta!");
-			});*/
-		}
-		
-		$scope.idDelatnostiZaIzmenu = -1;
-		controller.nazivDelatnostiIzmena = null;
-
+		$scope.idDelatnostiZaNext = delatnost.id;	
+		$scope.delatnostZaNext = delatnost;
+		$scope.ucitajPravnaLicaDelatnosti();
+		$scope.setovanDiv = 0
 	}
 	
 	$scope.pretragaPoPoljima = function() {
@@ -139,4 +144,124 @@ delatnostKontroler.controller('delatnostCtrl', function($scope, delatnostServis,
 		$scope.izlistajDelatnosti();
 
 	}
+	
+	
+	
+	
+	// OD KLIJENTA ZBOG NEXT-A
+
+	
+	$scope.obrisiPravnoLice = function(id) {
+		klijentServis.izbrisiPravnoLice(id).success(function(data) {
+			$scope.ucitajPravnaLicaDelatnosti();
+			$location.path('/delatnost');
+		}).error(function(data) {
+			alert("Nemoguce obrisati klijenta");
+		});
+	}
+	
+	
+	$scope.izmeniPravnoLice = function() {
+		var pravnoLice = {
+			id : $scope.idPravnogLicaZaIzmenu,
+			ime : controller.imePravnogLicaIzmena,
+			prezime : controller.prezimePravnogLicaIzmena,
+			brojLicneKarte : controller.brojLicneKartePravnogLicaIzmena,
+			datumIstekaLicneKarte : controller.datumIstekaLicneKartePravnogLicaIzmena,
+			telefon : controller.telefonPravnogLicaIzmena,
+			adresa : controller.adresaPravnogLicaIzmena,
+			pib : controller.pibPravnogLicaIzmena,
+			naziv : controller.nazivPravnogLicaIzmena,
+			web : controller.webPravnogLicaIzmena,
+			maticniBroj : controller.maticniBrojPravnogLicaIzmena,
+			fax : controller.faxPravnogLicaIzmena,
+			apr : controller.aprPravnogLicaIzmena,
+			op : controller.opPravnogLicaIzmena,
+			delatnost : $scope.delatnostZaNext
+		}
+		klijentServis.izmeniPravnoLice(pravnoLice).success(function(data) {
+			$scope.ucitajPravnaLicaDelatnosti();
+			//$location.path('/delatnost');
+			$scope.idPravnogLicaZaIzmenu = -1;
+			$scope.setovanDiv = 0;
+		}).error(function(data) {
+			alert("Nemoguce izmeniti klijenta");
+		});
+	}
+	
+	$scope.setPravnoLiceZaIzmenu = function(pravnoLice) {
+		
+//		$scope.resetujPoljaIzmenaPravnaLica();
+		$scope.idPravnogLicaZaIzmenu = pravnoLice.id;
+	
+		controller.imePravnogLicaIzmena = pravnoLice.ime;
+		controller.prezimePravnogLicaIzmena = pravnoLice.prezime;
+		controller.brojLicneKartePravnogLicaIzmena = pravnoLice.brojLicneKarte;
+		controller.datumIstekaLicneKartePravnogLicaIzmena = pravnoLice.datumIstekaLicneKarte;
+		controller.telefonPravnogLicaIzmena = pravnoLice.telefon;
+		controller.adresaPravnogLicaIzmena = pravnoLice.adresa;
+		controller.pibPravnogLicaIzmena = pravnoLice.pib;
+		controller.nazivPravnogLicaIzmena = pravnoLice.naziv;
+		controller.webPravnogLicaIzmena = pravnoLice.web;
+		controller.maticniBrojPravnogLicaIzmena = pravnoLice.maticniBroj;
+		controller.faxPravnogLicaIzmena = pravnoLice.fax;
+		controller.aprPravnogLicaIzmena = pravnoLice.apr;
+		controller.opPravnogLicaIzmena = pravnoLice.op;
+	
+		$scope.setovanDiv = 2;
+	}
+	
+	$scope.setPravnoLiceZaDetalje = function (pravnoLice){
+		$scope.idPravnogLicaZaDetalje = pravnoLice.id;
+		if($scope.idPravnogLicaZaDetalje != -1){
+			klijentServis.ucitajPravnoLice(pravnoLice).success(function (data){
+				$scope.pravnoLiceZaDetalje = data;
+				$scope.setovanDiv = 1;
+			}).error(function (data){
+				$scope.pravnoLiceZaDetalje = null;
+				alert("Neuspesno ucitavanje pravnog lica");
+			});
+		}
+	}
+	
+	
+	$scope.pretragaPravnihLicaPoPoljima = function() {
+		var pravnoLice = {
+				ime : $scope.imePravnogLicaPretraga,
+				prezime : $scope.prezimePravnogLicaPretraga,
+				username: $scope.usernamePravnogLicaPretraga,
+				email: $scope.emailPravnogLicaPretraga,
+				brojLicneKarte : $scope.brojLicneKartePravnogLicaPretraga,
+				datumIstekaLicneKarte : $scope.datumIstekaLicneKartePravnogLicaPretraga,
+				telefon : $scope.telefonPravnogLicaPretraga,
+				adresa : $scope.adresaPravnogLicaPretraga,
+				pib : $scope.pibPravnogLicaPretraga,
+				naziv : $scope.nazivPravnogLicaPretraga,
+				email : $scope.emailPravnogLicaPretraga,
+				web : $scope.webPravnogLicaPretraga,
+				maticniBroj : $scope.maticniBrojPravnogLicaPretraga,
+				fax : $scope.faxPravnogLicaPretraga,
+				apr : $scope.aprPravnogLicaPretraga,
+				op : $scope.opPravnogLicaPretraga
+			}
+		var zaPretragu  = {
+				pravnoLice : pravnoLice,
+				delatnost : $scope.delatnostZaNext
+		}
+		
+		klijentServis.pretragaPravnihLicaDelatnosti(zaPretragu).success(function(data) {
+			$scope.pravnaLicaDelatnosti = data;
+			$scope.idPravnogLicaZaIzmenu = -1;
+		}).error(function(data) {
+			alert("Greska prilikom pretrage");
+		});
+	}
+	
+	
+	$scope.ponistiPretraguPravnihLica = function(){
+		$scope.ucitajPravnaLicaDelatnosti();
+	}
+	
+	
+	
 });

@@ -23,21 +23,21 @@ public class ValutaKontroler {
 	public IValutaService valutaService;
 	
 	@RequestMapping(value = "/dodajValutu", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<List<Valuta>> dodajValutu(@RequestBody Valuta valuta) {
+	public ResponseEntity<Object> dodajValutu(@RequestBody Valuta valuta) {
 		valutaService.save(valuta);
-		return new ResponseEntity<List<Valuta>>(valutaService.findAll(), HttpStatus.OK);
+		return new ResponseEntity<Object>(HttpStatus.OK);
 	}
 	
 	@RequestMapping(value = "/izmeniValutu", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<List<Valuta>> izmeniValutu(@RequestBody Valuta valuta) {
+	public ResponseEntity<Object> izmeniValutu(@RequestBody Valuta valuta) {
 		valutaService.save(valuta);
-		return new ResponseEntity<List<Valuta>>(valutaService.findAll(), HttpStatus.OK);
+		return new ResponseEntity<Object>(HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/izbrisiValutu", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<List<Valuta>> izbrisiValutu(@RequestBody Long valutaId) {
+	public ResponseEntity<Object> izbrisiValutu(@RequestBody Long valutaId) {
 		valutaService.delete(valutaId);
-		return new ResponseEntity<List<Valuta>>(valutaService.findAll(), HttpStatus.OK);
+		return new ResponseEntity<Object>(HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/izlistajValute", method = RequestMethod.GET)

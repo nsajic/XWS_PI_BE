@@ -244,7 +244,7 @@ pravnoLiceKontroler.controller('pravnoLiceCtrl', function($scope, klijentServis,
 				op : $scope.opPravnogLicaPretraga
 			}
 			console.log(pravnoLice);
-		klijentServis.pretraziPravnaLica(pravnoLice).success(function(data) {
+		klijentServis.pretragaPravnihLicaDelatnosti(pravnoLice).success(function(data) {
 			$scope.pravnaLica = data;
 			$scope.idPravnogLicaZaIzmenu = -1;
 		}).error(function(data) {
