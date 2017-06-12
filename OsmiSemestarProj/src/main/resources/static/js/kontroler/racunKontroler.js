@@ -26,15 +26,19 @@ racunKontroler.controller('racunCtrl', function($scope, racunServis, $window, $l
 		$scope.valutaRacunaIzmena = null;
 	}
 	
+	$scope.izlistajRacune = function (){
+		racunServis.izlistajRacune().success(function(data) {
+			$scope.racuni = data;
+		}).error(function(data) {
+			alert("Neuspesno izlistavanje racuna!");
+		});
+	}
+	
 	var controller = this;
 	$scope.setTab = function(newTab) {
 		if(newTab == 0){
 			$scope.resetujPoljaPretragaRacuni();
-			racunServis.izlistajRacune().success(function(data) {
-				$scope.racuni = data;
-			}).error(function(data) {
-				alert("Neuspesno izlistavanje racuna!");
-			});
+			$scope.izlistajRacune();
 		}
 		
 		if(newTab == 1){
@@ -94,7 +98,7 @@ racunKontroler.controller('racunCtrl', function($scope, racunServis, $window, $l
 	
 	$scope.obrisiRacun = function(id) {
 		racunServis.izbrisiRacun(id).success(function(data) {
-			$scope.racuni = data;
+			$scope.izlistajRacune();
 			$location.path('/racun');
 		}).error(function(data) {
 			alert("Nemoguce obrisati racun");
@@ -115,7 +119,7 @@ racunKontroler.controller('racunCtrl', function($scope, racunServis, $window, $l
 				valuta : $scope.valutaRacuna
 		}
 		racunServis.dodajRacun(racun).success(function(data) {
-			$scope.racun = data;
+			$scope.izlistajRacune();
 			$location.path('/racun');
 			$scope.resetujPoljaDodavanjeRacuni();
 			$scope.setTab(0);
@@ -134,7 +138,7 @@ racunKontroler.controller('racunCtrl', function($scope, racunServis, $window, $l
 			valuta : controller.valutaRacunaIzmena,
 		}
 		racunServis.izmeniRacun(racun).success(function(data) {
-			$scope.racuni = data;
+			$scope.izlistajRacune();
 			$location.path('/racun');
 			$scope.idRacunaZaIzmenu = -1;
 			$scope.setTab(0);
@@ -180,11 +184,7 @@ racunKontroler.controller('racunCtrl', function($scope, racunServis, $window, $l
 	
 	
 	$scope.ponistiPretraguRacuna = function(){
-		racunServis.izlistajRacune().success(function(data) {
-			$scope.racuni = data;
-		}).error(function(data) {
-			alert("Neuspesno izlistavanje racuna!");
-		});
+		$scope.izlistajRacune();
 	}
 	
 	//KRECE ZUM

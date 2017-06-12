@@ -4,7 +4,6 @@ delatnostKontroler.controller('delatnostCtrl', function($scope, delatnostServis,
 
 	$scope.resetujPoljaPretraga = function(){
 		$scope.nazivDelatnostiPretraga = null;
-
 	}
 
 	$scope.resetujPoljaDodavanje = function() {
@@ -15,15 +14,19 @@ delatnostKontroler.controller('delatnostCtrl', function($scope, delatnostServis,
 		controller.nazivDelatnostiIzmena = null;
 	}
 	
+	$scope.izlistajDelatnosti = function(){
+		delatnostServis.izlistajDelatnosti().success(function(data) {
+			$scope.delatnosti = data;
+		}).error(function(data) {
+			alert("Neuspesno izlistavanje delatnosti!");
+		});
+	}
+	
 	var controller = this;
 	$scope.setTab = function(newTab) {
 		if(newTab == 0){
 			$scope.resetujPoljaPretraga();
-			delatnostServis.izlistajDelatnosti().success(function(data) {
-				$scope.delatnosti = data;
-			}).error(function(data) {
-				alert("Neuspesno izlistavanje delatnosti!");
-			});
+			$scope.izlistajDelatnosti();
 		}
 		$scope.tab = newTab;
 	};
@@ -43,7 +46,7 @@ delatnostKontroler.controller('delatnostCtrl', function($scope, delatnostServis,
 	
 	$scope.obrisiDelatnost = function(id) {
 		delatnostServis.izbrisiDelatnost(id).success(function(data) {
-			$scope.delatnosti = data;
+			$scope.izlistajDelatnosti();
 			$location.path('/delatnost');
 		}).error(function(data) {
 			alert("Nemoguce obrisati delatnost");
@@ -60,7 +63,7 @@ delatnostKontroler.controller('delatnostCtrl', function($scope, delatnostServis,
 		}
 		
 		delatnostServis.dodajDelatnost(delatnost).success(function(data) {
-			$scope.delatnosti = data;
+			$scope.izlistajDelatnosti();
 			$location.path('/delatnost');
 			$scope.resetujPoljaDodavanje();
 			$scope.setTab(0);
@@ -75,7 +78,7 @@ delatnostKontroler.controller('delatnostCtrl', function($scope, delatnostServis,
 			nazivDelatnosti : controller.nazivDelatnostiIzmena
 		}
 		delatnostServis.izmeniDelatnost(delatnost).success(function(data) {
-			$scope.delatnosti = data;
+			$scope.izlistajDelatnosti();
 			$location.path('/delatnost');
 			$scope.idDelatnostiZaIzmenu = -1;
 			$scope.setTab(0);
@@ -123,7 +126,6 @@ delatnostKontroler.controller('delatnostCtrl', function($scope, delatnostServis,
 		var delatnost = {
 			nazivDelatnosti : $scope.nazivDelatnostiPretraga
 		}
-		console.log(delatnost);
 		delatnostServis.pretraziDelatnosti(delatnost).success(function(data) {
 			$scope.delatnosti = data;
 			$scope.idDelatnostiZaIzmenu = -1;
@@ -134,10 +136,7 @@ delatnostKontroler.controller('delatnostCtrl', function($scope, delatnostServis,
 	
 	
 	$scope.ponistiPretragu = function(){
-		delatnostServis.izlistajDelatnosti().success(function(data) {
-			$scope.delatnosti = data;
-		}).error(function(data) {
-			alert("Neuspesno izlistavanje delatnosti!");
-		});
+		$scope.izlistajDelatnosti();
+
 	}
 });

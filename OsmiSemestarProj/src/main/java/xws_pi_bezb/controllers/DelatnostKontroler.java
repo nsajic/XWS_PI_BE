@@ -22,21 +22,21 @@ public class DelatnostKontroler {
 	public IDelatnostService delatnostService;
 
 	@RequestMapping(value = "/dodajDelatnost", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<List<Delatnost>> dodajDelatnost(@RequestBody Delatnost delatnost) {
+	public ResponseEntity<Object> dodajDelatnost(@RequestBody Delatnost delatnost) {
 		delatnostService.save(delatnost);
-		return new ResponseEntity<List<Delatnost>>(delatnostService.findAll(), HttpStatus.OK);
+		return new ResponseEntity<Object>(HttpStatus.CREATED);
 	}
 
-	@RequestMapping(value = "/izmeniDelatnost", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<List<Delatnost>> izmeniDelatnost(@RequestBody Delatnost delatnost) {
+	@RequestMapping(value = "/izmeniDelatnost", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Object> izmeniDelatnost(@RequestBody Delatnost delatnost) {
 		delatnostService.save(delatnost);
-		return new ResponseEntity<List<Delatnost>>(delatnostService.findAll(), HttpStatus.OK);
+		return new ResponseEntity<Object>(HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/izbrisiDelatnost", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<List<Delatnost>> izbrisiDelatnost(@RequestBody Long delatnostId) {
+	public ResponseEntity<Object> izbrisiDelatnost(@RequestBody Long delatnostId) {
 		delatnostService.delete(delatnostId);
-		return new ResponseEntity<List<Delatnost>>(delatnostService.findAll(), HttpStatus.OK);
+		return new ResponseEntity<Object>(HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/izlistajDelatnosti", method = RequestMethod.GET)
@@ -46,7 +46,6 @@ public class DelatnostKontroler {
 
 	@RequestMapping(value = "/pretraziDelatnosti", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<Delatnost>> pretraziDelatnosti(@RequestBody Delatnost delatnost) {
-		System.out.println("usao u kontroler back");
 		return new ResponseEntity<List<Delatnost>>(delatnostService.getBySearch(delatnost), HttpStatus.OK);
 	}
 

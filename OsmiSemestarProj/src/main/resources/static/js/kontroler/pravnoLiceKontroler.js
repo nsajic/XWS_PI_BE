@@ -51,15 +51,19 @@ pravnoLiceKontroler.controller('pravnoLiceCtrl', function($scope, klijentServis,
 		$scope.opPravnogLicaIzmena = null;
 	}
 	
+	$scope.izlistajPravnaLica = function (){
+		klijentServis.izlistajPravnaLica().success(function(data) {
+			$scope.pravnaLica = data;
+		}).error(function(data) {
+			alert("Neuspesno izlistavanje pravnih lica!");
+		});			
+	}
+	
 	var controller = this;
 	$scope.setTab = function(newTab) {
 		if(newTab == 0){
 			$scope.resetujPoljaPretragaPravnaLica();
-			klijentServis.izlistajPravnaLica().success(function(data) {
-				$scope.pravnaLica = data;
-			}).error(function(data) {
-				alert("Neuspesno izlistavanje pravnih lica!");
-			});
+			$scope.izlistajPravnaLica();
 		}
 		
 		if(newTab == 1){
@@ -99,7 +103,7 @@ pravnoLiceKontroler.controller('pravnoLiceCtrl', function($scope, klijentServis,
 	
 	$scope.obrisiPravnoLice = function(id) {
 		klijentServis.izbrisiPravnoLice(id).success(function(data) {
-			$scope.pravnaLica = data;
+			$scope.izlistajPravnaLica();
 			$location.path('/pravnoLice');
 		}).error(function(data) {
 			alert("Nemoguce obrisati klijenta");
@@ -131,7 +135,7 @@ pravnoLiceKontroler.controller('pravnoLiceCtrl', function($scope, klijentServis,
 				delatnost : $scope.delatnostPravnogLica
 		}
 		klijentServis.dodajPravnoLice(pravnoLice).success(function(data) {
-			$scope.pravnaLica = data;
+			$scope.izlistajPravnaLica();
 			$location.path('/pravnoLice');
 			$scope.resetujPoljaDodavanjePravnaLica();
 			$scope.setTab(0);
@@ -159,7 +163,7 @@ pravnoLiceKontroler.controller('pravnoLiceCtrl', function($scope, klijentServis,
 			delatnost : controller.delatnostPravnogLicaIzmena
 		}
 		klijentServis.izmeniPravnoLice(pravnoLice).success(function(data) {
-			$scope.pravnaLica = data;
+			$scope.izlistajPravnaLica();
 			$location.path('/pravnoLice');
 			$scope.idPravnogLicaZaIzmenu = -1;
 			$scope.setTab(0);
@@ -250,11 +254,7 @@ pravnoLiceKontroler.controller('pravnoLiceCtrl', function($scope, klijentServis,
 	
 	
 	$scope.ponistiPretraguPravnihLica = function(){
-		klijentServis.izlistajPravnaLica().success(function(data) {
-			$scope.pravnaLica = data;
-		}).error(function(data) {
-			alert("Neuspesno izlistavanje pravnih lica!");
-		});
+		$scope.izlistajPravnaLica();
 	}
 	
 	
