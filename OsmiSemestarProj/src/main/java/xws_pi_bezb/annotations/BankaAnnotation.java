@@ -7,8 +7,6 @@ import java.lang.annotation.Target;
 
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.METHOD)
-public @interface MyAnotation {
-
+public @interface BankaAnnotation {
 	String value() default "";
-
 }

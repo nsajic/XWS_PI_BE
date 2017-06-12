@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import xws_pi_bezb.helpers.Helpers;
@@ -13,7 +12,6 @@ import xws_pi_bezb.iservices.IBankaService;
 import xws_pi_bezb.models.Banka;
 
 @Service
-@Component
 public class BankaService implements IBankaService {
 
 	@Autowired

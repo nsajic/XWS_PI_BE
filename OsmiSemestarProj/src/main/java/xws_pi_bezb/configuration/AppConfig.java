@@ -6,7 +6,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 
-import xws_pi_bezb.aspects.MyAspect;
+import xws_pi_bezb.aspects.BankaAspect;
 
 @Configuration
 @ComponentScan(basePackages = "xws_pi_bezb")
@@ -14,9 +14,8 @@ import xws_pi_bezb.aspects.MyAspect;
 public class AppConfig {
 	
 	@Bean
-	public MyAspect interceptorMyAspect() {
-		MyAspect aspect = Aspects.aspectOf(MyAspect.class);
-	    // ... inject dependencies here if not using @Autowired
+	public BankaAspect interceptorBankaAspect() {
+		BankaAspect aspect = Aspects.aspectOf(BankaAspect.class);
 	    return aspect;
 	}
 

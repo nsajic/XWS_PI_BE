@@ -2,8 +2,6 @@ package xws_pi_bezb.controllers;
 
 import java.util.List;
 
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -13,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import xws_pi_bezb.annotations.MyAnotation;
+import xws_pi_bezb.annotations.BankaAnnotation;
 import xws_pi_bezb.iservices.IBankaService;
 import xws_pi_bezb.models.Banka;	
 
@@ -25,12 +23,13 @@ public class BankaKontroler {
 	public IBankaService bankaService;
 
 	@RequestMapping(value = "/dodajBanku", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-	@MyAnotation("Banka:Dodaj")
+	@BankaAnnotation("Banka:Dodaj")
 	public ResponseEntity<List<Banka>> dodajBanku(@RequestBody Banka banka) {
 		bankaService.save(banka);
 		return new ResponseEntity<List<Banka>>(bankaService.findAll(), HttpStatus.OK);
 	}
 
+	@BankaAnnotation("Banka:Izmeni")
 	@RequestMapping(value = "/izmeniBanku", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<Banka>> izmeniBanku(@RequestBody Banka banka) {
 		bankaService.save(banka);
@@ -38,7 +37,7 @@ public class BankaKontroler {
 	}
 
 	@RequestMapping(value = "/izbrisiBanku", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-	@MyAnotation("Banka:Obrisi")
+	@BankaAnnotation("Banka:Obrisi")
 	public ResponseEntity<List<Banka>> izbrisiBanku(@RequestBody Long bankaId) {
 		bankaService.delete(bankaId);
 		return new ResponseEntity<List<Banka>>(bankaService.findAll(), HttpStatus.OK);
