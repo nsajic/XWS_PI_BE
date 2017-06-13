@@ -7,7 +7,6 @@ klijentServis.factory('klijentServis', function($http) {
 	temp.dodajPravnoLice = function(data) {
 		return $http.post('/klijentKontroler/dodajPravnoLice', data);
 	}
-
 	temp.izbrisiPravnoLice = function(data) {
 		return $http.post('/klijentKontroler/izbrisiPravnoLice', data);
 	}
@@ -58,6 +57,16 @@ klijentServis.factory('klijentServis', function($http) {
 		return $http.post('/klijentKontroler/ucitajFizickoLice', data);
 	}
 
+	// ZA DELATNOST MI TREBALO
+
+	temp.izlistajPravnaLicaDelatnosti = function (data){
+		return $http.post('/klijentKontroler/izlistajPravnaLicaDelatnosti', data)
+	}
+	
+	temp.pretragaPravnihLicaDelatnosti = function (data){
+		return $http.post('/klijentKontroler/pretragaPravnihLicaDelatnosti', data)
+	}
+	
 	return temp;
 
 })

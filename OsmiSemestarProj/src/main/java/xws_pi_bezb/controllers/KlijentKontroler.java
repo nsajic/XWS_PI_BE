@@ -18,6 +18,7 @@ import xws_pi_bezb.iservices.IRolaService;
 import xws_pi_bezb.models.Delatnost;
 import xws_pi_bezb.models.korisnici.FizickoLice;
 import xws_pi_bezb.models.korisnici.PravnoLice;
+import xws_pi_bezb.view_models.PretragaPravnihLicaViewModel;
 
 @Controller
 @RequestMapping("/klijentKontroler")
@@ -74,6 +75,18 @@ public class KlijentKontroler {
 	public ResponseEntity<List<Delatnost>> ucitajDelatnosti() {
 		return new ResponseEntity<List<Delatnost>>(delatnostService.findAll(), HttpStatus.OK);
 	}
+	
+	//ZA DELATNOST MI TREBALO
+	@RequestMapping(value = "/izlistajPravnaLicaDelatnosti", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity <List<PravnoLice>> izlistajPravnaLicaDelatnosti(@RequestBody Long id) {
+		return new ResponseEntity<List<PravnoLice>>(klijentService.findByDelatnost(id), HttpStatus.OK);
+	}
+
+	@RequestMapping(value = "/pretragaPravnihLicaDelatnosti", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity <List<PravnoLice>> pretragaPravnihLicaDelatnosti(@RequestBody PretragaPravnihLicaViewModel viewModel) {
+		return new ResponseEntity<List<PravnoLice>>(klijentService.getPravnaLicaBySearchAndDelatnost(viewModel.getPravnoLice(), viewModel.getDelatnost()), HttpStatus.OK);
+	}
+	
 
 	// ISPOD FIZICKA
 
@@ -82,7 +95,6 @@ public class KlijentKontroler {
 		fizickoLice.setRola(rolaService.findByNaziv(Strings.fizickoLice));
 		klijentService.save(fizickoLice);
 		return new ResponseEntity<List<FizickoLice>>(klijentService.getFizickaLica(), HttpStatus.OK);
-
 	}
 
 	@RequestMapping(value = "/izmeniFizickoLice", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
@@ -112,8 +124,11 @@ public class KlijentKontroler {
 
 	@RequestMapping(value = "/ucitajFizickoLice", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<FizickoLice> ucitajFizickoLice(@RequestBody FizickoLice fizickoLice) {
-		return new ResponseEntity<FizickoLice>((FizickoLice) klijentService.findOne(fizickoLice.getId()),
-				HttpStatus.OK);
+		return new ResponseEntity<FizickoLice>((FizickoLice) klijentService.findOne(fizickoLice.getId()),HttpStatus.OK);
 	}
+
+	
+	
+	
 
 }

@@ -15,7 +15,9 @@ import org.springframework.stereotype.Service;
 
 import xws_pi_bezb.helpers.Helpers;
 import xws_pi_bezb.irepositories.IKlijentRepository;
+import xws_pi_bezb.irepositories.IPravnoLiceRepository;
 import xws_pi_bezb.iservices.IKlijentService;
+import xws_pi_bezb.models.Delatnost;
 import xws_pi_bezb.models.Privilegija;
 import xws_pi_bezb.models.Rola;
 import xws_pi_bezb.models.korisnici.FizickoLice;
@@ -27,6 +29,9 @@ public class KlijentService implements IKlijentService {
 
 	@Autowired
 	private IKlijentRepository klijentRepository;
+	
+	@Autowired
+	private IPravnoLiceRepository pravnoLiceRepository;
 
 	@Override
 	public List<Korisnik> findAll() {
@@ -309,6 +314,144 @@ public class KlijentService implements IKlijentService {
 	public Korisnik findByEmail(String email) {
 		return klijentRepository.findByEmail(email);
 	}
+
+	@Override
+	public List<PravnoLice> findByDelatnost(Long id) {
+		return pravnoLiceRepository.findByDelatnostId(id);
+	}
+
+	@Override
+	public List<PravnoLice> getPravnaLicaBySearchAndDelatnost(PravnoLice pravnoLice, Delatnost delatnost) {
+		List<PravnoLice> pravnaLica = new ArrayList<PravnoLice>();
+
+		System.out.println("apr = " + pravnoLice.isAPR());
+		System.out.println("op  = " + pravnoLice.isOP());
+		
+		String brojLicneKarteString = (pravnoLice.getBrojLicneKarte() == 0) ? null: Integer.toString(pravnoLice.getBrojLicneKarte());
+		String PIBString = (pravnoLice.getPIB() == 0) ? null : Integer.toString(pravnoLice.getPIB());
+		String maticniBrojString = (pravnoLice.getMaticniBroj() == 0) ? null: Integer.toString(pravnoLice.getMaticniBroj());
+
+		boolean praznaPretraga = true;
+
+		for (PravnoLice pravnoLiceFor : pravnoLiceRepository.findByDelatnostId(delatnost.getId())) {
+			
+			if (!Helpers.isNullOrEmpty(pravnoLice.getIme())) {
+				praznaPretraga = false;
+				if (pravnoLiceFor.getIme().toLowerCase().contains(pravnoLice.getIme().toLowerCase())) {
+					if (!pravnaLica.contains(pravnoLiceFor)) {
+						pravnaLica.add(pravnoLiceFor);
+					}
+				}
+			}
+			if (!Helpers.isNullOrEmpty(pravnoLice.getPrezime())) {
+				praznaPretraga = false;
+				if (pravnoLiceFor.getPrezime().toLowerCase().contains(pravnoLice.getPrezime().toLowerCase())) {
+					if (!pravnaLica.contains(pravnoLiceFor)) {
+						pravnaLica.add(pravnoLiceFor);
+					}
+				}
+			}
+			
+			if (!Helpers.isNullOrEmpty(pravnoLice.getUsername())) {
+				praznaPretraga = false;
+				if (pravnoLiceFor.getUsername().toLowerCase().contains(pravnoLice.getUsername().toLowerCase())) {
+					if (!pravnaLica.contains(pravnoLiceFor)) {
+						pravnaLica.add(pravnoLiceFor);
+					}
+				}
+			}
+			
+			if (!Helpers.isNullOrEmpty(pravnoLice.getEmail())) {
+				praznaPretraga = false;
+				if (pravnoLiceFor.getEmail().toLowerCase().contains(pravnoLice.getEmail().toLowerCase())) {
+					if (!pravnaLica.contains(pravnoLiceFor)) {
+						pravnaLica.add(pravnoLiceFor);
+					}
+				}
+			}
+
+			if (!Helpers.isNullOrEmpty(pravnoLice.getTelefon())) {
+				praznaPretraga = false;
+				if (pravnoLiceFor.getTelefon().toLowerCase().contains(pravnoLice.getTelefon().toLowerCase())) {
+					if (!pravnaLica.contains(pravnoLiceFor)) {
+						pravnaLica.add(pravnoLiceFor);
+					}
+				}
+			}
+
+			if (!Helpers.isNullOrEmpty(pravnoLice.getAdresa())) {
+				praznaPretraga = false;
+				if (pravnoLiceFor.getAdresa().toLowerCase().contains(pravnoLice.getAdresa().toLowerCase())) {
+					if (!pravnaLica.contains(pravnoLiceFor)) {
+						pravnaLica.add(pravnoLiceFor);
+					}
+				}
+			}
+
+			if (!Helpers.isNullOrEmpty(pravnoLice.getNaziv())) {
+				praznaPretraga = false;
+				if (pravnoLiceFor.getNaziv().toLowerCase().contains(pravnoLice.getNaziv().toLowerCase())) {
+					if (!pravnaLica.contains(pravnoLiceFor)) {
+						pravnaLica.add(pravnoLiceFor);
+					}
+				}
+			}
+
+			if (!Helpers.isNullOrEmpty(pravnoLice.getEmail())) {
+				praznaPretraga = false;
+				if (pravnoLiceFor.getEmail().toLowerCase().contains(pravnoLice.getEmail().toLowerCase())) {
+					if (!pravnaLica.contains(pravnoLiceFor)) {
+						pravnaLica.add(pravnoLiceFor);
+					}
+				}
+			}
+
+			if (!Helpers.isNullOrEmpty(pravnoLice.getFax())) {
+				praznaPretraga = false;
+				if (pravnoLiceFor.getFax().toLowerCase().contains(pravnoLice.getFax().toLowerCase())) {
+					if (!pravnaLica.contains(pravnoLiceFor)) {
+						pravnaLica.add(pravnoLiceFor);
+					}
+				}
+			}
+
+			// TODO: Pretraga za boolean-e i za delatnost
+
+			if (!Helpers.isNullOrEmpty(brojLicneKarteString)) {
+				praznaPretraga = false;
+				if (Integer.toString(pravnoLiceFor.getBrojLicneKarte()).toLowerCase()
+						.contains(brojLicneKarteString.toLowerCase())) {
+					if (!pravnaLica.contains(pravnoLiceFor)) {
+						pravnaLica.add(pravnoLiceFor);
+					}
+				}
+			}
+
+			if (!Helpers.isNullOrEmpty(PIBString)) {
+				praznaPretraga = false;
+				if (Integer.toString(pravnoLiceFor.getPIB()).toLowerCase().contains(PIBString.toLowerCase())) {
+					if (!pravnaLica.contains(pravnoLiceFor)) {
+						pravnaLica.add(pravnoLiceFor);
+					}
+				}
+			}
+
+			if (!Helpers.isNullOrEmpty(maticniBrojString)) {
+				praznaPretraga = false;
+				if (Integer.toString(pravnoLiceFor.getMaticniBroj()).toLowerCase()
+						.contains(maticniBrojString.toLowerCase())) {
+					if (!pravnaLica.contains(pravnoLiceFor)) {
+						pravnaLica.add(pravnoLiceFor);
+					}
+				}
+			}
+
+			if (praznaPretraga) {
+				pravnaLica = pravnoLiceRepository.findByDelatnostId(delatnost.getId());
+			}
+		}
+		return pravnaLica;
+	}
 	
 	@Override
 	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
@@ -319,8 +462,8 @@ public class KlijentService implements IKlijentService {
 		return null;
 	}
 	
-	private Collection<? extends GrantedAuthority> getAuthorities(Rola role) {
-		return getGrantedAuthorities(getPrivileges(role));
+	private Collection<? extends GrantedAuthority> getAuthorities(Rola rola) {
+		return getGrantedAuthorities(getPrivilegije(rola));
 	}
 	
 	@Override
@@ -338,18 +481,17 @@ public class KlijentService implements IKlijentService {
 		return authorities;
 	}
 	
-	private List<String> getPrivileges(Rola rola) {
-		List<String> privileges = new ArrayList<>();
+	private List<String> getPrivilegije(Rola rola) {
+		List<String> privilegije = new ArrayList<>();
 		if(rola == null)
-			return privileges;
-		List<Privilegija> collection = new ArrayList<>();
+			return privilegije;
 		
+		List<Privilegija> collection = new ArrayList<>();	
 		collection.addAll(rola.getPrivilegije());
 		
 		for (Privilegija priv : collection) {
-			privileges.add(priv.getNaziv());
+			privilegije.add(priv.getNaziv());
 		}
-		return privileges;
+		return privilegije;
 	}
-
 }

@@ -21,7 +21,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import xws_pi_bezb.helpers.Poruka;
 import xws_pi_bezb.iservices.IKlijentService;
 import xws_pi_bezb.models.korisnici.Korisnik;
-import xws_pi_bezb.services.KlijentService;
 
 
 @Controller
@@ -39,9 +38,9 @@ public class LogRegKontroler {
 	public @ResponseBody ResponseEntity<Poruka> getKorisnik(@RequestBody Korisnik newUser, HttpSession session){	
 		Korisnik kor = (Korisnik) session.getAttribute("ulogovanKorisnik");
 				
-		/*BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 		String hashedPassword = passwordEncoder.encode(newUser.getSifra());
-		System.out.println(hashedPassword);*/
+		System.out.println(hashedPassword);
 		
 		if(kor == null){
 			

@@ -1,7 +1,6 @@
 package xws_pi_bezb.models;
 
 import java.io.Serializable;
-import java.util.Collection;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -13,6 +12,9 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import xws_pi_bezb.models.korisnici.Korisnik;
 
@@ -54,10 +56,12 @@ public class Rola implements Serializable  {
 		this.naziv = naziv;
 	}
 
+	@JsonIgnore
 	public Set<Privilegija> getPrivilegije() {
 		return privilegije;
 	}
 
+	@JsonProperty
 	public void setPrivilegije(Set<Privilegija> privilegije) {
 		this.privilegije = privilegije;
 	}

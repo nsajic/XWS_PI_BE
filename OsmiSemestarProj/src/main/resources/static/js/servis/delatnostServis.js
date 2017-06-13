@@ -13,7 +13,7 @@ delatnostServis.factory('delatnostServis', function($http) {
 	}	
 	
 	temp.izmeniDelatnost = function(data) {
-		return $http.post('/delatnostKontroler/izmeniDelatnost', data);
+		return $http.put('/delatnostKontroler/izmeniDelatnost', data);
 	}	
 	
 	temp.izlistajDelatnosti = function(data) {

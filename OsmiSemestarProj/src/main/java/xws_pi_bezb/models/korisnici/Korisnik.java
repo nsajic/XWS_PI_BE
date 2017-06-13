@@ -13,6 +13,9 @@ import javax.persistence.Table;
 
 import org.springframework.stereotype.Component;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import xws_pi_bezb.models.Rola;
 
 @Entity
@@ -128,10 +131,12 @@ public class Korisnik {
 		this.adresa = adresa;
 	}
 
+	@JsonIgnore
 	public Rola getRola() {
 		return rola;
 	}
 
+	@JsonProperty
 	public void setRola(Rola rola) {
 		this.rola = rola;
 	}

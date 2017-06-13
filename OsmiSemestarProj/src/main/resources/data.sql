@@ -8,7 +8,7 @@ insert into privilegija (naziv) values ('Banka:IzlistajPretrazi');
 
 insert into rola_privilegija values (1, 1);
 insert into rola_privilegija values (1, 2);
-insert into rola_privilegija values (1, 3);
+--insert into rola_privilegija values (1, 3);
 insert into rola_privilegija values (1, 4);
 
 --insert into delatnost(naziv_delatnosti) values ('Ugostiteljstvo');
@@ -16,9 +16,20 @@ insert into rola_privilegija values (1, 4);
 --insert into delatnost(naziv_delatnosti) values ('Poljoprivreda');
 --insert into delatnost(naziv_delatnosti) values ('IT');
 
-insert into korisnik (tip_korisnika, ime, prezime, broj_licne_karte, telefon, adresa, jmbg, rola_id, email, sifra, username) values ('F','Sima1', 'Simic1', 112345, '1111', 'adresa1', 11111, 1, 'k1@k1.com', '$2a$10$wlYUw.oodVjtHPRgBxMAfeTh64oquJNQfvJKTebzJJlKI1yvJBJ3O', 'kor');
-insert into korisnik (tip_korisnika, ime, prezime, broj_licne_karte, telefon, adresa, jmbg, rola_id, email, sifra, username, apr, op, pib, maticni_broj, fax) values ('P','Sima2', 'Simic2', 112345, '1111', 'adresa1', 11111, 2, 'k2@k2.com', '2', 'kor', true, true, 25254525, 2332221, 'fax.fax');
---insert into klijent (tip, tip_klijenta, ime, prezime, broj_licne_karte, telefon, adresa, jmbg, pib, delatnost_id) values (1, 'F','Sima2', 'Simic2', 212345, '2222', 'adresa1', 22222, null, null);
+insert into korisnik (tip_korisnika, ime, prezime, broj_licne_karte, telefon, adresa, jmbg, rola_id, email, sifra, username) values ('F','Sima1', 'Simic1', 112345, '1111', 'adresa1', 11111, 1, 'k1@k1.com', '$2a$10$dY/AjjviMK7ekanzNADPd.jUlldHwfUIJcWFOXc7GyfUtFG/CBM6C', 'kor');
+insert into korisnik (tip_korisnika, ime, prezime, broj_licne_karte, telefon, adresa, jmbg, rola_id, email, sifra, username, apr, op, pib, maticni_broj, fax) values ('P','Sima2', 'Simic2', 112345, '1111', 'adresa1', 11111, 2, 'k2@k2.com', '$2a$10$dY/AjjviMK7ekanzNADPd.jUlldHwfUIJcWFOXc7GyfUtFG/CBM6C', 'kor', true, true, 25254525, 2332221, 'fax.fax');
+
+insert into delatnost(naziv_delatnosti) values ('Ugostiteljstvo');
+insert into delatnost(naziv_delatnosti) values ('Turizam');
+insert into delatnost(naziv_delatnosti) values ('Poljoprivreda');
+insert into delatnost(naziv_delatnosti) values ('IT');
+
+insert into korisnik (tip_korisnika, ime, prezime, broj_licne_karte, telefon, adresa, jmbg, rola_id, email, sifra, username, apr, op, pib, maticni_broj, fax, delatnost_id) values ('P','Sima3', 'Simic2', 112345, '1111', 'adresa1', 11111, 2, 'k3@k3.com', '$2a$10$dY/AjjviMK7ekanzNADPd.jUlldHwfUIJcWFOXc7GyfUtFG/CBM6C', 'kor', true, true, 25254525, 2332221, 'fax.fax', 1);
+insert into korisnik (tip_korisnika, ime, prezime, broj_licne_karte, telefon, adresa, jmbg, rola_id, email, sifra, username, apr, op, pib, maticni_broj, fax, delatnost_id) values ('P','Sima4', 'Simic2', 112345, '1111', 'adresa1', 11111, 2, 'k4@k4.com', '$2a$10$dY/AjjviMK7ekanzNADPd.jUlldHwfUIJcWFOXc7GyfUtFG/CBM6C', 'kor', true, true, 25254525, 2332221, 'fax.fax', 1);
+insert into korisnik (tip_korisnika, ime, prezime, broj_licne_karte, telefon, adresa, jmbg, rola_id, email, sifra, username, apr, op, pib, maticni_broj, fax, delatnost_id) values ('P','Sima5', 'Simic2', 112345, '1111', 'adresa1', 11111, 2, 'k5@k5.com', '$2a$10$dY/AjjviMK7ekanzNADPd.jUlldHwfUIJcWFOXc7GyfUtFG/CBM6C', 'kor', true, true, 25254525, 2332221, 'fax.fax', 1);
+--insert into korisnik (tip_korisnika, ime, prezime, broj_licne_karte, telefon, adresa, jmbg, rola_id, email, sifra, username) values ('F','Sima1', 'Simic1', 112345, '1111', 'adresa1', 11111, 1, 'k1@k1.com', '1', 'kor');
+--insert into korisnik (tip_korisnika, ime, prezime, broj_licne_karte, telefon, adresa, jmbg, rola_id, email, sifra, username) values ('F','Sima2', 'Simic2', 112345, '1111', 'adresa1', 11111, 1, 'k2@k2.com', '2', 'kor');
+
 
 --insert into banka (naziv_banke, sifra_banke, swift_kod, obracunski_racun) values ('Banka1', 111, '111', '111');
 --insert into banka (naziv_banke, sifra_banke, swift_kod, obracunski_racun) values ('Banka2', 222, '222', '222');

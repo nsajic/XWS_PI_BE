@@ -18,15 +18,19 @@ valutaKontroler.controller('valutaCtrl', function($scope, valutaServis, $window,
 		controller.sifraValuteIzmena = null;
 	}
 	
+	$scope.izlistajValute = function (){
+		valutaServis.izlistajValute().success(function(data) {
+			$scope.valute = data;
+		}).error(function(data) {
+			alert("Neuspesno izlistavanje valuta!");
+		});
+	}
+	
 	var controller = this;
 	$scope.setTab = function(newTab) {
 		if(newTab == 0){
 			$scope.resetujPoljaPretraga();
-			valutaServis.izlistajValute().success(function(data) {
-				$scope.valute = data;
-			}).error(function(data) {
-				alert("Neuspesno izlistavanje valuta!");
-			});
+			$scope.izlistajValute();
 		}
 		$scope.tab = newTab;
 	};
@@ -44,7 +48,7 @@ valutaKontroler.controller('valutaCtrl', function($scope, valutaServis, $window,
 	
 	$scope.obrisiValutu = function(id) {
 		valutaServis.izbrisiValutu(id).success(function(data) {
-			$scope.valute = data;
+			$scope.izlistajValute();
 			$location.path('/valuta');
 		}).error(function(data) {
 			alert("Nemoguce obrisati valutu");
@@ -62,7 +66,7 @@ valutaKontroler.controller('valutaCtrl', function($scope, valutaServis, $window,
 		}
 		
 		valutaServis.dodajValutu(valuta).success(function(data) {
-			$scope.valute = data;
+			$scope.izlistajValute();
 			$location.path('/valuta');
 			$scope.resetujPoljaDodavanje();
 			$scope.setTab(0);
@@ -78,7 +82,7 @@ valutaKontroler.controller('valutaCtrl', function($scope, valutaServis, $window,
 			sifraValute : controller.sifraValuteIzmena
 		}
 		valutaServis.izmeniValutu(valuta).success(function(data) {
-			$scope.valute = data;
+			$scope.izlistajValute();
 			$location.path('/valuta');
 			$scope.idValuteZaIzmenu = -1;
 			$scope.setTab(0);
@@ -114,10 +118,6 @@ valutaKontroler.controller('valutaCtrl', function($scope, valutaServis, $window,
 	
 	
 	$scope.ponistiPretragu = function(){
-		valutaServis.izlistajValute().success(function(data) {
-			$scope.valute = data;
-		}).error(function(data) {
-			alert("Neuspesno izlistavanje valuta!");
-		});
+		$scope.izlistajValute();
 	}
 });

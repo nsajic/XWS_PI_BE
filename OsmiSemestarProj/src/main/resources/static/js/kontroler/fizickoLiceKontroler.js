@@ -40,15 +40,20 @@ fizickoLiceKontroler.controller('fizickoLiceCtrl', function($scope, klijentServi
 		$scope.imeRoditeljaFizickogLicaIzmena = null;
 	}
 	
+	$scope.izlistajFizickaLica = function (){
+		klijentServis.izlistajFizickaLica().success(function(data) {
+			$scope.fizickaLica = data;
+		}).error(function(data) {
+			alert("Neuspesno izlistavanje fizickih lica!");
+		});
+		
+	}
+	
 	var controller = this;
 	$scope.setTab = function(newTab) {
 		if(newTab == 0){
 			$scope.resetujPoljaPretragaFizickaLica();
-			klijentServis.izlistajFizickaLica().success(function(data) {
-				$scope.fizickaLica = data;
-			}).error(function(data) {
-				alert("Neuspesno izlistavanje fizickih lica!");
-			});
+			$scope.izlistajFizickaLica();
 		}
 
 		if(newTab == 2){
@@ -82,7 +87,7 @@ fizickoLiceKontroler.controller('fizickoLiceCtrl', function($scope, klijentServi
 	
 	$scope.obrisiFizickoLice = function(id) {
 		klijentServis.izbrisiFizickoLice(id).success(function(data) {
-			$scope.fizickaLica = data;
+			$scope.izlistajFizickaLica();
 			$location.path('/fizickoLice');
 		}).error(function(data) {
 			alert("Nemoguce obrisati klijenta");
@@ -108,7 +113,7 @@ fizickoLiceKontroler.controller('fizickoLiceCtrl', function($scope, klijentServi
 				imeRoditelja : $scope.imeRoditeljaFizickogLica,
 		}
 		klijentServis.dodajFizickoLice(fizickoLice).success(function(data) {
-			$scope.fizickaLica = data;
+			$scope.izlistajFizickaLica();
 			$location.path('/fizickoLice');
 			$scope.resetujPoljaDodavanjeFizickaLica();
 			$scope.setTab(0);
@@ -129,7 +134,7 @@ fizickoLiceKontroler.controller('fizickoLiceCtrl', function($scope, klijentServi
 			imeRoditelja : controller.imeRoditeljaFizickogLicaIzmena,
 		}
 		klijentServis.izmeniFizickoLice(fizickoLice).success(function(data) {
-			$scope.fizickaLica = data;
+			$scope.izlistajFizickaLica();
 			$location.path('/fizickoLice');
 			$scope.idFizickogLicaZaIzmenu = -1;
 			$scope.setTab(0);
@@ -202,10 +207,6 @@ fizickoLiceKontroler.controller('fizickoLiceCtrl', function($scope, klijentServi
 	
 	
 	$scope.ponistiPretraguFizickihLica = function(){
-		klijentServis.izlistajFizickaLica().success(function(data) {
-			$scope.fizickaLica = data;
-		}).error(function(data) {
-			alert("Neuspesno izlistavanje fizickih lica!");
-		});
+		$scope.izlistajFizickaLica();
 	}
 });
