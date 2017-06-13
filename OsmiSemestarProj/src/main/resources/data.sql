@@ -73,8 +73,7 @@ insert into rola_privilegija values (1, 4);
 --insert into delatnost(naziv_delatnosti) values ('Poljoprivreda');
 --insert into delatnost(naziv_delatnosti) values ('IT');
 
-insert into korisnik (logovao_se, tip_korisnika, ime, prezime, broj_licne_karte, telefon, adresa, jmbg, rola_id, email, sifra, username) values (false, 'F','Sima1', 'Simic1', 112345, '1111', 'adresa1', 11111, 1, 'k1@k1.com', '1', 'kor');
-insert into korisnik (logovao_se, tip_korisnika, ime, prezime, broj_licne_karte, telefon, adresa, jmbg, rola_id, email, sifra, username) values (false, 'F','Sima1', 'Simic1', 112345, '1111', 'adresa1', 11111, 1, 'k1@k1.com', '1', 'kor');
+insert into korisnik (logovao_se, tip_korisnika, ime, prezime, broj_licne_karte, telefon, adresa, jmbg, rola_id, email, sifra, username) values (false, 'F','Sima1', 'Simic1', 112345, '1111', 'adresa1', 11111, 1, 'k1@k1.com', '$2a$10$dY/AjjviMK7ekanzNADPd.jUlldHwfUIJcWFOXc7GyfUtFG/CBM6C', 'kor');
 
 
 insert into korisnik (logovao_se, tip_korisnika, ime, prezime, broj_licne_karte, telefon, adresa, jmbg, rola_id, email, sifra, username, apr, op, pib, maticni_broj, fax) values (false, 'P','Sima2', 'Simic2', 112345, '1111', 'adresa1', 11111, 2, 'k2@k2.com', '1', 'kor', true, true, 25254525, 2332221, 'fax.fax');

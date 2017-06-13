@@ -7,9 +7,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
 
 import xws_pi_bezb.helpers.Helpers;
 import xws_pi_bezb.helpers.Strings;
@@ -98,11 +101,24 @@ public class KlijentKontroler {
 		fizickoLice.setSifra(Helpers.generatePassword());	
 		fizickoLice.setRola(rolaService.findByNaziv(Strings.fizickoLice));
 		klijentService.save(fizickoLice);
-		SendMail sm = new SendMail("onezerobeatz@gmail.com","Kreiran vam je nalog! Prilikom prvog logovanja moracete da odaberete lozinku! XWS_PI_BEZB");
+		SendMail sm = new SendMail("nikola9n@gmail.com","Aktivirajte nalog klikom na link: " + "http://localhost:9000/contr/activate/onezerobeatz@gmail.com/");
 		
 		
 		
 		return new ResponseEntity<Object>(HttpStatus.OK);
+	}
+	
+	@Transactional
+	@RequestMapping(value = "/activate/{email}")
+	public ResponseEntity<String> activateAccount(@PathVariable String email) {			
+		
+		/*try{
+			Gost gost = servis.findByEmail(email);
+			servis.activateAccount(gost.getEmail());
+			return new ResponseEntity<String>("Uspesno ste aktivirali nalog!", HttpStatus.ACCEPTED);			
+		}catch(Exception ex){}*/
+		return new ResponseEntity<String>("Neuspesna aktivacija naloga.", HttpStatus.ACCEPTED);
+		
 	}
 
 	@RequestMapping(value = "/izmeniFizickoLice", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
