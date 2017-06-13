@@ -1,6 +1,5 @@
 package xws_pi_bezb.models;
 
-import java.util.Collection;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -9,6 +8,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Entity
 @Table(name = "privilegija")
@@ -42,4 +44,13 @@ public class Privilegija {
 		this.naziv = naziv;
 	}
 
+	@JsonIgnore
+	public Set<Rola> getRole() {
+		return role;
+	}
+
+	@JsonProperty
+	public void setRole(Set<Rola> role) {
+		this.role = role;
+	}
 }

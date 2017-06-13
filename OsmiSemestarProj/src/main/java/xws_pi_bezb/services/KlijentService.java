@@ -1,9 +1,16 @@
 package xws_pi_bezb.services;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import xws_pi_bezb.helpers.Helpers;
@@ -11,6 +18,8 @@ import xws_pi_bezb.irepositories.IKlijentRepository;
 import xws_pi_bezb.irepositories.IPravnoLiceRepository;
 import xws_pi_bezb.iservices.IKlijentService;
 import xws_pi_bezb.models.Delatnost;
+import xws_pi_bezb.models.Privilegija;
+import xws_pi_bezb.models.Rola;
 import xws_pi_bezb.models.korisnici.FizickoLice;
 import xws_pi_bezb.models.korisnici.Korisnik;
 import xws_pi_bezb.models.korisnici.PravnoLice;
@@ -443,6 +452,46 @@ public class KlijentService implements IKlijentService {
 		}
 		return pravnaLica;
 	}
-
-
+	
+	@Override
+	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+		Korisnik kor = findByEmail(email);
+		if (kor != null) {
+			return new User(email, kor.getSifra(), getAuthorities(kor.getRola()));
+		}
+		return null;
+	}
+	
+	private Collection<? extends GrantedAuthority> getAuthorities(Rola rola) {
+		return getGrantedAuthorities(getPrivilegije(rola));
+	}
+	
+	@Override
+	public void logoutKorisnik() {
+		SecurityContextHolder.getContext().setAuthentication(null);
+	}
+	
+	private List<GrantedAuthority> getGrantedAuthorities(List<String> privileges) {
+		List<GrantedAuthority> authorities = new ArrayList<>();
+		if(privileges == null)
+			return authorities;
+		for (String privilege : privileges) {
+			authorities.add(new SimpleGrantedAuthority(privilege));
+		}
+		return authorities;
+	}
+	
+	private List<String> getPrivilegije(Rola rola) {
+		List<String> privilegije = new ArrayList<>();
+		if(rola == null)
+			return privilegije;
+		
+		List<Privilegija> collection = new ArrayList<>();	
+		collection.addAll(rola.getPrivilegije());
+		
+		for (Privilegija priv : collection) {
+			privilegije.add(priv.getNaziv());
+		}
+		return privilegije;
+	}
 }

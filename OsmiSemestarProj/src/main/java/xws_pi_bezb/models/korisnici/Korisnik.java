@@ -13,6 +13,9 @@ import javax.persistence.Table;
 
 import org.springframework.stereotype.Component;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import xws_pi_bezb.models.Rola;
 
 @Entity
@@ -39,7 +42,7 @@ public class Korisnik {
 	@Column(name = "email", nullable = false)
 	private String email;
 
-	@Column(name = "sifra", nullable = false)
+	@Column(name = "sifra", length = 60, nullable = false)
 	private String sifra;
 	
 	@Column(name = "broj_licne_karte", nullable = false)
@@ -133,10 +136,12 @@ public class Korisnik {
 		this.adresa = adresa;
 	}
 
+	@JsonIgnore
 	public Rola getRola() {
 		return rola;
 	}
 
+	@JsonProperty
 	public void setRola(Rola rola) {
 		this.rola = rola;
 	}

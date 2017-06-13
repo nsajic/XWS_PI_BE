@@ -71,7 +71,13 @@ bankaKontroler.controller('bankaCtrl', function($scope, bankaServis, $window, $l
 		}
 		
 		bankaServis.dodajBanku(banka).success(function(data) {
-			$scope.banke = data;
+			//$scope.banke = data;	
+			bankaServis.izlistajBanke().success(function(data1) {
+				$scope.banke = data1;
+			}).error(function(data1) {
+				alert("Neuspesno izlistavanje banaka!");
+			});
+			
 			$location.path('/banka');
 			$scope.resetujPoljaDodavanje();
 			$scope.setTab(0);
@@ -89,7 +95,7 @@ bankaKontroler.controller('bankaCtrl', function($scope, bankaServis, $window, $l
 			obracunskiRacun : controller.obracunskiRacunIzmena
 		}
 		bankaServis.izmeniBanku(banka).success(function(data) {
-			$scope.banke = data;
+			//$scope.banke = data;
 			$location.path('/banka');
 			$scope.idBankeZaIzmenu = -1;
 			$scope.setTab(0);

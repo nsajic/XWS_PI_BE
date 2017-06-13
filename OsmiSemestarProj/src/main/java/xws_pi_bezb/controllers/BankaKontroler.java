@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import xws_pi_bezb.annotations.BankaAnnotation;
+import xws_pi_bezb.helpers.Poruka;
 import xws_pi_bezb.iservices.IBankaService;
 import xws_pi_bezb.models.Banka;	
 
@@ -24,13 +25,13 @@ public class BankaKontroler {
 
 	@RequestMapping(value = "/dodajBanku", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
 	@BankaAnnotation("Banka:Dodaj")
-	public ResponseEntity<List<Banka>> dodajBanku(@RequestBody Banka banka) {
+	public ResponseEntity<Poruka> dodajBanku(@RequestBody Banka banka) {
 		bankaService.save(banka);
-		return new ResponseEntity<List<Banka>>(bankaService.findAll(), HttpStatus.OK);
+		return new ResponseEntity<Poruka>(new Poruka("Dodato", null), HttpStatus.OK);
 	}
 
-	@BankaAnnotation("Banka:Izmeni")
 	@RequestMapping(value = "/izmeniBanku", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+	@BankaAnnotation("Banka:Izmeni")
 	public ResponseEntity<List<Banka>> izmeniBanku(@RequestBody Banka banka) {
 		bankaService.save(banka);
 		return new ResponseEntity<List<Banka>>(bankaService.findAll(), HttpStatus.OK);
@@ -44,11 +45,13 @@ public class BankaKontroler {
 	}
 
 	@RequestMapping(value = "/izlistajBanke", method = RequestMethod.GET)
+	@BankaAnnotation("Banka:IzlistajPretrazi")
 	public ResponseEntity<List<Banka>> izlistajBanku() {
 		return new ResponseEntity<List<Banka>>(bankaService.findAll(), HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/pretraziBanke", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+	@BankaAnnotation("Banka:IzlistajPretrazi")
 	public ResponseEntity<List<Banka>> pretraziBanke(@RequestBody Banka banka) {
 		return new ResponseEntity<List<Banka>>(bankaService.getBySearch(banka), HttpStatus.OK);
 	}
