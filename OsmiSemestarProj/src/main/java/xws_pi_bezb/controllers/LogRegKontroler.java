@@ -12,6 +12,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,6 +22,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import xws_pi_bezb.helpers.Poruka;
 import xws_pi_bezb.iservices.IKlijentService;
 import xws_pi_bezb.models.korisnici.Korisnik;
+import xws_pi_bezb.view_models.PromenaLozinkeViewModel;
 
 
 @Controller
@@ -32,15 +34,18 @@ public class LogRegKontroler {
 	private IKlijentService korisnikService;
 	
 	@Autowired
+	private PasswordEncoder passwordEncoder;
+	
+	@Autowired
 	private AuthenticationManager authenticationManager;
 	
 	@RequestMapping(value = "/login", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody ResponseEntity<Poruka> getKorisnik(@RequestBody Korisnik newUser, HttpSession session){	
 		Korisnik kor = (Korisnik) session.getAttribute("ulogovanKorisnik");
 				
-		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+		/*BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 		String hashedPassword = passwordEncoder.encode(newUser.getSifra());
-		System.out.println(hashedPassword);
+		System.out.println(hashedPassword);*/
 		
 		if(kor == null){
 			
@@ -73,5 +78,36 @@ public class LogRegKontroler {
 		}else{
 			return new ResponseEntity<Poruka>(new Poruka("NijeIzlogovan", null), HttpStatus.ACCEPTED);			
 		}
+	}
+	
+	@RequestMapping(value = "/resetPassword", method = RequestMethod.POST)
+	public ResponseEntity<Poruka> resetPassword(@RequestBody PromenaLozinkeViewModel user, HttpSession session){	
+		if(user.getNovaLozinka().equals(user.getNovaLozinka2())){
+			Korisnik kor = (Korisnik) session.getAttribute("ulogovanKorisnik");
+			
+			UserDetails userDetails = korisnikService.loadUserByUsername(kor.getEmail());
+			UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
+					userDetails, user.getStaraLozinka(), userDetails.getAuthorities());
+			authenticationManager.authenticate(authenticationToken);
+				
+			if (authenticationToken.isAuthenticated()){
+				Korisnik korisnik = korisnikService.findByEmail(kor.getEmail());
+				
+				String hashedPassword = passwordEncoder.encode(user.getNovaLozinka());
+				
+				korisnik.setSifra(hashedPassword);
+				System.out.println(hashedPassword + "       " + "ovoooooo");
+				korisnikService.save(korisnik);
+				
+				session.setAttribute("ulogovanKorisnik", korisnik);
+				SecurityContextHolder.getContext().setAuthentication(authenticationToken);
+				return new ResponseEntity<Poruka>(new Poruka("Promenjeno", null), HttpStatus.ACCEPTED);
+			}
+				
+			return new ResponseEntity<Poruka>(new Poruka("NePostoji", null), HttpStatus.ACCEPTED);
+		}else{
+			return new ResponseEntity<Poruka>(new Poruka("RazliciteLozinke", null), HttpStatus.ACCEPTED);
+		}
+		
 	}
 }

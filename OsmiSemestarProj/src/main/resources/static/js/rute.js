@@ -26,6 +26,9 @@ app.config(function($routeProvider, $locationProvider) {
     .when("/racun", {
         templateUrl : "html/racun.html"
     })
+    .when("/promenaLozinke", {
+        templateUrl : "html/promenaLozinke.html"
+    })
 
     $locationProvider.html5Mode(true);
 });

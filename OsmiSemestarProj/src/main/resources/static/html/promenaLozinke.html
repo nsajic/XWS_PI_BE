@@ -1,0 +1,26 @@
+<div ng-cloak ng-controller="promenaLozinkeKontroler as $ctrl">
+	<div>
+		<h2>Unesite podatke o banci:</h2>
+		<table>
+			<tr>
+				<td>Stara lozinka:</td>
+				<td><input type=password ng-model="staraLozinka"></td>
+			<tr>
+			<tr>
+				<td>Nova lozinka:</td>
+				<td><input type=password ng-model="novaLozinka"></td>
+			<tr>
+			<tr>
+				<td>Ponovite novu lozinku:</td>
+				<td><input type=password ng-model="novaLozinka2"></td>
+			<tr>
+		
+			<tr>
+				<td>
+				<td>
+					<button ng-click="promeniLozinku()">Promeni lozinku</button>
+				</td>
+			</tr>
+		</table>
+	</div>
+</div>
