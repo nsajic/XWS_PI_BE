@@ -20,7 +20,6 @@ fizickoLiceKontroler.controller('fizickoLiceCtrl', function($scope, klijentServi
 		$scope.prezimeFizickogLica = null;
 		$scope.usernameFizickogLica = null;
 		$scope.emailFizickogLica = null;
-		$scope.sifraFizickogLica = null;
 		$scope.brojLicneKarteFizickogLica = null;
 		$scope.datumIstekaLicneKarteFizickogLica = null;
 		$scope.telefonFizickogLica = null;
@@ -105,7 +104,6 @@ fizickoLiceKontroler.controller('fizickoLiceCtrl', function($scope, klijentServi
 				prezime : $scope.prezimeFizickogLica,
 				username: $scope.usernameFizickogLica,
 				email: $scope.emailFizickogLica,
-				sifra: $scope.sifraFizickogLica,
 				brojLicneKarte : $scope.brojLicneKarteFizickogLica,
 				telefon : $scope.telefonFizickogLica,
 				adresa : $scope.adresaFizickogLica,

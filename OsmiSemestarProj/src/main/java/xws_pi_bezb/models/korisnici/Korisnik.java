@@ -51,8 +51,13 @@ public class Korisnik {
 	@Column(name = "adresa", nullable = false)
 	private String adresa;
 	
+	@Column(name = "logovao_se", nullable = false)
+	private boolean logovaoSe;
+	
+	
 	@ManyToOne
 	private Rola rola;
+	
 	
 	public Korisnik() {}
 
@@ -134,5 +139,13 @@ public class Korisnik {
 
 	public void setRola(Rola rola) {
 		this.rola = rola;
+	}
+	
+	public boolean isLogovaoSe() {
+		return logovaoSe;
+	}
+	
+	public void setLogovaoSe(boolean logovaoSe) {
+		this.logovaoSe = logovaoSe;
 	}
 }

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import xws_pi_bezb.helpers.Helpers;
 import xws_pi_bezb.helpers.Strings;
 import xws_pi_bezb.iservices.IDelatnostService;
 import xws_pi_bezb.iservices.IKlijentService;
@@ -18,6 +19,8 @@ import xws_pi_bezb.iservices.IRolaService;
 import xws_pi_bezb.models.Delatnost;
 import xws_pi_bezb.models.korisnici.FizickoLice;
 import xws_pi_bezb.models.korisnici.PravnoLice;
+import xws_pi_bezb.password_security.PasswordValidator;
+import xws_pi_bezb.password_security.SendMail;
 import xws_pi_bezb.view_models.PretragaPravnihLicaViewModel;
 
 @Controller
@@ -87,14 +90,19 @@ public class KlijentKontroler {
 		return new ResponseEntity<List<PravnoLice>>(klijentService.getPravnaLicaBySearchAndDelatnost(viewModel.getPravnoLice(), viewModel.getDelatnost()), HttpStatus.OK);
 	}
 	
-
 	// ISPOD FIZICKA
 
 	@RequestMapping(value = "/dodajFizickoLice", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<List<FizickoLice>> dodajFizickoLice(@RequestBody FizickoLice fizickoLice) {
+	public ResponseEntity<Object> dodajFizickoLice(@RequestBody FizickoLice fizickoLice) {
+		fizickoLice.setLogovaoSe(false);
+		fizickoLice.setSifra(Helpers.generatePassword());	
 		fizickoLice.setRola(rolaService.findByNaziv(Strings.fizickoLice));
 		klijentService.save(fizickoLice);
-		return new ResponseEntity<List<FizickoLice>>(klijentService.getFizickaLica(), HttpStatus.OK);
+		SendMail sm = new SendMail("onezerobeatz@gmail.com","Kreiran vam je nalog! Prilikom prvog logovanja moracete da odaberete lozinku! XWS_PI_BEZB");
+		
+		
+		
+		return new ResponseEntity<Object>(HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/izmeniFizickoLice", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
