@@ -2,11 +2,14 @@ package xws_pi_bezb.iservices;
 
 import java.util.List;
 
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+
 import xws_pi_bezb.models.korisnici.FizickoLice;
 import xws_pi_bezb.models.korisnici.Korisnik;
 import xws_pi_bezb.models.korisnici.PravnoLice;
 
-public interface IKlijentService {
+public interface IKlijentService extends UserDetailsService {
 	
 	List<Korisnik> findAll();
 	
@@ -25,5 +28,9 @@ public interface IKlijentService {
 	List<FizickoLice> getFizickaLicaBySearch(FizickoLice fizickoLice);
 
 	Korisnik findByEmail(String email);
+	
+	UserDetails loadUserByUsername(String username);
+	
+	void logoutKorisnik();
 	
 }

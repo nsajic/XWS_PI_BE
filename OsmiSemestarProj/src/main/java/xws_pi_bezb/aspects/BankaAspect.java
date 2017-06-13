@@ -17,7 +17,6 @@ public class BankaAspect{
 	@Autowired
 	public IPrivilegijaService privilegijaService;
 	
-	//@Around("@annotation(xws_pi_bezb.annotations.BankaAnnotation) && @annotation(bankaAnnotation) && execution(* *(..))")
 	@Around("execution(@xws_pi_bezb.annotations.BankaAnnotation * *(..)) && @annotation(bankaAnnotation)")
 	public Object aspMeth(ProceedingJoinPoint joinPoint, BankaAnnotation bankaAnnotation) throws Throwable{
 		
@@ -25,7 +24,7 @@ public class BankaAspect{
 		
 		ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
 		Korisnik korisnik = (Korisnik) attr.getRequest().getSession().getAttribute("ulogovanKorisnik");
-			
+		System.out.println("caoooocaococaocaocaoac");
 		if(!privilegijaService.getByRole(korisnik.getRola()).contains(privilegijaService.getByNaziv(bankaAnnotation.value())))
 			throw new Throwable();			
 		else

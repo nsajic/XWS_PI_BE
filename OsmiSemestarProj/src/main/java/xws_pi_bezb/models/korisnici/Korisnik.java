@@ -39,7 +39,7 @@ public class Korisnik {
 	@Column(name = "email", nullable = false)
 	private String email;
 
-	@Column(name = "sifra", nullable = false)
+	@Column(name = "sifra", length = 60, nullable = false)
 	private String sifra;
 	
 	@Column(name = "broj_licne_karte", nullable = false)

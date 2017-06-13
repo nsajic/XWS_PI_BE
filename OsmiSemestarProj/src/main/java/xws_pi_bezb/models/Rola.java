@@ -53,4 +53,20 @@ public class Rola implements Serializable  {
 	public void setNaziv(String naziv) {
 		this.naziv = naziv;
 	}
+
+	public Set<Privilegija> getPrivilegije() {
+		return privilegije;
+	}
+
+	public void setPrivilegije(Set<Privilegija> privilegije) {
+		this.privilegije = privilegije;
+	}
+
+	public Set<Korisnik> getKorisnici() {
+		return korisnici;
+	}
+
+	public void setKorisnici(Set<Korisnik> korisnici) {
+		this.korisnici = korisnici;
+	}	
 }
