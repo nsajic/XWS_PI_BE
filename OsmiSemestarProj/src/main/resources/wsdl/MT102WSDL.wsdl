@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="MT102Service"
+	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+	xmlns:mt102="http://xml.poslovna.bezbednost/MT102" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	targetNamespace="http://xml.poslovna.bezbednost/MT102">
+
+	<wsdl:types>
+		<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+			targetNamespace="http://xml.poslovna.bezbednost/MT102" xmlns:mt102="http://xml.poslovna.bezbednost/MT102">
+
+			<xs:element name="MT102Request" type="mt102:MT102Request" />
+			<xs:element name="MT102Response" type="mt102:MT102Response" />
+
+			<xs:complexType name="MT102Request">
+				<xs:sequence>
+					<xs:element name="obracunskiRacunBankeDuznika">
+						<xs:simpleType>
+							<xs:restriction base="xs:string">
+								<xs:minLength value="18" />
+								<xs:maxLength value="20" />
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:element>
+					<xs:element name="obracunskiRacunBankePoverioca">
+						<xs:simpleType>
+							<xs:restriction base="xs:string">
+								<xs:minLength value="18" />
+								<xs:maxLength value="20" />
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:element>
+					<xs:element name="ukupanIznos">
+						<xs:simpleType>
+							<xs:restriction base="xs:decimal">
+								<xs:totalDigits value="15" />
+								<xs:fractionDigits value="2" />
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:element>
+					<xs:element name="sifraValute">
+						<xs:simpleType>
+							<xs:restriction base="xs:string">
+								<xs:length value="3" />
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:element>
+					<xs:element name="datumValute" type="xs:date" />
+					<xs:element name="datum" type="xs:date" />
+					<xs:element maxOccurs="unbounded" name="pojedinacnoPlacanje">
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="idNalogaZaPlacanje">
+									<xs:simpleType>
+										<xs:restriction base="xs:string">
+											<xs:length value="16" />
+										</xs:restriction>
+									</xs:simpleType>
+								</xs:element>
+								<xs:element name="duznikNalogodavac">
+									<xs:simpleType>
+										<xs:restriction base="xs:string">
+											<xs:minLength value="1" />
+											<xs:maxLength value="255" />
+										</xs:restriction>
+									</xs:simpleType>
+								</xs:element>
+								<xs:element name="svrhaPlacanja">
+									<xs:simpleType>
+										<xs:restriction base="xs:string">
+											<xs:minLength value="1" />
+											<xs:maxLength value="255" />
+										</xs:restriction>
+									</xs:simpleType>
+								</xs:element>
+								<xs:element name="primalacPoverilac">
+									<xs:simpleType>
+										<xs:restriction base="xs:string">
+											<xs:minLength value="1" />
+											<xs:maxLength value="255" />
+										</xs:restriction>
+									</xs:simpleType>
+								</xs:element>
+								<xs:element name="datumNaloga" type="xs:date" />
+								<xs:element name="racunDuznika">
+									<xs:simpleType>
+										<xs:restriction base="xs:string">
+											<xs:length value="18" />
+										</xs:restriction>
+									</xs:simpleType>
+								</xs:element>
+								<xs:element name="modelZaduzenja">
+									<xs:simpleType>
+										<xs:restriction base="xs:int">
+											<xs:totalDigits value="2" />
+											<xs:minExclusive value="9" />
+											<xs:maxExclusive value="100" />
+										</xs:restriction>
+									</xs:simpleType>
+								</xs:element>
+								<xs:element name="pozivNaBrojZaduzenja">
+									<xs:simpleType>
+										<xs:restriction base="xs:string">
+											<xs:minLength value="1" />
+											<xs:maxLength value="20" />
+										</xs:restriction>
+									</xs:simpleType>
+								</xs:element>
+								<xs:element name="racunPoverioca">
+									<xs:simpleType>
+										<xs:restriction base="xs:string">
+											<xs:length value="18" />
+										</xs:restriction>
+									</xs:simpleType>
+								</xs:element>
+								<xs:element name="modelOdobrenja">
+									<xs:simpleType>
+										<xs:restriction base="xs:int">
+											<xs:totalDigits value="2" />
+											<xs:minExclusive value="9" />
+											<xs:maxExclusive value="100" />
+										</xs:restriction>
+									</xs:simpleType>
+								</xs:element>
+								<xs:element name="pozivNaBrojOdobrenja">
+									<xs:simpleType>
+										<xs:restriction base="xs:string">
+											<xs:minLength value="1" />
+											<xs:maxLength value="20" />
+										</xs:restriction>
+									</xs:simpleType>
+								</xs:element>
+								<xs:element name="iznos">
+									<xs:simpleType>
+										<xs:restriction base="xs:decimal">
+											<xs:totalDigits value="15" />
+											<xs:fractionDigits value="2" />
+										</xs:restriction>
+									</xs:simpleType>
+								</xs:element>
+								<xs:element name="sifraValute">
+									<xs:simpleType>
+										<xs:restriction base="xs:string">
+											<xs:length value="3" />
+										</xs:restriction>
+									</xs:simpleType>
+								</xs:element>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+				</xs:sequence>
+				<xs:attribute name="idPoruke">
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:length value="16" />
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:attribute>
+				<xs:attribute name="swiftBankeDuznika" use="required">
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:pattern
+								value="[A-Z][A-Z][A-Z][A-Z][A-Z][A-Z][A-Z0-9][A-Z0-9]([X][X][X])?" />
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:attribute>
+				<xs:attribute name="swiftBankePoverioca" use="required">
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:pattern
+								value="[A-Z][A-Z][A-Z][A-Z][A-Z][A-Z][A-Z0-9][A-Z0-9]([X][X][X])?" />
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:attribute>
+			</xs:complexType>
+
+			<xs:complexType name="MT102Response">
+				<xs:sequence>
+					<xs:element name="odgovor" type="xs:string" />
+				</xs:sequence>
+			</xs:complexType>
+
+		</xs:schema>
+	</wsdl:types>
+
+	<wsdl:message name="MT102Request">
+		<wsdl:part element="mt102:MT102Request" name="parameters" />
+	</wsdl:message>
+	<wsdl:message name="MT102Response">
+		<wsdl:part element="mt102:MT102Response" name="parameters" />
+	</wsdl:message>
+
+	<wsdl:portType name="MT102">
+		<wsdl:operation name="MT102Request">
+			<wsdl:input name="MT102Request" message="mt102:MT102Request" />
+			<wsdl:output name="MT102Response" message="mt102:MT102Response" />
+		</wsdl:operation>
+	</wsdl:portType>
+
+	<wsdl:binding name="MT102SOAP" type="mt102:MT102">
+		<soap:binding style="document"
+			transport="http://schemas.xmlsoap.org/soap/http" />
+		<wsdl:operation name="MT102Request">
+			<soap:operation soapAction="" style="document" />
+			<wsdl:input name="MT102Request">
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="MT102Response">
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:service name="MT102Service">
+		<wsdl:port binding="mt102:MT102SOAP" name="MT102Port">
+			<soap:address location="http://localhost:9000/MT102" />
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>

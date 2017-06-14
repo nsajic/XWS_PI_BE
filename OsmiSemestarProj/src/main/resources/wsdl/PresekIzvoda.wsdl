@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions
+	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema" name="PresekIzvodaServis"
+	xmlns:pr="http://xml.poslovna.bezbednost/PresekIzvoda" targetNamespace="http://xml.poslovna.bezbednost/PresekIzvoda">
+	<wsdl:types>
+		<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+			elementFormDefault="qualified" targetNamespace="http://xml.poslovna.bezbednost/PresekIzvoda"
+			xmlns:nzp="http://xml.poslovna.bezbednost/nalogZaPrenos" xmlns:pr="http://xml.poslovna.bezbednost/PresekIzvoda">
+
+			<xs:import namespace="http://xml.poslovna.bezbednost/nalogZaPrenos"
+				schemaLocation="/src/main/resources/seme/NalogZaPrenos.xsd" />
+
+			<xs:element name="PresekIzvodaRequest" type="pr:PresekIzvodaRequest" />
+			<xs:element name="PresekIzvodaResponse" type="pr:PresekIzvodaResponse" />
+
+			<xs:complexType name="PresekIzvodaResponse">
+				<xs:sequence>
+					<xs:element name="odgovor" type="xs:string" />
+				</xs:sequence>
+			</xs:complexType>
+
+			<xs:complexType name="PresekIzvodaRequest">
+				<xs:sequence>
+					<xs:element name="Zaglavlje_preseka">
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="Zahtev" type="pr:TZahtev" />
+								<xs:element name="Prethodno_stanje" type="pr:TStanje_ili_suma" />
+								<xs:element name="Broj_promena_u_korist" type="pr:TBroj_promena" />
+								<xs:element name="Ukupno_u_korist" type="pr:TStanje_ili_suma" />
+								<xs:element name="Broj_promena_na_teret" type="pr:TBroj_promena" />
+								<xs:element name="Ukupno_na_teret" type="pr:TStanje_ili_suma" />
+								<xs:element name="Novo_stanje" type="pr:TStanje_ili_suma" />
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+					<xs:element maxOccurs="unbounded" name="Stavka_preseka">
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="Duznik" type="nzp:TOpis" />
+								<xs:element name="Svrha_placanja" type="nzp:TOpis" />
+								<xs:element name="Primalac" type="nzp:TOpis" />
+								<xs:element name="Datum_nalog" type="xs:date" />
+								<xs:element name="Datum_valute" type="xs:date" />
+								<xs:element name="Duznik_racun" type="nzp:TPodaci_o_racunu" />
+								<xs:element name="Poverilac_racun" type="nzp:TPodaci_o_racunu" />
+								<xs:element name="Iznos" type="nzp:TIznos" />
+								<xs:element name="Smer" type="pr:TSmer" />
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+				</xs:sequence>
+			</xs:complexType>
+
+			<xs:simpleType name="TStanje_ili_suma">
+				<xs:restriction base="xs:decimal">
+					<xs:totalDigits value="15" />
+					<xs:fractionDigits value="2" />
+				</xs:restriction>
+			</xs:simpleType>
+			<xs:simpleType name="TBroj_promena">
+				<xs:restriction base="xs:int">
+					<xs:minInclusive value="0" />
+					<xs:maxInclusive value="999999" />
+				</xs:restriction>
+			</xs:simpleType>
+			<xs:simpleType name="TSmer">
+				<xs:restriction base="xs:string">
+					<xs:minLength value="1" />
+					<xs:maxLength value="1" />
+				</xs:restriction>
+			</xs:simpleType>
+			<xs:complexType name="TZahtev">
+				<xs:sequence>
+					<xs:element name="Broj_racuna" type="pr:TBroj_racuna" />
+					<xs:element name="Datum" type="xs:date" />
+					<xs:element name="Redni_broj_preseka" type="pr:TRB_preseka" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:simpleType name="TBroj_racuna">
+				<xs:restriction base="xs:string">
+					<xs:pattern value="\d{3}-\d{13}-\d{2}" />
+				</xs:restriction>
+			</xs:simpleType>
+			<xs:simpleType name="TRB_preseka">
+				<xs:restriction base="xs:int">
+					<xs:maxInclusive value="99" />
+					<xs:minInclusive value="1" />
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:schema>
+	</wsdl:types>
+	
+	<wsdl:message name="PresekIzvodaRequest">
+		<wsdl:part element="pr:PresekIzvodaRequest" name="parameters" />
+	</wsdl:message>
+	<wsdl:message name="PresekIzvodaResponse">
+		<wsdl:part element="pr:PresekIzvodaResponse" name="parameters" />
+	</wsdl:message>
+	
+	<wsdl:portType name="PresekIzvoda">
+		<wsdl:operation name="PresekIzvodaRequest">
+			<wsdl:input name="PresekIzvodaRequest" message="pr:PresekIzvodaRequest" />
+			<wsdl:output name="PresekIzvodaResponse" message="pr:PresekIzvodaResponse" />
+		</wsdl:operation>
+	</wsdl:portType>
+	
+	<wsdl:binding name="PresekIzvodaSOAP" type="pr:PresekIzvoda">
+		<soap:binding style="document"
+			transport="http://schemas.xmlsoap.org/soap/http" />
+		<wsdl:operation name="PresekIzvodaRequest">
+			<soap:operation soapAction="" style="document"/>
+			<wsdl:input name="PresekIzvodaRequest">
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="PresekIzvodaResponse">
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:binding>
+	
+	<wsdl:service name="PresekIzvodaServis">
+		<wsdl:port name="PresekIzvodaPort" binding="pr:PresekIzvodaSOAP">
+			<soap:address location="http://localhost:9000/PresekIzvoda" />
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>
