@@ -65,7 +65,7 @@ insert into privilegija (naziv) values ('Banka:IzlistajPretrazi');
 
 insert into rola_privilegija values (1, 1);
 insert into rola_privilegija values (1, 2);
---insert into rola_privilegija values (1, 3);
+insert into rola_privilegija values (1, 3);
 insert into rola_privilegija values (1, 4);
 
 --insert into delatnost(naziv_delatnosti) values ('Ugostiteljstvo');
