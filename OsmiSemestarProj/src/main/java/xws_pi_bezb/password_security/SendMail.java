@@ -42,7 +42,7 @@ public class SendMail {
 	          message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(to));
 	          message.setSubject("Aktivacioni link");
 	          message.setText(link);
-	          Transport.send(message, username	, password);
+	          Transport.send(message, username, password);
 	      }
 	      catch (AddressException e) {e.printStackTrace();}
 	      catch (MessagingException e) {e.printStackTrace();}
