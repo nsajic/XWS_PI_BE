@@ -7,25 +7,25 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
-import xws_pi_bezb.annotations.BankaAnnotation;
+import xws_pi_bezb.annotations.InterceptorAnnotation;
 import xws_pi_bezb.iservices.IPrivilegijaService;
 import xws_pi_bezb.models.korisnici.Korisnik;
 
 @Aspect
-public class BankaAspect{
+public class InterceptorAspect{
 
 	@Autowired
 	public IPrivilegijaService privilegijaService;
 	
-	@Around("execution(@xws_pi_bezb.annotations.BankaAnnotation * *(..)) && @annotation(bankaAnnotation)")
-	public Object aspMeth(ProceedingJoinPoint joinPoint, BankaAnnotation bankaAnnotation) throws Throwable{
+	@Around("execution(@xws_pi_bezb.annotations.InterceptorAnnotation * *(..)) && @annotation(interceptorAnnotation)")
+	public Object aspMeth(ProceedingJoinPoint joinPoint, InterceptorAnnotation interceptorAnnotation) throws Throwable{
 		
 		Object returnObject = null;
 		
 		ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
 		Korisnik korisnik = (Korisnik) attr.getRequest().getSession().getAttribute("ulogovanKorisnik");
 		System.out.println("caoooocaococaocaocaoac");
-		if(!privilegijaService.getByRole(korisnik.getRola()).contains(privilegijaService.getByNaziv(bankaAnnotation.value())))
+		if(!privilegijaService.getByRole(korisnik.getRola()).contains(privilegijaService.getByNaziv(interceptorAnnotation.value())))
 			throw new Throwable();			
 		else
 			returnObject = joinPoint.proceed();

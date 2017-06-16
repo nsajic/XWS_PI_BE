@@ -101,7 +101,7 @@ public class KlijentKontroler {
 		fizickoLice.setSifra(Helpers.generatePassword());	
 		fizickoLice.setRola(rolaService.findByNaziv(Strings.fizickoLice));
 		klijentService.save(fizickoLice);
-		SendMail sm = new SendMail("nikola9n@gmail.com","Aktivirajte nalog klikom na link: " + "http://localhost:9000/contr/activate/onezerobeatz@gmail.com/");
+		SendMail sm = new SendMail("unesite.svoj@mejl.com","Aktivirajte nalog klikom na link: " + "http://localhost:9000/contr/activate/onezerobeatz@gmail.com/");
 		
 		
 		

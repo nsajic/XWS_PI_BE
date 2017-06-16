@@ -7,6 +7,6 @@ import java.lang.annotation.Target;
 
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.METHOD)
-public @interface BankaAnnotation {
+public @interface InterceptorAnnotation {
 	String value() default "";
 }

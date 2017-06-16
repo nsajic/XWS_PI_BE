@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import xws_pi_bezb.annotations.BankaAnnotation;
+import xws_pi_bezb.annotations.InterceptorAnnotation;
 import xws_pi_bezb.helpers.Poruka;
 import xws_pi_bezb.iservices.IBankaService;
 import xws_pi_bezb.models.Banka;	
@@ -24,34 +24,34 @@ public class BankaKontroler {
 	public IBankaService bankaService;
 
 	@RequestMapping(value = "/dodajBanku", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-	@BankaAnnotation("Banka:Dodaj")
+	@InterceptorAnnotation("Banka:Dodaj")
 	public ResponseEntity<Poruka> dodajBanku(@RequestBody Banka banka) {
 		bankaService.save(banka);
 		return new ResponseEntity<Poruka>(new Poruka("Dodato", null), HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/izmeniBanku", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-	@BankaAnnotation("Banka:Izmeni")
+	@InterceptorAnnotation("Banka:Izmeni")
 	public ResponseEntity<List<Banka>> izmeniBanku(@RequestBody Banka banka) {
 		bankaService.save(banka);
 		return new ResponseEntity<List<Banka>>(bankaService.findAll(), HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/izbrisiBanku", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-	@BankaAnnotation("Banka:Obrisi")
+	@InterceptorAnnotation("Banka:Obrisi")
 	public ResponseEntity<List<Banka>> izbrisiBanku(@RequestBody Long bankaId) {
 		bankaService.delete(bankaId);
 		return new ResponseEntity<List<Banka>>(bankaService.findAll(), HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/izlistajBanke", method = RequestMethod.GET)
-	@BankaAnnotation("Banka:IzlistajPretrazi")
+	@InterceptorAnnotation("Banka:IzlistajPretrazi")
 	public ResponseEntity<List<Banka>> izlistajBanku() {
 		return new ResponseEntity<List<Banka>>(bankaService.findAll(), HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/pretraziBanke", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-	@BankaAnnotation("Banka:IzlistajPretrazi")
+	@InterceptorAnnotation("Banka:IzlistajPretrazi")
 	public ResponseEntity<List<Banka>> pretraziBanke(@RequestBody Banka banka) {
 		return new ResponseEntity<List<Banka>>(bankaService.getBySearch(banka), HttpStatus.OK);
 	}
