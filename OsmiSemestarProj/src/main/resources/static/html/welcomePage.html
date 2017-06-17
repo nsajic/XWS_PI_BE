@@ -1,5 +1,10 @@
-<div ng-cloak ng-controller="welcomeCtrl">
-	<div>
+<div ng-cloak ng-controller="welcomeCtrl as $ctrl">
+	<div ng-show = "zabraniPrikaz == true">
+		Zabranjen prikaz
+	</div>
+	
+	
+	<div ng-show = "zabraniPrikaz == false">
 		<h1>Welcome</h1>		
 		<a href="promenaLozinke">Promeni lozinku</a>
 		<br/>

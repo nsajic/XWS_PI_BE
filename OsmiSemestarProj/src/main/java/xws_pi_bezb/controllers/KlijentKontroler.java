@@ -2,13 +2,13 @@ package xws_pi_bezb.controllers;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -21,8 +21,8 @@ import xws_pi_bezb.iservices.IKlijentService;
 import xws_pi_bezb.iservices.IRolaService;
 import xws_pi_bezb.models.Delatnost;
 import xws_pi_bezb.models.korisnici.FizickoLice;
+import xws_pi_bezb.models.korisnici.Korisnik;
 import xws_pi_bezb.models.korisnici.PravnoLice;
-import xws_pi_bezb.password_security.PasswordValidator;
 import xws_pi_bezb.password_security.SendMail;
 import xws_pi_bezb.view_models.PretragaPravnihLicaViewModel;
 
@@ -44,7 +44,6 @@ public class KlijentKontroler {
 		pravnoLice.setRola(rolaService.findByNaziv(Strings.pravnoLice));
 		klijentService.save(pravnoLice);
 		return new ResponseEntity<List<PravnoLice>>(klijentService.getPravnaLica(), HttpStatus.OK);
-
 	}
 
 	@RequestMapping(value = "/izmeniPravnoLice", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
@@ -101,26 +100,12 @@ public class KlijentKontroler {
 		fizickoLice.setSifra(Helpers.generatePassword());	
 		fizickoLice.setRola(rolaService.findByNaziv(Strings.fizickoLice));
 		klijentService.save(fizickoLice);
-		SendMail sm = new SendMail("unesite.svoj@mejl.com","Aktivirajte nalog klikom na link: " + "http://localhost:9000/contr/activate/onezerobeatz@gmail.com/");
-		
-		
-		
+		new SendMail(fizickoLice.getEmail(),"Postovani "+ fizickoLice.getIme() + ". \n\n" +  
+				"Kreiran vam je nalog u banci.\n\nVasa sifra je " + fizickoLice.getSifra() + ".\n"
+				+ "Prilikom prvog logovanja cete morati da postavite novu sifru.\n\n" + "Pozdrav.");
 		return new ResponseEntity<Object>(HttpStatus.OK);
 	}
 	
-	@Transactional
-	@RequestMapping(value = "/activate/{email}")
-	public ResponseEntity<String> activateAccount(@PathVariable String email) {			
-		
-		/*try{
-			Gost gost = servis.findByEmail(email);
-			servis.activateAccount(gost.getEmail());
-			return new ResponseEntity<String>("Uspesno ste aktivirali nalog!", HttpStatus.ACCEPTED);			
-		}catch(Exception ex){}*/
-		return new ResponseEntity<String>("Neuspesna aktivacija naloga.", HttpStatus.ACCEPTED);
-		
-	}
-
 	@RequestMapping(value = "/izmeniFizickoLice", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<FizickoLice>> izmeniKlijenta(@RequestBody FizickoLice fizickoLice) {
 		fizickoLice.setEmail(klijentService.findOne(fizickoLice.getId()).getEmail());
@@ -150,6 +135,18 @@ public class KlijentKontroler {
 	public ResponseEntity<FizickoLice> ucitajFizickoLice(@RequestBody FizickoLice fizickoLice) {
 		return new ResponseEntity<FizickoLice>((FizickoLice) klijentService.findOne(fizickoLice.getId()),HttpStatus.OK);
 	}
+
+	@RequestMapping(value = "/ucitajUlogovanogKorisnika", method = RequestMethod.POST)
+	public ResponseEntity<Korisnik> ucitajUlogovanogKorisnika(HttpSession session){	
+		Korisnik kor = (Korisnik) session.getAttribute("ulogovanKorisnik");	
+		System.out.println(klijentService.findOne(kor.getId()).getRola().getNaziv());
+		return new ResponseEntity<Korisnik>(klijentService.findOne(kor.getId()),HttpStatus.OK);	
+
+	}
+
+	
+		
+	
 
 	
 	

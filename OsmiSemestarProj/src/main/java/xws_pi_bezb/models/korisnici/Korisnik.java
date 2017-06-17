@@ -57,7 +57,6 @@ public class Korisnik {
 	@Column(name = "logovao_se", nullable = false)
 	private boolean logovaoSe;
 	
-	
 	@ManyToOne
 	private Rola rola;
 	

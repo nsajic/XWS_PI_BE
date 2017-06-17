@@ -9,7 +9,7 @@ racunKontroler.controller('racunCtrl', function($scope, racunServis, $window, $l
 		$scope.bankaRacunaPretraga = null;
 		$scope.valutaRacunaPretraga = null;
 	}
-
+	
 	$scope.resetujPoljaDodavanjeRacuni = function() {
 		$scope.brojRacuna = null;
 		$scope.statusRacuna = null;
@@ -85,6 +85,8 @@ racunKontroler.controller('racunCtrl', function($scope, racunServis, $window, $l
 	$scope.banke = [];
 	$scope.klijenti = [];
 	$scope.idRacunaZaIzmenu = -1;
+	$scope.idRacunaZaDnevnaStanja = -1;
+	$scope.dnevnaStanjaOdabranogRacuna = [];
 	
 
 	
@@ -152,6 +154,7 @@ racunKontroler.controller('racunCtrl', function($scope, racunServis, $window, $l
 		$scope.ucitajValute();
 		$scope.ucitajKlijente();
 		$scope.idRacunaZaIzmenu = racun.id;
+		$scope.idRacunaZaDnevnaStanja = -1;
 
 		//TODO: Treba da se odradi combo ko covek za klijente
 		controller.brojRacunaIzmena = racun.brojRacuna;
@@ -162,6 +165,24 @@ racunKontroler.controller('racunCtrl', function($scope, racunServis, $window, $l
 		controller.valutaRacunaIzmena = racun.valuta;
 		
 		$scope.setTab(2);
+	}
+	
+	$scope.setRacunZaDnevnaStanja = function (racun){
+		$scope.idRacunaZaIzmenu = -1;
+		$scope.idRacunaZaDnevnaStanja = racun.id;
+		
+		racunServis.ucitajDnevnaStanjaOdabranogRacuna($scope.idRacunaZaDnevnaStanja).success (function (data){
+			$scope.dnevnaStanjaOdabranogRacuna = data;
+		}).error(function(data){
+			alert("Nemoguce ucitati dnevna stanja racuna");
+		});
+		
+		
+		
+	}
+	
+	$scope.nazadNaRacune = function (){
+		$scope.idRacunaZaDnevnaStanja = -1;
 	}
 
 

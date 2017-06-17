@@ -17,7 +17,14 @@
 		</div>
 
 		<div ng-show="isSet(0)">
-			<div>
+			<div ng-show = "idRacunaZaDnevnaStanja =! -1">
+			
+			
+				<button ng-click="nazadNaRacune()">Nazad</button>			
+			</div>
+		
+		
+			<div ng-show = "idRacunaZaDnevnaStanja == -1">
 				<h2>Racuni</h2>
 					
 				<button ng-show = "racuni.length != 0 || prikaziPretraguRacuni" ng-click="prikaziPretraguRacuni = true">Pretraga</button>
@@ -94,7 +101,7 @@
 						<td style = "width:130px; heigth: 70px">{{racun.valuta.nazivValute}}</td>
 						<td><button ng-click="obrisiRacun(racun.id)">Obrisi</button></td>
 						<td><button ng-click="setRacunZaIzmenu(racun)">Izmeni</button></td>
-						<td><button ng-click="setRacunZaNext(racun)">Next</button></td>
+						<td><button ng-click="setRacunZaDnevnaStanja(racun)">Dnevna stanja</button></td>
 					</tr>
 				</table>
 			</div>

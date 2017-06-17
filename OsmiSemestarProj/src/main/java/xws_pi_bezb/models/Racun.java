@@ -1,10 +1,13 @@
 package xws_pi_bezb.models;
 
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import xws_pi_bezb.models.korisnici.FizickoLice;
@@ -38,10 +41,10 @@ public class Racun {
 	/*
 	@OneToMany(mappedBy = "racun")
 	private Set<ZatvaranjeRacuna> zatvaranjaRacuna; 
-	
+*/	
 	@OneToMany(mappedBy = "racun")
 	private Set<DnevnoStanjeRacuna> dnevnjaStanjaRacuna;
-*/
+
 	public Racun()
 	{
 		

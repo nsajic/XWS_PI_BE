@@ -2,13 +2,14 @@ var fizickoLiceKontroler = angular.module('xws_pi_bezb.fizickoLiceKontroler', []
 
 fizickoLiceKontroler.controller('fizickoLiceCtrl', function($scope, klijentServis, $window, $location) {
 
+
+	
 	$scope.resetujPoljaPretragaFizickaLica = function(){
 		$scope.imeFizickogLicaPretraga = null;
 		$scope.prezimeFizickogLicaPretraga = null;
 		$scope.usernameFizickogLicaPretraga = null;
 		$scope.emailFizickogLicaPretraga = null;
 		$scope.brojLicneKarteFizickogLicaPretraga = null;
-		$scope.datumIstekaLicneKarteFizickogLicaPretraga = null;
 		$scope.telefonFizickogLicaPretraga = null;
 		$scope.adresaFizickogLicaPretraga = null;
 		$scope.jmbgFizickogLicaPretraga = null;
@@ -21,7 +22,6 @@ fizickoLiceKontroler.controller('fizickoLiceCtrl', function($scope, klijentServi
 		$scope.usernameFizickogLica = null;
 		$scope.emailFizickogLica = null;
 		$scope.brojLicneKarteFizickogLica = null;
-		$scope.datumIstekaLicneKarteFizickogLica = null;
 		$scope.telefonFizickogLica = null;
 		$scope.adresaFizickogLica = null;
 		$scope.jmbgFizickogLica = null;
@@ -32,12 +32,13 @@ fizickoLiceKontroler.controller('fizickoLiceCtrl', function($scope, klijentServi
 		$scope.imeFizickogLicaIzmena = null;
 		$scope.prezimeFizickogLicaIzmena = null;
 		$scope.brojLicneKarteFizickogLicaIzmena = null;
-		$scope.datumIstekaLicneKarteFizickogLicaIzmena = null;
 		$scope.telefonFizickogLicaIzmena = null;
 		$scope.adresaFizickogLicaIzmena = null;
 		$scope.jmbgFizickogLicaIzmena = null;
 		$scope.imeRoditeljaFizickogLicaIzmena = null;
 	}
+	
+
 	
 	$scope.izlistajFizickaLica = function (){
 		klijentServis.izlistajFizickaLica().success(function(data) {
@@ -50,11 +51,11 @@ fizickoLiceKontroler.controller('fizickoLiceCtrl', function($scope, klijentServi
 	
 	var controller = this;
 	$scope.setTab = function(newTab) {
+
 		if(newTab == 0){
 			$scope.resetujPoljaPretragaFizickaLica();
 			$scope.izlistajFizickaLica();
 		}
-
 		if(newTab == 2){
 			if($scope.idFizickogLicaZaIzmenu == -1){
 				alert("Prvo odaberite klijenta kog menjate.");
@@ -62,20 +63,19 @@ fizickoLiceKontroler.controller('fizickoLiceCtrl', function($scope, klijentServi
 			}
 		}
 		$scope.tab = newTab;
+		
 	};
 	
 
 	//INIT START
+	$scope.ulogovanKorisnik = new Object();
 	$scope.setTab(0);
 	$scope.idFizickogLicaZaIzmenu = -1;
 	$scope.idFizickogLicaZaNext = -1;
 	$scope.idFizickogLicaZaDetalje = -1;
 	$scope.fizickoLiceZaDetalje = null;
 	$scope.prikaziDrzaveBool = false;
-	$scope.prikaziDrzaveBoolIzmena = false;
-	
-
-	
+	$scope.prikaziDrzaveBoolIzmena = false;	
 	//INIT END
 	
 	
@@ -202,7 +202,6 @@ fizickoLiceKontroler.controller('fizickoLiceCtrl', function($scope, klijentServi
 			alert("Greska prilikom pretrage");
 		});
 	}
-	
 	
 	$scope.ponistiPretraguFizickihLica = function(){
 		$scope.izlistajFizickaLica();
