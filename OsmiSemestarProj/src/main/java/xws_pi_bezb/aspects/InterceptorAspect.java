@@ -1,5 +1,7 @@
 package xws_pi_bezb.aspects;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -17,6 +19,8 @@ public class InterceptorAspect{
 	@Autowired
 	public IPrivilegijaService privilegijaService;
 	
+	private HttpServletResponse response;	
+	
 	@Around("execution(@xws_pi_bezb.annotations.InterceptorAnnotation * *(..)) && @annotation(interceptorAnnotation)")
 	public Object aspMeth(ProceedingJoinPoint joinPoint, InterceptorAnnotation interceptorAnnotation) throws Throwable{
 		
@@ -24,10 +28,11 @@ public class InterceptorAspect{
 		
 		ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
 		Korisnik korisnik = (Korisnik) attr.getRequest().getSession().getAttribute("ulogovanKorisnik");
-		System.out.println("caoooocaococaocaocaoac");
-		if(!privilegijaService.getByRole(korisnik.getRola()).contains(privilegijaService.getByNaziv(interceptorAnnotation.value())))
-			throw new Throwable();			
-		else
+
+		if(!privilegijaService.getByRole(korisnik.getRola()).contains(privilegijaService.getByNaziv(interceptorAnnotation.value()))){
+			response.sendError(401, "Unauthorized request");
+			//throw new Throwable();			
+		}else
 			returnObject = joinPoint.proceed();
 					
 		return returnObject;

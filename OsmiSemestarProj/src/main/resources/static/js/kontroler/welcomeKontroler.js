@@ -6,8 +6,7 @@ welcomeKontroler.controller('welcomeCtrl', function($scope, $location, $window, 
 
 		welcomeServis.logOut().success(function(data) {
 			if(data.message == "Izlogovan"){
-				//$window.location.href = '/';
-				$location.path('/');
+				$window.location.href = '/';
 			}else{
 			}
 		});

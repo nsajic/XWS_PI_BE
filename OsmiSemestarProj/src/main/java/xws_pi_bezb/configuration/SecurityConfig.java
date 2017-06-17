@@ -42,8 +42,16 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter {
 		http.authorizeRequests().antMatchers("/**").permitAll()
 			.anyRequest().authenticated().and()
         	.addFilterAfter(new CsrfHeaderFilter(), CsrfFilter.class)
-        	.csrf().csrfTokenRepository(csrfTokenRepository());
+        	.csrf().csrfTokenRepository(csrfTokenRepository())
+        	.and().logout();
 	}
+	
+	private CsrfTokenRepository csrfTokenRepository() {
+		HttpSessionCsrfTokenRepository repository = new HttpSessionCsrfTokenRepository();
+		repository.setHeaderName("X-XSRF-TOKEN");
+		return repository;
+	}
+
 	
 	@Bean
 	public PasswordEncoder passwordEncoder(){
@@ -52,9 +60,4 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter {
 		return encoder;
 	}
 	
-	private CsrfTokenRepository csrfTokenRepository() {
-		  HttpSessionCsrfTokenRepository repository = new HttpSessionCsrfTokenRepository();
-		  repository.setHeaderName("X-XSRF-TOKEN");
-		  return repository;
-		}
 }
