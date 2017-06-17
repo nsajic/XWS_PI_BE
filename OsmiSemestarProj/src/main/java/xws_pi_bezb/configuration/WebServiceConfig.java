@@ -11,9 +11,9 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.ws.config.annotation.EnableWs;
 import org.springframework.ws.config.annotation.WsConfigurerAdapter;
 import org.springframework.ws.server.EndpointInterceptor;
-import org.springframework.ws.soap.security.wss4j.Wss4jSecurityInterceptor;
-import org.springframework.ws.soap.security.wss4j.callback.KeyStoreCallbackHandler;
-import org.springframework.ws.soap.security.wss4j.support.CryptoFactoryBean;
+import org.springframework.ws.soap.security.wss4j2.Wss4jSecurityInterceptor;
+import org.springframework.ws.soap.security.wss4j2.callback.KeyStoreCallbackHandler;
+import org.springframework.ws.soap.security.wss4j2.support.CryptoFactoryBean;
 import org.springframework.ws.transport.http.MessageDispatcherServlet;
 import org.springframework.ws.wsdl.wsdl11.DefaultWsdl11Definition;
 import org.springframework.xml.xsd.SimpleXsdSchema;
@@ -32,7 +32,7 @@ public class WebServiceConfig extends WsConfigurerAdapter{
 	}
 	
 	@Bean(name = "NalogZaPrenos")
-	public DefaultWsdl11Definition defaultWsdl11Definition(XsdSchema nalogZaPlacanjeSchema) {
+	public DefaultWsdl11Definition nalogZaPrenosWsdl11Definition(XsdSchema nalogZaPlacanjeSchema) {
 		DefaultWsdl11Definition wsdl11Definition = new DefaultWsdl11Definition();
 		wsdl11Definition.setPortTypeName("NalogZaPlacanjePort");
 		wsdl11Definition.setLocationUri("/ws");
@@ -46,6 +46,22 @@ public class WebServiceConfig extends WsConfigurerAdapter{
 		return new SimpleXsdSchema(new ClassPathResource("seme/NalogZaPrenos.xsd"));
 	}
 	
+	@Bean(name = "Izvod")
+	public DefaultWsdl11Definition izvodWsdl11Definition(XsdSchema izvodSchema) {
+		DefaultWsdl11Definition wsdl11Definition = new DefaultWsdl11Definition();
+		wsdl11Definition.setPortTypeName("IzvodPort");
+		wsdl11Definition.setLocationUri("/ws");
+		wsdl11Definition.setTargetNamespace("http://xml.poslovna.bezbednost/ws/izvod");
+		wsdl11Definition.setSchema(izvodSchema);
+		return wsdl11Definition;
+	}
+
+	@Bean
+	public XsdSchema izvodSchema() {
+		return new SimpleXsdSchema(new ClassPathResource("seme/PresekIzvoda.xsd"));
+	}
+	
+	/*
 	//Bezbednost
 	@Bean
     public KeyStoreCallbackHandler securityCallbackHandler(){
@@ -66,7 +82,7 @@ public class WebServiceConfig extends WsConfigurerAdapter{
 
         // encrypt the response
         securityInterceptor.setSecurementEncryptionUser("client-public");
-        securityInterceptor.setSecurementEncryptionParts("{Content}{http://memorynotfound.com/beer}getBeerResponse");
+        securityInterceptor.setSecurementEncryptionParts("{Content}{http://nalogzaprenos.ws.xml.poslovna.bezbednost/}NalogZaPrenosResponse");
         securityInterceptor.setSecurementEncryptionCrypto(getCryptoFactoryBean().getObject());
 
         // sign the response
@@ -77,7 +93,7 @@ public class WebServiceConfig extends WsConfigurerAdapter{
 
         return securityInterceptor;
     }
-
+   
     @Bean
     public CryptoFactoryBean getCryptoFactoryBean() throws IOException {
         CryptoFactoryBean cryptoFactoryBean = new CryptoFactoryBean();
@@ -94,4 +110,5 @@ public class WebServiceConfig extends WsConfigurerAdapter{
             throw new RuntimeException("could not initialize security interceptor");
         }
     }
+    */
 }

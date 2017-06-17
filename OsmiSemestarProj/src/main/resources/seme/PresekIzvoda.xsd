@@ -10,19 +10,19 @@
     <xs:element name="IzvodRequest" type="pr:IzvodRequest" />
     <xs:element name="IzvodResponse" type="pr:IzvodResponse" />
     
-
     <xs:complexType name="IzvodRequest">
+        <xs:sequence>
+            <xs:element name="Zahtev" type="pr:TZahtev"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="IzvodResponse">
         <xs:sequence>
             <xs:element name="ZaglavljePreseka" type="pr:TZaglavljePreseka"/>
             <xs:element maxOccurs="unbounded" name="StavkaPreseka" type="pr:TStavkaPreseka"/>
         </xs:sequence>
     </xs:complexType>
     
-    <xs:complexType name="IzvodResponse">
-        <xs:sequence>
-            <xs:element name="Zahtev" type="pr:TZahtev"/>
-        </xs:sequence>
-    </xs:complexType>
     
     
     <xs:complexType name="TZaglavljePreseka">
