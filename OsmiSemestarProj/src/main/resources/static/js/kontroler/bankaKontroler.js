@@ -1,7 +1,7 @@
 var bankaKontroler = angular.module('xws_pi_bezb.bankaKontroler', []);
 
-bankaKontroler.controller('bankaCtrl', function($scope, bankaServis, $window, $location) {
-
+bankaKontroler.controller('bankaCtrl', function($scope, bankaServis, $window, $location, klijentServis) {
+	
 	$scope.resetujPoljaPretraga = function(){
 		$scope.nazivBankePretraga = null;
 		$scope.sifraBankePretraga = null;
@@ -25,6 +25,12 @@ bankaKontroler.controller('bankaCtrl', function($scope, bankaServis, $window, $l
 	
 	var controller = this;
 	$scope.setTab = function(newTab) {
+		klijentServis.ucitajPrivilegije().success(function(data){
+			$scope.privileges = data;	
+		})
+		.error(function(data){
+			alert("Korisnik nema nikakvih privilegija.");
+		});
 		if(newTab == 0){
 			$scope.resetujPoljaPretraga();
 			bankaServis.izlistajBanke().success(function(data) {
@@ -37,13 +43,22 @@ bankaKontroler.controller('bankaCtrl', function($scope, bankaServis, $window, $l
 	};
 
 	//INIT START
-	$scope.setTab(0);
+	
+	$scope.privileges = [];
 
 	$scope.idBankeZaIzmenu = -1;
 	$scope.idBankeZaNext = -1;
 	
 	//INIT END
-
+	
+	
+	
+	$scope.hasPrivilege = function(privilege){
+		if($scope.privileges.indexOf(privilege) > -1)
+			return true;
+		else
+			return false;
+	};
 	
 	$scope.isSet = function(tabNum) {
 		return $scope.tab === tabNum;
@@ -168,4 +183,6 @@ bankaKontroler.controller('bankaCtrl', function($scope, bankaServis, $window, $l
 			alert("Neuspesno izlistavanje banaka!");
 		});
 	}
+	
+	$scope.setTab(0);
 });

@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <wsdl:definitions name="NalogZaPrenosServis"
 	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
-	xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:nzp="http://xml.poslovna.bezbednost/NalogZaPrenos"
-	targetNamespace="http://xml.poslovna.bezbednost/NalogZaPrenos">
+	xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:nzp="http://xml.poslovna.bezbednost/ws/NalogZaPrenos"
+	targetNamespace="http://xml.poslovna.bezbednost/ws/NalogZaPrenos">
 	<wsdl:types>
 		<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
-			targetNamespace="http://xml.poslovna.bezbednost/NalogZaPrenos"
-			xmlns:nzp="http://xml.poslovna.bezbednost/NalogZaPrenos">
+			targetNamespace="http://xml.poslovna.bezbednost/ws/NalogZaPrenos"
+			xmlns:nzp="http://xml.poslovna.bezbednost/ws/NalogZaPrenos">
 
 			<xs:element name="NalogZaPrenosRequest" type="nzp:NalogZaPrenosRequest" />
 			<xs:element name="NalogZaPrenosResponse" type="nzp:NalogZaPrenosResponse" />
@@ -150,7 +150,7 @@
 	
 	<wsdl:service name="NalogZaPrenosServis">
 		<wsdl:port name="NalogZaPrenosPort" binding="nzp:NalogZaPrenosSOAP">
-			<soap:address location="http://localhost:9000/NalogZaPrenos" />
+			<soap:address location="http://localhost:9000/ws/nalogZaPlacanje" />
 		</wsdl:port>
 	</wsdl:service>
 </wsdl:definitions>

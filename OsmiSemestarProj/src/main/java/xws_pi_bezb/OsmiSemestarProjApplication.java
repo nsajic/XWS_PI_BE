@@ -10,5 +10,6 @@ public class OsmiSemestarProjApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(OsmiSemestarProjApplication.class, args);
+		
 	}
 }

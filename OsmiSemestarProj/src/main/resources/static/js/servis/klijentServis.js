@@ -73,6 +73,10 @@ klijentServis.factory('klijentServis', function($http) {
 		return $http.post('/klijentKontroler/pretragaPravnihLicaDelatnosti', data)
 	}
 	
+	temp.ucitajPrivilegije = function() {
+		return $http.get('/klijentKontroler/ucitajPrivilegije');
+	}
+	
 	return temp;
 
 })
