@@ -22,11 +22,14 @@ import xws_pi_bezb.iservices.IPrivilegijaService;
 import xws_pi_bezb.iservices.IRolaService;
 import xws_pi_bezb.models.Delatnost;
 import xws_pi_bezb.models.Privilegija;
+import xws_pi_bezb.models.Rola;
 import xws_pi_bezb.models.korisnici.FizickoLice;
 import xws_pi_bezb.models.korisnici.Korisnik;
 import xws_pi_bezb.models.korisnici.PravnoLice;
+import xws_pi_bezb.password_security.Password;
 import xws_pi_bezb.password_security.SendMail;
 import xws_pi_bezb.view_models.PretragaPravnihLicaViewModel;
+import xws_pi_bezb.view_models.UlogovanKorisnikIRolaViewModel;
 
 @Controller
 @RequestMapping("/klijentKontroler")
@@ -101,12 +104,14 @@ public class KlijentKontroler {
 
 	@RequestMapping(value = "/dodajFizickoLice", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Object> dodajFizickoLice(@RequestBody FizickoLice fizickoLice) {
+		String randomPassword = Helpers.generatePassword();
+		
 		fizickoLice.setLogovaoSe(false);
-		fizickoLice.setSifra(Helpers.generatePassword());	
+		fizickoLice.setSifra(Password.hashPassword(randomPassword));	
 		fizickoLice.setRola(rolaService.findByNaziv(Strings.fizickoLice));
 		klijentService.save(fizickoLice);
 		new SendMail(fizickoLice.getEmail(),"Postovani "+ fizickoLice.getIme() + ". \n\n" +  
-				"Kreiran vam je nalog u banci.\n\nVasa sifra je " + fizickoLice.getSifra() + ".\n"
+				"Kreiran vam je nalog u banci.\n\nVasa sifra je " + randomPassword + ".\n"
 				+ "Prilikom prvog logovanja cete morati da postavite novu sifru.\n\n" + "Pozdrav.");
 		return new ResponseEntity<Object>(HttpStatus.OK);
 	}
@@ -141,11 +146,22 @@ public class KlijentKontroler {
 		return new ResponseEntity<FizickoLice>((FizickoLice) klijentService.findOne(fizickoLice.getId()),HttpStatus.OK);
 	}
 
-	@RequestMapping(value = "/ucitajUlogovanogKorisnika", method = RequestMethod.POST)
-	public ResponseEntity<Korisnik> ucitajUlogovanogKorisnika(HttpSession session){	
+	@RequestMapping(value = "/ucitajUlogovanogKorisnika", method = RequestMethod.GET)
+	public ResponseEntity<UlogovanKorisnikIRolaViewModel> ucitajUlogovanogKorisnika(HttpSession session){	
 		Korisnik kor = (Korisnik) session.getAttribute("ulogovanKorisnik");	
+		
+		UlogovanKorisnikIRolaViewModel retVal = new UlogovanKorisnikIRolaViewModel();
+		retVal.setRola(klijentService.findOne(kor.getId()).getRola());
+		retVal.setKorisnik(klijentService.findOne(kor.getId()));
+		return new ResponseEntity<UlogovanKorisnikIRolaViewModel>(retVal,HttpStatus.OK);	
+
+	}
+	
+	@RequestMapping(value = "/ucitajRoluUlogovanogKorisnika", method = RequestMethod.GET)
+	public ResponseEntity<Rola> ucitajRoluUlogovanogKorisnika(HttpSession session){	
+		Korisnik kor = (Korisnik) session.getAttribute("ulogovanKorisnik");
 		System.out.println(klijentService.findOne(kor.getId()).getRola().getNaziv());
-		return new ResponseEntity<Korisnik>(klijentService.findOne(kor.getId()),HttpStatus.OK);	
+		return new ResponseEntity<Rola>(klijentService.findOne(kor.getId()).getRola(),HttpStatus.OK);	
 
 	}
 

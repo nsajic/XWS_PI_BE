@@ -13,30 +13,33 @@ welcomeKontroler.controller('welcomeCtrl', function($scope, $location, $window, 
 		});
 	}
 	
+	
 	$scope.ulogovanKorisnik = new Object();
 	$scope.zabraniPrikaz = false;
+	$scope.rolaUlogovanog = "";
 	
-	$scope.ucitajTrenutnogKorisnika = function(){
+	
 		klijentServis.ucitajUlogovanogKorisnika().success(function(data) {
-			$scope.ulogovanKorisnik = data;
-			//TODO JSON IGNORE ZEZA
-			console.log(data);
+			$scope.ulogovanKorisnik = data.korisnik
+			$scope.rolaUlogovanog = data.rola.naziv;
+			
+
+			if($scope.rolaUlogovanog == "FizickoLice"){
+				if($scope.ulogovanKorisnik.logovaoSe == true){
+					$scope.zabraniPrikaz = false;
+				} else {
+					$location.path('/promenaLozinke');
+				}
+			}
 		}).error(function(data) {
 			alert("Neuspesno ucitavanje ulogovanog korisnika!");
 		});	
-	}
-	
-	$scope.ucitajTrenutnogKorisnika();
-	
-	alert($scope.ulogovanKorisnik.rola.naziv);
-	if($scope.ulogovanKorisnik.rola.naziv == "FizickoLice"){
-		if($scope.ulogovanKorisnik.logovaoSe == true){
-			$scope.zabraniPrikaz = true;
-		} else {
-			$scope.zabraniPrikaz = false;
-		}
-	}
-	
+		
+		
+
+
+
+
 
 
 });

@@ -2,8 +2,6 @@ var fizickoLiceKontroler = angular.module('xws_pi_bezb.fizickoLiceKontroler', []
 
 fizickoLiceKontroler.controller('fizickoLiceCtrl', function($scope, klijentServis, $window, $location) {
 
-
-	
 	$scope.resetujPoljaPretragaFizickaLica = function(){
 		$scope.imeFizickogLicaPretraga = null;
 		$scope.prezimeFizickogLicaPretraga = null;
@@ -38,8 +36,6 @@ fizickoLiceKontroler.controller('fizickoLiceCtrl', function($scope, klijentServi
 		$scope.imeRoditeljaFizickogLicaIzmena = null;
 	}
 	
-
-	
 	$scope.izlistajFizickaLica = function (){
 		klijentServis.izlistajFizickaLica().success(function(data) {
 			$scope.fizickaLica = data;
@@ -51,7 +47,6 @@ fizickoLiceKontroler.controller('fizickoLiceCtrl', function($scope, klijentServi
 	
 	var controller = this;
 	$scope.setTab = function(newTab) {
-
 		if(newTab == 0){
 			$scope.resetujPoljaPretragaFizickaLica();
 			$scope.izlistajFizickaLica();
@@ -63,19 +58,20 @@ fizickoLiceKontroler.controller('fizickoLiceCtrl', function($scope, klijentServi
 			}
 		}
 		$scope.tab = newTab;
-		
 	};
 	
 
 	//INIT START
-	$scope.ulogovanKorisnik = new Object();
 	$scope.setTab(0);
 	$scope.idFizickogLicaZaIzmenu = -1;
 	$scope.idFizickogLicaZaNext = -1;
 	$scope.idFizickogLicaZaDetalje = -1;
 	$scope.fizickoLiceZaDetalje = null;
 	$scope.prikaziDrzaveBool = false;
-	$scope.prikaziDrzaveBoolIzmena = false;	
+	$scope.prikaziDrzaveBoolIzmena = false;
+	
+
+	
 	//INIT END
 	
 	

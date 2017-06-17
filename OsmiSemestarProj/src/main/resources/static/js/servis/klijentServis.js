@@ -54,8 +54,13 @@ klijentServis.factory('klijentServis', function($http) {
 	}
 	
 	temp.ucitajUlogovanogKorisnika = function(data) {
-		return $http.post('/klijentKontroler/ucitajUlogovanogKorisnika');
+		return $http.get('/klijentKontroler/ucitajUlogovanogKorisnika');
 	}
+	
+	temp.ucitajRoluUlogovanogKorisnika = function(data) {
+		return $http.get('/klijentKontroler/ucitajRoluUlogovanogKorisnika');
+	}
+	
 	
 	
 
