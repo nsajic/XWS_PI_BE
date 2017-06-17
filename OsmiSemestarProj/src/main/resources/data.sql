@@ -18,7 +18,6 @@ insert into delatnost(naziv_delatnosti) values ('IT');
 
 insert into korisnik (logovao_se, tip_korisnika, ime, prezime, broj_licne_karte, telefon, adresa, jmbg, rola_id, email, sifra, username) values (false, 'F','Sima1', 'Simic1', 112345, '1111', 'adresa1', 11111, 1, 'k1@k1.com', '$2a$12$/eDioOpiKrGQnDv53hPxIe8XDCJWP/Xe1fF6E5IrTVxuBozu9EX9G', 'kor');
 
-<<<<<<< HEAD
 insert into valuta (sifra_valute, naziv_valute) values ('JEN', 'Japanski jen');
 
 
