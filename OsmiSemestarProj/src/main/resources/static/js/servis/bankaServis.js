@@ -16,7 +16,7 @@ bankaServis.factory('bankaServis', function($http) {
 		return $http.post('/bankaKontroler/izmeniBanku', data);
 	}	
 	
-	temp.izlistajBanke = function(data) {
+	temp.izlistajBanke = function() {
 		return $http.get('/bankaKontroler/izlistajBanke');
 	}
 	
