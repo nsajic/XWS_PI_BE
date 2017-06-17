@@ -22,7 +22,7 @@ public class DnevnoStanjeRacuna implements Serializable {
 	@GeneratedValue
 	private Long id;
 	
-	@Column(name = "datum", nullable = false)
+	@Column(name = "datum", nullable = false, unique = true)
 	private Date datum;
 
 	@Column(name = "prethodno_stanje", nullable = false)

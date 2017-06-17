@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import xws_pi_bezb.irepositories.IDnevnoStanjeRacunaRepository;
 import xws_pi_bezb.iservices.IDnevnoStanjeRacunaService;
 import xws_pi_bezb.models.DnevnoStanjeRacuna;
+import xws_pi_bezb.models.Racun;
 
 @Service
 public class DnevnoStanjeRacunaService implements IDnevnoStanjeRacunaService {
@@ -21,8 +22,14 @@ public class DnevnoStanjeRacunaService implements IDnevnoStanjeRacunaService {
 	}
 
 	@Override
-	public List<DnevnoStanjeRacuna> findByRacunId(Long id) {
-		return dnevnoStanjeRacunaRepository.findByRacunId(id);
+	public List<DnevnoStanjeRacuna> findByRacun(Racun racun) {
+		return dnevnoStanjeRacunaRepository.findByRacun(racun);
+	}
+
+	@Override
+	public void save(DnevnoStanjeRacuna dsr) {
+		dnevnoStanjeRacunaRepository.save(dsr);
+		
 	}
 
 }

@@ -1,7 +1,13 @@
 package xws_pi_bezb.controllers;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
+import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -39,8 +45,23 @@ public class RacunKontroler {
 	private IDnevnoStanjeRacunaService dnevnoStanjeRacunaService;
 
 	@RequestMapping(value = "/dodajRacun", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Object> dodajRacun(@RequestBody Racun racun) {
+	public ResponseEntity<Object> dodajRacun(@RequestBody Racun racun) throws ParseException {
+		DnevnoStanjeRacuna dsr = new DnevnoStanjeRacuna();
+		DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+		Date today = new Date();
+		Date todayWithZeroTime = formatter.parse(formatter.format(today));
+		
+		System.out.println(todayWithZeroTime);
+		
+		dsr.setDatum(todayWithZeroTime);
+		dsr.setNovoStanje(0);
+		dsr.setPrethodnoStanje(0);
+		dsr.setPrometNaTeret(0);
+		dsr.setPrometUKorist(0);
+		dsr.setRacun(racun);
+		
 		racunService.save(racun);
+		dnevnoStanjeRacunaService.save(dsr);
 		return new ResponseEntity<Object>(racunService.findAll(), HttpStatus.OK);
 	}
 	
@@ -88,8 +109,11 @@ public class RacunKontroler {
 	}
 	
 
-	@RequestMapping(value = "/ucitajDnevnaStanjaOdabranogRacuna", method = RequestMethod.GET, consumes = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<List<DnevnoStanjeRacuna>> ucitajDnevnaStanjaOdabranogRacuna(@RequestBody Long racunId) {
-		return new ResponseEntity<List<DnevnoStanjeRacuna>>(dnevnoStanjeRacunaService.findByRacunId(racunId), HttpStatus.OK);
+	@RequestMapping(value = "/ucitajDnevnaStanjaOdabranogRacuna", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<List<DnevnoStanjeRacuna>> ucitajDnevnaStanjaOdabranogRacuna(@RequestBody Racun racun) {
+		List<DnevnoStanjeRacuna> retVal = dnevnoStanjeRacunaService.findByRacun(racun);
+		
+		return new ResponseEntity<List<DnevnoStanjeRacuna>>(retVal, HttpStatus.OK);
 	}
+
 }

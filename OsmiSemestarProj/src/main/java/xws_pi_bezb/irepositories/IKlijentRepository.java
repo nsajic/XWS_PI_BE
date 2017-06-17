@@ -6,7 +6,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import xws_pi_bezb.models.Delatnost;
 import xws_pi_bezb.models.korisnici.Korisnik;
 import xws_pi_bezb.models.korisnici.PravnoLice;
 
