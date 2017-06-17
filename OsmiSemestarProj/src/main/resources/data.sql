@@ -1,6 +1,5 @@
 insert into rola (naziv) values ('FizickoLice');
 insert into rola (naziv) values ('PravnoLice');
-insert into rola (naziv) values ('MenadzerSistema');
 
 insert into delatnost(naziv_delatnosti) values ('Ugostiteljstvo');
 insert into delatnost(naziv_delatnosti) values ('Turizam');
@@ -20,12 +19,5 @@ insert into privilegija (naziv) values ('Banka:IzlistajPretrazi');
 insert into rola_privilegija values (1, 1);
 insert into rola_privilegija values (1, 2);
 insert into rola_privilegija values (1, 3);
---insert into rola_privilegija values (1, 4);
+insert into rola_privilegija values (1, 4);
 
-
-
-insert into banka (naziv_banke, sifra_banke, swift_kod, obracunski_racun) values ('Banka1', 111, '111', '111');
-insert into banka (naziv_banke, sifra_banke, swift_kod, obracunski_racun) values ('Banka2', 222, '222', '222');
-
-insert into valuta (sifra_valute, naziv_valute) values ('JEN', 'Japanski jen');
-insert into valuta (sifra_valute, naziv_valute) values ('DIN', 'Dinar');

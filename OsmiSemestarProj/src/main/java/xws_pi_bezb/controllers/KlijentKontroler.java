@@ -164,15 +164,7 @@ public class KlijentKontroler {
 		return new ResponseEntity<Rola>(klijentService.findOne(kor.getId()).getRola(),HttpStatus.OK);	
 
 	}
-
 	
-		
-	
-
-	
-	
-	
-
 	@RequestMapping(value = "/ucitajPrivilegije", method = RequestMethod.GET)
 	public ResponseEntity<List<String>> ucitajPrivilegije(HttpSession session) {
 		Korisnik kor = (Korisnik) session.getAttribute("ulogovanKorisnik");
