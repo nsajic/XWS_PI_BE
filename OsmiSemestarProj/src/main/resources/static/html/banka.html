@@ -7,9 +7,9 @@
 	<div>
 		<div id="tabs">
 			<ul>
-				<li ng-class="{active: isSet(0)}"><a ng-click="setTab(0); prikaziPretragu = false"
+				<li ng-show="hasPrivilege('Banka:IzlistajPretrazi')" ng-class="{active: isSet(0)}"><a ng-click="setTab(0); prikaziPretragu = false"
 					href=""><span>Banke</span></a></li>
-				<li ng-class="{active: isSet(1)}"><a ng-click="setTab(1)"
+				<li ng-show="hasPrivilege('Banka:Dodaj')" ng-class="{active: isSet(1)}"><a ng-click="setTab(1)"
 					href=""><span>Dodaj banke</span></a></li>
 			</ul>
 		</div>
@@ -18,7 +18,7 @@
 			<h2>Banke</h2>	
 		
 		
-			<button ng-show = "banke.length != 0 || prikaziPretragu" ng-click="prikaziPretragu = true">Pretraga</button>
+			<button ng-show="hasPrivilege('Banka:IzlistajPretrazi')" ng-show = "banke.length != 0 || prikaziPretragu" ng-click="prikaziPretragu = true">Pretraga</button>
 			<div ng-show = "prikaziPretragu">
 				<h2>Unesite podatke o banci:</h2>
 				<table>
@@ -53,7 +53,7 @@
 			</div>
 			
 			<table ng-show = "banke.length != 0">
-				<tr>
+				<tr ng-show="hasPrivilege('Banka:IzlistajPretrazi')">
 					<td style = "width:120px; heigth: 70px">Naziv</td>
 					<td style = "width:120px; heigth: 70px">Sifra</td>
 					<td style = "width:120px; heigth: 70px">Swift kod</td>
@@ -66,8 +66,8 @@
 					<td style = "width:120px; heigth: 70px">{{banka.sifraBanke}}</td>
 					<td style = "width:120px; heigth: 70px">{{banka.swiftKod}}</td>
 					<td style = "width:120px; heigth: 70px">{{banka.obracunskiRacun}}</td>
-					<td><button ng-click="obrisiBanku(banka.id)">Obrisi</button></td>
-					<td><button ng-click="setBankaZaIzmenu(banka)">Izmeni</button></td>
+					<td ng-show="hasPrivilege('Banka:Obrisi')"><button ng-click="obrisiBanku(banka.id)">Obrisi</button></td>
+					<td ng-show="hasPrivilege('Banka:Izmeni')"><button ng-click="setBankaZaIzmenu(banka)">Izmeni</button></td>
 					<td><button ng-click="setBankaZaNext(banka)">Next</button></td>
 				</tr>
 				<tr ng-show = 'idBankeZaIzmenu == banka.id'>

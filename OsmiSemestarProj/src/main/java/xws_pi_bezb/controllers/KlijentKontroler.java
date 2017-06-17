@@ -1,6 +1,9 @@
 package xws_pi_bezb.controllers;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -13,16 +16,17 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-
 import xws_pi_bezb.helpers.Helpers;
 import xws_pi_bezb.helpers.Strings;
 import xws_pi_bezb.iservices.IDelatnostService;
 import xws_pi_bezb.iservices.IKlijentService;
+import xws_pi_bezb.iservices.IPrivilegijaService;
 import xws_pi_bezb.iservices.IRolaService;
 import xws_pi_bezb.models.Delatnost;
+import xws_pi_bezb.models.Privilegija;
 import xws_pi_bezb.models.korisnici.FizickoLice;
+import xws_pi_bezb.models.korisnici.Korisnik;
 import xws_pi_bezb.models.korisnici.PravnoLice;
-import xws_pi_bezb.password_security.PasswordValidator;
 import xws_pi_bezb.password_security.SendMail;
 import xws_pi_bezb.view_models.PretragaPravnihLicaViewModel;
 
@@ -38,6 +42,9 @@ public class KlijentKontroler {
 	
 	@Autowired
 	public IRolaService rolaService;
+	
+	@Autowired
+	private IPrivilegijaService prvilegijaService;
 
 	@RequestMapping(value = "/dodajPravnoLice", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<PravnoLice>> dodajPravnoLice(@RequestBody PravnoLice pravnoLice) {
@@ -151,8 +158,23 @@ public class KlijentKontroler {
 		return new ResponseEntity<FizickoLice>((FizickoLice) klijentService.findOne(fizickoLice.getId()),HttpStatus.OK);
 	}
 
-	
-	
-	
-
+	@RequestMapping(value = "/ucitajPrivilegije", method = RequestMethod.GET)
+	public ResponseEntity<List<String>> ucitajPrivilegije(HttpSession session) {
+		Korisnik kor = (Korisnik) session.getAttribute("ulogovanKorisnik");
+		if(kor != null){
+			List<String> privilegije = new ArrayList<>();
+			if(kor.getRola() == null)
+				return new ResponseEntity<List<String>>(new ArrayList<String>(), HttpStatus.BAD_REQUEST);
+			
+			List<Privilegija> collection = new ArrayList<>();	
+			//collection.addAll(kor.getRola().getPrivilegije());
+			collection.addAll(prvilegijaService.getByRole(kor.getRola()));
+			
+			for (Privilegija priv : collection) {
+				privilegije.add(priv.getNaziv());
+			}
+			return new ResponseEntity<List<String>>(privilegije, HttpStatus.OK);					
+		}
+		return new ResponseEntity<List<String>>(new ArrayList<String>(), HttpStatus.BAD_REQUEST);
+	}
 }
