@@ -52,6 +52,17 @@ klijentServis.factory('klijentServis', function($http) {
 	temp.pretraziFizickaLica = function(data) {
 		return $http.post('/klijentKontroler/pretraziFizickaLica', data);
 	}
+	
+	temp.ucitajUlogovanogKorisnika = function(data) {
+		return $http.get('/klijentKontroler/ucitajUlogovanogKorisnika');
+	}
+	
+	temp.ucitajRoluUlogovanogKorisnika = function(data) {
+		return $http.get('/klijentKontroler/ucitajRoluUlogovanogKorisnika');
+	}
+	
+	
+	
 
 	temp.ucitajFizickoLice = function(data) {
 		return $http.post('/klijentKontroler/ucitajFizickoLice', data);

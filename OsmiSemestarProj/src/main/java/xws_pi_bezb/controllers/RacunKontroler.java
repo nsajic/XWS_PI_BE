@@ -12,10 +12,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import xws_pi_bezb.iservices.IBankaService;
+import xws_pi_bezb.iservices.IDnevnoStanjeRacunaService;
 import xws_pi_bezb.iservices.IKlijentService;
 import xws_pi_bezb.iservices.IRacunService;
 import xws_pi_bezb.iservices.IValutaService;
 import xws_pi_bezb.models.Banka;
+import xws_pi_bezb.models.DnevnoStanjeRacuna;
 import xws_pi_bezb.models.Racun;
 import xws_pi_bezb.models.Valuta;
 import xws_pi_bezb.models.korisnici.Korisnik;
@@ -33,6 +35,8 @@ public class RacunKontroler {
 	public IValutaService valutaService;
 	@Autowired
 	public IBankaService bankaService;
+	@Autowired
+	private IDnevnoStanjeRacunaService dnevnoStanjeRacunaService;
 
 	@RequestMapping(value = "/dodajRacun", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Object> dodajRacun(@RequestBody Racun racun) {
@@ -81,5 +85,11 @@ public class RacunKontroler {
 	@RequestMapping(value = "/ucitajKlijente", method = RequestMethod.GET)
 	public ResponseEntity<List<Korisnik>> ucitajKlijente() {
 		return new ResponseEntity<List<Korisnik>>(klijentService.findAll(), HttpStatus.OK);
+	}
+	
+
+	@RequestMapping(value = "/ucitajDnevnaStanjaOdabranogRacuna", method = RequestMethod.GET, consumes = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<List<DnevnoStanjeRacuna>> ucitajDnevnaStanjaOdabranogRacuna(@RequestBody Long racunId) {
+		return new ResponseEntity<List<DnevnoStanjeRacuna>>(dnevnoStanjeRacunaService.findByRacunId(racunId), HttpStatus.OK);
 	}
 }

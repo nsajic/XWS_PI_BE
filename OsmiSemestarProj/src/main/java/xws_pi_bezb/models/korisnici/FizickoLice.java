@@ -16,6 +16,7 @@ public class FizickoLice extends Korisnik implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 	
+	// TODO: Change to String, change pretraga and other linked code
 	@Column(name = "jmbg", nullable = true)
 	private int jmbg;
 	

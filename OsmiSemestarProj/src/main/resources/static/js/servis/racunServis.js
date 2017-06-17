@@ -39,6 +39,13 @@ racunServis.factory('racunServis', function($http) {
 	temp.ucitajKlijente = function() {
 		return $http.get('/racunKontroler/ucitajKlijente');
 	}
+	
+
+	temp.ucitajDnevnaStanjaOdabranogRacuna = function() {
+		return $http.get('/racunKontroler/ucitajDnevnaStanjaOdabranogRacuna');
+	}
+	
+	
 
 
 	return temp;

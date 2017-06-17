@@ -10,8 +10,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -24,11 +22,14 @@ import xws_pi_bezb.iservices.IPrivilegijaService;
 import xws_pi_bezb.iservices.IRolaService;
 import xws_pi_bezb.models.Delatnost;
 import xws_pi_bezb.models.Privilegija;
+import xws_pi_bezb.models.Rola;
 import xws_pi_bezb.models.korisnici.FizickoLice;
 import xws_pi_bezb.models.korisnici.Korisnik;
 import xws_pi_bezb.models.korisnici.PravnoLice;
+import xws_pi_bezb.password_security.Password;
 import xws_pi_bezb.password_security.SendMail;
 import xws_pi_bezb.view_models.PretragaPravnihLicaViewModel;
+import xws_pi_bezb.view_models.UlogovanKorisnikIRolaViewModel;
 
 @Controller
 @RequestMapping("/klijentKontroler")
@@ -51,7 +52,6 @@ public class KlijentKontroler {
 		pravnoLice.setRola(rolaService.findByNaziv(Strings.pravnoLice));
 		klijentService.save(pravnoLice);
 		return new ResponseEntity<List<PravnoLice>>(klijentService.getPravnaLica(), HttpStatus.OK);
-
 	}
 
 	@RequestMapping(value = "/izmeniPravnoLice", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
@@ -104,30 +104,18 @@ public class KlijentKontroler {
 
 	@RequestMapping(value = "/dodajFizickoLice", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Object> dodajFizickoLice(@RequestBody FizickoLice fizickoLice) {
+		String randomPassword = Helpers.generatePassword();
+		
 		fizickoLice.setLogovaoSe(false);
-		fizickoLice.setSifra(Helpers.generatePassword());	
+		fizickoLice.setSifra(Password.hashPassword(randomPassword));	
 		fizickoLice.setRola(rolaService.findByNaziv(Strings.fizickoLice));
 		klijentService.save(fizickoLice);
-		SendMail sm = new SendMail("unesite.svoj@mejl.com","Aktivirajte nalog klikom na link: " + "http://localhost:9000/contr/activate/onezerobeatz@gmail.com/");
-		
-		
-		
+		new SendMail(fizickoLice.getEmail(),"Postovani "+ fizickoLice.getIme() + ". \n\n" +  
+				"Kreiran vam je nalog u banci.\n\nVasa sifra je " + randomPassword + ".\n"
+				+ "Prilikom prvog logovanja cete morati da postavite novu sifru.\n\n" + "Pozdrav.");
 		return new ResponseEntity<Object>(HttpStatus.OK);
 	}
 	
-	@Transactional
-	@RequestMapping(value = "/activate/{email}")
-	public ResponseEntity<String> activateAccount(@PathVariable String email) {			
-		
-		/*try{
-			Gost gost = servis.findByEmail(email);
-			servis.activateAccount(gost.getEmail());
-			return new ResponseEntity<String>("Uspesno ste aktivirali nalog!", HttpStatus.ACCEPTED);			
-		}catch(Exception ex){}*/
-		return new ResponseEntity<String>("Neuspesna aktivacija naloga.", HttpStatus.ACCEPTED);
-		
-	}
-
 	@RequestMapping(value = "/izmeniFizickoLice", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<FizickoLice>> izmeniKlijenta(@RequestBody FizickoLice fizickoLice) {
 		fizickoLice.setEmail(klijentService.findOne(fizickoLice.getId()).getEmail());
@@ -157,6 +145,33 @@ public class KlijentKontroler {
 	public ResponseEntity<FizickoLice> ucitajFizickoLice(@RequestBody FizickoLice fizickoLice) {
 		return new ResponseEntity<FizickoLice>((FizickoLice) klijentService.findOne(fizickoLice.getId()),HttpStatus.OK);
 	}
+
+	@RequestMapping(value = "/ucitajUlogovanogKorisnika", method = RequestMethod.GET)
+	public ResponseEntity<UlogovanKorisnikIRolaViewModel> ucitajUlogovanogKorisnika(HttpSession session){	
+		Korisnik kor = (Korisnik) session.getAttribute("ulogovanKorisnik");	
+		
+		UlogovanKorisnikIRolaViewModel retVal = new UlogovanKorisnikIRolaViewModel();
+		retVal.setRola(klijentService.findOne(kor.getId()).getRola());
+		retVal.setKorisnik(klijentService.findOne(kor.getId()));
+		return new ResponseEntity<UlogovanKorisnikIRolaViewModel>(retVal,HttpStatus.OK);	
+
+	}
+	
+	@RequestMapping(value = "/ucitajRoluUlogovanogKorisnika", method = RequestMethod.GET)
+	public ResponseEntity<Rola> ucitajRoluUlogovanogKorisnika(HttpSession session){	
+		Korisnik kor = (Korisnik) session.getAttribute("ulogovanKorisnik");
+		System.out.println(klijentService.findOne(kor.getId()).getRola().getNaziv());
+		return new ResponseEntity<Rola>(klijentService.findOne(kor.getId()).getRola(),HttpStatus.OK);	
+
+	}
+
+	
+		
+	
+
+	
+	
+	
 
 	@RequestMapping(value = "/ucitajPrivilegije", method = RequestMethod.GET)
 	public ResponseEntity<List<String>> ucitajPrivilegije(HttpSession session) {

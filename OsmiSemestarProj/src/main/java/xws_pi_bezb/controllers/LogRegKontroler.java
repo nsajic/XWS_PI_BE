@@ -101,11 +101,12 @@ public class LogRegKontroler {
 		if(user.getNovaLozinka().equals(user.getNovaLozinka2())){
 	
 			Korisnik korisnik = korisnikService.findByEmail(((Korisnik) session.getAttribute("ulogovanKorisnik")).getEmail());
-				
+			
 			if (Password.checkPassword(user.getStaraLozinka(), korisnik.getSifra())){			
 				String hashedPassword = Password.hashPassword(user.getNovaLozinka());
 				
 				korisnik.setSifra(hashedPassword);
+				korisnik.setLogovaoSe(true);
 				korisnikService.save(korisnik);
 				
 				session.setAttribute("ulogovanKorisnik", korisnik);
