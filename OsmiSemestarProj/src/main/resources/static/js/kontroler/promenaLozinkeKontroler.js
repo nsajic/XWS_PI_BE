@@ -2,6 +2,8 @@ var promenaLozinkeKontroler = angular.module('xws_pi_bezb.promenaLozinkeKontrole
 
 promenaLozinkeKontroler.controller('promenaLozinkeKontroler', function($scope, promenaLozinkeServis, $window, $location) {
 	
+	$scope.poruka = "";
+	
 	$scope.promeniLozinku = function() {
 		var banka = {
 			staraLozinka : $scope.staraLozinka,
@@ -20,7 +22,11 @@ promenaLozinkeKontroler.controller('promenaLozinkeKontroler', function($scope, p
 			
 			$location.path('/welcome');
 		}).error(function(data) {
-			alert("Nemoguce promeniti lozinku!");
+			$scope.poruka = data.message;
+			$scope.staraLozinka = "";
+			$scope.novaLozinka = "";
+			$scope.novaLozinka2 = "";
+			alert("Lozinka nije promenjena!");
 		});
 	}
 	

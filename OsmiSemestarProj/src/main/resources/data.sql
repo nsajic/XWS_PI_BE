@@ -1,5 +1,6 @@
 insert into rola (naziv) values ('FizickoLice');
 insert into rola (naziv) values ('PravnoLice');
+insert into rola (naziv) values ('MenadzerSistema');
 
 insert into delatnost(naziv_delatnosti) values ('Ugostiteljstvo');
 insert into delatnost(naziv_delatnosti) values ('Turizam');

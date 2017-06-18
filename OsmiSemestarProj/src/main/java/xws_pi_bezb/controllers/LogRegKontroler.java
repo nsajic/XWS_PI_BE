@@ -17,6 +17,7 @@ import xws_pi_bezb.helpers.Poruka;
 import xws_pi_bezb.iservices.IKlijentService;
 import xws_pi_bezb.models.korisnici.Korisnik;
 import xws_pi_bezb.password_security.Password;
+import xws_pi_bezb.password_security.PasswordValidator;
 import xws_pi_bezb.view_models.PromenaLozinkeViewModel;
 
 
@@ -99,7 +100,12 @@ public class LogRegKontroler {
 	@RequestMapping(value = "/resetPassword", method = RequestMethod.POST)
 	public ResponseEntity<Poruka> resetPassword(@RequestBody PromenaLozinkeViewModel user, HttpSession session){	
 		if(user.getNovaLozinka().equals(user.getNovaLozinka2())){
-	
+			PasswordValidator validator = new PasswordValidator();
+			
+			if(!validator.validate(user.getNovaLozinka())){
+				return new ResponseEntity<Poruka>(new Poruka("Lozinka mora sadrzati mala i velika slova, brojeve i neke od specijalnih karaktera '@#$%' i mora biti duza od 6 karaktera.", null), HttpStatus.NOT_ACCEPTABLE);
+				
+			}
 			Korisnik korisnik = korisnikService.findByEmail(((Korisnik) session.getAttribute("ulogovanKorisnik")).getEmail());
 			
 			if (Password.checkPassword(user.getStaraLozinka(), korisnik.getSifra())){			
