@@ -10,11 +10,11 @@ public class PasswordValidator{
 
 	  private static final String PASSWORD_PATTERN = "((?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{6,20})";
 
-	  public PasswordValidator(){
-		  pattern = Pattern.compile(PASSWORD_PATTERN);
-	  }
+
 	  
 	  public boolean validate(final String password){
+
+		  pattern = Pattern.compile(PASSWORD_PATTERN);
 		  matcher = pattern.matcher(password);
 		  return matcher.matches();
 	  }
