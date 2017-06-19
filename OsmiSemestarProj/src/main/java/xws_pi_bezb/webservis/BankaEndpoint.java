@@ -16,6 +16,8 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ws.server.endpoint.annotation.Endpoint;
 import org.springframework.ws.server.endpoint.annotation.PayloadRoot;
@@ -27,6 +29,7 @@ import bezbednost.poslovna.xml.ws.izvod.IzvodRequest;
 import bezbednost.poslovna.xml.ws.izvod.IzvodResponse;
 import bezbednost.poslovna.xml.ws.nalogzaprenos.NalogZaPrenosRequest;
 import bezbednost.poslovna.xml.ws.nalogzaprenos.NalogZaPrenosResponse;
+import xws_pi_bezb.controllers.LogRegKontroler;
 import xws_pi_bezb.xml.secutiry.DocumentLoader;
 import xws_pi_bezb.xml.secutiry.KeyStoreReader;
 import xws_pi_bezb.xml.secutiry.XMLEncryptionUtility;
@@ -36,7 +39,8 @@ import xws_pi_bezb.xml.secutiry.XMLSigningUtility;
 public class BankaEndpoint {
 	private static final String HTTP = "http://";
 	private static final String NAMESPACE_URI = "ws.xml.poslovna.bezbednost/";
-
+	private Logger logger = LoggerFactory.getLogger(LogRegKontroler.class);
+	
 	@Autowired
 	public BankaEndpoint() {
 
@@ -62,7 +66,9 @@ public class BankaEndpoint {
 		System.out.println("Usao endpoint - izvod");
 		IzvodResponse response = new IzvodResponse();
 
-		// response.
+		logger.info("[Zahtev izvoda: " + request.toString());
+		
+		//response.
 		return response;
 	}
 
@@ -91,7 +97,6 @@ public class BankaEndpoint {
 		boolean res = sigUtility.verifySignature(doc);
 
 		if (true) {
-
 			PrivateKey privateKey = ksReader.readPrivateKey("./primer.jks", "primer", "primer", "primer");
 			document = encUtility.decrypt(document, privateKey);
 			TransformerFactory factory1 = TransformerFactory.newInstance();
@@ -110,9 +115,10 @@ public class BankaEndpoint {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-		} /*else {
+		} else {
 			return false;
-		}*/
+		}
+		
 		NalogZaPrenosRequest nalogZaPrenosRequest = null;
 		try {
 			JAXBContext jaxbContext = JAXBContext.newInstance(NalogZaPrenosRequest.class);
@@ -124,6 +130,7 @@ public class BankaEndpoint {
 		}
 		
 		if(nalogZaPrenosRequest != null){
+			logger.info("[Nalog za prenos: " + nalogZaPrenosRequest.toString());
 			System.out.println("[Nalog za prenos: " + nalogZaPrenosRequest.toString());
 		}
 		

@@ -8,10 +8,13 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.csrf.CsrfFilter;
+import org.springframework.security.web.csrf.CsrfTokenRepository;
+import org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository;
 
+import xws_pi_bezb.csrf.CsrfHeaderFilter;
 import xws_pi_bezb.iservices.IKlijentService;
 
 @Configuration
@@ -29,6 +32,7 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter {
 	    return authProvider;
 	}
 	
+	
 	@Autowired
 	public void configAuthentication(AuthenticationManagerBuilder auth) throws Exception {	
 		auth.authenticationProvider(authProvider());		
@@ -36,8 +40,19 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter {
 	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests().antMatchers("/**").permitAll().and().csrf().disable();
+		http.authorizeRequests().antMatchers("/**").permitAll()
+			.anyRequest().authenticated().and()
+        	.addFilterAfter(new CsrfHeaderFilter(), CsrfFilter.class)
+        	.csrf().csrfTokenRepository(csrfTokenRepository())
+        	.and().logout();
 	}
+	
+	private CsrfTokenRepository csrfTokenRepository() {
+		HttpSessionCsrfTokenRepository repository = new HttpSessionCsrfTokenRepository();
+		repository.setHeaderName("XSRF-TOKEN");
+		return repository;
+	}
+
 	
 	@Bean
 	public PasswordEncoder passwordEncoder(){
@@ -45,4 +60,5 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter {
 		
 		return encoder;
 	}
+	
 }

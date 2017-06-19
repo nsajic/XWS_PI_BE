@@ -17,7 +17,37 @@
 		</div>
 
 		<div ng-show="isSet(0)">
-			<div>
+		
+			<div ng-show = "getIdRacunaZaZatvaranje() != -1">
+				Unesite racun na koji zelite da prebacite sredstva <input type = "text" ng-model = "racunGdePrebacujem"/>
+				<button ng-click="prebaciSredstva()">Prebaci</button>
+				<br>
+				<button ng-click="nazadNaRacune()">Nazad</button>
+			</div>
+		
+			<div ng-show = "getIdRacuna() != -1">
+				<table>	
+					<tr>
+						<td style = "width:130px; heigth: 70px">Datum:</td>
+						<td style = "width:130px; heigth: 70px">Prethodno stanje</td>
+						<td style = "width:190px; heigth: 70px">Promet na teret</td>
+						<td style = "width:130px; heigth: 70px">Promet u korist</td>
+						<td style = "width:130px; heigth: 70px">Novo stanje</td>
+
+					</tr>
+					<tr  ng-repeat='dnevnoStanje in dnevnaStanjaOdabranogRacuna'>
+						<td style = "width:130px; heigth: 70px">{{dnevnoStanje.datum | date }}</td>
+						<td style = "width:130px; heigth: 70px">{{dnevnoStanje.prethodnoStanje}}</td>
+						<td style = "width:130px; heigth: 70px">{{dnevnoStanje.prometNaTeret}}</td>
+						<td style = "width:130px; heigth: 70px">{{dnevnoStanje.prometUKorist}}</td>
+						<td style = "width:130px; heigth: 70px">{{dnevnoStanje.novoStanje}}</td>
+					</tr>
+				</table>
+				<button ng-click="nazadNaRacune()">Nazad</button>			
+			</div>
+		
+		
+			<div ng-show = "getIdRacuna() === -1 && getIdRacunaZaZatvaranje() === -1">
 				<h2>Racuni</h2>
 					
 				<button ng-show = "racuni.length != 0 || prikaziPretraguRacuni" ng-click="prikaziPretraguRacuni = true">Pretraga</button>
@@ -94,12 +124,15 @@
 						<td style = "width:130px; heigth: 70px">{{racun.valuta.nazivValute}}</td>
 						<td><button ng-click="obrisiRacun(racun.id)">Obrisi</button></td>
 						<td><button ng-click="setRacunZaIzmenu(racun)">Izmeni</button></td>
-						<td><button ng-click="setRacunZaNext(racun)">Next</button></td>
+						<td><button ng-click="setRacunZaZatvaranje(racun)">Zatvori</button></td>
+						<td><button ng-click="setRacunZaDnevnaStanja(racun)">Dnevna stanja</button></td>
 					</tr>
 				</table>
 			</div>
 		</div>
 		<div ng-show="isSet(1)">
+
+		
 			<div>
 				<h2>Unesite podatke o racunu:</h2>
 				<table>

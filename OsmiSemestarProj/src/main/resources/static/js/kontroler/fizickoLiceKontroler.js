@@ -8,7 +8,6 @@ fizickoLiceKontroler.controller('fizickoLiceCtrl', function($scope, klijentServi
 		$scope.usernameFizickogLicaPretraga = null;
 		$scope.emailFizickogLicaPretraga = null;
 		$scope.brojLicneKarteFizickogLicaPretraga = null;
-		$scope.datumIstekaLicneKarteFizickogLicaPretraga = null;
 		$scope.telefonFizickogLicaPretraga = null;
 		$scope.adresaFizickogLicaPretraga = null;
 		$scope.jmbgFizickogLicaPretraga = null;
@@ -21,7 +20,6 @@ fizickoLiceKontroler.controller('fizickoLiceCtrl', function($scope, klijentServi
 		$scope.usernameFizickogLica = null;
 		$scope.emailFizickogLica = null;
 		$scope.brojLicneKarteFizickogLica = null;
-		$scope.datumIstekaLicneKarteFizickogLica = null;
 		$scope.telefonFizickogLica = null;
 		$scope.adresaFizickogLica = null;
 		$scope.jmbgFizickogLica = null;
@@ -32,7 +30,6 @@ fizickoLiceKontroler.controller('fizickoLiceCtrl', function($scope, klijentServi
 		$scope.imeFizickogLicaIzmena = null;
 		$scope.prezimeFizickogLicaIzmena = null;
 		$scope.brojLicneKarteFizickogLicaIzmena = null;
-		$scope.datumIstekaLicneKarteFizickogLicaIzmena = null;
 		$scope.telefonFizickogLicaIzmena = null;
 		$scope.adresaFizickogLicaIzmena = null;
 		$scope.jmbgFizickogLicaIzmena = null;
@@ -42,6 +39,7 @@ fizickoLiceKontroler.controller('fizickoLiceCtrl', function($scope, klijentServi
 	$scope.izlistajFizickaLica = function (){
 		klijentServis.izlistajFizickaLica().success(function(data) {
 			$scope.fizickaLica = data;
+			console.log(data);
 		}).error(function(data) {
 			alert("Neuspesno izlistavanje fizickih lica!");
 		});
@@ -54,7 +52,6 @@ fizickoLiceKontroler.controller('fizickoLiceCtrl', function($scope, klijentServi
 			$scope.resetujPoljaPretragaFizickaLica();
 			$scope.izlistajFizickaLica();
 		}
-
 		if(newTab == 2){
 			if($scope.idFizickogLicaZaIzmenu == -1){
 				alert("Prvo odaberite klijenta kog menjate.");
@@ -202,7 +199,6 @@ fizickoLiceKontroler.controller('fizickoLiceCtrl', function($scope, klijentServi
 			alert("Greska prilikom pretrage");
 		});
 	}
-	
 	
 	$scope.ponistiPretraguFizickihLica = function(){
 		$scope.izlistajFizickaLica();

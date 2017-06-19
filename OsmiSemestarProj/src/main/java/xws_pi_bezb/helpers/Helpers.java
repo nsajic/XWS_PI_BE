@@ -4,7 +4,7 @@ import java.util.Random;
 
 public class Helpers {
 
-	public static String allChars = "asdfghjklpoiuytrewqzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM1234567890";
+	public static String allChars = "asdfghjklpoiuytrewqzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM12345678901234567890";
 
 	public static boolean isNullOrEmpty(String str) {
 		if (str == null) {
@@ -23,8 +23,6 @@ public class Helpers {
 		    char c = chars[random.nextInt(chars.length)];
 		    sb.append(c);
 		}
-		String output = sb.toString();
-		System.out.println(output);
 		return sb.toString();
 	}
 

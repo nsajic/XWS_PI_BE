@@ -16,7 +16,7 @@ insert into delatnost(naziv_delatnosti) values ('Turizam');
 insert into delatnost(naziv_delatnosti) values ('Poljoprivreda');
 insert into delatnost(naziv_delatnosti) values ('IT');
 
-insert into korisnik (logovao_se, tip_korisnika, ime, prezime, broj_licne_karte, telefon, adresa, jmbg, rola_id, email, sifra, username) values (false, 'F','Sima1', 'Simic1', 112345, '1111', 'adresa1', 11111, 1, 'k1@k1.com', '$2a$12$/eDioOpiKrGQnDv53hPxIe8XDCJWP/Xe1fF6E5IrTVxuBozu9EX9G', 'kor');
+insert into korisnik (logovao_se, tip_korisnika, ime, prezime, broj_licne_karte, telefon, adresa, jmbg, rola_id, email, sifra, username) values (true, 'F','Sima1', 'Simic1', 112345, '1111', 'adresa1', 11111, 1, 'k1@k1.com', '$2a$12$/eDioOpiKrGQnDv53hPxIe8XDCJWP/Xe1fF6E5IrTVxuBozu9EX9G', 'kor');
 
 
 insert into korisnik (logovao_se, tip_korisnika, ime, prezime, broj_licne_karte, telefon, adresa, jmbg, rola_id, email, sifra, username, apr, op, pib, maticni_broj, fax) values (false, 'P','Sima2', 'Simic2', 112345, '1111', 'adresa1', 11111, 2, 'k2@k2.com', '$2a$12$/eDioOpiKrGQnDv53hPxIe8XDCJWP/Xe1fF6E5IrTVxuBozu9EX9G', 'kor', true, true, 25254525, 2332221, 'fax.fax');

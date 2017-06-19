@@ -28,7 +28,7 @@ app.config(function($routeProvider, $locationProvider) {
     })
     .when("/promenaLozinke", {
         templateUrl : "html/promenaLozinke.html"
-    })
+    });
 
     $locationProvider.html5Mode(true);
 });

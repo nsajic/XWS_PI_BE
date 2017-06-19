@@ -9,7 +9,7 @@ racunKontroler.controller('racunCtrl', function($scope, racunServis, $window, $l
 		$scope.bankaRacunaPretraga = null;
 		$scope.valutaRacunaPretraga = null;
 	}
-
+	
 	$scope.resetujPoljaDodavanjeRacuni = function() {
 		$scope.brojRacuna = null;
 		$scope.statusRacuna = null;
@@ -29,6 +29,8 @@ racunKontroler.controller('racunCtrl', function($scope, racunServis, $window, $l
 	$scope.izlistajRacune = function (){
 		racunServis.izlistajRacune().success(function(data) {
 			$scope.racuni = data;
+			console.log($scope.racuni);
+			
 		}).error(function(data) {
 			alert("Neuspesno izlistavanje racuna!");
 		});
@@ -85,13 +87,13 @@ racunKontroler.controller('racunCtrl', function($scope, racunServis, $window, $l
 	$scope.banke = [];
 	$scope.klijenti = [];
 	$scope.idRacunaZaIzmenu = -1;
+	$scope.idRacunaZaDnevnaStanja = -1;
+	$scope.idRacunaZaZatvaranje = -1;
+	$scope.dnevnaStanjaOdabranogRacuna = [];
 	
 
 	
 	//INIT END
-	
-	
-	
 	$scope.isSet = function(tabNum) {
 		return $scope.tab === tabNum;
 	};
@@ -120,6 +122,7 @@ racunKontroler.controller('racunCtrl', function($scope, racunServis, $window, $l
 		}
 		racunServis.dodajRacun(racun).success(function(data) {
 			$scope.izlistajRacune();
+			alert("Racun uspesno dodat");
 			$location.path('/racun');
 			$scope.resetujPoljaDodavanjeRacuni();
 			$scope.setTab(0);
@@ -147,11 +150,27 @@ racunKontroler.controller('racunCtrl', function($scope, racunServis, $window, $l
 		});
 	}
 	
+	$scope.getIdRacunaZaZatvaranje = function (){
+		return $scope.idRacunaZaZatvaranje;
+	}
+	
+	$scope.getIdRacuna = function (){
+		return $scope.idRacunaZaDnevnaStanja;
+	}
+	
+	$scope.setRacunZaZatvaranje = function (racun){
+		$scope.idRacunaZaZatvaranje = racun.id;
+		$scope.idRacunaZaDnevnaStanja = -1;
+		$scope.idRacunaZaIzmenu = -1;
+	}
+	
 	$scope.setRacunZaIzmenu = function(racun) {
 		$scope.ucitajBanke();
 		$scope.ucitajValute();
 		$scope.ucitajKlijente();
 		$scope.idRacunaZaIzmenu = racun.id;
+		$scope.idRacunaZaDnevnaStanja = -1;
+		$scope.idRacunaZaZatvaranje = -1;
 
 		//TODO: Treba da se odradi combo ko covek za klijente
 		controller.brojRacunaIzmena = racun.brojRacuna;
@@ -162,6 +181,32 @@ racunKontroler.controller('racunCtrl', function($scope, racunServis, $window, $l
 		controller.valutaRacunaIzmena = racun.valuta;
 		
 		$scope.setTab(2);
+	}
+
+	
+	$scope.setRacunZaDnevnaStanja = function (racun){
+		$scope.idRacunaZaDnevnaStanja = racun.id;
+
+	
+		racunServis.ucitajDnevnaStanjaOdabranogRacuna(racun).success(function(data) {
+			$scope.dnevnaStanjaOdabranogRacuna = data;
+		}).error(function(data) {
+			alert("Nemoguce ucitati dnevna stanja racuna");
+		});
+		
+		
+		
+		
+	}
+	
+	$scope.prebaciSredstvaNaRacun = function(){
+		// TODO: Implementirati prebacivanje sredstava i zatvaranje racuna
+	}
+	
+	$scope.nazadNaRacune = function (){
+		$scope.idRacunaZaDnevnaStanja = -1;
+		$scope.idRacunaZaZatvaranje = -1;
+		$scope.racunGdePrebacujem = "";
 	}
 
 

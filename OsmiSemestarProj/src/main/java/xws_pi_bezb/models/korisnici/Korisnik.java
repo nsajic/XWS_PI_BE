@@ -10,6 +10,8 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import org.springframework.stereotype.Component;
 
@@ -39,9 +41,11 @@ public class Korisnik {
 	@Column(name = "username", nullable = false)
 	private String username;
 	
+	@NotNull
 	@Column(name = "email", nullable = false)
 	private String email;
-
+	
+	@NotNull
 	@Column(name = "sifra", length = 60, nullable = false)
 	private String sifra;
 	
@@ -57,7 +61,6 @@ public class Korisnik {
 	@Column(name = "logovao_se", nullable = false)
 	private boolean logovaoSe;
 	
-	
 	@ManyToOne
 	private Rola rola;
 	
@@ -72,10 +75,12 @@ public class Korisnik {
 		this.email = email;
 	}
 
+	@JsonIgnore
 	public String getSifra() {
 		return sifra;
 	}
 
+	@JsonProperty
 	public void setSifra(String sifra) {
 		this.sifra = sifra;
 	}
