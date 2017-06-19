@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ns4:NalogZaPrenosRequest xmlns:ns2="http://www.w3.org/2001/04/xmlenc#" xmlns:ns3="http://www.w3.org/2000/09/xmldsig#" xmlns:ns4="http://nalogzaprenos.ws.xml.poslovna.bezbednost/">
+    <Hitno>false</Hitno>
+    <ns2:EncryptedData Type="http://www.w3.org/2001/04/xmlenc#Content">
+        <ns2:EncryptionMethod Algorithm="http://www.w3.org/2001/04/xmlenc#tripledes-cbc"/>
+        <ns3:KeyInfo>
+            <ns3:KeyName>Sifrovan tajni kljuc</ns3:KeyName>
+            <ns2:EncryptedKey>
+                <ns2:EncryptionMethod Algorithm="http://www.w3.org/2001/04/xmlenc#rsa-1_5"/>
+                <ns2:CipherData>
+                    <ns2:CipherValue>jZFZIbRCvILjnxmSTWBEnp/7yfN2d+rlmpL70+aWRuFnuIR5wwKEVwDUs13y2DebUtbzyLW04AfludFZh9qKxyKjiUDnoT8qkQArbYf+6afwicxKUfqKVLBqVYfc9LP8QEB3yxnlgWEOFlmBQkobYxPXZPhzrkt45FeeywYzwTQ=</ns2:CipherValue>
+                </ns2:CipherData>
+            </ns2:EncryptedKey>
+        </ns3:KeyInfo>
+        <ns2:CipherData>
+            <ns2:CipherValue>bVGVedQdNuCc9eBIGvKP0QPecKS6kIUpiXmOc5ErpNhx7aNpm9ikvFHLbzNdvDwTtbRc+Rk9bmkjRbxLOi5JsQauXCTQsobJO/dBeVwCAPWv2rygba8qKJYzaYNkR05MjJwL8LbDcn+3EYjk6ws5nY8t9ggx6Mx1roch2wIuFQhUg4n78A3EV1by8RJTktTygZih53PwTp2LIJSILb6DtnlKVuKuyjSOW+X2VypZQgPTxZQZiWMI58zl/h/8BfXTF682Bu+MJqoK34tMzQp7Q/xwEpR+p1Yga3AmHoqrmk5QHs5gYKJL6KvkMGbbEK/jVERYEKcpuEVJVz70ze9PXoymnlYm0531LNAENHU+jpEzFHesJKadlWeS9UiuZ7qAeNVUSEs/DFxL7Enc4Y5vRD49VsaAy8KsCp3fk9HXcZfpV5E1upy25ms30xTmKzSoZc9fY83OHyGEGx9e7W+b4SoqwHfEcYJ0JWiTUdB7JhhEHzagcm9ybzh1iZ7Wjm12YK7mXuMEldS7E7c6yuQWMAd6ijYH0zjhohNci5ub6ZtrGzFxQBRh3XQqmfnw/537L85h9gVy7eqFlYXoyyj2XEjY3WLQdlLmOUZICZsTFLpHANE6/1RsNeXvu6mRrnj5hrNPj335BtTvrqJ0pbNppXsfbKJrZ2jLPcqzvclC5ixFjbVRNyywebAZUQJl8+tqyvlLvt/A6obhN4aVBBR8V8HpN/o1yAOw+b80ZnDgK1ii5SSmzzzxX1KbLapxcUpFO9QOOyfugusZu4Z71xHQwFDaXUnZyVsIUISZM9ZR1sulI9O1WGiSAnUxGu2/In41mL9HA4hWPJ7xr7xQMKgaBOMNOenG31VYU5DKiHMHUjnDy+L9wniaEC67j6K9+Dzb5yyX0ejxOZD/FrRJID6WDAORuT1GxMccN9XIQ39S2tpZSO9TcTLWAht1Fm6FO1rCVVAv1vYuWtbkENt2/bL9bPi2czrADMX39zGNLNzwqZg+Iyg4fzQbvPrtE/9aMUL1KKLLAWkWIWP6H4CYtJmStIxGh+W6wZVj</ns2:CipherValue>
+        </ns2:CipherData>
+    </ns2:EncryptedData>
+    <ns3:Signature>
+        <ns3:SignedInfo>
+            <ns3:CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315"/>
+            <ns3:SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1"/>
+            <ns3:Reference URI="">
+                <ns3:Transforms>
+                    <ns3:Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/>
+                    <ns3:Transform Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315#WithComments"/>
+                </ns3:Transforms>
+                <ns3:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"/>
+                <ns3:DigestValue>T2DPNZYkI0rGtSjyOvp5r21nd8I=</ns3:DigestValue>
+            </ns3:Reference>
+        </ns3:SignedInfo>
+        <ns3:SignatureValue>Q2jkHHXyhsiAm+q2wG7jVvNUd2xaYnlak7swcxLTPQ1Rl0K2ulzIGuVmaTNvDfzOLKI3LW+/VUkzcv6+FiidJj03NAt+L217Gz19DjwbrkbxypL5uYPDEgmqA0kCWjLkj+zXSkplY2vPvhJJtPmWUWm+KAlxcUb2l68Oms9kuhA=</ns3:SignatureValue>
+        <ns3:KeyInfo>
+            <ns3:KeyValue>
+                <ns3:RSAKeyValue>
+                    <ns3:Modulus>zQ9KJLShafi/S2HkWlfnRpKcuLB4BgeJ5y2wBafGRRNz5kss0gjzzQZIDf684gwQ2WYEDlH2s+OXfbX4v6KTKJ4ug0wfY05sciJ7Dx+HOPUw6KU5aWvbBIKAXJE+MCSaO/FSk+ujgXSZAY/epUsSqBo2EZgUl90oEpTRbV+xX8E=</ns3:Modulus>
+                    <ns3:Exponent>AQAB</ns3:Exponent>
+                </ns3:RSAKeyValue>
+            </ns3:KeyValue>
+            <ns3:X509Data>
+                <ns3:X509Certificate>MIIBtjCCAR8CBEZasCQwDQYJKoZIhvcNAQEFBQAwIjEPMA0GA1UECwwGcHJpbWVyMQ8wDQYDVQQDDAZwcmltZXIwHhcNMDcwNTI4MTAzNDEyWhcNMjcwNTIzMTAzNDEyWjAiMQ8wDQYDVQQLDAZwcmltZXIxDzANBgNVBAMMBnByaW1lcjCBnzANBgkqhkiG9w0BAQEFAAOBjQAwgYkCgYEAzQ9KJLShafi/S2HkWlfnRpKcuLB4BgeJ5y2wBafGRRNz5kss0gjzzQZIDf684gwQ2WYEDlH2s+OXfbX4v6KTKJ4ug0wfY05sciJ7Dx+HOPUw6KU5aWvbBIKAXJE+MCSaO/FSk+ujgXSZAY/epUsSqBo2EZgUl90oEpTRbV+xX8ECAwEAATANBgkqhkiG9w0BAQUFAAOBgQB2HjPI427zRaVfLTaeNVcjH9hoTkl9OUJAAmEa6EQdbdqZ75ca3IfuLHJFJ8zzyBP4LUGSxgA4OpnKs6Ej5w2n0GHmu0g4YqxInfpv/kCwswoia4Oza17te8mMamffCn3ySX5yZzEex5nueNAyhJkmWBcBCOvJw4+U+gSK50Xbcw==</ns3:X509Certificate>
+            </ns3:X509Data>
+        </ns3:KeyInfo>
+    </ns3:Signature>
+</ns4:NalogZaPrenosRequest>

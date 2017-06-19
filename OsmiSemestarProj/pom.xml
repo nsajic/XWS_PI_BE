@@ -49,7 +49,6 @@
 			<artifactId>spring-security-web</artifactId>
 			<scope>provided</scope>
 		</dependency>
-
 		<dependency>
 			<groupId>wsdl4j</groupId>
 			<artifactId>wsdl4j</artifactId>
@@ -60,6 +59,7 @@
 		</dependency>
 
 		<!--Security dependency -->
+
 
 		<!--dependencies for web sockets -->
 		<dependency>

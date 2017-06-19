@@ -55,35 +55,29 @@ public class WebServiceConfig extends WsConfigurerAdapter{
 		return new SimpleXsdSchema(new ClassPathResource("seme/PresekIzvoda.xsd"));
 	}
 	
-	/*
+	
 	//Bezbednost
-	@Bean
-    public KeyStoreCallbackHandler securityCallbackHandler(){
-        KeyStoreCallbackHandler callbackHandler = new KeyStoreCallbackHandler();
-        callbackHandler.setPrivateKeyPassword("changeit");
-        return callbackHandler;
-    }
-
+/*
     @Bean
     public Wss4jSecurityInterceptor securityInterceptor() throws Exception {
         Wss4jSecurityInterceptor securityInterceptor = new Wss4jSecurityInterceptor();
 
         // validate incoming request
-        securityInterceptor.setValidationActions("Timestamp Signature Encrypt");
+        securityInterceptor.setValidationActions("Signature Encrypt");
         securityInterceptor.setValidationSignatureCrypto(getCryptoFactoryBean().getObject());
         securityInterceptor.setValidationDecryptionCrypto(getCryptoFactoryBean().getObject());
-        securityInterceptor.setValidationCallbackHandler(securityCallbackHandler());
+        //securityInterceptor.setValidationCallbackHandler(securityCallbackHandler());
 
         // encrypt the response
-        securityInterceptor.setSecurementEncryptionUser("client-public");
-        securityInterceptor.setSecurementEncryptionParts("{Content}{http://nalogzaprenos.ws.xml.poslovna.bezbednost/}NalogZaPrenosResponse");
-        securityInterceptor.setSecurementEncryptionCrypto(getCryptoFactoryBean().getObject());
+        //securityInterceptor.setSecurementEncryptionUser("client-public");
+        //securityInterceptor.setSecurementEncryptionParts("{Content}{http://nalogzaprenos.ws.xml.poslovna.bezbednost/}NalogZaPrenosResponse");
+        //securityInterceptor.setSecurementEncryptionCrypto(getCryptoFactoryBean().getObject());
 
         // sign the response
-        securityInterceptor.setSecurementActions("Signature Encrypt");
-        securityInterceptor.setSecurementUsername("server");
-        securityInterceptor.setSecurementPassword("changeit");
-        securityInterceptor.setSecurementSignatureCrypto(getCryptoFactoryBean().getObject());
+        //securityInterceptor.setSecurementActions("Signature Encrypt");
+        //securityInterceptor.setSecurementUsername("primer");
+        //securityInterceptor.setSecurementPassword("primer");
+        //securityInterceptor.setSecurementSignatureCrypto(getCryptoFactoryBean().getObject());
 
         return securityInterceptor;
     }
@@ -91,8 +85,8 @@ public class WebServiceConfig extends WsConfigurerAdapter{
     @Bean
     public CryptoFactoryBean getCryptoFactoryBean() throws IOException {
         CryptoFactoryBean cryptoFactoryBean = new CryptoFactoryBean();
-        cryptoFactoryBean.setKeyStorePassword("changeit");
-        cryptoFactoryBean.setKeyStoreLocation(new ClassPathResource("server.jks"));
+        cryptoFactoryBean.setKeyStorePassword("primer");
+        cryptoFactoryBean.setKeyStoreLocation(new ClassPathResource("primer.jks"));
         return cryptoFactoryBean;
     }
 
@@ -104,5 +98,5 @@ public class WebServiceConfig extends WsConfigurerAdapter{
             throw new RuntimeException("could not initialize security interceptor");
         }
     }
-    */
+*/ 
 }
