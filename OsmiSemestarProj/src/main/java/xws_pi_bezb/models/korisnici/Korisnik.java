@@ -10,6 +10,8 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import org.springframework.stereotype.Component;
 
@@ -39,9 +41,13 @@ public class Korisnik {
 	@Column(name = "username", nullable = false)
 	private String username;
 	
+	@NotNull
 	@Column(name = "email", nullable = false)
 	private String email;
-
+	
+	
+	@Size(min=6, max=20)
+	@NotNull
 	@Column(name = "sifra", length = 60, nullable = false)
 	private String sifra;
 	

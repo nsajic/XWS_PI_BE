@@ -1,6 +1,7 @@
 package xws_pi_bezb.exceptions;
 
 
+import java.sql.SQLException;
 import java.text.ParseException;
 import java.time.format.DateTimeParseException;
 
@@ -18,8 +19,8 @@ import groovy.util.logging.Slf4j;
 public class GlobalExceptionHandler {
 
 	//TODO Handle exceptions
-	@ResponseStatus(value = HttpStatus.BAD_REQUEST, reason = "DateTimeParseException occured")
-	@ExceptionHandler(DateTimeParseException.class)
+	@ResponseStatus(value = HttpStatus.BAD_REQUEST, reason = "SQLException occured")
+	@ExceptionHandler(SQLException.class)
 	public void handleSQLException(HttpServletRequest req, Exception e) {
 		e.printStackTrace();
 	}
