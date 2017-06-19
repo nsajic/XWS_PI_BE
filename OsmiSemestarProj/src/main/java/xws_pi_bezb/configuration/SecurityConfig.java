@@ -32,6 +32,7 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter {
 	    return authProvider;
 	}
 	
+	
 	@Autowired
 	public void configAuthentication(AuthenticationManagerBuilder auth) throws Exception {	
 		auth.authenticationProvider(authProvider());		
@@ -48,7 +49,7 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter {
 	
 	private CsrfTokenRepository csrfTokenRepository() {
 		HttpSessionCsrfTokenRepository repository = new HttpSessionCsrfTokenRepository();
-		repository.setHeaderName("X-XSRF-TOKEN");
+		repository.setHeaderName("XSRF-TOKEN");
 		return repository;
 	}
 
