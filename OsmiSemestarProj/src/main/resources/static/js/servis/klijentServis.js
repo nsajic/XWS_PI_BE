@@ -82,6 +82,10 @@ klijentServis.factory('klijentServis', function($http) {
 		return $http.get('/klijentKontroler/ucitajPrivilegije');
 	}
 	
+	temp.koJeNaSesiji = function() {
+		return $http.post('/contr/check');
+	}
+	
 	return temp;
 
 })

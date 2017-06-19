@@ -102,6 +102,7 @@ public class LogRegKontroler {
 	@RequestMapping(value = "/resetPassword", method = RequestMethod.POST)
 	public ResponseEntity<Poruka> resetPassword(@RequestBody PromenaLozinkeViewModel user, HttpSession session) throws InterruptedException{
 		TimeUnit.SECONDS.sleep(1); // zbog brute force
+		
 		if(user.getNovaLozinka().equals(user.getNovaLozinka2())){
 			PasswordValidator validator = new PasswordValidator();
 			
@@ -126,5 +127,16 @@ public class LogRegKontroler {
 		}else{
 			return new ResponseEntity<Poruka>(new Poruka("RazliciteLozinke", null), HttpStatus.ACCEPTED);
 		}	
+	}
+	
+	@RequestMapping(value = "/check", method = RequestMethod.POST)
+	public ResponseEntity<Poruka> checkSessions(HttpSession session){
+		Korisnik kor = (Korisnik) session.getAttribute("ulogovanKorisnik");
+		if(kor != null){
+			return new ResponseEntity<Poruka>(new Poruka("NekoNaSesiji", kor), HttpStatus.ACCEPTED);
+		}else{
+			return new ResponseEntity<Poruka>(new Poruka("NikoNaSesiji", null), HttpStatus.ACCEPTED);
+		}	
+			
 	}
 }
