@@ -7,11 +7,11 @@
 	<div>
 		<div id="tabs">
 			<ul>
-				<li ng-class="{active: isSet(0)}"><a ng-click="setTab(0); prikaziPretraguPravnaLica = false"
+				<li ng-class="{active: isSet(0)}" ng-show="hasPrivilege('Klijent:IzlistajPretraziPravnoFizicko')"><a ng-click="setTab(0); prikaziPretraguPravnaLica = false"
 					href=""><span>Pravna lica</span></a></li>
-				<li ng-class="{active: isSet(1)}"><a ng-click="setTab(1)"
+				<li ng-class="{active: isSet(1)}" ng-show="hasPrivilege('Klijent:DodajPravnoFizicko')"><a ng-click="setTab(1)"
 					href=""><span>Dodaj pravno lice</span></a></li>
-				<li ng-class="{active: isSet(2)}"><a ng-click="setTab(2)"
+				<li ng-class="{active: isSet(2)}" ng-show="hasPrivilege('Klijent:IzmeniPravnoFizicko')"><a ng-click="setTab(2)"
 					href=""><span>Izmeni pravno lice</span></a></li>
 			</ul>
 		</div>
@@ -20,7 +20,7 @@
 			<div ng-show ="idPravnogLicaZaDetalje == -1" >
 				<h2>Pravna lica</h2>
 					
-				<button ng-show = "pravnaLica.length != 0 || prikaziPretraguPravnaLica" ng-click="prikaziPretraguPravnaLica = true">Pretraga</button>
+				<button ng-show="hasPrivilege('Klijent:IzlistajPretraziPravnoFizicko')" ng-show = "pravnaLica.length != 0 || prikaziPretraguPravnaLica" ng-click="prikaziPretraguPravnaLica = true">Pretraga</button>
 				<div ng-show = "prikaziPretraguPravnaLica">
 					<h2>Unesite podatke o klijentu:</h2>
 					<table>
@@ -133,10 +133,10 @@
 						<td style = "width:130px; heigth: 70px">{{pravnoLice.naziv}}</td>
 						<td style = "width:130px; heigth: 70px">{{pravnoLice.pib}}</td>
 						<td style = "width:130px; heigth: 70px">{{pravnoLice.email}}</td>
-						<td><button ng-click="obrisiPravnoLice(pravnoLice.id)">Obrisi</button></td>
-						<td><button ng-click="setPravnoLiceZaIzmenu(pravnoLice)">Izmeni</button></td>
-						<td><button ng-click="setPravnoLiceZaDetalje(pravnoLice)">Detalji</button></td>
-						<td><button ng-click="setPravnoLiceZaNext(pravnoLice)">Next</button></td>
+						<td><button ng-click="obrisiPravnoLice(pravnoLice.id)" ng-show="hasPrivilege('Klijent:ObrisiPravnoFizicko')">Obrisi</button></td>
+						<td><button ng-click="setPravnoLiceZaIzmenu(pravnoLice)" ng-show="hasPrivilege('Klijent:IzmeniPravnoFizicko')">Izmeni</button></td>
+						<td><button ng-click="setPravnoLiceZaDetalje(pravnoLice)" ng-show="hasPrivilege('Klijent:IzlistajPretraziPravnoFizicko')">Detalji</button></td>
+						<!--<td><button ng-click="setPravnoLiceZaNext(pravnoLice)" ng-show="hasPrivilege('Klijent:ObrisiPravnoFizicko')">Next</button></td>  -->
 					</tr>
 	
 					<tr ng-show = 'idPravnogLicaZaNext == pravnoLice.id'>
@@ -290,7 +290,7 @@
 						</td>
 					</tr>
 				</table>
-				<button ng-click="dodajPravnoLice()">Dodaj</button>
+				<button ng-show="hasPrivilege('Klijent:DodajPravnoFizicko')" ng-click="dodajPravnoLice()">Dodaj</button>
 				
 				<div ng-show = "prikaziDelatnostiBool == true" >
 					<hr>
@@ -378,7 +378,7 @@
 
 
 				</table>
-				<button ng-click="izmeniPravnoLice()">Potvrdi</button>
+				<button  ng-show="hasPrivilege('Klijent:IzmeniPravnoFizicko')"  ng-click="izmeniPravnoLice()">Potvrdi</button>
 				
 				<div ng-show = "prikaziDelatnostiBoolIzmena == true" >
 					<hr>

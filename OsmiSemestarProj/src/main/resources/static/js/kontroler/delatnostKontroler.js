@@ -1,6 +1,6 @@
 var delatnostKontroler = angular.module('xws_pi_bezb.delatnostKontroler', []);
 
-delatnostKontroler.controller('delatnostCtrl', function($scope, klijentServis, delatnostServis, $window, $location) {
+delatnostKontroler.controller('delatnostCtrl', function($scope, klijentServis, delatnostServis, $window, $location, klijentServis) {
 
 	$scope.resetujPoljaPretraga = function(){
 		$scope.nazivDelatnostiPretraga = null;
@@ -46,6 +46,21 @@ delatnostKontroler.controller('delatnostCtrl', function($scope, klijentServis, d
 	$scope.pravnoLiceZaDetalje = null;
 	
 	//INIT END
+	
+	$scope.privileges = [];
+
+	klijentServis.ucitajPrivilegije().success(function(data) {
+		$scope.privileges = data;
+	}).error(function(data) {
+		alert("Korisnik nema nikakvih privilegija.");
+	});
+
+	$scope.hasPrivilege = function(privilege) {
+		if ($scope.privileges.indexOf(privilege) > -1)
+			return true;
+		else
+			return false;
+	};
 
 	$scope.setujDiv = function (divNum){
 		$scope.setovanDiv = divNum;

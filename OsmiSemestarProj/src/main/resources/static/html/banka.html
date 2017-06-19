@@ -18,7 +18,7 @@
 			<h2>Banke</h2>	
 		
 		
-			<button ng-show="hasPrivilege('Banka:IzlistajPretrazi')" ng-show = "banke.length != 0 || prikaziPretragu" ng-click="prikaziPretragu = true">Pretraga</button>
+			<button ng-show = "(banke.length != 0 || prikaziPretragu) && hasPrivilege('Banka:IzlistajPretrazi')" ng-click="prikaziPretragu = true">Pretraga</button>
 			<div ng-show = "prikaziPretragu">
 				<h2>Unesite podatke o banci:</h2>
 				<table>

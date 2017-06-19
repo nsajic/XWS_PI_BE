@@ -1,6 +1,6 @@
 var racunKontroler = angular.module('xws_pi_bezb.racunKontroler', []);
 
-racunKontroler.controller('racunCtrl', function($scope, racunServis, $window, $location) {
+racunKontroler.controller('racunCtrl', function($scope, racunServis, $window, $location, klijentServis) {
 
 	$scope.resetujPoljaPretragaRacuni = function(){
 		$scope.brojRacunaPretraga = null;
@@ -35,6 +35,21 @@ racunKontroler.controller('racunCtrl', function($scope, racunServis, $window, $l
 			alert("Neuspesno izlistavanje racuna!");
 		});
 	}
+	
+	$scope.privileges = [];
+
+	klijentServis.ucitajPrivilegije().success(function(data) {
+		$scope.privileges = data;
+	}).error(function(data) {
+		alert("Korisnik nema nikakvih privilegija.");
+	});
+
+	$scope.hasPrivilege = function(privilege) {
+		if ($scope.privileges.indexOf(privilege) > -1)
+			return true;
+		else
+			return false;
+	};
 	
 	var controller = this;
 	$scope.setTab = function(newTab) {

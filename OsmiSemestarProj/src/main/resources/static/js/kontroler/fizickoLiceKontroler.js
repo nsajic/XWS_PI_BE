@@ -1,6 +1,6 @@
 var fizickoLiceKontroler = angular.module('xws_pi_bezb.fizickoLiceKontroler', []);
 
-fizickoLiceKontroler.controller('fizickoLiceCtrl', function($scope, klijentServis, $window, $location) {
+fizickoLiceKontroler.controller('fizickoLiceCtrl', function($scope, klijentServis, $window, $location, klijentServis) {
 
 	$scope.resetujPoljaPretragaFizickaLica = function(){
 		$scope.imeFizickogLicaPretraga = null;
@@ -35,6 +35,21 @@ fizickoLiceKontroler.controller('fizickoLiceCtrl', function($scope, klijentServi
 		$scope.jmbgFizickogLicaIzmena = null;
 		$scope.imeRoditeljaFizickogLicaIzmena = null;
 	}
+	
+	$scope.privileges = [];
+
+	klijentServis.ucitajPrivilegije().success(function(data) {
+		$scope.privileges = data;
+	}).error(function(data) {
+		alert("Korisnik nema nikakvih privilegija.");
+	});
+
+	$scope.hasPrivilege = function(privilege) {
+		if ($scope.privileges.indexOf(privilege) > -1)
+			return true;
+		else
+			return false;
+	};
 	
 	$scope.izlistajFizickaLica = function (){
 		klijentServis.izlistajFizickaLica().success(function(data) {
