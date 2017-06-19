@@ -39,6 +39,7 @@ fizickoLiceKontroler.controller('fizickoLiceCtrl', function($scope, klijentServi
 	$scope.izlistajFizickaLica = function (){
 		klijentServis.izlistajFizickaLica().success(function(data) {
 			$scope.fizickaLica = data;
+			console.log(data);
 		}).error(function(data) {
 			alert("Neuspesno izlistavanje fizickih lica!");
 		});

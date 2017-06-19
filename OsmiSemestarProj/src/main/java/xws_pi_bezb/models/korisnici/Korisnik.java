@@ -75,10 +75,12 @@ public class Korisnik {
 		this.email = email;
 	}
 
+	@JsonIgnore
 	public String getSifra() {
 		return sifra;
 	}
 
+	@JsonProperty
 	public void setSifra(String sifra) {
 		this.sifra = sifra;
 	}
