@@ -45,8 +45,6 @@ public class Korisnik {
 	@Column(name = "email", nullable = false)
 	private String email;
 	
-	
-	@Size(min=6, max=20)
 	@NotNull
 	@Column(name = "sifra", length = 60, nullable = false)
 	private String sifra;

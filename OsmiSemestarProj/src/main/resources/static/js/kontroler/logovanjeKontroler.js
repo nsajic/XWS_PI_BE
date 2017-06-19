@@ -7,7 +7,6 @@ logovanjeKontroler.controller('logovanjeKontroler', function($window,
 		if (data.message == "NekoNaSesiji") {
 			$location.path('/welcome');
 		} else {
-
 		}
 	});
 
@@ -35,8 +34,14 @@ logovanjeKontroler.controller('logovanjeKontroler', function($window,
 				console.log(data);
 				$location.path('/welcome');
 
+			} else {
+
+				alert("Neuspesno logovanje, pokusajte ponovo");
 			}
-		});
+		}). error(function (data){
+			
+			alert("Neuspesno logovanje, pokusajte ponovo");
+		})
 
 	}
 
