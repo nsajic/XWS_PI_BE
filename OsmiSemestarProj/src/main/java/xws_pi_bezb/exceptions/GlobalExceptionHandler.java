@@ -19,11 +19,20 @@ import groovy.util.logging.Slf4j;
 public class GlobalExceptionHandler {
 
 	//TODO Handle exceptions
+	
+	@ResponseStatus(value = HttpStatus.BAD_REQUEST, reason = "InterruptedException occured")
+	@ExceptionHandler(InterruptedException.class)
+	public void InterruptedException(HttpServletRequest req, Exception e) {
+		e.printStackTrace();
+	}
+	
+
 	@ResponseStatus(value = HttpStatus.BAD_REQUEST, reason = "SQLException occured")
 	@ExceptionHandler(SQLException.class)
 	public void handleSQLException(HttpServletRequest req, Exception e) {
 		e.printStackTrace();
 	}
+	
 	
 	@ResponseStatus(value = HttpStatus.BAD_REQUEST, reason = "DateTimeParseException occured")
 	@ExceptionHandler(DateTimeParseException.class)

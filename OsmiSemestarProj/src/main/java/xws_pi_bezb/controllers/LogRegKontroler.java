@@ -1,5 +1,7 @@
 package xws_pi_bezb.controllers;
 
+import java.util.concurrent.TimeUnit;
+
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -107,8 +109,12 @@ public class LogRegKontroler {
 	}
 
 	@RequestMapping(value = "/resetPassword", method = RequestMethod.POST)
-	public ResponseEntity<Poruka> resetPassword(@RequestBody PromenaLozinkeViewModel user, HttpSession session) {
-		if (user.getNovaLozinka().equals(user.getNovaLozinka2())) {
+
+	public ResponseEntity<Poruka> resetPassword(@RequestBody PromenaLozinkeViewModel user, HttpSession session) throws InterruptedException{
+		TimeUnit.SECONDS.sleep(1); // zbog brute force
+		
+		if(user.getNovaLozinka().equals(user.getNovaLozinka2())){
+
 			PasswordValidator validator = new PasswordValidator();
 
 			if (!validator.validate(user.getNovaLozinka())) {
