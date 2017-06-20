@@ -11,7 +11,9 @@ package bezbednost.poslovna.xml.ws.nalogzaprenos;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
+
 import org.w3._2000._09.xmldsig_.SignatureType;
 import org.w3._2001._04.xmlenc_.EncryptedDataType;
 
@@ -40,6 +42,7 @@ import org.w3._2001._04.xmlenc_.EncryptedDataType;
  * 
  * 
  */
+@XmlRootElement(name="NalogZaPrenosRequest", namespace="http://nalogzaprenos.ws.xml.poslovna.bezbednost/")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "NalogZaPrenosRequest", propOrder = {
     "idPoruke",
@@ -48,7 +51,7 @@ import org.w3._2001._04.xmlenc_.EncryptedDataType;
     "hitno",
     "encryptedData",
     "signature"
-})
+}, namespace="http://nalogzaprenos.ws.xml.poslovna.bezbednost/")
 public class NalogZaPrenosRequest {
 
     @XmlElement(name = "IDPoruke", required = true)
