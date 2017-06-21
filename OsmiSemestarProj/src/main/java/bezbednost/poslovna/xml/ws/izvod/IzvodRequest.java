@@ -10,6 +10,7 @@ package bezbednost.poslovna.xml.ws.izvod;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
 
@@ -32,10 +33,11 @@ import javax.xml.bind.annotation.XmlType;
  * 
  * 
  */
+@XmlRootElement(name="IzvodRequest", namespace="http://izvod.ws.xml.poslovna.bezbednost/")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "IzvodRequest", propOrder = {
     "zahtev"
-})
+}, namespace="http://izvod.ws.xml.poslovna.bezbednost/")
 public class IzvodRequest {
 
     @XmlElement(name = "Zahtev", required = true)
