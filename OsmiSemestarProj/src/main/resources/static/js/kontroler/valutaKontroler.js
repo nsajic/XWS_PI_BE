@@ -1,7 +1,23 @@
 var valutaKontroler = angular.module('xws_pi_bezb.valutaKontroler', []);
 
-valutaKontroler.controller('valutaCtrl', function($scope, valutaServis, $window, $location) {
+valutaKontroler.controller('valutaCtrl', function($scope, valutaServis, $window, $location, klijentServis) {
 
+
+	$scope.privileges = [];
+
+	klijentServis.ucitajPrivilegije().success(function(data) {
+		$scope.privileges = data;
+	}).error(function(data) {
+		alert("Korisnik nema nikakvih privilegija.");
+	});
+
+	$scope.hasPrivilege = function(privilege) {
+		if ($scope.privileges.indexOf(privilege) > -1)
+			return true;
+		else
+			return false;
+	};
+	
 	$scope.resetujPoljaPretraga = function(){
 		$scope.nazivValutePretraga = null;
 		$scope.sifraValutePretraga = null;

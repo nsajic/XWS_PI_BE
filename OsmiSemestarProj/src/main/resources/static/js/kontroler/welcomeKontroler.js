@@ -2,6 +2,21 @@ var welcomeKontroler = angular.module('xws_pi_bezb.welcomeKontroler', []);
 
 welcomeKontroler.controller('welcomeCtrl', function($scope, $location, $window, welcomeServis, klijentServis) {
 
+	$scope.privileges = [];
+
+	klijentServis.ucitajPrivilegije().success(function(data) {
+		$scope.privileges = data;
+	}).error(function(data) {
+		alert("Korisnik nema nikakvih privilegija.");
+	});
+
+	$scope.hasPrivilege = function(privilege) {
+		if ($scope.privileges.indexOf(privilege) > -1)
+			return true;
+		else
+			return false;
+	};
+	
 	$scope.logOut = function(){
 
 		welcomeServis.logOut().success(function(data) {

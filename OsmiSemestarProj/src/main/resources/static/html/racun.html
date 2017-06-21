@@ -7,11 +7,11 @@
 	<div>
 		<div id="tabs">
 			<ul>
-				<li ng-class="{active: isSet(0)}"><a ng-click="setTab(0); prikaziPretraguRacuni = false"
+				<li ng-show="hasPrivilege('Racun:IzlistajPretrazi')" ng-class="{active: isSet(0)}"><a ng-click="setTab(0); prikaziPretraguRacuni = false"
 					href=""><span>Racuni</span></a></li>
-				<li ng-class="{active: isSet(1)}"><a ng-click="setTab(1)"
+				<li ng-show="hasPrivilege('Racun:Dodaj')" ng-class="{active: isSet(1)}"><a ng-click="setTab(1)"
 					href=""><span>Dodaj racun</span></a></li>
-				<li ng-class="{active: isSet(2)}"><a ng-click="setTab(2)"
+				<li ng-show="hasPrivilege('Racun:Izmeni')" ng-class="{active: isSet(2)}"><a ng-click="setTab(2)"
 					href=""><span>Izmeni racun</span></a></li>
 			</ul>
 		</div>
@@ -50,7 +50,7 @@
 			<div ng-show = "getIdRacuna() === -1 && getIdRacunaZaZatvaranje() === -1">
 				<h2>Racuni</h2>
 					
-				<button ng-show = "racuni.length != 0 || prikaziPretraguRacuni" ng-click="prikaziPretraguRacuni = true">Pretraga</button>
+				<button ng-show = "(racuni.length != 0 || prikaziPretraguRacuni) && hasPrivilege('Racun:IzlistajPretrazi')" ng-click="prikaziPretraguRacuni = true">Pretraga</button>
 				<div ng-show = "prikaziPretraguRacuni">
 					<h2>Unesite podatke o racunu:</h2>
 					<table>
@@ -100,7 +100,7 @@
 					</table>
 				</div>
 						
-				<table>
+				<table  ng-show="hasPrivilege('Racun:IzlistajPretrazi') && racuni.length != 0">
 					<tr>
 						<td style = "width:130px; heigth: 70px">Broj racuna:</td>
 						<td style = "width:130px; heigth: 70px">Status racuna</td>
@@ -122,10 +122,10 @@
 						</td> 
 						<td style = "width:130px; heigth: 70px">{{racun.banka.nazivBanke}}</td>
 						<td style = "width:130px; heigth: 70px">{{racun.valuta.nazivValute}}</td>
-						<td><button ng-click="obrisiRacun(racun.id)">Obrisi</button></td>
-						<td><button ng-click="setRacunZaIzmenu(racun)">Izmeni</button></td>
-						<td><button ng-click="setRacunZaZatvaranje(racun)">Zatvori</button></td>
-						<td><button ng-click="setRacunZaDnevnaStanja(racun)">Dnevna stanja</button></td>
+						<td ng-show="hasPrivilege('Racun:Obrisi')"><button ng-click="obrisiRacun(racun.id)">Obrisi</button></td>
+						<td ng-show="hasPrivilege('Racun:Izmeni')"><button ng-click="setRacunZaIzmenu(racun)">Izmeni</button></td>
+						<td ng-show="hasPrivilege('Racun:Izmeni')"> <button ng-click="setRacunZaZatvaranje(racun)">Zatvori</button></td>
+						<td ng-show="hasPrivilege('Racun:DnevnoStanjeOdabranogRacuna')"><button ng-click="setRacunZaDnevnaStanja(racun)">Dnevna stanja</button></td>
 					</tr>
 				</table>
 			</div>
@@ -178,7 +178,7 @@
 						</td>
 					</tr>
 				</table>
-				<button ng-click="dodajRacun()">Dodaj</button>
+				<button ng-show="hasPrivilege('Racun:Dodaj')" ng-click="dodajRacun()">Dodaj</button>
 				
 				<div ng-show = "prikaziKlijenteBool == true" >
 					<hr>
@@ -297,7 +297,7 @@
 					</tr>
 
 				</table>
-				<button ng-click="izmeniRacun()">Potvrdi</button>
+				<button ng-show="hasPrivilege('Racun:Izmeni')" ng-click="izmeniRacun()">Potvrdi</button>
 				
 				<div ng-show = "prikaziKlijenteBoolIzmena == true" >
 					<hr>

@@ -32,11 +32,6 @@ public class LogRegKontroler {
 	@Autowired
 	private IKlijentService korisnikService;
 
-	//private Logger logger; 
-	
-	/*public LogRegKontroler() {
-		logger = new Logger();
-	}*/
 	/*
 	 * @Autowired private PasswordEncoder passwordEncoder;
 	 * 

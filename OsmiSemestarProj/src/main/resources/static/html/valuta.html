@@ -7,9 +7,9 @@
 	<div>
 		<div id="tabs">
 			<ul>
-				<li ng-class="{active: isSet(0)}"><a ng-click="setTab(0); prikaziPretragu = false"
+				<li ng-show="hasPrivilege('Valuta:IzlistajPretrazi')" ng-class="{active: isSet(0)}"><a ng-click="setTab(0); prikaziPretragu = false"
 					href=""><span>Valute</span></a></li>
-				<li ng-class="{active: isSet(1)}"><a ng-click="setTab(1)"
+				<li ng-show="hasPrivilege('Valuta:Dodaj')" ng-class="{active: isSet(1)}"><a ng-click="setTab(1)"
 					href=""><span>Dodaj valutu</span></a></li>
 			</ul>
 		</div>
@@ -18,7 +18,7 @@
 			<h2>Valute</h2>	
 		
 		
-			<button ng-show = "valute.length != 0 || prikaziPretragu" ng-click="prikaziPretragu = true">Pretraga</button>
+			<button ng-show = "(valute.length != 0 || prikaziPretragu) && hasPrivilege('Valuta:IzlistajPretrazi')" ng-click="prikaziPretragu = true">Pretraga</button>
 			<div ng-show = "prikaziPretragu">
 				<h2>Unesite podatke o valuti:</h2>
 				<table>
@@ -55,9 +55,9 @@
 				<tr>
 					<td style = "width:120px; heigth: 70px">{{valuta.nazivValute}}</td>
 					<td style = "width:120px; heigth: 70px">{{valuta.sifraValute}}</td>
-					<td><button ng-click="obrisiValutu(valuta.id)">Obrisi</button></td>
-					<td><button ng-click="setValutuZaIzmenu(valuta)">Izmeni</button></td>
-					<td><button ng-click="setValutuZaNext(valuta)">Next</button></td>
+					<td><button ng-click="obrisiValutu(valuta.id)" ng-show="hasPrivilege('Valuta:Obrisi')">Obrisi</button></td>
+					<td><button ng-click="setValutuZaIzmenu(valuta)" ng-show="hasPrivilege('Valuta:Izmeni')">Izmeni</button></td>
+					<td><button ng-click="setValutuZaNext(valuta)" ng-show="hasPrivilege('Valuta:IzlistajPretrazi')">Next</button></td>
 				</tr>
 				<tr ng-show = 'idValuteZaIzmenu == valuta.id'>
 					<td><input style = "width:100px; heigth: 70px" type=text ng-model="$ctrl.nazivValuteIzmena"></td>
@@ -85,7 +85,7 @@
 					<tr>
 
 				</table>
-				<button ng-click="dodajValutu()">Dodaj</button>
+				<button ng-click="dodajValutu()" ng-show="hasPrivilege('Valuta:Dodaj')">Dodaj</button>
 			</div>
 		</div>
 	</div>

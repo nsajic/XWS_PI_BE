@@ -12,17 +12,24 @@
 
 		<hr/>
 		<div>
+			<div  ng-show="hasPrivilege('Banka:View')">
 			<a href="banka">Banke</a> 
-			<br/>
+			</div>
+			<div ng-show="hasPrivilege('Klijent:View')">
 			<a href="pravnoLice">Pravna lica</a>
-			<br/>
+			</div>
+			<div ng-show="hasPrivilege('Klijent:View')">
 			<a href="fizickoLice">Fizicka lica</a>
-			<br/>
-			<a href="delatnost">Delatnosti</a>
-			<br/>
+			</div>
+			<div ng-show="hasPrivilege('Delatnost:View')">
+			<a href="delatnost" >Delatnosti</a>
+			</div>
+			<div ng-show="hasPrivilege('Valuta:View')">
 			<a href="valuta">Valute</a>
-			<br/>
+			</div>
+			<div ng-show="hasPrivilege('Racun:View')">
 			<a href="racun">Racuni</a>
+			</div>
 		</div>
 	</div>
 </div>
