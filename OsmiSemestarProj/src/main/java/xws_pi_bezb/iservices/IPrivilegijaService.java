@@ -1,4 +1,4 @@
-package xws_pi_bezb.iservices;
+/*package xws_pi_bezb.iservices;
 
 import java.util.List;
 
@@ -20,3 +20,4 @@ public interface IPrivilegijaService {
 	Privilegija getByNaziv(String value);
 	
 }
+*/

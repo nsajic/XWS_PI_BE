@@ -37,7 +37,7 @@ welcomeKontroler.controller('welcomeCtrl', function($scope, $location, $window, 
 			$scope.ulogovanKorisnik = data.korisnik
 			$scope.rolaUlogovanog = data.rola.naziv;
 			
-
+			/*
 			if($scope.rolaUlogovanog == "FizickoLice"){
 				if($scope.ulogovanKorisnik.logovaoSe == true){
 					$scope.zabraniPrikaz = false;
@@ -45,6 +45,7 @@ welcomeKontroler.controller('welcomeCtrl', function($scope, $location, $window, 
 					$location.path('/promenaLozinke');
 				}
 			}
+			*/
 		}).error(function(data) {
 			alert("Neuspesno ucitavanje ulogovanog korisnika!");
 		});	

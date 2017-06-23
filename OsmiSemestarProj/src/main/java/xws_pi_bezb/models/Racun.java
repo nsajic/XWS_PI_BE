@@ -10,8 +10,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import xws_pi_bezb.models.korisnici.FizickoLice;
-
 
 @Entity
 @Table(name = "racun")

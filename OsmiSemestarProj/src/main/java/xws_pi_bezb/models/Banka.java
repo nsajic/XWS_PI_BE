@@ -10,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import xws_pi_bezb.models.korisnici.BankarskiSluzbenik;
+
 @Entity
 @Table(name = "banka")
 public class Banka implements Serializable {
@@ -40,6 +42,10 @@ public class Banka implements Serializable {
 	*/
 	@OneToMany(mappedBy = "banka")
 	private Set<Racun> racuni;
+	
+	@OneToMany(mappedBy = "banka")
+	private Set<BankarskiSluzbenik> bankarskiSluzbenici;
+	
 	
 	public Banka(){}
 	

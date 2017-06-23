@@ -1,4 +1,4 @@
-package xws_pi_bezb.models;
+/*package xws_pi_bezb.models;
 
 import java.io.Serializable;
 import java.util.Set;
@@ -16,7 +16,7 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import xws_pi_bezb.models.korisnici.Korisnik;
+import xws_pi_bezb.models.korisnici.Klijent;
 
 @Entity
 @Table(name = "rola")
@@ -31,8 +31,8 @@ public class Rola implements Serializable  {
 	@Column(name = "naziv", nullable = false)
 	private String naziv;
 	
-	/*@OneToMany(mappedBy = "rola")
-	private Set<Privilegija> privilegijе;*/
+	//@OneToMany(mappedBy = "rola")
+	//private Set<Privilegija> privilegijе;
 	
 	@ManyToMany
     @JoinTable(
@@ -44,7 +44,7 @@ public class Rola implements Serializable  {
     private Set<Privilegija> privilegije;  
 	
 	@OneToMany(mappedBy = "rola")
-	private Set<Korisnik> korisnici;
+	private Set<Klijent> korisnici;
 	
 	public Rola() {}
 
@@ -66,11 +66,12 @@ public class Rola implements Serializable  {
 		this.privilegije = privilegije;
 	}
 
-	public Set<Korisnik> getKorisnici() {
+	public Set<Klijent> getKorisnici() {
 		return korisnici;
 	}
 
-	public void setKorisnici(Set<Korisnik> korisnici) {
+	public void setKorisnici(Set<Klijent> korisnici) {
 		this.korisnici = korisnici;
 	}	
 }
+*/

@@ -6,15 +6,15 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import xws_pi_bezb.models.korisnici.Korisnik;
-import xws_pi_bezb.models.korisnici.PravnoLice;
+import xws_pi_bezb.models.Klijent;
+import xws_pi_bezb.models.PravnoLice;
 
 @Repository
 @Transactional
-public interface IKlijentRepository extends JpaRepository<Korisnik, Long>{
-	Korisnik findById(Long id);
+public interface IKlijentRepository extends JpaRepository<Klijent, Long>{
+	Klijent findById(Long id);
 	
-	Korisnik findByEmail(String email);
+	Klijent findByEmail(String email);
 
 
 }
