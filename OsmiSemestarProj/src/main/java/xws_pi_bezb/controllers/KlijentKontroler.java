@@ -23,11 +23,11 @@ import xws_pi_bezb.iservices.IRolaService;
 import xws_pi_bezb.models.Delatnost;
 import xws_pi_bezb.models.FizickoLice;
 import xws_pi_bezb.models.PravnoLice;
-import xws_pi_bezb.view_models.UlogovanKorisnikIRolaViewModel;
 import xws_pi_bezb.models.Privilegija;
 import xws_pi_bezb.models.Rola;
 import xws_pi_bezb.models.korisnici.BankarskiSluzbenik;
 import xws_pi_bezb.view_models.PretragaPravnihLicaViewModel;
+import xws_pi_bezb.view_models.UlogovanKorisnikIRolaViewModel;
 
 @Controller
 @RequestMapping("/klijentKontroler")

@@ -1,9 +1,12 @@
 insert into banka (naziv_banke, sifra_banke, swift_kod, obracunski_racun) values ('Banka1', 111, '111', '111');
 insert into banka (naziv_banke, sifra_banke, swift_kod, obracunski_racun) values ('Banka2', 222, '222', '222');
 
+
+insert into rola (naziv) values ('aaaa');
+insert into rola (naziv) values ('bbbb');
 insert into rola (naziv) values ('BankarskiSluzbenik');
 
-insert into bankarski_sluzbenik (ime, prezime, email, sifra, telefon, adresa, jmbg, banka_id, rola_id) values ('Sasa', 'Momcilovic', 'a@gmail.com', '$2a$12$/eDioOpiKrGQnDv53hPxIe8XDCJWP/Xe1fF6E5IrTVxuBozu9EX9G', '93849214', 'Vojvodjanska 14', '3948393', 1, 1);
+
 
 insert into privilegija (naziv) values ('Banka:View');	--1
 insert into privilegija (naziv) values ('Banka:Dodaj');  --2
@@ -73,6 +76,8 @@ insert into rola_privilegija values (3, 23);
 insert into rola_privilegija values (3, 24);
 insert into rola_privilegija values (3, 25);
 insert into rola_privilegija values (3, 26);
+
+insert into bankarski_sluzbenik (ime, prezime, email, sifra, telefon, adresa, jmbg, banka_id, rola_id) values ('Sasa', 'Momcilovic', 'a@gmail.com', '$2a$12$/eDioOpiKrGQnDv53hPxIe8XDCJWP/Xe1fF6E5IrTVxuBozu9EX9G', '93849214', 'Vojvodjanska 14', '3948393', 1, 3);
 
 insert into delatnost(naziv_delatnosti) values ('Ugostiteljstvo');
 insert into delatnost(naziv_delatnosti) values ('Turizam');
