@@ -6,7 +6,6 @@ racunKontroler.controller('racunCtrl', function($scope, racunServis, $window, $l
 		$scope.brojRacunaPretraga = null;
 		$scope.statusRacunaPretraga = null;
 		$scope.klijentRacunaPretraga = null;
-		$scope.bankaRacunaPretraga = null;
 		$scope.valutaRacunaPretraga = null;
 	}
 	
@@ -14,7 +13,6 @@ racunKontroler.controller('racunCtrl', function($scope, racunServis, $window, $l
 		$scope.brojRacuna = null;
 		$scope.statusRacuna = null;
 		$scope.klijentRacuna = null;
-		$scope.bankaRacuna = null;
 		$scope.valutaRacuna = null;
 	}
 	
@@ -22,7 +20,6 @@ racunKontroler.controller('racunCtrl', function($scope, racunServis, $window, $l
 		$scope.brojRacunaIzmena = null;
 		$scope.statusRacunaIzmena = null;
 		$scope.klijentRacunaIzmena = null;
-		$scope.bankaRacunaIzmena = null;
 		$scope.valutaRacunaIzmena = null;
 	}
 	
@@ -60,7 +57,6 @@ racunKontroler.controller('racunCtrl', function($scope, racunServis, $window, $l
 		
 		if(newTab == 1){
 			$scope.ucitajValute();
-			$scope.ucitajBanke();
 			$scope.ucitajKlijente();
 		}
 		if(newTab == 2){
@@ -80,14 +76,6 @@ racunKontroler.controller('racunCtrl', function($scope, racunServis, $window, $l
 		});
 	}
 	
-	$scope.ucitajBanke = function (){
-		racunServis.ucitajBanke().success(function(data) {
-			$scope.banke = data;
-		}).error(function(data) {
-			alert("Nemoguce ucitati banke");
-		});
-	}
-	
 	$scope.ucitajKlijente = function (){
 		racunServis.ucitajKlijente().success(function(data) {
 			$scope.klijenti = data;
@@ -99,7 +87,6 @@ racunKontroler.controller('racunCtrl', function($scope, racunServis, $window, $l
 	//INIT START
 	$scope.setTab(0);
 	$scope.valute = [];
-	$scope.banke = [];
 	$scope.klijenti = [];
 	$scope.idRacunaZaIzmenu = -1;
 	$scope.idRacunaZaDnevnaStanja = -1;
@@ -132,7 +119,6 @@ racunKontroler.controller('racunCtrl', function($scope, racunServis, $window, $l
 				brojRacuna : $scope.brojRacuna,
 				statusRacuna : $scope.statusRacuna,
 				klijent : $scope.klijentRacuna,
-				banka : $scope.bankaRacuna,
 				valuta : $scope.valutaRacuna
 		}
 		racunServis.dodajRacun(racun).success(function(data) {
@@ -152,7 +138,6 @@ racunKontroler.controller('racunCtrl', function($scope, racunServis, $window, $l
 			brojRacuna : controller.brojRacunaIzmena,
 			statusRacuna : controller.statusRacunaIzmena,
 			klijent : controller.klijentRacunaIzmena,
-			banka : controller.bankaRacunaIzmena,
 			valuta : controller.valutaRacunaIzmena,
 		}
 		racunServis.izmeniRacun(racun).success(function(data) {
@@ -180,7 +165,6 @@ racunKontroler.controller('racunCtrl', function($scope, racunServis, $window, $l
 	}
 	
 	$scope.setRacunZaIzmenu = function(racun) {
-		$scope.ucitajBanke();
 		$scope.ucitajValute();
 		$scope.ucitajKlijente();
 		$scope.idRacunaZaIzmenu = racun.id;
@@ -192,7 +176,6 @@ racunKontroler.controller('racunCtrl', function($scope, racunServis, $window, $l
 		controller.statusRacunaIzmena = racun.statusRacuna;
 
 		controller.klijentRacunaIzmena = racun.klijent;
-		controller.bankaRacunaIzmena = racun.banka;
 		controller.valutaRacunaIzmena = racun.valuta;
 		
 		$scope.setTab(2);
@@ -230,7 +213,6 @@ racunKontroler.controller('racunCtrl', function($scope, racunServis, $window, $l
 				brojRacuna : $scope.brojRacunaPretraga,
 				statusRacuna : $scope.statusRacunaPretraga,
 				klijent : $scope.statusRacunaPretraga,
-				banka : $scope.statusRacunaPretraga,
 				valuta : $scope.statusRacunaPretraga
 
 			}
@@ -289,50 +271,6 @@ racunKontroler.controller('racunCtrl', function($scope, racunServis, $window, $l
 
 
 	
-
-	
-	
-	// ZOOM BANKA
-
-	
-	$scope.odaberiBanku = function (banka){
-		if (banka != null) {
-			for (var i = 0; i < $scope.banke.length; i++) {
-				if ($scope.banke[i].id == banka.id) {
-					$scope.bankaRacuna = $scope.banke[i];
-				}
-			}
-		} else {
-			controller.bankaRacunaIzmena = null;
-		}
-		$scope.prikaziBankeBool = false;
-		
-	}
-	
-	$scope.odaberiBankuIzmena = function (banka){
-		$scope.prikaziBankeBoolIzmena = false;
-		if (banka != null) {
-			for (var i = 0; i < $scope.banke.length; i++) {
-				if ($scope.banke[i].id == banka.id) {
-					controller.bankaRacunaIzmena = $scope.banke[i];
-				}
-			}
-		} else {
-			controller.bankaRacunaIzmena = null;
-		}
-		$scope.prikaziBankeBoolIzmena = false;
-	}
-	
-	
-	$scope.skloniBanke =function (){
-		$scope.prikaziBankeBool = false;
-	}	
-
-	$scope.skloniBankeIzmena =function (){
-		$scope.prikaziBankeBoolIzmena = false;
-	}	
-
-
 
 	
 
