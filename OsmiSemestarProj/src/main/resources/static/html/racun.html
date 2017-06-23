@@ -73,12 +73,7 @@
 							<td>
 						</tr>
 						
-						<tr>
-							<td>Banka:</td>
-							<td>
-								<select style="width: 100px" ng-options="delatnost.nazivDelatnosti for delatnost in delatnosti" ng-model="delatnostRacunaPretraga"></select></td>
-							<td>
-						</tr>
+					
 						<tr>
 							<td>Valuta:</td>
 							<td>
@@ -105,7 +100,6 @@
 						<td style = "width:130px; heigth: 70px">Broj racuna:</td>
 						<td style = "width:130px; heigth: 70px">Status racuna</td>
 						<td style = "width:190px; heigth: 70px">Klijent</td>
-						<td style = "width:130px; heigth: 70px">Banka</td>
 						<td style = "width:130px; heigth: 70px">Valuta</td>
 
 					</tr>
@@ -120,7 +114,6 @@
 							<div ng-show = "racun.klijent.rola.naziv == 'PravnoLice'">{{racun.klijent.naziv}}</div>
 							<div ng-show = "racun.klijent.rola.naziv == 'FizickoLice'">{{racun.klijent.ime}} {{racun.klijent.prezime}}</div>
 						</td> 
-						<td style = "width:130px; heigth: 70px">{{racun.banka.nazivBanke}}</td>
 						<td style = "width:130px; heigth: 70px">{{racun.valuta.nazivValute}}</td>
 						<td ng-show="hasPrivilege('Racun:Obrisi')"><button ng-click="obrisiRacun(racun.id)">Obrisi</button></td>
 						<td ng-show="hasPrivilege('Racun:Izmeni')"><button ng-click="setRacunZaIzmenu(racun)">Izmeni</button></td>
@@ -158,15 +151,6 @@
 						</td>
 					</tr>
 
-					<tr>
-						<td>Banka:</td>
-						<td>
-							<select style="width: 180px" ng-options="banka.nazivBanke for banka in banke" ng-model="bankaRacuna"></select>
-						</td>
-						<td>
-							<button class="btn" ng-click="prikaziBankeBool = true">Prikazi banke</button>
-						</td>
-					</tr>
 
 					<tr>
 						<td>Valute:</td>
@@ -191,37 +175,7 @@
 					<hr>
 					<button ng-click="skloniKlijente()">Skloni</button>
 				</div>
-				
-				<div ng-show = "prikaziBankeBool == true" >
-					<hr>
-					<table>
-						<tr>
-							<td style = "width:120px; heigth: 70px">
-								Naziv
-							</td>
-							<td style = "width:120px; heigth: 70px">
-								Sifra
-							</td>
-							<td style = "width:120px; heigth: 70px">
-								Swift kod
-							</td>
-							<td style = "width:120px; heigth: 70px">
-								Obracunski racun
-							</td>
-						</tr>
-					</table>
-					<table  ng-repeat='banka in banke'>
-						<tr >
-							<td style = "width:120px; heigth: 70px">{{banka.nazivBanke}}</td>
-							<td style = "width:120px; heigth: 70px">{{banka.sifraBanke}}</td>
-							<td style = "width:120px; heigth: 70px">{{banka.swiftKod}}</td>
-							<td style = "width:120px; heigth: 70px">{{banka.obracunskiRacun}}</td>
-							<td><button ng-click="odaberiBanku(banka)">Odaberi</button></td>
-						</tr>
-					</table>
-					<hr>
-					<button ng-click="skloniBanke()">Skloni</button>
-				</div>
+			
 				
 				<div ng-show = "prikaziValuteBool == true" >
 					<hr>
@@ -277,16 +231,6 @@
 					</tr>
 
 					<tr>
-						<td>Banka:</td>
-						<td>
-							<select style="width: 180px" ng-options="banka.nazivBanke for banka in banke" ng-model="$ctrl.bankaRacunaIzmena"></select>
-						</td>
-						<td>
-							<button class="btn" ng-click="prikaziBankeBoolIzmena = true">Prikazi banke</button>
-						</td>
-					</tr>
-
-					<tr>
 						<td>Valute:</td>
 						<td>
 							<select style="width: 180px" ng-options="valuta.nazivValute for valuta in valute" ng-model="$ctrl.valutaRacunaIzmena"></select>
@@ -310,37 +254,7 @@
 					<hr>
 					<button ng-click="skloniKlijenteIzmena()">Skloni</button>
 				</div>
-				
-				<div ng-show = "prikaziBankeBoolIzmena == true" >
-					<hr>
-					<table>
-						<tr>
-							<td style = "width:120px; heigth: 70px">
-								Naziv
-							</td>
-							<td style = "width:120px; heigth: 70px">
-								Sifra
-							</td>
-							<td style = "width:120px; heigth: 70px">
-								Swift kod
-							</td>
-							<td style = "width:120px; heigth: 70px">
-								Obracunski racun
-							</td>
-						</tr>
-					</table>
-					<table  ng-repeat='banka in banke'>
-						<tr >
-							<td style = "width:120px; heigth: 70px">{{banka.nazivBanke}}</td>
-							<td style = "width:120px; heigth: 70px">{{banka.sifraBanke}}</td>
-							<td style = "width:120px; heigth: 70px">{{banka.swiftKod}}</td>
-							<td style = "width:120px; heigth: 70px">{{banka.obracunskiRacun}}</td>
-							<td><button ng-click="odaberiBankuIzmena(banka)">Odaberi</button></td>
-						</tr>
-					</table>
-					<hr>
-					<button ng-click="skloniBankeIzmena()">Skloni</button>
-				</div>
+	
 				
 				<div ng-show = "prikaziValuteBoolIzmena == true" >
 					<hr>

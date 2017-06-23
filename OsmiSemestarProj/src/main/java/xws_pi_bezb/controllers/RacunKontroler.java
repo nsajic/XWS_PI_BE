@@ -51,7 +51,7 @@ public class RacunKontroler {
 
 	@RequestMapping(value = "/dodajRacun", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
 	@InterceptorAnnotation("Racun:Dodaj")
-	public ResponseEntity<Object> dodajRacun(@RequestBody Racun racun) throws ParseException {
+	public ResponseEntity<Object> dodajRacun(HttpSession session,@RequestBody Racun racun ) throws ParseException {
 		DnevnoStanjeRacuna dsr = new DnevnoStanjeRacuna();
 		DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
 		Date today = new Date();
@@ -66,15 +66,32 @@ public class RacunKontroler {
 		dsr.setPrometUKorist(0);
 		dsr.setRacun(racun);
 		
+		BankarskiSluzbenik sluzbenik = (BankarskiSluzbenik)session.getAttribute("ulogovanKorisnik");
+		if(sluzbenik == null){
+			return new ResponseEntity<Object>(HttpStatus.BAD_REQUEST);
+		}
+		
+		racun.setBanka(bankaService.findOne(sluzbenik.getBanka().getId()));
+		
 		racunService.save(racun);
+		System.out.println(racunService.findOne(racun.getId()).getBanka().getNazivBanke());
 		dnevnoStanjeRacunaService.save(dsr);
 		return new ResponseEntity<Object>(racunService.findAll(), HttpStatus.OK);
 	}
 	
 	@RequestMapping(value = "/izmeniRacun", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
 	@InterceptorAnnotation("Racun:Izmeni")
-	public ResponseEntity<Object> izmeniRacun(@RequestBody Racun racun) {
+	public ResponseEntity<Object> izmeniRacun(@RequestBody Racun racun, HttpSession session) {
+		
+		BankarskiSluzbenik sluzbenik = (BankarskiSluzbenik)session.getAttribute("ulogovanKorisnik");
+		if(sluzbenik == null){
+			return new ResponseEntity<Object>(HttpStatus.BAD_REQUEST);
+		}
+		
+		racun.setBanka(bankaService.findOne(sluzbenik.getBanka().getId()));
+		
 		racunService.save(racun);
+		System.out.println(racunService.findOne(racun.getId()).getBanka().getNazivBanke());
 		return new ResponseEntity<Object>(HttpStatus.OK);
 	}
 
@@ -113,12 +130,6 @@ public class RacunKontroler {
 	@InterceptorAnnotation("Racun:IzlistajPretrazi")
 	public ResponseEntity<Racun> ucitajPravnoLice(@RequestBody Racun racun) {
 		return new ResponseEntity<Racun>(racunService.findOne(racun.getId()), HttpStatus.OK);
-	}
-	
-	@RequestMapping(value = "/ucitajBanke", method = RequestMethod.GET)
-	@InterceptorAnnotation("Banka:IzlistajPretrazi")
-	public ResponseEntity<List<Banka>> ucitajBanke() {
-		return new ResponseEntity<List<Banka>>(bankaService.findAll(), HttpStatus.OK);
 	}
 	
 	@RequestMapping(value = "/ucitajValute", method = RequestMethod.GET)
