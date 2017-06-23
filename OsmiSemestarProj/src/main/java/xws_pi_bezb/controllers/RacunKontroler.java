@@ -3,11 +3,11 @@ package xws_pi_bezb.controllers;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-import org.joda.time.DateTime;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import xws_pi_bezb.annotations.InterceptorAnnotation;
 import xws_pi_bezb.iservices.IBankaService;
+import xws_pi_bezb.iservices.IBankarskiSluzbenikService;
 import xws_pi_bezb.iservices.IDnevnoStanjeRacunaService;
 import xws_pi_bezb.iservices.IKlijentService;
 import xws_pi_bezb.iservices.IRacunService;
@@ -28,6 +29,7 @@ import xws_pi_bezb.models.DnevnoStanjeRacuna;
 import xws_pi_bezb.models.Klijent;
 import xws_pi_bezb.models.Racun;
 import xws_pi_bezb.models.Valuta;
+import xws_pi_bezb.models.korisnici.BankarskiSluzbenik;
 
 
 @Controller
@@ -44,6 +46,8 @@ public class RacunKontroler {
 	public IBankaService bankaService;
 	@Autowired
 	private IDnevnoStanjeRacunaService dnevnoStanjeRacunaService;
+	@Autowired
+	private IBankarskiSluzbenikService bankarskiSluzbenikService;
 
 	@RequestMapping(value = "/dodajRacun", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
 	@InterceptorAnnotation("Racun:Dodaj")
@@ -83,14 +87,25 @@ public class RacunKontroler {
 
 	@RequestMapping(value = "/izlistajRacune", method = RequestMethod.GET)
 	@InterceptorAnnotation("Racun:IzlistajPretrazi")
-	public ResponseEntity<List<Racun>> izlistajRacune() {
-		return new ResponseEntity<List<Racun>>(racunService.findAll(), HttpStatus.OK);
+	public ResponseEntity<List<Racun>> izlistajRacune(HttpSession session) {
+		BankarskiSluzbenik sluzbenik = (BankarskiSluzbenik)session.getAttribute("ulogovanKorisnik");
+		if(sluzbenik == null){
+			return new ResponseEntity<List<Racun>>(HttpStatus.BAD_REQUEST);
+		}
+		BankarskiSluzbenik sluzbenik2 = bankarskiSluzbenikService.findOne(sluzbenik.getId());
+		
+		
+		return new ResponseEntity<List<Racun>>(racunService.findByBanka(sluzbenik2.getBanka()), HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/pretraziRacune", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
 	@InterceptorAnnotation("Racun:IzlistajPretrazi")
-	public ResponseEntity<List<Racun>> pretraziPravnaLica(@RequestBody Racun racun) {
-		return new ResponseEntity<List<Racun>>(racunService.getRacunBySearch(racun), HttpStatus.OK);
+	public ResponseEntity<List<Racun>> pretraziPravnaLica(@RequestBody Racun racun, HttpSession session) {
+		BankarskiSluzbenik sluzbenik = (BankarskiSluzbenik)session.getAttribute("ulogovanKorisnik");
+		if(sluzbenik == null){
+			return new ResponseEntity<List<Racun>>(HttpStatus.BAD_REQUEST);
+		}
+		return new ResponseEntity<List<Racun>>(racunService.getRacunBySearch(racun, sluzbenik.getBanka()), HttpStatus.OK);
 	}
 	
 

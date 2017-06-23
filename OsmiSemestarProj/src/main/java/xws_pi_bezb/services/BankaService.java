@@ -43,12 +43,6 @@ public class BankaService implements IBankaService {
 		List<Banka> banke = new ArrayList<Banka>();
 
 		String sifraString = (banka.getSifraBanke() == 0) ? null : Integer.toString(banka.getSifraBanke());
-
-		System.out.println("NAZIV : " + banka.getNazivBanke());
-		System.out.println("SIFRA : " + sifraString);
-		System.out.println("SWIFT : " + banka.getSwiftKod());
-		System.out.println("OBRAC : " + banka.getObracunskiRacun());
-		
 		
 		boolean praznaPretraga = true;
 
