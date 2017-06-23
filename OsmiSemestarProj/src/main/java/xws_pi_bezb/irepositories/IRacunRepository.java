@@ -1,7 +1,5 @@
 package xws_pi_bezb.irepositories;
 
-import java.util.List;
-
 import javax.transaction.Transactional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -15,6 +13,8 @@ import xws_pi_bezb.models.Racun;
 public interface IRacunRepository extends JpaRepository<Racun, Long>{
 	
 	Racun findById(Long id);
+	
+	Racun findByBrojRacuna(String brojRacuna);
 	//List<NaseljenoMesto> findByDrzava(Drzava drzavaId);
 
 }

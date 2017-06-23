@@ -73,4 +73,9 @@ public class ValutaService implements IValutaService {
 		}
 		return valute;
 	}
+
+	@Override
+	public Valuta findBySifraValute(String oznakaValute) {
+		return valutaRepository.findBySifraValute(oznakaValute);
+	}
 }

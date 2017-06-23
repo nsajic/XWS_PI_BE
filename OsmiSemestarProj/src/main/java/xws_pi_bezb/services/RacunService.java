@@ -68,4 +68,9 @@ public class RacunService implements IRacunService{
 		return racuni;
 	}
 
+	@Override
+	public Racun findByBrojRacuna(String brojRacuna) {
+		return racunRepository.findByBrojRacuna(brojRacuna);
+	}
+
 }

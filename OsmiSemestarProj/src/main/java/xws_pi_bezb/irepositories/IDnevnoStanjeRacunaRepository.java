@@ -17,5 +17,5 @@ public interface IDnevnoStanjeRacunaRepository extends JpaRepository<DnevnoStanj
 
 	List<DnevnoStanjeRacuna> findByRacun(Racun racun);
 	
-	
+	DnevnoStanjeRacuna findTopByRacunOrderByDatum(Racun racun);
 }

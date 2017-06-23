@@ -32,4 +32,9 @@ public class DnevnoStanjeRacunaService implements IDnevnoStanjeRacunaService {
 		
 	}
 
+	@Override
+	public DnevnoStanjeRacuna findTopByRacunOrderByDatum(Racun racun) {
+		return dnevnoStanjeRacunaRepository.findTopByRacunOrderByDatum(racun);
+	}
+
 }

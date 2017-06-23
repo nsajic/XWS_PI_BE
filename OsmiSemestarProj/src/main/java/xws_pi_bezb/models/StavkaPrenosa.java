@@ -1,4 +1,4 @@
-/*package xws_pi_bezb.models;
+package xws_pi_bezb.models;
 
 import java.io.Serializable;
 
@@ -29,5 +29,3 @@ public class StavkaPrenosa implements Serializable{
 		this.analitikaIzvoda = analitikaIzvoda;
 	}
 }
-
-*/

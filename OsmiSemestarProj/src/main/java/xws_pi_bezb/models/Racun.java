@@ -38,10 +38,10 @@ public class Racun {
 	
 	@ManyToOne
 	private Valuta valuta;
-	/*
+	
 	@OneToMany(mappedBy = "racun")
 	private Set<ZatvaranjeRacuna> zatvaranjaRacuna; 
-*/	
+	
 	@OneToMany(mappedBy = "racun")
 	private Set<DnevnoStanjeRacuna> dnevnjaStanjaRacuna;
 

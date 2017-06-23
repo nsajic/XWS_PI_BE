@@ -13,4 +13,5 @@ public interface IDnevnoStanjeRacunaService {
 
 	List<DnevnoStanjeRacuna> findByRacun(Racun racun);
 	
+	DnevnoStanjeRacuna findTopByRacunOrderByDatum(Racun racun);
 }
