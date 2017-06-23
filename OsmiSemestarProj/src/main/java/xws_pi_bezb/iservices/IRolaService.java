@@ -6,9 +6,4 @@ public interface IRolaService {
 
 	Rola findByNaziv(String naziv);
 
-	/*void save(Rola banka);
-
-	void delete(Long id);
-	
-	List<Banka> getBySearch(Banka banka);*/
 }

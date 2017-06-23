@@ -6,21 +6,21 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
 import xws_pi_bezb.models.Delatnost;
-import xws_pi_bezb.models.korisnici.FizickoLice;
-import xws_pi_bezb.models.korisnici.Korisnik;
-import xws_pi_bezb.models.korisnici.PravnoLice;
+import xws_pi_bezb.models.FizickoLice;
+import xws_pi_bezb.models.Klijent;
+import xws_pi_bezb.models.PravnoLice;
 
 public interface IKlijentService extends UserDetailsService {
 	
-	List<Korisnik> findAll();
+	List<Klijent> findAll();
 	
 	List<PravnoLice> getPravnaLica();
 	
 	List<FizickoLice> getFizickaLica();
 	
-	Korisnik findOne(Long id);
+	Klijent findOne(Long id);
 
-	void save(Korisnik klijent);
+	void save(Klijent klijent);
 
 	void delete(Long id);
 
@@ -28,7 +28,7 @@ public interface IKlijentService extends UserDetailsService {
 	
 	List<FizickoLice> getFizickaLicaBySearch(FizickoLice fizickoLice);
 
-	Korisnik findByEmail(String email);
+	Klijent findByEmail(String email);
 
 	List<PravnoLice> findByDelatnost(Long id);
 

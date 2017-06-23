@@ -1,4 +1,4 @@
-package xws_pi_bezb.models.korisnici;
+package xws_pi_bezb.models;
 
 import java.io.Serializable;
 import java.util.Set;
@@ -9,12 +9,9 @@ import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
-import xws_pi_bezb.models.Delatnost;
-import xws_pi_bezb.models.Racun;
-
 @Entity
 @DiscriminatorValue("P")
-public class PravnoLice extends Korisnik implements Serializable {
+public class PravnoLice extends Klijent implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 

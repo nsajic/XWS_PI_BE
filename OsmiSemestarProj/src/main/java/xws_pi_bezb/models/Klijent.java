@@ -1,4 +1,4 @@
-package xws_pi_bezb.models.korisnici;
+package xws_pi_bezb.models;
 
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
@@ -8,47 +8,33 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
 import org.springframework.stereotype.Component;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
-
-import xws_pi_bezb.models.Rola;
 
 @Entity
-@Table(name = "korisnik")
+@Table(name = "klijent")
 @Component
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name="tip_korisnika", discriminatorType=DiscriminatorType.STRING)
-public class Korisnik {
+@DiscriminatorColumn(name="tip_klijenta", discriminatorType=DiscriminatorType.STRING)
+public class Klijent {
 	
 	@Id
 	@GeneratedValue
 	private Long id;
 
-	
 	@Column(name = "ime", nullable = false)
 	private String ime;
 	
 	@Column(name = "prezime", nullable = false)
 	private String prezime;
-	
-	@Column(name = "username", nullable = false)
-	private String username;
-	
+
 	@NotNull
 	@Column(name = "email", nullable = false)
 	private String email;
-	
-	@NotNull
-	@Column(name = "sifra", length = 60, nullable = false)
-	private String sifra;
-	
+		
 	@Column(name = "broj_licne_karte", nullable = false)
 	private int brojLicneKarte;
 	
@@ -57,15 +43,9 @@ public class Korisnik {
 	
 	@Column(name = "adresa", nullable = false)
 	private String adresa;
-	
-	@Column(name = "logovao_se", nullable = false)
-	private boolean logovaoSe;
-	
-	@ManyToOne
-	private Rola rola;
-	
-	
-	public Korisnik() {}
+
+
+	public Klijent() {}
 
 	public String getEmail() {
 		return email;
@@ -75,24 +55,6 @@ public class Korisnik {
 		this.email = email;
 	}
 
-	@JsonIgnore
-	public String getSifra() {
-		return sifra;
-	}
-
-	@JsonProperty
-	public void setSifra(String sifra) {
-		this.sifra = sifra;
-	}
-
-	public String getUsername() {
-		return username;
-	}
-
-	public void setUsername(String username) {
-		this.username = username;
-	}
-	
 	public Long getId() {
 		return id;
 	}
@@ -141,21 +103,4 @@ public class Korisnik {
 		this.adresa = adresa;
 	}
 
-	@JsonIgnore
-	public Rola getRola() {
-		return rola;
-	}
-
-	@JsonProperty
-	public void setRola(Rola rola) {
-		this.rola = rola;
-	}
-	
-	public boolean isLogovaoSe() {
-		return logovaoSe;
-	}
-	
-	public void setLogovaoSe(boolean logovaoSe) {
-		this.logovaoSe = logovaoSe;
-	}
 }

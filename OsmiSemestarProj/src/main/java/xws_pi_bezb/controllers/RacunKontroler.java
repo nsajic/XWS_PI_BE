@@ -25,9 +25,9 @@ import xws_pi_bezb.iservices.IRacunService;
 import xws_pi_bezb.iservices.IValutaService;
 import xws_pi_bezb.models.Banka;
 import xws_pi_bezb.models.DnevnoStanjeRacuna;
+import xws_pi_bezb.models.Klijent;
 import xws_pi_bezb.models.Racun;
 import xws_pi_bezb.models.Valuta;
-import xws_pi_bezb.models.korisnici.Korisnik;
 
 
 @Controller
@@ -114,8 +114,8 @@ public class RacunKontroler {
 	
 	@RequestMapping(value = "/ucitajKlijente", method = RequestMethod.GET)
 	@InterceptorAnnotation("Banka:IzlistajPretrazi")
-	public ResponseEntity<List<Korisnik>> ucitajKlijente() {
-		return new ResponseEntity<List<Korisnik>>(klijentService.findAll(), HttpStatus.OK);
+	public ResponseEntity<List<Klijent>> ucitajKlijente() {
+		return new ResponseEntity<List<Klijent>>(klijentService.findAll(), HttpStatus.OK);
 	}
 	
 
