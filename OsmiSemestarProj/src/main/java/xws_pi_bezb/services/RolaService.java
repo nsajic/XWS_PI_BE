@@ -1,4 +1,4 @@
-/*package xws_pi_bezb.services;
+package xws_pi_bezb.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,4 +18,7 @@ public class RolaService implements IRolaService{
 		return rolaRepository.findByNaziv(naziv);
 	}
 
-}*/
+
+
+
+}

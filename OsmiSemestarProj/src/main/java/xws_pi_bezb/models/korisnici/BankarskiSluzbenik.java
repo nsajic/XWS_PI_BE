@@ -10,11 +10,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-
 import xws_pi_bezb.models.Banka;
-import xws_pi_bezb.models.FizickoLice;
+import xws_pi_bezb.models.Rola;
 @Entity
 @Table(name = "bankarski_sluzbenik")
 public class BankarskiSluzbenik implements Serializable {
@@ -35,7 +32,6 @@ public class BankarskiSluzbenik implements Serializable {
 	@Column(name = "email", nullable = false)
 	private String email;
 	
-	
 	@Column(name = "sifra", nullable = false)
 	private String sifra;
 	
@@ -50,6 +46,9 @@ public class BankarskiSluzbenik implements Serializable {
 	
 	@ManyToOne
 	private Banka banka;
+	
+	@ManyToOne
+	private Rola rola;
 	
 	public BankarskiSluzbenik() {}
 	
@@ -115,6 +114,13 @@ public class BankarskiSluzbenik implements Serializable {
 		return sifra;
 	}
 	
+	public Rola getRola() {
+		return rola;
+	}
+	
+	public void setRola(Rola rola) {
+		this.rola = rola;
+	}
 	
 
 	

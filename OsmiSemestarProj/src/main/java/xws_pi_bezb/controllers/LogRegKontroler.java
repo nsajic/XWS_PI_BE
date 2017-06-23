@@ -30,7 +30,7 @@ import xws_pi_bezb.view_models.PromenaLozinkeViewModel;
 public class LogRegKontroler {
 
 	@Autowired
-	private IBankarskiSluzbenikService korisnikService;
+	private IBankarskiSluzbenikService bankarskiSluzbenikService;
 
 	/*
 	 * @Autowired private PasswordEncoder passwordEncoder;
@@ -76,7 +76,7 @@ public class LogRegKontroler {
 		BankarskiSluzbenik kor = (BankarskiSluzbenik) session.getAttribute("ulogovanKorisnik");
 
 		if (kor == null) {
-			BankarskiSluzbenik korisnik = korisnikService.findByEmail(newUser.getEmail());
+			BankarskiSluzbenik korisnik = bankarskiSluzbenikService.findByEmail(newUser.getEmail());
 
 			if (Password.checkPassword(newUser.getSifra(), korisnik.getSifra())) {
 				session.setAttribute("ulogovanKorisnik", korisnik);
@@ -106,8 +106,7 @@ public class LogRegKontroler {
 	@RequestMapping(value = "/resetPassword", method = RequestMethod.POST)
 
 	public ResponseEntity<Poruka> resetPassword(@RequestBody PromenaLozinkeViewModel user, HttpSession session) throws InterruptedException{
-		TimeUnit.SECONDS.sleep(1); // zbog brute force
-		
+
 		if(user.getNovaLozinka().equals(user.getNovaLozinka2())){
 
 			PasswordValidator validator = new PasswordValidator();
@@ -118,13 +117,13 @@ public class LogRegKontroler {
 						null), HttpStatus.NOT_ACCEPTABLE);
 
 			}
-			BankarskiSluzbenik korisnik = korisnikService.findByEmail(((BankarskiSluzbenik) session.getAttribute("ulogovanKorisnik")).getEmail());
+			BankarskiSluzbenik korisnik = bankarskiSluzbenikService.findByEmail(((BankarskiSluzbenik) session.getAttribute("ulogovanKorisnik")).getEmail());
 
 			if (Password.checkPassword(user.getStaraLozinka(), korisnik.getSifra())) {
 				String hashedPassword = Password.hashPassword(user.getNovaLozinka());
 
 				korisnik.setSifra(hashedPassword);
-				korisnikService.save(korisnik);
+				bankarskiSluzbenikService.save(korisnik);
 
 				session.setAttribute("ulogovanKorisnik", korisnik);
 				return new ResponseEntity<Poruka>(new Poruka("Promenjeno", null), HttpStatus.ACCEPTED);

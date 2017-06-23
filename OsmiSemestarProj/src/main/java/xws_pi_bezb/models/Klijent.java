@@ -34,8 +34,7 @@ public class Klijent {
 	@NotNull
 	@Column(name = "email", nullable = false)
 	private String email;
-	
-	
+		
 	@Column(name = "broj_licne_karte", nullable = false)
 	private int brojLicneKarte;
 	
@@ -44,9 +43,7 @@ public class Klijent {
 	
 	@Column(name = "adresa", nullable = false)
 	private String adresa;
-	
-	@Column(name = "logovao_se", nullable = false)
-	private boolean logovaoSe;
+
 
 	public Klijent() {}
 
@@ -105,12 +102,5 @@ public class Klijent {
 	public void setAdresa(String adresa) {
 		this.adresa = adresa;
 	}
-	
-	public boolean isLogovaoSe() {
-		return logovaoSe;
-	}
-	
-	public void setLogovaoSe(boolean logovaoSe) {
-		this.logovaoSe = logovaoSe;
-	}
+
 }
