@@ -5,7 +5,6 @@ fizickoLiceKontroler.controller('fizickoLiceCtrl', function($scope, klijentServi
 	$scope.resetujPoljaPretragaFizickaLica = function(){
 		$scope.imeFizickogLicaPretraga = null;
 		$scope.prezimeFizickogLicaPretraga = null;
-		$scope.usernameFizickogLicaPretraga = null;
 		$scope.emailFizickogLicaPretraga = null;
 		$scope.brojLicneKarteFizickogLicaPretraga = null;
 		$scope.telefonFizickogLicaPretraga = null;
@@ -17,7 +16,6 @@ fizickoLiceKontroler.controller('fizickoLiceCtrl', function($scope, klijentServi
 	$scope.resetujPoljaDodavanjeFizickaLica = function() {
 		$scope.imeFizickogLica = null;
 		$scope.prezimeFizickogLica = null;
-		$scope.usernameFizickogLica = null;
 		$scope.emailFizickogLica = null;
 		$scope.brojLicneKarteFizickogLica = null;
 		$scope.telefonFizickogLica = null;
@@ -114,7 +112,6 @@ fizickoLiceKontroler.controller('fizickoLiceCtrl', function($scope, klijentServi
 		var fizickoLice = {
 				ime : $scope.imeFizickogLica,
 				prezime : $scope.prezimeFizickogLica,
-				username: $scope.usernameFizickogLica,
 				email: $scope.emailFizickogLica,
 				brojLicneKarte : $scope.brojLicneKarteFizickogLica,
 				telefon : $scope.telefonFizickogLica,
@@ -199,7 +196,6 @@ fizickoLiceKontroler.controller('fizickoLiceCtrl', function($scope, klijentServi
 		var fizickoLice = {
 				ime : $scope.imeFizickogLicaPretraga,
 				prezime : $scope.prezimeFizickogLicaPretraga,
-				username: $scope.usernameFizickogLicaPretraga,
 				email: $scope.emailFizickogLicaPretraga,
 				brojLicneKarte : $scope.brojLicneKarteFizickogLicaPretraga,
 				telefon : $scope.telefonFizickogLicaPretraga,

@@ -1,19 +1,20 @@
 package xws_pi_bezb.view_models;
 
 import xws_pi_bezb.models.Rola;
-import xws_pi_bezb.models.korisnici.Korisnik;
+import xws_pi_bezb.models.korisnici.BankarskiSluzbenik;
 
 public class UlogovanKorisnikIRolaViewModel {
 
-	private Korisnik korisnik;
+	private BankarskiSluzbenik korisnik;
 	private Rola rola;
 	
 	public UlogovanKorisnikIRolaViewModel(){}
 	
-	public void setKorisnik(Korisnik korisnik) {
+	public void setKorisnik(BankarskiSluzbenik korisnik) {
 		this.korisnik = korisnik;
 	}
-	public Korisnik getKorisnik() {
+	
+	public BankarskiSluzbenik getKorisnik() {
 		return korisnik;
 	}
 	

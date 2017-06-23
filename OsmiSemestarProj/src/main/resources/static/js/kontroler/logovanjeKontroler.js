@@ -31,7 +31,6 @@ logovanjeKontroler.controller('logovanjeKontroler', function($window,
 
 		logovanjeServis.ulogujKorisnika(str).success(function(data) {
 			if (data.message != "NePostoji") {
-				console.log(data);
 				$location.path('/welcome');
 
 			} else {

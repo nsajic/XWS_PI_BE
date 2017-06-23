@@ -15,20 +15,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import xws_pi_bezb.annotations.InterceptorAnnotation;
-import xws_pi_bezb.helpers.Helpers;
-import xws_pi_bezb.helpers.Strings;
+import xws_pi_bezb.iservices.IBankarskiSluzbenikService;
 import xws_pi_bezb.iservices.IDelatnostService;
 import xws_pi_bezb.iservices.IKlijentService;
 import xws_pi_bezb.iservices.IPrivilegijaService;
 import xws_pi_bezb.iservices.IRolaService;
 import xws_pi_bezb.models.Delatnost;
+import xws_pi_bezb.models.FizickoLice;
+import xws_pi_bezb.models.PravnoLice;
 import xws_pi_bezb.models.Privilegija;
 import xws_pi_bezb.models.Rola;
-import xws_pi_bezb.models.korisnici.FizickoLice;
-import xws_pi_bezb.models.korisnici.Korisnik;
-import xws_pi_bezb.models.korisnici.PravnoLice;
-import xws_pi_bezb.password_security.Password;
-import xws_pi_bezb.password_security.SendMail;
+import xws_pi_bezb.models.korisnici.BankarskiSluzbenik;
 import xws_pi_bezb.view_models.PretragaPravnihLicaViewModel;
 import xws_pi_bezb.view_models.UlogovanKorisnikIRolaViewModel;
 
@@ -40,6 +37,9 @@ public class KlijentKontroler {
 	public IKlijentService klijentService;
 
 	@Autowired
+	public IBankarskiSluzbenikService bankarskiSluzbenikService;
+
+	@Autowired
 	public IDelatnostService delatnostService;
 	
 	@Autowired
@@ -47,11 +47,11 @@ public class KlijentKontroler {
 	
 	@Autowired
 	private IPrivilegijaService prvilegijaService;
-
+	
+	
 	@RequestMapping(value = "/dodajPravnoLice", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
 	@InterceptorAnnotation("Klijent:DodajPravnoFizicko")
 	public ResponseEntity<List<PravnoLice>> dodajPravnoLice(@RequestBody PravnoLice pravnoLice) {
-		pravnoLice.setRola(rolaService.findByNaziv(Strings.pravnoLice));
 		klijentService.save(pravnoLice);
 		return new ResponseEntity<List<PravnoLice>>(klijentService.getPravnaLica(), HttpStatus.OK);
 	}
@@ -60,8 +60,6 @@ public class KlijentKontroler {
 	@InterceptorAnnotation("Klijent:IzmeniPravnoFizicko")
 	public ResponseEntity<List<PravnoLice>> izmeniKlijenta(@RequestBody PravnoLice pravnoLice) {
 		pravnoLice.setEmail(klijentService.findOne(pravnoLice.getId()).getEmail());
-		pravnoLice.setUsername(klijentService.findOne(pravnoLice.getId()).getUsername());
-		pravnoLice.setSifra(klijentService.findOne(pravnoLice.getId()).getSifra());
 		klijentService.save(pravnoLice);
 		return new ResponseEntity<List<PravnoLice>>(klijentService.getPravnaLica(), HttpStatus.OK);
 	}
@@ -115,15 +113,18 @@ public class KlijentKontroler {
 	@RequestMapping(value = "/dodajFizickoLice", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
 	@InterceptorAnnotation("Klijent:DodajPravnoFizicko")
 	public ResponseEntity<Object> dodajFizickoLice(@RequestBody FizickoLice fizickoLice) {
-		String randomPassword = Helpers.generatePassword();
+		//String randomPassword = Helpers.generatePassword();
 		
-		fizickoLice.setLogovaoSe(false);
-		fizickoLice.setSifra(Password.hashPassword(randomPassword));	
-		fizickoLice.setRola(rolaService.findByNaziv(Strings.fizickoLice));
-		klijentService.save(fizickoLice);
-		new SendMail(fizickoLice.getEmail(),"Postovani "+ fizickoLice.getIme() + ". \n\n" +  
+		//fizickoLice.setLogovaoSe(false);
+		//fizickoLice.setSifra(Password.hashPassword(randomPassword));	
+		//fizickoLice.setRola(rolaService.findByNaziv(Strings.fizickoLice));
+		/*new SendMail(fizickoLice.getEmail(),"Postovani "+ fizickoLice.getIme() + ". \n\n" +  
 				"Kreiran vam je nalog u banci.\n\nVasa sifra je " + randomPassword + ".\n"
 				+ "Prilikom prvog logovanja cete morati da postavite novu sifru.\n\n" + "Pozdrav.");
+				*/
+		
+
+		klijentService.save(fizickoLice);
 		return new ResponseEntity<Object>(HttpStatus.OK);
 	}
 	
@@ -131,8 +132,8 @@ public class KlijentKontroler {
 	@InterceptorAnnotation("Klijent:IzmeniPravnoFizicko")
 	public ResponseEntity<List<FizickoLice>> izmeniKlijenta(@RequestBody FizickoLice fizickoLice) {
 		fizickoLice.setEmail(klijentService.findOne(fizickoLice.getId()).getEmail());
-		fizickoLice.setUsername(klijentService.findOne(fizickoLice.getId()).getUsername());
-		fizickoLice.setSifra(klijentService.findOne(fizickoLice.getId()).getSifra());
+		//fizickoLice.setUsername(klijentService.findOne(fizickoLice.getId()).getUsername());
+		//fizickoLice.setSifra(klijentService.findOne(fizickoLice.getId()).getSifra());
 		klijentService.save(fizickoLice);
 		return new ResponseEntity<List<FizickoLice>>(klijentService.getFizickaLica(), HttpStatus.OK);
 	}
@@ -163,27 +164,26 @@ public class KlijentKontroler {
 	}
 
 	@RequestMapping(value = "/ucitajUlogovanogKorisnika", method = RequestMethod.GET)
+	@InterceptorAnnotation("Klijent:IzlistajPretraziPravnoFizicko")
 	public ResponseEntity<UlogovanKorisnikIRolaViewModel> ucitajUlogovanogKorisnika(HttpSession session){	
-		Korisnik kor = (Korisnik) session.getAttribute("ulogovanKorisnik");	
-		
+		BankarskiSluzbenik kor = (BankarskiSluzbenik) session.getAttribute("ulogovanKorisnik");	
 		UlogovanKorisnikIRolaViewModel retVal = new UlogovanKorisnikIRolaViewModel();
-		retVal.setRola(klijentService.findOne(kor.getId()).getRola());
-		retVal.setKorisnik(klijentService.findOne(kor.getId()));
+		retVal.setKorisnik(bankarskiSluzbenikService.findOne(kor.getId()));
+		retVal.setRola(bankarskiSluzbenikService.findOne(kor.getId()).getRola());
 		return new ResponseEntity<UlogovanKorisnikIRolaViewModel>(retVal,HttpStatus.OK);	
 
 	}
 	
 	@RequestMapping(value = "/ucitajRoluUlogovanogKorisnika", method = RequestMethod.GET)
 	public ResponseEntity<Rola> ucitajRoluUlogovanogKorisnika(HttpSession session){	
-		Korisnik kor = (Korisnik) session.getAttribute("ulogovanKorisnik");
-		System.out.println(klijentService.findOne(kor.getId()).getRola().getNaziv());
-		return new ResponseEntity<Rola>(klijentService.findOne(kor.getId()).getRola(),HttpStatus.OK);	
+		BankarskiSluzbenik kor = (BankarskiSluzbenik) session.getAttribute("ulogovanKorisnik");
+		return new ResponseEntity<Rola>(bankarskiSluzbenikService.findOne(kor.getId()).getRola(),HttpStatus.OK);	
 
 	}
 	
 	@RequestMapping(value = "/ucitajPrivilegije", method = RequestMethod.GET)
 	public ResponseEntity<List<String>> ucitajPrivilegije(HttpSession session) {
-		Korisnik kor = (Korisnik) session.getAttribute("ulogovanKorisnik");
+		BankarskiSluzbenik kor = (BankarskiSluzbenik) session.getAttribute("ulogovanKorisnik");
 		if(kor != null){
 			List<String> privilegije = new ArrayList<>();
 			if(kor.getRola() == null)

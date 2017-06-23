@@ -18,4 +18,7 @@ public class RolaService implements IRolaService{
 		return rolaRepository.findByNaziv(naziv);
 	}
 
+
+
+
 }

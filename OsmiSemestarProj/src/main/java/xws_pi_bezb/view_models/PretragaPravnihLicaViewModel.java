@@ -1,7 +1,7 @@
 package xws_pi_bezb.view_models;
 
 import xws_pi_bezb.models.Delatnost;
-import xws_pi_bezb.models.korisnici.PravnoLice;
+import xws_pi_bezb.models.PravnoLice;
 
 public class PretragaPravnihLicaViewModel {
 

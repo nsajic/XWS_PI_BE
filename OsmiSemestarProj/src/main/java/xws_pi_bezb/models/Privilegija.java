@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -23,8 +24,8 @@ public class Privilegija {
 	@Column(name = "naziv", nullable = false)
 	private String naziv;
 	
-	/*@ManyToOne
-	private Rola rola;*/
+	@ManyToOne
+	private Rola rola;
 	
 	@ManyToMany(mappedBy = "privilegije")
     private Set<Rola> role;
