@@ -123,7 +123,6 @@ public class RacunKontroler {
 	@InterceptorAnnotation("Racun:DnevnoStanjeOdabranogRacuna")
 	public ResponseEntity<List<DnevnoStanjeRacuna>> ucitajDnevnaStanjaOdabranogRacuna(@RequestBody Racun racun) {
 		List<DnevnoStanjeRacuna> retVal = dnevnoStanjeRacunaService.findByRacun(racun);
-		
 		return new ResponseEntity<List<DnevnoStanjeRacuna>>(retVal, HttpStatus.OK);
 	}
 

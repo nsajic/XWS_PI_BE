@@ -30,13 +30,11 @@ public class KlijentService implements IKlijentService {
 
 	@Override
 	public List<Klijent> findAll() {
-		// TODO Auto-generated method stub
 		return klijentRepository.findAll();
 	}
 
 	@Override
 	public Klijent findOne(Long id) {
-		// TODO Auto-generated method stub
 		return klijentRepository.findById(id);
 	}
 
@@ -78,11 +76,7 @@ public class KlijentService implements IKlijentService {
 	public List<PravnoLice> getPravnaLicaBySearch(PravnoLice pravnoLice) {
 		List<PravnoLice> pravnaLica = new ArrayList<PravnoLice>();
 
-		System.out.println("apr = " + pravnoLice.isAPR());
-		System.out.println("op  = " + pravnoLice.isOP());
-		
 		String brojLicneKarteString = (pravnoLice.getBrojLicneKarte() == 0) ? null: Integer.toString(pravnoLice.getBrojLicneKarte());
-		String PIBString = (pravnoLice.getPIB() == 0) ? null : Integer.toString(pravnoLice.getPIB());
 		String maticniBrojString = (pravnoLice.getMaticniBroj() == 0) ? null: Integer.toString(pravnoLice.getMaticniBroj());
 
 		boolean praznaPretraga = true;
@@ -172,10 +166,10 @@ public class KlijentService implements IKlijentService {
 					}
 				}
 			}
-
-			if (!Helpers.isNullOrEmpty(PIBString)) {
+			
+			if (!Helpers.isNullOrEmpty(pravnoLice.getPIB())) {
 				praznaPretraga = false;
-				if (Integer.toString(pravnoLiceFor.getPIB()).toLowerCase().contains(PIBString.toLowerCase())) {
+				if (pravnoLiceFor.getPIB().toLowerCase().contains(pravnoLice.getPIB().toLowerCase())) {
 					if (!pravnaLica.contains(pravnoLiceFor)) {
 						pravnaLica.add(pravnoLiceFor);
 					}
@@ -204,7 +198,6 @@ public class KlijentService implements IKlijentService {
 		List<FizickoLice> fizickaLica = new ArrayList<FizickoLice>();
 
 		String brojLicneKarteString = (fizickoLice.getBrojLicneKarte() == 0) ? null: Integer.toString(fizickoLice.getBrojLicneKarte());
-		String JMBGString = (fizickoLice.getJmbg() == 0) ? null : Integer.toString(fizickoLice.getJmbg());
 
 		boolean praznaPretraga = true;
 
@@ -220,6 +213,15 @@ public class KlijentService implements IKlijentService {
 			if (!Helpers.isNullOrEmpty(fizickoLice.getPrezime())) {
 				praznaPretraga = false;
 				if (fizickoLiceFor.getPrezime().toLowerCase().contains(fizickoLice.getPrezime().toLowerCase())) {
+					if (!fizickaLica.contains(fizickoLiceFor)) {
+						fizickaLica.add(fizickoLiceFor);
+					}
+				}
+			}
+
+			if (!Helpers.isNullOrEmpty(fizickoLice.getJmbg())) {
+				praznaPretraga = false;
+				if (fizickoLiceFor.getJmbg().toLowerCase().contains(fizickoLice.getJmbg().toLowerCase())) {
 					if (!fizickaLica.contains(fizickoLiceFor)) {
 						fizickaLica.add(fizickoLiceFor);
 					}
@@ -273,9 +275,9 @@ public class KlijentService implements IKlijentService {
 				}
 			}
 
-			if (!Helpers.isNullOrEmpty(JMBGString)) {
+			if (!Helpers.isNullOrEmpty(fizickoLice.getJmbg())) {
 				praznaPretraga = false;
-				if (Integer.toString(fizickoLiceFor.getJmbg()).toLowerCase().contains(JMBGString.toLowerCase())) {
+				if (fizickoLiceFor.getJmbg().toLowerCase().contains(fizickoLice.getJmbg().toLowerCase())) {
 					if (!fizickaLica.contains(fizickoLiceFor)) {
 						fizickaLica.add(fizickoLiceFor);
 					}
@@ -303,11 +305,7 @@ public class KlijentService implements IKlijentService {
 	public List<PravnoLice> getPravnaLicaBySearchAndDelatnost(PravnoLice pravnoLice, Delatnost delatnost) {
 		List<PravnoLice> pravnaLica = new ArrayList<PravnoLice>();
 
-		System.out.println("apr = " + pravnoLice.isAPR());
-		System.out.println("op  = " + pravnoLice.isOP());
-		
 		String brojLicneKarteString = (pravnoLice.getBrojLicneKarte() == 0) ? null: Integer.toString(pravnoLice.getBrojLicneKarte());
-		String PIBString = (pravnoLice.getPIB() == 0) ? null : Integer.toString(pravnoLice.getPIB());
 		String maticniBrojString = (pravnoLice.getMaticniBroj() == 0) ? null: Integer.toString(pravnoLice.getMaticniBroj());
 
 		boolean praznaPretraga = true;
@@ -386,6 +384,15 @@ public class KlijentService implements IKlijentService {
 					}
 				}
 			}
+			
+			if (!Helpers.isNullOrEmpty(pravnoLice.getPIB())) {
+				praznaPretraga = false;
+				if (pravnoLiceFor.getPIB().toLowerCase().contains(pravnoLice.getPIB().toLowerCase())) {
+					if (!pravnaLica.contains(pravnoLiceFor)) {
+						pravnaLica.add(pravnoLiceFor);
+					}
+				}
+			}
 
 			// TODO: Pretraga za boolean-e i za delatnost
 
@@ -399,14 +406,7 @@ public class KlijentService implements IKlijentService {
 				}
 			}
 
-			if (!Helpers.isNullOrEmpty(PIBString)) {
-				praznaPretraga = false;
-				if (Integer.toString(pravnoLiceFor.getPIB()).toLowerCase().contains(PIBString.toLowerCase())) {
-					if (!pravnaLica.contains(pravnoLiceFor)) {
-						pravnaLica.add(pravnoLiceFor);
-					}
-				}
-			}
+
 
 			if (!Helpers.isNullOrEmpty(maticniBrojString)) {
 				praznaPretraga = false;

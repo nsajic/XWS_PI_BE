@@ -33,6 +33,7 @@ public class Banka implements Serializable {
 	
 	@Column(name = "obracunski_racun", nullable = false)
 	private String obracunskiRacun;
+	
 	/*
 	@OneToMany(mappedBy = "obracunskiPeriodBankeDuznika")
 	private Set<MedjubankarskiPrenos> bankePosiljaoci; 
@@ -40,9 +41,10 @@ public class Banka implements Serializable {
 	@OneToMany(mappedBy = "obracunskiPeriodBankePoverioca")
 	private Set<MedjubankarskiPrenos> bankePrimaoci; 
 	*/
+	
 	@OneToMany(mappedBy = "banka")
 	private Set<Racun> racuni;
-	
+		
 	@OneToMany(mappedBy = "banka")
 	private Set<BankarskiSluzbenik> bankarskiSluzbenici;
 	
