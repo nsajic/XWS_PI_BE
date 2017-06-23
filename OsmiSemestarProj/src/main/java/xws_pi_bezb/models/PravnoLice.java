@@ -16,7 +16,7 @@ public class PravnoLice extends Klijent implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Column(name = "pib", nullable = true)
-	private int PIB;
+	private String PIB;
 
 	@Column(name = "naziv", nullable = true)
 	private String naziv;
@@ -29,12 +29,6 @@ public class PravnoLice extends Klijent implements Serializable {
 
 	@Column(name = "fax", nullable = true)
 	private String fax;
-
-	@Column(name = "apr", nullable = true)
-	private boolean APR;
-
-	@Column(name = "op", nullable = true)
-	private boolean OP;
 	
 	@OneToMany(mappedBy = "pravnoLice")
 	private Set<Racun> racuni;
@@ -43,14 +37,6 @@ public class PravnoLice extends Klijent implements Serializable {
 	private Delatnost delatnost;
 
 	public PravnoLice() {
-	}
-
-	public int getPIB() {
-		return PIB;
-	}
-
-	public void setPIB(int PIB) {
-		this.PIB = PIB;
 	}
 
 	public String getNaziv() {
@@ -85,28 +71,20 @@ public class PravnoLice extends Klijent implements Serializable {
 		this.fax = fax;
 	}
 
-	public boolean isAPR() {
-		return APR;
-	}
-
-	public void setAPR(boolean aPR) {
-		APR = aPR;
-	}
-
-	public boolean isOP() {
-		return OP;
-	}
-
-	public void setOP(boolean oP) {
-		OP = oP;
-	}
-
 	public Delatnost getDelatnost() {
 		return delatnost;
 	}
 
 	public void setDelatnost(Delatnost delatnost) {
 		this.delatnost = delatnost;
+	}
+	
+	public void setPIB(String pIB) {
+		PIB = pIB;
+	}
+	
+	public String getPIB() {
+		return PIB;
 	}
 
 }

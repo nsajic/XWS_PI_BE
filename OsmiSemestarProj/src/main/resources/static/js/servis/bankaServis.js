@@ -8,6 +8,12 @@ bankaServis.factory('bankaServis', function($http) {
 		return $http.post('/bankaKontroler/dodajBanku', data);
 	}	
 	
+	temp.aboutBanka = function(data) {
+		return $http.post('/bankaKontroler/aboutBanka', data);
+	}	
+	
+	
+	
 	temp.izbrisiBanku = function(data) {
 		return $http.post('/bankaKontroler/izbrisiBanku', data);
 	}	

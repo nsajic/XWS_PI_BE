@@ -14,9 +14,8 @@ public class FizickoLice extends Klijent implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 	
-	// TODO: Change to String, change pretraga and other linked code
 	@Column(name = "jmbg", nullable = true)
-	private int jmbg;
+	private String jmbg;
 	
 	@Column(name = "ime_roditelja", nullable = true)
 	private String imeRoditelja;
@@ -26,11 +25,11 @@ public class FizickoLice extends Klijent implements Serializable{
 	
 	public FizickoLice(){}
 	
-	public int getJmbg() {
+	public String getJmbg() {
 		return jmbg;
 	}
 
-	public void setJmbg(int jmbg) {
+	public void setJmbg(String jmbg) {
 		this.jmbg = jmbg;
 	}
 

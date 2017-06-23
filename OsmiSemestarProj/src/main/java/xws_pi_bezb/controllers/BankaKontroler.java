@@ -55,5 +55,13 @@ public class BankaKontroler {
 	public ResponseEntity<List<Banka>> pretraziBanke(@RequestBody Banka banka) {
 		return new ResponseEntity<List<Banka>>(bankaService.getBySearch(banka), HttpStatus.OK);
 	}
+	
+	@RequestMapping(value = "/aboutBanka", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+
+	public ResponseEntity<Banka> aboutBanka(@RequestBody Banka banka) {
+		return new ResponseEntity<Banka>(bankaService.findOne(banka.getId()), HttpStatus.OK);
+	}
+	
+	
 
 }
