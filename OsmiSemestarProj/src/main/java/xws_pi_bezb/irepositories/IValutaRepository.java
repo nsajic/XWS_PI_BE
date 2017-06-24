@@ -12,5 +12,7 @@ import xws_pi_bezb.models.Valuta;
 @Transactional
 public interface IValutaRepository extends JpaRepository<Valuta, Long>{
 	Valuta findById(Long id);
+
+	Valuta findBySifraValute(String oznakaValute);
 }
 

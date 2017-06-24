@@ -17,7 +17,7 @@ import org.springframework.stereotype.Component;
 @Entity
 @Table(name = "klijent")
 @Component
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@Inheritance(strategy = InheritanceType.JOINED)
 @DiscriminatorColumn(name="tip_klijenta", discriminatorType=DiscriminatorType.STRING)
 public class Klijent {
 	

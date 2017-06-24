@@ -40,11 +40,11 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter {
 	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests().antMatchers("/**").permitAll()
-			.anyRequest().authenticated().and()
+		http.authorizeRequests().antMatchers("/**").permitAll().and().csrf().disable();
+			/*.anyRequest().authenticated().and()
         	.addFilterAfter(new CsrfHeaderFilter(), CsrfFilter.class)
         	.csrf().csrfTokenRepository(csrfTokenRepository())
-        	.and().logout();
+        	.and().logout();*/
 	}
 	
 	private CsrfTokenRepository csrfTokenRepository() {

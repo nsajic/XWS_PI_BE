@@ -55,6 +55,66 @@ public class WebServiceConfig extends WsConfigurerAdapter{
 		return new SimpleXsdSchema(new ClassPathResource("seme/PresekIzvoda.xsd"));
 	}
 	
+	@Bean(name = "MT102")
+	public DefaultWsdl11Definition mt102Wsdl11Definition(XsdSchema mt102Schema) {
+		DefaultWsdl11Definition wsdl11Definition = new DefaultWsdl11Definition();
+		wsdl11Definition.setPortTypeName("MT102Port");
+		wsdl11Definition.setLocationUri("/ws");
+		wsdl11Definition.setTargetNamespace("http://xml.poslovna.bezbednost/ws/MT102");
+		wsdl11Definition.setSchema(mt102Schema);
+		return wsdl11Definition;
+	}
+
+	@Bean
+	public XsdSchema mt102Schema() {
+		return new SimpleXsdSchema(new ClassPathResource("seme/MT102.xsd"));
+	}
+	
+	@Bean(name = "MT103")
+	public DefaultWsdl11Definition mt103Wsdl11Definition(XsdSchema mt103Schema) {
+		DefaultWsdl11Definition wsdl11Definition = new DefaultWsdl11Definition();
+		wsdl11Definition.setPortTypeName("MT103Port");
+		wsdl11Definition.setLocationUri("/ws");
+		wsdl11Definition.setTargetNamespace("http://xml.poslovna.bezbednost/ws/MT103");
+		wsdl11Definition.setSchema(mt103Schema);
+		return wsdl11Definition;
+	}
+
+	@Bean
+	public XsdSchema mt103Schema() {
+		return new SimpleXsdSchema(new ClassPathResource("seme/MT103.xsd"));
+	}
+	
+	@Bean(name = "MT900")
+	public DefaultWsdl11Definition mt900Wsdl11Definition(XsdSchema mt900Schema) {
+		DefaultWsdl11Definition wsdl11Definition = new DefaultWsdl11Definition();
+		wsdl11Definition.setPortTypeName("MT900Port");
+		wsdl11Definition.setLocationUri("/ws");
+		wsdl11Definition.setTargetNamespace("http://xml.poslovna.bezbednost/ws/MT900");
+		wsdl11Definition.setSchema(mt900Schema);
+		return wsdl11Definition;
+	}
+
+	@Bean
+	public XsdSchema mt900Schema() {
+		return new SimpleXsdSchema(new ClassPathResource("seme/MT900.xsd"));
+	}
+	
+	@Bean(name = "MT910")
+	public DefaultWsdl11Definition mt910Wsdl11Definition(XsdSchema mt910Schema) {
+		DefaultWsdl11Definition wsdl11Definition = new DefaultWsdl11Definition();
+		wsdl11Definition.setPortTypeName("MT910Schema");
+		wsdl11Definition.setLocationUri("/ws");
+		wsdl11Definition.setTargetNamespace("http://xml.poslovna.bezbednost/ws/MT910");
+		wsdl11Definition.setSchema(mt910Schema);
+		return wsdl11Definition;
+	}
+
+	@Bean
+	public XsdSchema mt910Schema() {
+		return new SimpleXsdSchema(new ClassPathResource("seme/MT910.xsd"));
+	}
+	
 	
 	//Bezbednost
 /*

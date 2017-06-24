@@ -22,66 +22,65 @@ public class AnalitikaIzvoda implements Serializable {
 	@Id
 	@GeneratedValue
 	private Long id;
-	
+
 	@Column(name = "datum_analitike", nullable = false)
 	private Date datumAnalitike;
-	
+
 	@Column(name = "smer", nullable = false)
 	private String smer;
-	
+
 	@Column(name = "duznik_nalogodavac", nullable = false)
 	private String duznikNalogodavac;
-	
+
 	@Column(name = "svrha_placanja", nullable = false)
 	private String svrhaPlacanja;
-	
+
 	@Column(name = "primalac_poverilac", nullable = false)
 	private String primalacPoverilac;
-	
+
 	@Column(name = "datum_naloga", nullable = false)
 	private Date datumNaloga;
-	
+
 	@Column(name = "datum_valute", nullable = false)
 	private Date datumValute;
-	
-	@Column(name = "racun_duznika", nullable = false)
+
+	@Column(name = "racun_duznika", nullable = true)
 	private String racunDuznika;
-	
-	@Column(name = "model_zaduzenja", nullable = false)
+
+	@Column(name = "model_zaduzenja", nullable = true)
 	private int modelZaduzenja;
-	
-	@Column(name = "poziv_na_broj_zaduzenja", nullable = false)
+
+	@Column(name = "poziv_na_broj_zaduzenja", nullable = true)
 	private String pozivNaBrojZaduzenja;
-	
-	@Column(name = "racun_poverioca", nullable = false)
+
+	@Column(name = "racun_poverioca", nullable = true)
 	private String racunPoverioca;
-	
-	@Column(name = "model_odobrenja", nullable = false)
+
+	@Column(name = "model_odobrenja", nullable = true)
 	private int modelOdobrenja;
-	
-	@Column(name = "poziv_na_broj_odobrenja", nullable = false)
+
+	@Column(name = "poziv_na_broj_odobrenja", nullable = true)
 	private String pozivNaBrojOdobrenja;
-	
+
 	@Column(name = "iznos", nullable = false)
 	private double iznos;
-	
+
 	@ManyToOne
 	private DnevnoStanjeRacuna dnevnoStanjeRacuna;
-	
+
 	@ManyToOne
 	private Valuta valuta;
-	
+
 	@OneToMany(mappedBy = "analitikaIzvoda")
-	private Set<StavkaPrenosa> stavkePrenosa; 
-	
+	private Set<StavkaPrenosa> stavkePrenosa;
+
 	@OneToMany(mappedBy = "analitikaIzvoda")
 	private Set<ZatvaranjeRacuna> zatvaranjeRacuna;
-	
-	public AnalitikaIzvoda()
-	{
-		
+
+	public AnalitikaIzvoda() {
+
 	}
-	
+
 	public Long getId() {
 		return id;
 	}
@@ -216,11 +215,6 @@ public class AnalitikaIzvoda implements Serializable {
 
 	public void setValuta(Valuta valuta) {
 		this.valuta = valuta;
-	} 
-	
+	}
 
-	
-	
-	
-	
 }

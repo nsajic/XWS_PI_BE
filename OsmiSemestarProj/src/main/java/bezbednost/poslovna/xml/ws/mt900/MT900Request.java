@@ -12,6 +12,7 @@ import java.math.BigDecimal;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.datatype.XMLGregorianCalendar;
@@ -42,6 +43,7 @@ import bezbednost.poslovna.xml.ws.mt103.TSWIFTIRacun;
  * 
  * 
  */
+@XmlRootElement(name="MT900Request", namespace="http://MT900.ws.xml.poslovna.bezbednost/")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "MT900Request", propOrder = {
     "idPoruke",
@@ -50,7 +52,7 @@ import bezbednost.poslovna.xml.ws.mt103.TSWIFTIRacun;
     "datumValute",
     "iznos",
     "sifraValute"
-})
+}, namespace="http://MT900.ws.xml.poslovna.bezbednost/")
 public class MT900Request {
 
     @XmlElement(name = "IDPoruke", required = true)

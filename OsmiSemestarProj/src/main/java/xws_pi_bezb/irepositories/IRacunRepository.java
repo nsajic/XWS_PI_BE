@@ -17,8 +17,12 @@ public interface IRacunRepository extends JpaRepository<Racun, Long>{
 	
 	Racun findById(Long id);
 
+	
+	Racun findByBrojRacuna(String brojRacuna);
+
 	List<Racun> findByBanka(Banka banka);
 	
 	List<Racun> findAll();
+
 
 }
