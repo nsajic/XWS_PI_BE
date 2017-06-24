@@ -10,6 +10,8 @@ public interface IRacunService {
 	List<Racun> findAll();
 
 	Racun findOne(Long id);
+	
+	Racun findByBrojRacuna(String brojRacuna);
 
 	void save(Racun racun);
 

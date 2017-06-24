@@ -21,13 +21,11 @@ public class RacunService implements IRacunService{
 	
 	@Override
 	public List<Racun> findAll() {
-		// TODO Auto-generated method stub
 		return racunRepository.findAll();
 	}
 
 	@Override
 	public Racun findOne(Long id) {
-		// TODO Auto-generated method stub
 		return racunRepository.findById(id);
 	}
 
@@ -70,8 +68,12 @@ public class RacunService implements IRacunService{
 	}
 
 	@Override
-	public List<Racun> findByBanka(Banka banka) {
-		
+	public Racun findByBrojRacuna(String brojRacuna) {
+		return racunRepository.findByBrojRacuna(brojRacuna);
+	}
+	
+	@Override
+	public List<Racun> findByBanka(Banka banka) {	
 		return racunRepository.findByBanka(banka);
 	}
 

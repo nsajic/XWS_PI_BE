@@ -14,6 +14,7 @@ import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.datatype.XMLGregorianCalendar;
@@ -46,6 +47,7 @@ import bezbednost.poslovna.xml.ws.mt103.TSWIFTIRacun;
  * 
  * 
  */
+@XmlRootElement(name="MT102Request", namespace="http://MT102.ws.xml.poslovna.bezbednost/")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "MT102Request", propOrder = {
     "idPoruke",
@@ -56,7 +58,7 @@ import bezbednost.poslovna.xml.ws.mt103.TSWIFTIRacun;
     "datumValute",
     "datum",
     "pojedinacnoPlacanje"
-})
+}, namespace="http://MT102.ws.xml.poslovna.bezbednost/")
 public class MT102Request {
 
     @XmlElement(name = "IDPoruke", required = true)
