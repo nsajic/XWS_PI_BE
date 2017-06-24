@@ -39,7 +39,6 @@ public class Banka implements Serializable {
 	
 	@OneToMany(mappedBy = "obracunskiPeriodBankePoverioca")
 	private Set<MedjubankarskiPrenos> bankePrimaoci; 
-
 	
 	@OneToMany(mappedBy = "banka")
 	private Set<Racun> racuni;
