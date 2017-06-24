@@ -17,7 +17,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import xws_pi_bezb.annotations.InterceptorAnnotation;
 import xws_pi_bezb.iservices.IBankarskiSluzbenikService;
 import xws_pi_bezb.iservices.IDelatnostService;
+import xws_pi_bezb.iservices.IFizickaLicaService;
 import xws_pi_bezb.iservices.IKlijentService;
+import xws_pi_bezb.iservices.IPravnaLicaService;
 import xws_pi_bezb.iservices.IPrivilegijaService;
 import xws_pi_bezb.iservices.IRolaService;
 import xws_pi_bezb.models.Delatnost;
@@ -48,45 +50,53 @@ public class KlijentKontroler {
 	@Autowired
 	private IPrivilegijaService prvilegijaService;
 	
+	@Autowired
+	public IPravnaLicaService pravnaLicaService;
+	
+	@Autowired
+	public IFizickaLicaService fizickaLicaService;
+	
 	
 	@RequestMapping(value = "/dodajPravnoLice", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
 	@InterceptorAnnotation("Klijent:DodajPravnoFizicko")
 	public ResponseEntity<List<PravnoLice>> dodajPravnoLice(@RequestBody PravnoLice pravnoLice) {
-		klijentService.save(pravnoLice);
-		return new ResponseEntity<List<PravnoLice>>(klijentService.getPravnaLica(), HttpStatus.OK);
+		pravnaLicaService.save(pravnoLice);
+		return new ResponseEntity<List<PravnoLice>>(pravnaLicaService.getPravnaLica(), HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/izmeniPravnoLice", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
 	@InterceptorAnnotation("Klijent:IzmeniPravnoFizicko")
 	public ResponseEntity<List<PravnoLice>> izmeniKlijenta(@RequestBody PravnoLice pravnoLice) {
-		pravnoLice.setEmail(klijentService.findOne(pravnoLice.getId()).getEmail());
-		klijentService.save(pravnoLice);
-		return new ResponseEntity<List<PravnoLice>>(klijentService.getPravnaLica(), HttpStatus.OK);
+		pravnoLice.setEmail(pravnaLicaService.findOne(pravnoLice.getId()).getEmail());
+		pravnaLicaService.save(pravnoLice);
+		return new ResponseEntity<List<PravnoLice>>(pravnaLicaService.getPravnaLica(), HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/izbrisiPravnoLice", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
 	@InterceptorAnnotation("Klijent:ObrisiPravnoFizicko")
 	public ResponseEntity<List<PravnoLice>> izbrisiPravnoLice(@RequestBody Long klijentId) {
-		klijentService.delete(klijentId);
-		return new ResponseEntity<List<PravnoLice>>(klijentService.getPravnaLica(), HttpStatus.OK);
+		pravnaLicaService.delete(klijentId);
+		return new ResponseEntity<List<PravnoLice>>(pravnaLicaService.getPravnaLica(), HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/izlistajPravnaLica", method = RequestMethod.GET)
 	@InterceptorAnnotation("Klijent:IzlistajPretraziPravnoFizicko")
 	public ResponseEntity<List<PravnoLice>> izlistajPravnaLica() {
-		return new ResponseEntity<List<PravnoLice>>(klijentService.getPravnaLica(), HttpStatus.OK);
+		return new ResponseEntity<List<PravnoLice>>(pravnaLicaService.getPravnaLica(), HttpStatus.OK);
 	}
 
-	@RequestMapping(value = "/pretraziPravnaLica", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "/pretragaPravnihLica", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
 	@InterceptorAnnotation("Klijent:IzlistajPretraziPravnoFizicko")
-	public ResponseEntity<List<PravnoLice>> pretraziPravnaLica(@RequestBody PravnoLice pravnoLice) {
-		return new ResponseEntity<List<PravnoLice>>(klijentService.getPravnaLicaBySearch(pravnoLice), HttpStatus.OK);
+	public ResponseEntity<List<PravnoLice>> pretragaPravnihLica(@RequestBody PravnoLice pravnoLice) {
+		//return new ResponseEntity<List<PravnoLice>>(klijentService.getPravnaLicaBySearch(pravnoLice), HttpStatus.OK);
+		return new ResponseEntity<List<PravnoLice>>(pravnaLicaService.getPravnaLicaBySearch(pravnoLice), HttpStatus.OK);
+		
 	}
 
 	@RequestMapping(value = "/ucitajPravnoLice", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
 	@InterceptorAnnotation("Klijent:IzlistajPretraziPravnoFizicko")
 	public ResponseEntity<PravnoLice> ucitajPravnoLice(@RequestBody PravnoLice pravnoLice) {
-		return new ResponseEntity<PravnoLice>((PravnoLice) klijentService.findOne(pravnoLice.getId()), HttpStatus.OK);
+		return new ResponseEntity<PravnoLice>((PravnoLice) pravnaLicaService.findOne(pravnoLice.getId()), HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/ucitajDelatnosti", method = RequestMethod.GET)
@@ -99,13 +109,14 @@ public class KlijentKontroler {
 	@RequestMapping(value = "/izlistajPravnaLicaDelatnosti", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
 	@InterceptorAnnotation("Klijent:IzlistajPretraziPravnoFizicko")
 	public ResponseEntity <List<PravnoLice>> izlistajPravnaLicaDelatnosti(@RequestBody Long id) {
-		return new ResponseEntity<List<PravnoLice>>(klijentService.findByDelatnost(id), HttpStatus.OK);
+		return new ResponseEntity<List<PravnoLice>>(pravnaLicaService.findByDelatnost(id), HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/pretragaPravnihLicaDelatnosti", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-	@InterceptorAnnotation("Klijent:IzlistajPretraziPravnoFizicko")
+	//@InterceptorAnnotation("Klijent:IzlistajPretraziPravnoFizicko")
 	public ResponseEntity <List<PravnoLice>> pretragaPravnihLicaDelatnosti(@RequestBody PretragaPravnihLicaViewModel viewModel) {
-		return new ResponseEntity<List<PravnoLice>>(klijentService.getPravnaLicaBySearchAndDelatnost(viewModel.getPravnoLice(), viewModel.getDelatnost()), HttpStatus.OK);
+		System.out.println(viewModel.getPravnoLice().getMaticniBroj()+"   del: "+ viewModel.getDelatnost().getNazivDelatnosti());
+		return new ResponseEntity<List<PravnoLice>>(pravnaLicaService.getPravnaLicaBySearchAndDelatnost(viewModel.getPravnoLice(), viewModel.getDelatnost()), HttpStatus.OK);
 	}
 	
 	// ISPOD FIZICKA
@@ -124,43 +135,43 @@ public class KlijentKontroler {
 				*/
 		
 
-		klijentService.save(fizickoLice);
+		fizickaLicaService.save(fizickoLice);
 		return new ResponseEntity<Object>(HttpStatus.OK);
 	}
 	
 	@RequestMapping(value = "/izmeniFizickoLice", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
 	@InterceptorAnnotation("Klijent:IzmeniPravnoFizicko")
 	public ResponseEntity<List<FizickoLice>> izmeniKlijenta(@RequestBody FizickoLice fizickoLice) {
-		fizickoLice.setEmail(klijentService.findOne(fizickoLice.getId()).getEmail());
+		fizickoLice.setEmail(fizickaLicaService.findOne(fizickoLice.getId()).getEmail());
 		//fizickoLice.setUsername(klijentService.findOne(fizickoLice.getId()).getUsername());
 		//fizickoLice.setSifra(klijentService.findOne(fizickoLice.getId()).getSifra());
-		klijentService.save(fizickoLice);
-		return new ResponseEntity<List<FizickoLice>>(klijentService.getFizickaLica(), HttpStatus.OK);
+		fizickaLicaService.save(fizickoLice);
+		return new ResponseEntity<List<FizickoLice>>(fizickaLicaService.getFizickaLica(), HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/izbrisiFizickoLice", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
 	@InterceptorAnnotation("Klijent:ObrisiPravnoFizicko")
 	public ResponseEntity<List<FizickoLice>> izbrisiFizickoLice(@RequestBody Long klijentId) {
-		klijentService.delete(klijentId);
-		return new ResponseEntity<List<FizickoLice>>(klijentService.getFizickaLica(), HttpStatus.OK);
+		fizickaLicaService.delete(klijentId);
+		return new ResponseEntity<List<FizickoLice>>(fizickaLicaService.getFizickaLica(), HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/izlistajFizickaLica", method = RequestMethod.GET)
 	@InterceptorAnnotation("Klijent:IzlistajPretraziPravnoFizicko")
 	public ResponseEntity<List<FizickoLice>> izlistajFizickaLica() {
-		return new ResponseEntity<List<FizickoLice>>(klijentService.getFizickaLica(), HttpStatus.OK);
+		return new ResponseEntity<List<FizickoLice>>(fizickaLicaService.getFizickaLica(), HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/pretraziFizickaLica", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
 	@InterceptorAnnotation("Klijent:IzlistajPretraziPravnoFizicko")
 	public ResponseEntity<List<FizickoLice>> pretraziFizickaLica(@RequestBody FizickoLice fizickoLice) {
-		return new ResponseEntity<List<FizickoLice>>(klijentService.getFizickaLicaBySearch(fizickoLice), HttpStatus.OK);
+		return new ResponseEntity<List<FizickoLice>>(fizickaLicaService.getFizickaLicaBySearch(fizickoLice), HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/ucitajFizickoLice", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
 	@InterceptorAnnotation("Klijent:IzlistajPretraziPravnoFizicko")
 	public ResponseEntity<FizickoLice> ucitajFizickoLice(@RequestBody FizickoLice fizickoLice) {
-		return new ResponseEntity<FizickoLice>((FizickoLice) klijentService.findOne(fizickoLice.getId()),HttpStatus.OK);
+		return new ResponseEntity<FizickoLice>(fizickaLicaService.findOne(fizickoLice.getId()),HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/ucitajUlogovanogKorisnika", method = RequestMethod.GET)

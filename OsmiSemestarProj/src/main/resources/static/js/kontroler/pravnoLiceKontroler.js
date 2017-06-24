@@ -251,7 +251,7 @@ pravnoLiceKontroler
 							fax : $scope.faxPravnogLicaPretraga
 						}
 						console.log(pravnoLice);
-						klijentServis.pretragaPravnihLicaDelatnosti(pravnoLice)
+						klijentServis.pretragaPravnihLica(pravnoLice)
 								.success(function(data) {
 									$scope.pravnaLica = data;
 									$scope.idPravnogLicaZaIzmenu = -1;

@@ -19,8 +19,8 @@ klijentServis.factory('klijentServis', function($http) {
 		return $http.get('/klijentKontroler/izlistajPravnaLica');
 	}
 
-	temp.pretraziPravnaLica = function(data) {
-		return $http.post('/klijentKontroler/pretraziPravnaLica', data);
+	temp.pretragaPravnihLica = function(data) {
+		return $http.post('/klijentKontroler/pretragaPravnihLica', data);
 	}
 
 	temp.ucitajPravnoLice = function(data) {
