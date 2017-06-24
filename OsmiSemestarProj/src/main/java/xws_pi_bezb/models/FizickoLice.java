@@ -19,10 +19,10 @@ public class FizickoLice extends Klijent implements Serializable{
 	
 	@Column(name = "ime_roditelja", nullable = true)
 	private String imeRoditelja;
-	
+	/*
 	@OneToMany(mappedBy = "fizickoLice")
 	private Set<Racun> racuni;
-	
+	*/
 	public FizickoLice(){}
 	
 	public String getJmbg() {

@@ -45,6 +45,7 @@ import bezbednost.poslovna.xml.ws.nalogzaprenos.TNalog;
 import bezbednost.poslovna.xml.ws.nalogzaprenos.TPodaciORacunu;
 import xws_pi_bezb.BankaKlijentSamoTest;
 import xws_pi_bezb.controllers.LogRegKontroler;
+import xws_pi_bezb.iservices.IAnalitikaIzvodaService;
 import xws_pi_bezb.iservices.IBankaService;
 import xws_pi_bezb.iservices.IDnevnoStanjeRacunaService;
 import xws_pi_bezb.iservices.IRacunService;
@@ -75,6 +76,9 @@ public class BankaEndpoint {
 	
 	@Autowired
 	private IBankaService bankaService;
+	
+	@Autowired
+	private IAnalitikaIzvodaService analitikaIzvodaService;
 
 	@Autowired
 	public BankaEndpoint() {
@@ -200,10 +204,9 @@ public class BankaEndpoint {
 					dnevnoStanjeRacunaService.save(dnevnoStanjeRacunaPoverioca);
 					
 					analitikaIzvoda.setDnevnoStanjeRacuna(dnevnoStanjeRacunaDuznika);
-					// TODO: save(analitikaIzvoda)
-					
+					analitikaIzvodaService.save(analitikaIzvoda);
 					analitikaIzvoda.setDnevnoStanjeRacuna(dnevnoStanjeRacunaPoverioca);
-					// TODO: save(analitikaIzvoda)
+					analitikaIzvodaService.save(analitikaIzvoda);
 
 				}else{	
 					
@@ -250,7 +253,7 @@ public class BankaEndpoint {
 					dnevnoStanjeRacunaService.save(dnevnoStanjeRacunaDuznika);
 					
 					analitikaIzvoda.setDnevnoStanjeRacuna(dnevnoStanjeRacunaDuznika);
-					// TODO: save(analitikaIzvoda)
+					analitikaIzvodaService.save(analitikaIzvoda);
 					
 
 					// provera da li je preko 250000 ili hitno
@@ -365,7 +368,7 @@ public class BankaEndpoint {
 
 					analitikaIzvoda.setDnevnoStanjeRacuna(dnevnoStanjeRacuna);
 
-					// TODO: save(analitikaIzvoda)
+					analitikaIzvodaService.save(analitikaIzvoda);
 
 				} else {
 					response.setOdgovor("Nema se para!");
@@ -427,7 +430,7 @@ public class BankaEndpoint {
 
 				analitikaIzvoda.setDnevnoStanjeRacuna(dnevnoStanjeRacuna);
 
-				// TODO: save(analitikaIzvoda)
+				analitikaIzvodaService.save(analitikaIzvoda);
 
 			} else {
 				response.setOdgovor("Racun je zatvoren!");
@@ -506,10 +509,10 @@ public class BankaEndpoint {
 		}
 
 		Document document = DocumentLoader.loadDocument(file);
-		boolean res12 = sigUtility.verifySignature(document);
+		//boolean res12 = sigUtility.verifySignature(document);
 
 		Document doc = DocumentLoader.loadDocument("univerzitet_signed.xml");
-		boolean res = sigUtility.verifySignature(doc);
+		//boolean res = sigUtility.verifySignature(doc);
 
 		if (true) {
 			PrivateKey privateKey = ksReader.readPrivateKey("./primer.jks", "primer", "primer", "primer");

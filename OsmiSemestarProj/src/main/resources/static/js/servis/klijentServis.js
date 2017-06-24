@@ -18,9 +18,14 @@ klijentServis.factory('klijentServis', function($http) {
 	temp.izlistajPravnaLica = function(data) {
 		return $http.get('/klijentKontroler/izlistajPravnaLica');
 	}
+	
+	temp.izlistajPravnaLicaBanke = function(data) {
+		return $http.get('/klijentKontroler/izlistajPravnaLicaBanke');
+	}
 
-	temp.pretraziPravnaLica = function(data) {
-		return $http.post('/klijentKontroler/pretraziPravnaLica', data);
+
+	temp.pretragaPravnihLica = function(data) {
+		return $http.post('/klijentKontroler/pretragaPravnihLica', data);
 	}
 
 	temp.ucitajPravnoLice = function(data) {
@@ -47,6 +52,10 @@ klijentServis.factory('klijentServis', function($http) {
 
 	temp.izlistajFizickaLica = function(data) {
 		return $http.get('/klijentKontroler/izlistajFizickaLica');
+	}
+	
+	temp.izlistajFizickaLicaBanke = function(data) {
+		return $http.get('/klijentKontroler/izlistajFizickaLicaBanke');
 	}
 
 	temp.pretraziFizickaLica = function(data) {

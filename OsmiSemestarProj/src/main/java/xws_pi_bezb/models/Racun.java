@@ -10,44 +10,44 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-
 @Entity
 @Table(name = "racun")
 public class Racun {
-	
+
 	@Id
 	@GeneratedValue
 	private Long id;
-	
+
 	@Column(name = "broj_racuna", nullable = false)
 	private String brojRacuna;
 
 	@Column(name = "status_racuna", nullable = false)
 	private int statusRacuna;
-	
+
 	@ManyToOne
-	private FizickoLice fizickoLice;
-	
-	@ManyToOne
-	private PravnoLice pravnoLice;
-	
+	private Klijent klijent;
+
+	/*
+	 * @ManyToOne private FizickoLice fizickoLice;
+	 * 
+	 * @ManyToOne private PravnoLice pravnoLice;
+	 */
 	@ManyToOne
 	private Banka banka;
-	
+
 	@ManyToOne
 	private Valuta valuta;
-	
+
 	@OneToMany(mappedBy = "racun")
-	private Set<ZatvaranjeRacuna> zatvaranjaRacuna; 
-	
+	private Set<ZatvaranjeRacuna> zatvaranjaRacuna;
+
 	@OneToMany(mappedBy = "racun")
 	private Set<DnevnoStanjeRacuna> dnevnjaStanjaRacuna;
 
-	public Racun()
-	{
-		
+	public Racun() {
+
 	}
-	
+
 	public Long getId() {
 		return id;
 	}
@@ -88,19 +88,22 @@ public class Racun {
 		this.valuta = valuta;
 	}
 
-	public FizickoLice getFizickoLice() {
-		return fizickoLice;
+	public Klijent getKlijent() {
+		return klijent;
 	}
 
-	public void setFizickoLice(FizickoLice fizickoLice) {
-		this.fizickoLice = fizickoLice;
+	public void setKlijent(Klijent klijent) {
+		this.klijent = klijent;
 	}
-
-	public PravnoLice getPravnoLice() {
-		return pravnoLice;
-	}
-
-	public void setPravnoLice(PravnoLice pravnoLice) {
-		this.pravnoLice = pravnoLice;
-	} 
+	/*
+	 * public FizickoLice getFizickoLice() { return fizickoLice; }
+	 * 
+	 * public void setFizickoLice(FizickoLice fizickoLice) { this.fizickoLice =
+	 * fizickoLice; }
+	 * 
+	 * public PravnoLice getPravnoLice() { return pravnoLice; }
+	 * 
+	 * public void setPravnoLice(PravnoLice pravnoLice) { this.pravnoLice =
+	 * pravnoLice; }
+	 */
 }

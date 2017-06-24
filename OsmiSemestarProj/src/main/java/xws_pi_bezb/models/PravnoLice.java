@@ -29,10 +29,10 @@ public class PravnoLice extends Klijent implements Serializable {
 
 	@Column(name = "fax", nullable = true)
 	private String fax;
-	
+	/*
 	@OneToMany(mappedBy = "pravnoLice")
 	private Set<Racun> racuni;
-
+*/
 	@ManyToOne(optional = true)
 	private Delatnost delatnost;
 

@@ -11,6 +11,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import xws_pi_bezb.models.korisnici.BankarskiSluzbenik;
+import xws_pi_bezb.models.MedjubankarskiPrenos;
 
 @Entity
 @Table(name = "banka")
