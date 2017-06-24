@@ -12,9 +12,12 @@ import org.springframework.stereotype.Service;
 
 import xws_pi_bezb.helpers.Helpers;
 import xws_pi_bezb.irepositories.IFizickaLicaRepository;
+import xws_pi_bezb.irepositories.IRacunRepository;
 import xws_pi_bezb.iservices.IFizickaLicaService;
 import xws_pi_bezb.models.FizickoLice;
 import xws_pi_bezb.models.Klijent;
+import xws_pi_bezb.models.PravnoLice;
+import xws_pi_bezb.models.Racun;
 
 
 @Service
@@ -22,6 +25,9 @@ public class FizickaLicaService implements IFizickaLicaService {
 
 	@Autowired
 	public IFizickaLicaRepository fizickaLicaRepository;
+	
+	@Autowired
+	public IRacunRepository racunRepository;
 
 	@Override
 	public FizickoLice findById(Long id) {
@@ -55,6 +61,27 @@ public class FizickaLicaService implements IFizickaLicaService {
 				fizickaLica.add(flice);
 			
 		}
+		return fizickaLica;
+	}
+	
+	@Override
+	public List<FizickoLice> getFizickaLicaByBanka(Long bankId) {
+		List<FizickoLice> fizickaLica = new ArrayList<FizickoLice>();
+		
+		
+		List<Racun> racuni = new ArrayList<Racun>();
+		racuni.addAll(racunRepository.findByBankaId(bankId));
+		
+		for(Racun racun: racuni){
+			FizickoLice fLice = fizickaLicaRepository.findById(racun.getKlijent().getId());
+			
+			if(fLice != null ){
+				if(!fizickaLica.contains(fLice))
+					fizickaLica.add(fLice);
+			}
+			
+		}
+		
 		return fizickaLica;
 	}
 
@@ -163,6 +190,8 @@ public class FizickaLicaService implements IFizickaLicaService {
 		}
 		return fizickaLica;
 	}
+
+
 	
 
 }

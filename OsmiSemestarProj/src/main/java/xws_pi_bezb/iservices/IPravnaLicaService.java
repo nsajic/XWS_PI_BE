@@ -13,6 +13,8 @@ public interface IPravnaLicaService {
 
 	List<PravnoLice> getPravnaLica();
 	
+	List<PravnoLice> getPravnaLicaByBanka(Long bankId);
+	
 	List<PravnoLice> getPravnaLicaBySearchAndDelatnost(PravnoLice pravnoLice, Delatnost delatnost);
 	
 	void delete(Long id);

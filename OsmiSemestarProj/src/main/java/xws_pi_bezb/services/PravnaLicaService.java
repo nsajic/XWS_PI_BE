@@ -8,10 +8,12 @@ import org.springframework.stereotype.Service;
 
 import xws_pi_bezb.helpers.Helpers;
 import xws_pi_bezb.irepositories.IPravnoLiceRepository;
+import xws_pi_bezb.irepositories.IRacunRepository;
 import xws_pi_bezb.iservices.IPravnaLicaService;
 import xws_pi_bezb.models.Delatnost;
 import xws_pi_bezb.models.Klijent;
 import xws_pi_bezb.models.PravnoLice;
+import xws_pi_bezb.models.Racun;
 
 
 
@@ -20,6 +22,9 @@ public class PravnaLicaService implements IPravnaLicaService {
 	
 	@Autowired
 	private IPravnoLiceRepository pravnoLiceRepository;
+	
+	@Autowired
+	private IRacunRepository racunRepository;
 
 	public List<PravnoLice> getPravnaLicaBySearch(PravnoLice pravnoLice) {
 		
@@ -148,6 +153,29 @@ public class PravnaLicaService implements IPravnaLicaService {
 		pravnaLica = pravnoLiceRepository.findAll();
 		return pravnaLica;
 	}
+	
+	@Override
+	public List<PravnoLice> getPravnaLicaByBanka(Long bankId) {
+		
+		List<PravnoLice> pravnaLica = new ArrayList<PravnoLice>();
+		
+		
+		List<Racun> racuni = new ArrayList<Racun>();
+		racuni.addAll(racunRepository.findByBankaId(bankId));
+		
+		for(Racun racun: racuni){
+			PravnoLice pLice = pravnoLiceRepository.findById(racun.getKlijent().getId());
+			
+			if(pLice != null ){
+				if(!pravnaLica.contains(pLice))
+					pravnaLica.add(pLice);
+			}
+			
+		}
+		
+		return pravnaLica;
+	}
+
 
 	@Override
 	public List<PravnoLice> getPravnaLicaBySearchAndDelatnost(PravnoLice pravnoLice, Delatnost delatnost) {
@@ -296,6 +324,7 @@ public class PravnaLicaService implements IPravnaLicaService {
 		return pravnoLiceRepository.findByDelatnostId(id);
 	}
 
+	
 
 
 }

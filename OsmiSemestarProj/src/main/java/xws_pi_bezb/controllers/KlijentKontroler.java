@@ -81,8 +81,15 @@ public class KlijentKontroler {
 
 	@RequestMapping(value = "/izlistajPravnaLica", method = RequestMethod.GET)
 	@InterceptorAnnotation("Klijent:IzlistajPretraziPravnoFizicko")
-	public ResponseEntity<List<PravnoLice>> izlistajPravnaLica() {
+	public ResponseEntity<List<PravnoLice>> izlistajPravnaLica() {	
 		return new ResponseEntity<List<PravnoLice>>(pravnaLicaService.getPravnaLica(), HttpStatus.OK);
+	}
+	
+	@RequestMapping(value = "/izlistajPravnaLicaBanke", method = RequestMethod.GET)
+	@InterceptorAnnotation("Klijent:IzlistajPretraziPravnoFizicko")
+	public ResponseEntity<List<PravnoLice>> izlistajPravnaLicaBanke(HttpSession session) {	
+		BankarskiSluzbenik kor = (BankarskiSluzbenik) session.getAttribute("ulogovanKorisnik");	
+		return new ResponseEntity<List<PravnoLice>>(pravnaLicaService.getPravnaLicaByBanka(kor.getBanka().getId()), HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/pretragaPravnihLica", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
@@ -160,6 +167,13 @@ public class KlijentKontroler {
 	@InterceptorAnnotation("Klijent:IzlistajPretraziPravnoFizicko")
 	public ResponseEntity<List<FizickoLice>> izlistajFizickaLica() {
 		return new ResponseEntity<List<FizickoLice>>(fizickaLicaService.getFizickaLica(), HttpStatus.OK);
+	}
+	
+	@RequestMapping(value = "/izlistajFizickaLicaBanke", method = RequestMethod.GET)
+	@InterceptorAnnotation("Klijent:IzlistajPretraziPravnoFizicko")
+	public ResponseEntity<List<FizickoLice>> izlistajFizickaLicaBanke(HttpSession session) {
+		BankarskiSluzbenik kor = (BankarskiSluzbenik) session.getAttribute("ulogovanKorisnik");	
+		return new ResponseEntity<List<FizickoLice>>(fizickaLicaService.getFizickaLicaByBanka(kor.getBanka().getId()), HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/pretraziFizickaLica", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
