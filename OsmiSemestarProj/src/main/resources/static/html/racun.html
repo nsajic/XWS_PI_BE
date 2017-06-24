@@ -18,14 +18,15 @@
 
 		<div ng-show="isSet(0)">
 		
-			<div ng-show = "getIdRacunaZaZatvaranje() != -1">
-				Unesite racun na koji zelite da prebacite sredstva <input type = "text" ng-model = "racunGdePrebacujem"/>
+			<div ng-show = "getIdRacunaZaZatvaranje() !== -1">
+				Unesite racun na koji zelite da prebacite sredstva 
+				<input type = "text" ng-model = "racunGdePrebacujem"/>
 				<button ng-click="prebaciSredstva()">Prebaci</button>
 				<br>
 				<button ng-click="nazadNaRacune()">Nazad</button>
 			</div>
 		
-			<div ng-show = "getIdRacuna() != -1">
+			<div ng-show = "getIdRacuna() !== -1">
 				<table>	
 					<tr>
 						<td style = "width:130px; heigth: 70px">Datum:</td>
@@ -41,13 +42,17 @@
 						<td style = "width:130px; heigth: 70px">{{dnevnoStanje.prometNaTeret}}</td>
 						<td style = "width:130px; heigth: 70px">{{dnevnoStanje.prometUKorist}}</td>
 						<td style = "width:130px; heigth: 70px">{{dnevnoStanje.novoStanje}}</td>
+						<td><button ng-click="setDnevnoStanjeRacunaNext(dnevnoStanje)">Analitike izvoda</button> </td>
 					</tr>
 				</table>
 				<button ng-click="nazadNaRacune()">Nazad</button>			
 			</div>
-		
-		
-			<div ng-show = "getIdRacuna() === -1 && getIdRacunaZaZatvaranje() === -1">
+			
+			<div ng-show = "getIdDnevnogStanjaZaAnalitiku() !== -1">
+				Analitike dnevnog stanja
+			</div>
+			
+			<div ng-show = "getPrikaziSveRacune()" >
 				<h2>Racuni</h2>
 					
 				<button ng-show = "(racuni.length != 0 || prikaziPretraguRacuni) && hasPrivilege('Racun:IzlistajPretrazi')" ng-click="prikaziPretraguRacuni = true">Pretraga</button>
@@ -124,21 +129,12 @@
 			</div>
 		</div>
 		<div ng-show="isSet(1)">
-
-		
 			<div>
 				<h2>Unesite podatke o racunu:</h2>
 				<table>
 					<tr>
 						<td>Broj racuna:</td>
 						<td><input type=text ng-model="brojRacuna"></td>
-					</tr>
-					<tr>
-						<td>Status racuna:</td>
-						<td>	
-							<input type="radio" ng-model="statusRacuna" value=0> Aktivan
-							<input type="radio" ng-model="statusRacuna" value=1> Zatvoren
-						</td>
 					</tr>
 
 					<tr>
@@ -209,15 +205,6 @@
 					<tr>
 						<td>Broj racuna:</td>
 						<td><input type=text ng-model="$ctrl.brojRacunaIzmena"></td>
-					</tr>
-					<tr>
-						<td>Status racuna:</td>
-						<td>
-							<div>
-								<input checked = "$ctrl.statusRacunaIzmena == 0" type="radio" ng-model="$ctrl.statusRacunaIzmena" value=0> Aktivan
-								<input checked = "$ctrl.statusRacunaIzmena == 1" type="radio" ng-model="$ctrl.statusRacunaIzmena" value=1> Zatvoren
-							</div>
-						</td>
 					</tr>
 
 					<tr>

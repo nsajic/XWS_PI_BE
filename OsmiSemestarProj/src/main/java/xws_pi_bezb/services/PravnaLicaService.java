@@ -314,7 +314,7 @@ public class PravnaLicaService implements IPravnaLicaService {
 	
 	@Override
 	public PravnoLice findOne(Long id) {
-		return pravnoLiceRepository.findById(id);
+		return pravnoLiceRepository.findOne(id);
 	}
 	
 

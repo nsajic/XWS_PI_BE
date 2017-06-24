@@ -7,11 +7,9 @@
 	<div>
 		<div id="tabs">
 			<ul>
-				<li ng-class="{active: isSet(0)}"
-					ng-show="hasPrivilege('Delatnost:IzlistajPretrazi')"><a
+				<li ng-class="{active: isSet(0)}" ng-show="hasPrivilege('Delatnost:IzlistajPretrazi')"><a
 					ng-click="setTab(0); prikaziPretragu = false" href=""><span>Delatnosti</span></a></li>
-				<li ng-class="{active: isSet(1)}"
-					ng-show="hasPrivilege('Delatnost:Dodaj')"><a
+				<li ng-class="{active: isSet(1)}"ng-show="hasPrivilege('Delatnost:Dodaj')"><a
 					ng-click="setTab(1)" href=""><span>Dodaj delatnost</span></a></li>
 			</ul>
 		</div>
@@ -22,9 +20,7 @@
 
 				<h2>Pravna lica koja se bave odabranom delatnoscu:</h2>
 
-				<button
-					ng-show="(pravnaLicaDelatnosti.length != 0 || prikaziPretraguPravnaLica) && hasPrivilege('Delatnost:IzlistajPretrazi')"
-					ng-click="prikaziPretraguPravnaLica = true">Pretraga</button>
+				<button ng-show="(pravnaLicaDelatnosti.length != 0 || prikaziPretraguPravnaLica) && hasPrivilege('Delatnost:IzlistajPretrazi')" ng-click="prikaziPretraguPravnaLica = true">Pretraga</button>
 				<div ng-show="prikaziPretraguPravnaLica">
 					<h2>Unesite podatke o klijentu:</h2>
 					<table>
@@ -37,17 +33,12 @@
 							<td><input type=text ng-model="prezimePravnogLicaPretraga"></td>
 						</tr>
 						<tr>
-							<td>Username:</td>
-							<td><input type=text ng-model="usernamePravnogLicaPretraga"></td>
-						</tr>
-						<tr>
 							<td>Email:</td>
 							<td><input type=text ng-model="emailPravnogLicaPretraga"></td>
 						</tr>
 						<tr>
 							<td>Broj licne karte vlasnika:</td>
-							<td><input type=number
-								ng-model="brojLicneKartePravnogLicaPretraga"></td>
+							<td><input type=number ng-model="brojLicneKartePravnogLicaPretraga"></td>
 						</tr>
 						<tr>
 							<td>Telefon:</td>
@@ -79,36 +70,14 @@
 							<td>FAX:</td>
 							<td><input type="text" ng-model="faxPravnogLicaPretraga"></td>
 						</tr>
-						<tr>
-							<td>APR:</td>
-							<td>
-								<form>
-									<input type="radio" ng-model="aprPravnogLicaPretraga"
-										value="true" />True <input type="radio"
-										ng-model="aprPravnogLicaPretraga" value="false" />False <input
-										class=btn type="reset" />
-								</form>
-							</td>
-						</tr>
-						<tr>
-							<td>OP:</td>
-							<td>
-								<form>
-									<input type="radio" ng-model="opPravnogLicaPretraga"
-										value="true" />True <input type="radio"
-										ng-model="opPravnogLicaPretraga" value="false" />False <input
-										type="reset" />
-								</form>
-							</td>
-						</tr>
+
 
 
 						<tr>
 							<td>
 							<td>
 							<td>
-								<button ng-show="hasPrivilege('Delatnost:IzlistajPretrazi')"
-									ng-click="pretragaPravnihLicaPoPoljima()">Pretrazi</button>
+								<button ng-show="hasPrivilege('Delatnost:IzlistajPretrazi')" ng-click="pretragaPravnihLicaPoPoljima()">Pretrazi</button>
 
 							</td>
 							<td>
@@ -164,10 +133,6 @@
 						<td>{{pravnoLiceZaDetalje.prezime}}</td>
 					</tr>
 					<tr>
-						<td>Username:</td>
-						<td>{{pravnoLiceZaDetalje.username}}</td>
-					</tr>
-					<tr>
 						<td>Email:</td>
 						<td>{{pravnoLiceZaDetalje.email}}</td>
 					</tr>
@@ -203,14 +168,6 @@
 					<tr>
 						<td>FAX:</td>
 						<td>{{pravnoLiceZaDetalje.fax}}</td>
-					</tr>
-					<tr>
-						<td>APR:</td>
-						<td>{{pravnoLiceZaDetalje.apr}}</td>
-					</tr>
-					<tr>
-						<td>OP:</td>
-						<td>{{pravnoLiceZaDetalje.op}}</td>
 					</tr>
 					<tr>
 						<td>Delatnost:</td>
@@ -277,16 +234,6 @@
 					<tr>
 						<td>FAX:</td>
 						<td><input type="text" ng-model="$ctrl.faxPravnogLicaIzmena"></td>
-					</tr>
-					<tr>
-						<td>APR:</td>
-						<td><input type="checkbox"
-							ng-model="$ctrl.aprPravnogLicaIzmena"></td>
-					</tr>
-					<tr>
-						<td>OP:</td>
-						<td><input type="checkbox"
-							ng-model="$ctrl.opPravnogLicaIzmena"></td>
 					</tr>
 				</table>
 				<button ng-click="izmeniPravnoLice()"

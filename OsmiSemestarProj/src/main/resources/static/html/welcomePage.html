@@ -6,30 +6,17 @@
 	
 	<div ng-show = "zabraniPrikaz == false">
 		<h1>Welcome</h1>		
-		<a href="promenaLozinke">Promeni lozinku</a>
-		<br/>
+		<a href="banka">O banci</a> &nbsp &nbsp
+		<a href="promenaLozinke">Promeni lozinku</a>&nbsp &nbsp
 		<a ng-click="logOut()" href="">Izloguj se</a>
-
 		<hr/>
 		<div>
-			<div  ng-show="hasPrivilege('Banka:View')">
-			<a href="banka">Banke</a> 
-			</div>
-			<div ng-show="hasPrivilege('Klijent:View')">
-			<a href="pravnoLice">Pravna lica</a>
-			</div>
-			<div ng-show="hasPrivilege('Klijent:View')">
-			<a href="fizickoLice">Fizicka lica</a>
-			</div>
-			<div ng-show="hasPrivilege('Delatnost:View')">
-			<a href="delatnost" >Delatnosti</a>
-			</div>
-			<div ng-show="hasPrivilege('Valuta:View')">
-			<a href="valuta">Valute</a>
-			</div>
-			<div ng-show="hasPrivilege('Racun:View')">
-			<a href="racun">Racuni</a>
-			</div>
+			<div ng-show="hasPrivilege('Klijent:View')"> <a href="pravnoLice">Pravna lica</a></div>
+			<div ng-show="hasPrivilege('Klijent:View')"><a href="fizickoLice">Fizicka lica</a></div>
+			<div ng-show="hasPrivilege('Racun:View')"><a href="racun">Racuni</a></div>
+			<br/>
+			<div ng-show="hasPrivilege('Valuta:View')"><a href="valuta">Valute</a></div>
+			<div ng-show="hasPrivilege('Delatnost:View')"><a href="delatnost" >Delatnosti</a></div>
 		</div>
 	</div>
 </div>
