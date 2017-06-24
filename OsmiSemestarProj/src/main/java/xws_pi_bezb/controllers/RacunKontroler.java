@@ -18,13 +18,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import xws_pi_bezb.annotations.InterceptorAnnotation;
+import xws_pi_bezb.iservices.IAnalitikaIzvodaService;
 import xws_pi_bezb.iservices.IBankaService;
 import xws_pi_bezb.iservices.IBankarskiSluzbenikService;
 import xws_pi_bezb.iservices.IDnevnoStanjeRacunaService;
 import xws_pi_bezb.iservices.IKlijentService;
 import xws_pi_bezb.iservices.IRacunService;
 import xws_pi_bezb.iservices.IValutaService;
-import xws_pi_bezb.models.Banka;
+import xws_pi_bezb.models.AnalitikaIzvoda;
 import xws_pi_bezb.models.DnevnoStanjeRacuna;
 import xws_pi_bezb.models.Klijent;
 import xws_pi_bezb.models.Racun;
@@ -48,18 +49,23 @@ public class RacunKontroler {
 	private IDnevnoStanjeRacunaService dnevnoStanjeRacunaService;
 	@Autowired
 	private IBankarskiSluzbenikService bankarskiSluzbenikService;
+	@Autowired
+	private IAnalitikaIzvodaService analitikaIzvodaService;
+	
+	
 
+	
+	private Date getDateWithZeroTime () throws ParseException {
+		DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+		Date today = new Date();
+		return formatter.parse(formatter.format(today));
+	}
+	
 	@RequestMapping(value = "/dodajRacun", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
 	@InterceptorAnnotation("Racun:Dodaj")
 	public ResponseEntity<Object> dodajRacun(HttpSession session,@RequestBody Racun racun ) throws ParseException {
 		DnevnoStanjeRacuna dsr = new DnevnoStanjeRacuna();
-		DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-		Date today = new Date();
-		Date todayWithZeroTime = formatter.parse(formatter.format(today));
-		
-		System.out.println(todayWithZeroTime);
-		
-		dsr.setDatum(todayWithZeroTime);
+		dsr.setDatum(getDateWithZeroTime());
 		dsr.setNovoStanje(0);
 		dsr.setPrethodnoStanje(0);
 		dsr.setPrometNaTeret(0);
@@ -71,6 +77,7 @@ public class RacunKontroler {
 			return new ResponseEntity<Object>(HttpStatus.BAD_REQUEST);
 		}
 		
+		racun.setStatusRacuna(1);
 		racun.setBanka(bankaService.findOne(sluzbenik.getBanka().getId()));
 		
 		racunService.save(racun);
@@ -87,9 +94,7 @@ public class RacunKontroler {
 		if(sluzbenik == null){
 			return new ResponseEntity<Object>(HttpStatus.BAD_REQUEST);
 		}
-		
 		racun.setBanka(bankaService.findOne(sluzbenik.getBanka().getId()));
-		
 		racunService.save(racun);
 		System.out.println(racunService.findOne(racun.getId()).getBanka().getNazivBanke());
 		return new ResponseEntity<Object>(HttpStatus.OK);
@@ -110,8 +115,6 @@ public class RacunKontroler {
 			return new ResponseEntity<List<Racun>>(HttpStatus.BAD_REQUEST);
 		}
 		BankarskiSluzbenik sluzbenik2 = bankarskiSluzbenikService.findOne(sluzbenik.getId());
-		
-		
 		return new ResponseEntity<List<Racun>>(racunService.findByBanka(sluzbenik2.getBanka()), HttpStatus.OK);
 	}
 
@@ -145,11 +148,26 @@ public class RacunKontroler {
 	}
 	
 
+	// NEXTOVI
+	
 	@RequestMapping(value = "/ucitajDnevnaStanjaOdabranogRacuna", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
 	@InterceptorAnnotation("Racun:DnevnoStanjeOdabranogRacuna")
 	public ResponseEntity<List<DnevnoStanjeRacuna>> ucitajDnevnaStanjaOdabranogRacuna(@RequestBody Racun racun) {
 		List<DnevnoStanjeRacuna> retVal = dnevnoStanjeRacunaService.findByRacun(racun);
 		return new ResponseEntity<List<DnevnoStanjeRacuna>>(retVal, HttpStatus.OK);
 	}
+	
+	
+	@RequestMapping(value = "/ucitajAnalitikeOdabranogDnevnogStanja", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+	//@InterceptorAnnotation("Racun:DnevnoStanjeOdabranogRacuna")
+	public ResponseEntity<List<AnalitikaIzvoda>> ucitajAnalitikeOdabranogDnevnogStanja(@RequestBody DnevnoStanjeRacuna dnevnoStanjeRacuna) {
+		System.out.println(dnevnoStanjeRacuna.getRacun().getBrojRacuna() + " sasasasa");
+		List<AnalitikaIzvoda> retVal = analitikaIzvodaService.findByDnevnoStanjeRacuna(dnevnoStanjeRacuna);
+		return new ResponseEntity<List<AnalitikaIzvoda>>(retVal, HttpStatus.OK);
+	}
+	
+	
+	
+	
 
 }

@@ -56,17 +56,9 @@ public class MedjubankarskiPrenos {
 
 	@OneToMany(mappedBy = "medjubankarskiPrenos")
 	private Set<StavkaPrenosa> stavkePrenosa;
-
-<<<<<<< HEAD
+	
 	public MedjubankarskiPrenos(){}
 	
-	
-=======
-	public MedjubankarskiPrenos() {
-
-	}
-
->>>>>>> 6a2049b2460a21eacd29281815512b2e88cf75b8
 	public Long getId() {
 		return id;
 	}

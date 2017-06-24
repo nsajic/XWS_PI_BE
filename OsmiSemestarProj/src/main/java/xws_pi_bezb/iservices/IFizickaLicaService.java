@@ -8,8 +8,6 @@ import xws_pi_bezb.models.FizickoLice;
 import xws_pi_bezb.models.Klijent;
 import xws_pi_bezb.models.PravnoLice;
 
-
-@Service
 public interface IFizickaLicaService  {
 	
 	FizickoLice findById(Long id);

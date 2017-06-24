@@ -190,8 +190,6 @@ delatnostKontroler.controller('delatnostCtrl', function($scope, klijentServis, d
 			web : controller.webPravnogLicaIzmena,
 			maticniBroj : controller.maticniBrojPravnogLicaIzmena,
 			fax : controller.faxPravnogLicaIzmena,
-			apr : controller.aprPravnogLicaIzmena,
-			op : controller.opPravnogLicaIzmena,
 			delatnost : $scope.delatnostZaNext
 		}
 		klijentServis.izmeniPravnoLice(pravnoLice).success(function(data) {
@@ -219,8 +217,6 @@ delatnostKontroler.controller('delatnostCtrl', function($scope, klijentServis, d
 		controller.nazivPravnogLicaIzmena = pravnoLice.naziv;
 		controller.webPravnogLicaIzmena = pravnoLice.web;
 		controller.maticniBrojPravnogLicaIzmena = pravnoLice.maticniBroj;
-		controller.faxPravnogLicaIzmena = pravnoLice.fax;
-		controller.aprPravnogLicaIzmena = pravnoLice.apr;
 		controller.opPravnogLicaIzmena = pravnoLice.op;
 	
 		$scope.setovanDiv = 2;
@@ -244,7 +240,6 @@ delatnostKontroler.controller('delatnostCtrl', function($scope, klijentServis, d
 		var pravnoLice = {
 				ime : $scope.imePravnogLicaPretraga,
 				prezime : $scope.prezimePravnogLicaPretraga,
-				username: $scope.usernamePravnogLicaPretraga,
 				email: $scope.emailPravnogLicaPretraga,
 				brojLicneKarte : $scope.brojLicneKartePravnogLicaPretraga,
 				datumIstekaLicneKarte : $scope.datumIstekaLicneKartePravnogLicaPretraga,
@@ -256,8 +251,6 @@ delatnostKontroler.controller('delatnostCtrl', function($scope, klijentServis, d
 				web : $scope.webPravnogLicaPretraga,
 				maticniBroj : $scope.maticniBrojPravnogLicaPretraga,
 				fax : $scope.faxPravnogLicaPretraga,
-				apr : $scope.aprPravnogLicaPretraga,
-				op : $scope.opPravnogLicaPretraga
 			}
 		var zaPretragu  = {
 				pravnoLice : pravnoLice,
