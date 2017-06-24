@@ -1,5 +1,6 @@
 package xws_pi_bezb.iservices;
 
+import java.util.Date;
 import java.util.List;
 
 import xws_pi_bezb.models.DnevnoStanjeRacuna;
@@ -14,4 +15,6 @@ public interface IDnevnoStanjeRacunaService {
 	List<DnevnoStanjeRacuna> findByRacun(Racun racun);
 	
 	DnevnoStanjeRacuna findTopByRacunOrderByDatum(Racun racun);
+
+	DnevnoStanjeRacuna findByRacunAndDatum(Racun racunD, Date date);
 }

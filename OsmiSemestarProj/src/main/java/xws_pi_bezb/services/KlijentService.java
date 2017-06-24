@@ -447,7 +447,6 @@ public class KlijentService implements IKlijentService {
 
 	@Override
 	public UserDetails loadUserByUsername(String username) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 	

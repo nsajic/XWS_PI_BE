@@ -1,5 +1,6 @@
 package xws_pi_bezb.services;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +36,11 @@ public class DnevnoStanjeRacunaService implements IDnevnoStanjeRacunaService {
 	@Override
 	public DnevnoStanjeRacuna findTopByRacunOrderByDatum(Racun racun) {
 		return dnevnoStanjeRacunaRepository.findTopByRacunOrderByDatum(racun);
+	}
+
+	@Override
+	public DnevnoStanjeRacuna findByRacunAndDatum(Racun racunD, Date date) {
+		return dnevnoStanjeRacunaRepository.findByRacunAndDatum(racunD, date);
 	}
 
 }

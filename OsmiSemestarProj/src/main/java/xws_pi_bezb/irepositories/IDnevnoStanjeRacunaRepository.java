@@ -1,5 +1,6 @@
 package xws_pi_bezb.irepositories;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -18,4 +19,6 @@ public interface IDnevnoStanjeRacunaRepository extends JpaRepository<DnevnoStanj
 	List<DnevnoStanjeRacuna> findByRacun(Racun racun);
 	
 	DnevnoStanjeRacuna findTopByRacunOrderByDatum(Racun racun);
+
+	DnevnoStanjeRacuna findByRacunAndDatum(Racun racunD, Date date);
 }

@@ -29,7 +29,7 @@ public class Racun {
 	private FizickoLice fizickoLice;
 	
 	@ManyToOne
-	private FizickoLice pravnoLice;
+	private PravnoLice pravnoLice;
 	
 	@ManyToOne
 	private Banka banka;
@@ -96,11 +96,11 @@ public class Racun {
 		this.fizickoLice = fizickoLice;
 	}
 
-	public FizickoLice getPravnoLice() {
+	public PravnoLice getPravnoLice() {
 		return pravnoLice;
 	}
 
-	public void setPravnoLice(FizickoLice pravnoLice) {
+	public void setPravnoLice(PravnoLice pravnoLice) {
 		this.pravnoLice = pravnoLice;
 	} 
 }

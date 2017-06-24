@@ -13,13 +13,13 @@ public class OsmiSemestarProjApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(OsmiSemestarProjApplication.class, args);
-		
+/*		
 		MT102Request request102 = new MT102Request();
 		MT103Request request103 = new MT103Request();
 		
 		BankaKlijentSamoTest klijentTest = new BankaKlijentSamoTest();
 		klijentTest.posaljiMT102(request102);
 		klijentTest.posaljiMT103(request103);
-		
+*/		
 	}
 }

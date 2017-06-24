@@ -21,13 +21,11 @@ public class RacunService implements IRacunService{
 	
 	@Override
 	public List<Racun> findAll() {
-		// TODO Auto-generated method stub
 		return racunRepository.findAll();
 	}
 
 	@Override
 	public Racun findOne(Long id) {
-		// TODO Auto-generated method stub
 		return racunRepository.findById(id);
 	}
 

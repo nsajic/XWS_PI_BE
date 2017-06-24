@@ -8,38 +8,12 @@
 <ns2:EncryptedKey>
                 <ns2:EncryptionMethod Algorithm="http://www.w3.org/2001/04/xmlenc#rsa-1_5"/>
                 <ns2:CipherData>
-                    <ns2:CipherValue>xh2S2urvFSsdvD/6UoCJG0B0Y/4rIrbLHWfY1nZXwtqOyWh+Y9EMpI1eR9K64cX4iOsQ7s3CFtrZ4odsBV1k9oBOt6uWAotLze8Uoqhd0ctcienWnji9XLnbjGYBVFdytZVkE1rRpKsZcGWobJFJEC4nhreSYbfoSbX2kmg1Xr4=</ns2:CipherValue>
+                    <ns2:CipherValue>otaHgHGJ5Fio2Z5d+d4Ac7XlSpu74441T7J+hBQqkxguFwCCXX+QIjjq3UD/v/3KrMgq2RSGQWaB61CRBcJvWOpa1BObEiignQncNpBB/Vzeei0JPjgh1FkxYpmvWo3y4dX6wtAo7rk6Q0vVblwT2Gj7piq8/cy5V2NRW2zABco=</ns2:CipherValue>
                 </ns2:CipherData>
             </ns2:EncryptedKey>
         </ns3:KeyInfo>
         <ns2:CipherData>
-            <ns2:CipherValue>BoMXxFs7fwg0IrYGoZGI+q2Pm0wz/wztbsotij8agqF6gWdV2/yVWlRahORELBJsL1Da4JD2vLgvZEBjRJDa+F8QPR6jANeWqncWoKT1ke2LIRqkREDfsg0Vm7i5XgLjY+uEAHmqEOy26qZ/MQuq3SE84RLt+pHYOmeBZluV5Klacsg/4xDeJwEyF6l2ELSYe8UWoz2kVVS5AsE0np5Fby/w9dfOWy2bLDkcHrOIQ+hBcse0j+Bgxbzr8ANmJ/qWwXtUFeKC3oFYLapDCA72OBoEToYod4NZF3j+Rv5w25ohIVgym6X2FmNkQDkW+IhhPcPGlxaR9BLX7BbjvHdPGwtopbo7F3jM053UppSxn5F97KdaR4wTdjO23S/5AXR+QW3ym6Qgu0wmvKgQf44C2/CR5B0p2i3nrOqTY7t/K/O1RKZYiUCEVrzHYJdqvlrOBhySnS543gDd7QzIFd86Y4DVMtgo2VmN1lrLJtqADSNwmmQB2sojfsPORk1VGdmwwmnBB1SbAb3rP5CwHVvGfPO3VtT30G0X9dOBcePfGJFcQU/p5JpuenQVGy9DvoKnb5pDF0yMIYhp06ZsETC/PEyUHQx44ZvNvhG2P4gU1RWyA59EkTyZNlvoIYs9/H/c9XVO6oEJ67iq2xtsAitYsTsHIWIfz7HkBdg4mwl2fIInMMafkDkunc8DyOYiuWN51lOUuBs/+OqZVfpnRAOpQjOHvz/Kful8C9OH3sM3kwwWDNWanj1BALGfrrCuMcAGGxaRF8GsH/mNm9TS3YHrv6XNLex+DJnrv0V4f9bZT7TJr2rmMoQ3E0sYkV+7bqwsGIiec4gmYvhrAjRqVAvwwsqznCx4asMbTH0OFWkGkPDeOFFL9B1levND1uXIrWgB+OobJYRhfqmymw6wZVOQSD/Xb7jFDgWz+RpxMWOvWo6KfwCUiN/0xQpDCqooxHbx4f8Ip1sdu8/hXBx2YhWG+WhmHSh/9rxuK9F6SW0CuP7t7RhWtogzPizDXiSTCVtPo6fmAWTKnDr9pHzS4S7zwIlB+wNLi5Tj</ns2:CipherValue>
+            <ns2:CipherValue>78ANIcNce3QdMRUIbnfcq6gRjIRVYVGXxwjgw8m0F1YjYyojFqjpLKadO2KrfheWz8GnRjoducAeoBvl1AGfmX4kJ3Qf4ZPJP7Ezm69jPYTBufWalPGES+mg5zTVZ835FjXOyfMCLcIT+28WCB8FsvfaLI7+RBWmytJF4y8i94vO/30DndvgQ6RNcgnpXO7+GL+36FzWzoIi5WsEQIQX974CA83WlwqxgyaLfxUvOHNCH10Mronbb841v1XBcHS1EmGlZKb1ZDezWL3vFSJbYlTzG1zUEJSRfpv0jHzkXXU7YhyljA6IuLX17VGpVgQuJ1chqY0KjVHGWax+p5eeNjOQR1G3e7x32pIJR8j+PSSHH+pgDOWIC8RS4Jh2tmOrIJPZyx6mBxRZgO7jaq81Lmh7O3hq7N7NgQAotjntwDL7KVrlsZsCSXk/5zDcAWyvUCkT5DZT9o+Z0QrcHXtM1A21W1wKBIZ++SoQXv7KDpYod/zmCCHphMbMvoTTovzeckhZ5HSTcu9xkLWQAvzKHPa0rewhlnMQlTxoMGlS0T7icqlSVZfXAfLoYV4WDSbpvppwQUSGUjWyO7fIXZRkBS3igXtY9KuIbDRqkqZ6/6VOxcBrFvW2VSDB/bAc8Ku3DjC0A2FqKZ7gKdDxmX5Q7FissHQqmalj8k14a8tW1D1oit1mgoYyf2wNpy1AsiXUHEaFWLoI8WS5CeMZcbB/9IC4wSly6kkjH7ESJP+l62c=</ns2:CipherValue>
         </ns2:CipherData>
     </ns2:EncryptedData>
-    <ns3:Signature>
-        <ns3:SignedInfo>
-            <ns3:CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315"/>
-            <ns3:SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1"/>
-            <ns3:Reference URI="">
-                <ns3:Transforms>
-                    <ns3:Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/>
-                    <ns3:Transform Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315#WithComments"/>
-                </ns3:Transforms>
-                <ns3:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"/>
-                <ns3:DigestValue>MEqfGefD9VX5RkjPuoHo3PzNEqo=</ns3:DigestValue>
-            </ns3:Reference>
-        </ns3:SignedInfo>
-        <ns3:SignatureValue>mBuMm0XHlNhOpv/moyVIkAVIcaWoUzx5IQtNpJ6qLMjT68MLU2jx/jDPkSW9qxZuW1jfX4zQm4hZ9Y19h3F5TfyDJfEBMED6Wnsc6BTnpug54l7uXcgA2eoS7HZvn+9VQ7lQ53KIqLK369NpGDz+EecY7Yh2OnxfJm0wRU/G1hQ=</ns3:SignatureValue>
-        <ns3:KeyInfo>
-<ns3:KeyValue>
-<ns3:RSAKeyValue>
-                    <ns3:Modulus>zQ9KJLShafi/S2HkWlfnRpKcuLB4BgeJ5y2wBafGRRNz5kss0gjzzQZIDf684gwQ2WYEDlH2s+OXfbX4v6KTKJ4ug0wfY05sciJ7Dx+HOPUw6KU5aWvbBIKAXJE+MCSaO/FSk+ujgXSZAY/epUsSqBo2EZgUl90oEpTRbV+xX8E=</ns3:Modulus>
-                    <ns3:Exponent>AQAB</ns3:Exponent>
-                </ns3:RSAKeyValue>
-</ns3:KeyValue>
-<ns3:X509Data>
-                <ns3:X509Certificate>MIIBtjCCAR8CBEZasCQwDQYJKoZIhvcNAQEFBQAwIjEPMA0GA1UECwwGcHJpbWVyMQ8wDQYDVQQDDAZwcmltZXIwHhcNMDcwNTI4MTAzNDEyWhcNMjcwNTIzMTAzNDEyWjAiMQ8wDQYDVQQLDAZwcmltZXIxDzANBgNVBAMMBnByaW1lcjCBnzANBgkqhkiG9w0BAQEFAAOBjQAwgYkCgYEAzQ9KJLShafi/S2HkWlfnRpKcuLB4BgeJ5y2wBafGRRNz5kss0gjzzQZIDf684gwQ2WYEDlH2s+OXfbX4v6KTKJ4ug0wfY05sciJ7Dx+HOPUw6KU5aWvbBIKAXJE+MCSaO/FSk+ujgXSZAY/epUsSqBo2EZgUl90oEpTRbV+xX8ECAwEAATANBgkqhkiG9w0BAQUFAAOBgQB2HjPI427zRaVfLTaeNVcjH9hoTkl9OUJAAmEa6EQdbdqZ75ca3IfuLHJFJ8zzyBP4LUGSxgA4OpnKs6Ej5w2n0GHmu0g4YqxInfpv/kCwswoia4Oza17te8mMamffCn3ySX5yZzEex5nueNAyhJkmWBcBCOvJw4+U+gSK50Xbcw==</ns3:X509Certificate>
-            </ns3:X509Data>
-</ns3:KeyInfo>
-    </ns3:Signature>
 </ns4:NalogZaPrenosRequest>

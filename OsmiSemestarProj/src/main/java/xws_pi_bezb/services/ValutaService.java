@@ -19,25 +19,21 @@ public class ValutaService implements IValutaService {
 
 	@Override
 	public List<Valuta> findAll() {
-		// TODO Auto-generated method stub
 		return valutaRepository.findAll();
 	}
 
 	@Override
 	public Valuta findOne(Long id) {
-		// TODO Auto-generated method stub
 		return valutaRepository.findById(id);
 	}
 
 	@Override
 	public void save(Valuta valuta) {
-		// TODO Auto-generated method stub
 		valutaRepository.save(valuta);
 	}
 
 	@Override
 	public void delete(Long id) {
-		// TODO Auto-generated method stub
 		valutaRepository.delete(id);
 	}
 
