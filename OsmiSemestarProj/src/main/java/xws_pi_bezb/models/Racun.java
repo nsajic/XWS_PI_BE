@@ -26,11 +26,15 @@ public class Racun {
 	private int statusRacuna;
 	
 	@ManyToOne
+	private Klijent klijent;
+	
+	/*
+	@ManyToOne
 	private FizickoLice fizickoLice;
 	
 	@ManyToOne
 	private PravnoLice pravnoLice;
-	
+	*/
 	@ManyToOne
 	private Banka banka;
 	
@@ -40,6 +44,14 @@ public class Racun {
 	@OneToMany(mappedBy = "racun")
 	private Set<ZatvaranjeRacuna> zatvaranjaRacuna; 
 	
+	public Klijent getKlijent() {
+		return klijent;
+	}
+
+	public void setKlijent(Klijent klijent) {
+		this.klijent = klijent;
+	}
+
 	@OneToMany(mappedBy = "racun")
 	private Set<DnevnoStanjeRacuna> dnevnjaStanjaRacuna;
 
@@ -87,7 +99,7 @@ public class Racun {
 	public void setValuta(Valuta valuta) {
 		this.valuta = valuta;
 	}
-
+/*
 	public FizickoLice getFizickoLice() {
 		return fizickoLice;
 	}
@@ -102,5 +114,5 @@ public class Racun {
 
 	public void setPravnoLice(PravnoLice pravnoLice) {
 		this.pravnoLice = pravnoLice;
-	} 
+	} */
 }

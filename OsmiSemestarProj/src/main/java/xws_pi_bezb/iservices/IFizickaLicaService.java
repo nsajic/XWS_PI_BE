@@ -20,6 +20,8 @@ public interface IFizickaLicaService  {
 	
 	List<FizickoLice> getFizickaLica();
 	
+	List<FizickoLice> getFizickaLicaByBanka(Long bankId);
+	
 	FizickoLice findOne(Long id);
 	
 	List<FizickoLice> getFizickaLicaBySearch(FizickoLice fizickoLice);

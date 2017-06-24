@@ -65,8 +65,8 @@ pravnoLiceKontroler
 							return false;
 					};
 
-					$scope.izlistajPravnaLica = function() {
-						klijentServis.izlistajPravnaLica().success(
+					$scope.izlistajPravnaLicaBanke = function() {
+						klijentServis.izlistajPravnaLicaBanke().success(
 								function(data) {
 									$scope.pravnaLica = data;
 								}).error(function(data) {
@@ -78,7 +78,7 @@ pravnoLiceKontroler
 					$scope.setTab = function(newTab) {
 						if (newTab == 0) {
 							$scope.resetujPoljaPretragaPravnaLica();
-							$scope.izlistajPravnaLica();
+							$scope.izlistajPravnaLicaBanke();
 						}
 
 						if (newTab == 1) {
@@ -119,7 +119,7 @@ pravnoLiceKontroler
 					$scope.obrisiPravnoLice = function(id) {
 						klijentServis.izbrisiPravnoLice(id).success(
 								function(data) {
-									$scope.izlistajPravnaLica();
+									$scope.izlistajPravnaLicaBanke();
 									$location.path('/pravnoLice');
 								}).error(function(data) {
 							alert("Nemoguce obrisati klijenta");
@@ -150,7 +150,7 @@ pravnoLiceKontroler
 						}
 						klijentServis.dodajPravnoLice(pravnoLice).success(
 								function(data) {
-									$scope.izlistajPravnaLica();
+									$scope.izlistajPravnaLicaBanke();
 									$location.path('/pravnoLice');
 									$scope.resetujPoljaDodavanjePravnaLica();
 									$scope.setTab(0);
@@ -177,7 +177,7 @@ pravnoLiceKontroler
 						}
 						klijentServis.izmeniPravnoLice(pravnoLice).success(
 								function(data) {
-									$scope.izlistajPravnaLica();
+									$scope.izlistajPravnaLicaBanke();
 									$location.path('/pravnoLice');
 									$scope.idPravnogLicaZaIzmenu = -1;
 									$scope.setTab(0);
@@ -261,7 +261,7 @@ pravnoLiceKontroler
 					}
 
 					$scope.ponistiPretraguPravnihLica = function() {
-						$scope.izlistajPravnaLica();
+						$scope.izlistajPravnaLicaBanke();
 					}
 
 					// ZOOM
