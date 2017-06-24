@@ -1,4 +1,4 @@
-/*package xws_pi_bezb.models;
+package xws_pi_bezb.models;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -30,4 +30,37 @@ public class ZatvaranjeRacuna implements Serializable{
 	
 	@ManyToOne
 	private AnalitikaIzvoda analitikaIzvoda;
-}*/
+	
+	public ZatvaranjeRacuna (){}
+	
+	public AnalitikaIzvoda getAnalitikaIzvoda() {
+		return analitikaIzvoda;
+	}
+	
+	public Date getDatumZatvaranja() {
+		return datumZatvaranja;
+	}
+	
+	public String getPrebacenoNaRacun() {
+		return prebacenoNaRacun;
+	}
+	
+	public Racun getRacun() {
+		return racun;
+	}
+	
+	public void setAnalitikaIzvoda(AnalitikaIzvoda analitikaIzvoda) {
+		this.analitikaIzvoda = analitikaIzvoda;
+	}
+	
+	public void setDatumZatvaranja(Date datumZatvaranja) {
+		this.datumZatvaranja = datumZatvaranja;
+	}
+	
+	public void setPrebacenoNaRacun(String prebacenoNaRacun) {
+		this.prebacenoNaRacun = prebacenoNaRacun;
+	}
+	public void setRacun(Racun racun) {
+		this.racun = racun;
+	}
+}

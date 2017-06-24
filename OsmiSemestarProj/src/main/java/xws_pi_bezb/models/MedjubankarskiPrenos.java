@@ -1,4 +1,4 @@
-/*package xws_pi_bezb.models;
+package xws_pi_bezb.models;
 
 import java.util.Date;
 import java.util.Set;
@@ -57,11 +57,7 @@ public class MedjubankarskiPrenos {
 	@OneToMany(mappedBy = "medjubankarskiPrenos")
 	private Set<StavkaPrenosa> stavkePrenosa;
 
-	public MedjubankarskiPrenos()
-	{
-		
-		
-	}
+	public MedjubankarskiPrenos(){}
 	
 	
 	public Long getId() {
@@ -165,4 +161,3 @@ public class MedjubankarskiPrenos {
 	
 	
 }
-*/
