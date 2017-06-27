@@ -189,7 +189,7 @@ racunKontroler.controller('racunCtrl', function($scope, racunServis, $window, $l
 	}
 	
 	$scope.getPrikaziSveRacune = function (){
-		return $scope.idRacunaZaIzmenu == -1 && $scope.idRacunaZaZatvaranje == -1 && $scope.idDnevnogStanjaZaAnalitiku == -1 && $scope.idRacunaZaDnevnaStanja;
+		return $scope.idRacunaZaIzmenu == -1 && $scope.idRacunaZaZatvaranje == -1 && $scope.idDnevnogStanjaZaAnalitiku == -1 && $scope.idRacunaZaDnevnaStanja == -1;
 	}
 	
 	$scope.getIdRacunaZaZatvaranje = function (){
@@ -228,33 +228,29 @@ racunKontroler.controller('racunCtrl', function($scope, racunServis, $window, $l
 		$scope.setTab(2);
 	}
 
-	
+	$scope.promenjenCheck = function(tipLica){
+		$scope.kojaLicaDaPrikaze = tipLica;
+		$scope.izlistajFizickaLica();
+		$scope.izlistajPravnaLica();
+	}
+
 	$scope.setRacunZaDnevnaStanja = function (racun){
 		$scope.resetujZaView();
 		$scope.idRacunaZaDnevnaStanja = racun.id;
-
+		
 		racunServis.ucitajDnevnaStanjaOdabranogRacuna(racun).success(function(data) {
 			$scope.dnevnaStanjaOdabranogRacuna = data;
 		}).error(function(data) {
 			alert("Nemoguce ucitati dnevna stanja racuna");
 		});
 	}
-	
-	$scope.promenjenCheck = function(tipLica){
-		console.log("tip lica izmenjen = " + tipLica);
-		$scope.kojaLicaDaPrikaze = tipLica;
-		$scope.izlistajFizickaLica();
-		$scope.izlistajPravnaLica();
-	}
 
-	
-	
 	$scope.setDnevnoStanjeRacunaNext = function(dnevnoStanje){
 		$scope.resetujZaView();
 		$scope.idDnevnogStanjaZaAnalitiku = dnevnoStanje.id
 		
 		racunServis.ucitajAnalitikeOdabranogDnevnogStanja(dnevnoStanje).success(function(data) {
-			$scope.analitikeOdabranogDnevnogStanja= data;
+			$scope.analitikeOdabranogDnevnogStanja = data;
 		}).error(function(data) {
 			alert("Nemoguce ucitati analitike");
 		});
@@ -262,7 +258,6 @@ racunKontroler.controller('racunCtrl', function($scope, racunServis, $window, $l
 	
 	
 	$scope.prebaciSredstva = function(){
-		
 		var racun = {
 			idRacunKojiGasim : $scope.idRacunaZaZatvaranje,
 			brojRacunaNaKojiPrebacujem : $scope.racunGdePrebacujem
@@ -281,6 +276,10 @@ racunKontroler.controller('racunCtrl', function($scope, racunServis, $window, $l
 	$scope.nazadNaRacune = function (){
 		$scope.resetujZaView();
 		$scope.racunGdePrebacujem = "";
+	}
+	$scope.nazadNaDnevnaStanja = function (){
+		$scope.resetujZaView();
+		$scope.idRacunaZaDnevnaStanja = 0;
 	}
 
 

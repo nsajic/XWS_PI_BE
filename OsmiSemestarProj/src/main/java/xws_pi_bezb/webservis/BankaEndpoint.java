@@ -700,9 +700,52 @@ public class BankaEndpoint {
 		return null;
 	}
 
-	private MT103Request konvertujMT103(MT103 mt103) {
+	private MT103Request konvertujMT103(MT103 mt103) throws DatatypeConfigurationException {
 		
-		return null;
+		MT103Request req = new MT103Request();
+		
+		req.setIDPoruke(mt103.getIdPoruke());
+		
+		req.getBankaDuznika().setSWIFT(mt103.getSwiftDuznik());
+		req.getBankaDuznika().setObracunskiRacun(mt103.getObracunskiRacunDuznik());
+		
+		req.getBankaPoverioca().setSWIFT(mt103.getSwiftPoverilac());
+		req.getBankaPoverioca().setObracunskiRacun(mt103.getObracunskiRacunPoverilac());
+		
+		req.getNalog().setDuznik(mt103.getDuznik());
+		req.getNalog().setSvrhaPlacanja(mt103.getSvrhaPlacanja());
+		req.getNalog().setPrimalac(mt103.getPrimalac());
+		
+		
+		 GregorianCalendar gcal = (GregorianCalendar) GregorianCalendar.getInstance();
+		 gcal.setTime(mt103.getDatumValute());
+		 
+	      XMLGregorianCalendar xgcal = DatatypeFactory.newInstance()
+	            .newXMLGregorianCalendar(gcal);
+	      
+	      req.getNalog().setDatumValute(xgcal);
+	      
+	      gcal = (GregorianCalendar) GregorianCalendar.getInstance();
+			 gcal.setTime(mt103.getDatumNaloga());
+			 
+			  xgcal = DatatypeFactory.newInstance()
+			            .newXMLGregorianCalendar(gcal);
+			  
+			  req.getNalog().setDatumValute(xgcal);
+			  
+			  req.getNalog().getDuznikRacun().setModel(mt103.getModelDuznik());
+			  req.getNalog().getDuznikRacun().setPozivNaBroj(mt103.getPozivNaBrojDuznik());
+			  req.getNalog().getDuznikRacun().setRacun(mt103.getRacunDuznik());
+			  
+			  req.getNalog().getPoverilacRacun().setModel(mt103.getModelPoverilac());
+			  req.getNalog().getPoverilacRacun().setPozivNaBroj(mt103.getPozivNaBrojPoverilac());
+			  req.getNalog().getPoverilacRacun().setRacun(mt103.getRacunDuznik());
+			  
+			  req.getNalog().setIznos(mt103.getIznos());
+			  
+			  req.setSifraValute(mt103.getSifraValute());
+
+		return req;
 	}
 
 	private String uradiObracun910Mt102(MT102Request request) {

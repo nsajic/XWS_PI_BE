@@ -35,8 +35,9 @@ public class StavkaPrenosa implements Serializable{
 		return medjubankarskiPrenos;
 	}
 	
-	public void setMedjubankarskiPrenos(MedjubankarskiPrenos medjubankarskiPrenos) {
-		this.medjubankarskiPrenos = medjubankarskiPrenos;
+	public void setMedjubankarskiPrenos(MedjubankarskiPrenos kliring) {
+		this.medjubankarskiPrenos = kliring;
+		
 	}
 }
 
