@@ -18,7 +18,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import xws_pi_bezb.helpers.Poruka;
+import xws_pi_bezb.iservices.IBankaService;
 import xws_pi_bezb.iservices.IBankarskiSluzbenikService;
+import xws_pi_bezb.models.Banka;
 import xws_pi_bezb.models.korisnici.BankarskiSluzbenik;
 import xws_pi_bezb.password_security.Password;
 import xws_pi_bezb.password_security.PasswordValidator;
@@ -31,6 +33,9 @@ public class LogRegKontroler {
 
 	@Autowired
 	private IBankarskiSluzbenikService bankarskiSluzbenikService;
+
+	@Autowired
+	private IBankaService bankaService;
 
 	/*
 	 * @Autowired private PasswordEncoder passwordEncoder;
@@ -145,4 +150,16 @@ public class LogRegKontroler {
 		}
 
 	}
+	
+	@RequestMapping(value = "/posaljiKliring", method = RequestMethod.POST)
+	public ResponseEntity<Poruka> posaljiKliring(HttpSession session) {
+		BankarskiSluzbenik kor = (BankarskiSluzbenik) session.getAttribute("ulogovanKorisnik");
+		Banka banka = bankaService.findOne(kor.getBanka().getId());
+		
+		
+		//TODO Coa kliring
+		
+		return new ResponseEntity<Poruka>(HttpStatus.ACCEPTED);
+	}
+	
 }

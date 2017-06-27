@@ -31,3 +31,4 @@ public class StavkaPrenosa implements Serializable{
 		this.analitikaIzvoda = analitikaIzvoda;
 	}
 }
+

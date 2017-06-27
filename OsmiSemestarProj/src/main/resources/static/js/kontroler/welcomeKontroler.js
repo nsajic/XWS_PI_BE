@@ -33,23 +33,32 @@ welcomeKontroler.controller('welcomeCtrl', function($scope, $location, $window, 
 	$scope.rolaUlogovanog = "";
 	
 	
-		klijentServis.ucitajUlogovanogKorisnika().success(function(data) {
-			$scope.ulogovanKorisnik = data.korisnik
-			$scope.rolaUlogovanog = data.rola.naziv;
-			
-			/*
-			if($scope.rolaUlogovanog == "FizickoLice"){
-				if($scope.ulogovanKorisnik.logovaoSe == true){
-					$scope.zabraniPrikaz = false;
-				} else {
-					$location.path('/promenaLozinke');
-				}
-			}
-			*/
-		}).error(function(data) {
-			alert("Neuspesno ucitavanje ulogovanog korisnika!");
-		});	
+	klijentServis.ucitajUlogovanogKorisnika().success(function(data) {
+		$scope.ulogovanKorisnik = data.korisnik
+		$scope.rolaUlogovanog = data.rola.naziv;
 		
+		/*
+		if($scope.rolaUlogovanog == "FizickoLice"){
+			if($scope.ulogovanKorisnik.logovaoSe == true){
+				$scope.zabraniPrikaz = false;
+			} else {
+				$location.path('/promenaLozinke');
+			}
+		}
+		*/
+	}).error(function(data) {
+		alert("Neuspesno ucitavanje ulogovanog korisnika!");
+	});	
+		
+	$scope.kliknuoKliring = function(){
+		welcomeServis.posaljiKliring().success(function(data){
+			alert("uspesno poslat clearing");
+			
+		}).error(function (data){
+			alert("Neuspesno poslat clearing");
+			
+		});
+	}
 		
 
 

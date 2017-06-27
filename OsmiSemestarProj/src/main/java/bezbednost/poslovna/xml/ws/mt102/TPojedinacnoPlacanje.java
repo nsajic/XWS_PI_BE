@@ -9,13 +9,20 @@
 package bezbednost.poslovna.xml.ws.mt102;
 
 import java.math.BigDecimal;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.datatype.XMLGregorianCalendar;
+
 import bezbednost.poslovna.xml.ws.nalogzaprenos.TPodaciORacunu;
+import xws_pi_bezb.models.Delatnost;
 
 
 /**
@@ -45,6 +52,7 @@ import bezbednost.poslovna.xml.ws.nalogzaprenos.TPodaciORacunu;
  * 
  * 
  */
+
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "TPojedinacnoPlacanje", propOrder = {
     "idNalogaZaPlacanje",
@@ -57,6 +65,8 @@ import bezbednost.poslovna.xml.ws.nalogzaprenos.TPodaciORacunu;
     "iznos",
     "sifraValute"
 })
+
+
 public class TPojedinacnoPlacanje {
 
     @XmlElement(name = "IDNalogaZaPlacanje", required = true)
@@ -78,6 +88,8 @@ public class TPojedinacnoPlacanje {
     protected BigDecimal iznos;
     @XmlElement(name = "SifraValute", required = true)
     protected String sifraValute;
+    
+  
 
     /**
      * Gets the value of the idNalogaZaPlacanje property.

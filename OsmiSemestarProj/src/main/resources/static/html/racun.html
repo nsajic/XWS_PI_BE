@@ -66,8 +66,8 @@
 						<tr>
 							<td>Status racuna:</td>
 							<td>	
-								<input type="radio" ng-model="statusRacunaPretraga" value=0> Aktivan
-								<input type="radio" ng-model="statusRacunaPretraga" value=1> Zatvoren
+								<input type="radio" ng-model="statusRacunaPretraga" value=1> Aktivan
+								<input type="radio" ng-model="statusRacunaPretraga" value=2> Zatvoren
 							</td>
 						</tr>
 						<!-- 
@@ -102,27 +102,27 @@
 						
 				<table  ng-show="hasPrivilege('Racun:IzlistajPretrazi') && racuni.length != 0">
 					<tr>
-						<td style = "width:130px; heigth: 70px">Broj racuna:</td>
+						<td style = "width:180px; heigth: 70px">Broj racuna:</td>
 						<td style = "width:130px; heigth: 70px">Status racuna</td>
 						<td style = "width:190px; heigth: 70px">Klijent</td>
 						<td style = "width:130px; heigth: 70px">Valuta</td>
 
 					</tr>
 					<tr  ng-repeat='racun in racuni'>
-						<td style = "width:130px; heigth: 70px">{{racun.brojRacuna}}</td>
+						<td style = "width:180px; heigth: 70px">{{racun.brojRacuna}}</td>
 						<td style = "width:130px; heigth: 70px">
-							<div ng-show = "racun.statusRacuna == 0">Aktivan</div>
-							<div ng-show = "racun.statusRacuna == 1">Zatvoren</div>
+							<div ng-show = "racun.statusRacuna == 1">Aktivan</div>
+							<div ng-show = "racun.statusRacuna == 2">Zatvoren</div>
 						</td>
 						
 						<td style = "width:190px; heigth: 70px">
 							<div ng-show = "racun.klijent.rola.naziv == 'PravnoLice'">{{racun.klijent.naziv}}</div>
 							<div ng-show = "racun.klijent.rola.naziv == 'FizickoLice'">{{racun.klijent.ime}} {{racun.klijent.prezime}}</div>
-						</td> 
+						</td>
 						<td style = "width:130px; heigth: 70px">{{racun.valuta.nazivValute}}</td>
-						<td ng-show="hasPrivilege('Racun:Obrisi')"><button ng-click="obrisiRacun(racun.id)">Obrisi</button></td>
-						<td ng-show="hasPrivilege('Racun:Izmeni')"><button ng-click="setRacunZaIzmenu(racun)">Izmeni</button></td>
-						<td ng-show="hasPrivilege('Racun:Izmeni')"> <button ng-click="setRacunZaZatvaranje(racun)">Zatvori</button></td>
+						<td ng-show="hasPrivilege('Racun:Obrisi')"><button ng-show = "racun.statusRacuna == 1" ng-click="obrisiRacun(racun.id)">Obrisi</button></td>
+						<td ng-show="hasPrivilege('Racun:Izmeni')"><button ng-show = "racun.statusRacuna == 1" ng-click="setRacunZaIzmenu(racun)">Izmeni</button></td>
+						<td ng-show="hasPrivilege('Racun:Izmeni')"> <button ng-show = "racun.statusRacuna == 1" ng-click="setRacunZaZatvaranje(racun)">Zatvori</button></td>
 						<td ng-show="hasPrivilege('Racun:DnevnoStanjeOdabranogRacuna')"><button ng-click="setRacunZaDnevnaStanja(racun)">Dnevna stanja</button></td>
 					</tr>
 				</table>
