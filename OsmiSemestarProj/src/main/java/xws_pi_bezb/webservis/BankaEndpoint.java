@@ -14,13 +14,10 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
-<<<<<<< HEAD
-=======
 
 import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.DatatypeFactory;
 import javax.xml.datatype.XMLGregorianCalendar;
->>>>>>> 8d00fcf1e1468eab0d0acb2a6918fd529376c96e
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerConfigurationException;
 import javax.xml.transform.TransformerException;
@@ -67,6 +64,7 @@ import xws_pi_bezb.models.DnevnoStanjeRacuna;
 import xws_pi_bezb.models.MT102;
 import xws_pi_bezb.models.MT103;
 import xws_pi_bezb.models.MedjubankarskiPrenos;
+import xws_pi_bezb.models.PojedinacnoPlacanje;
 import xws_pi_bezb.models.Racun;
 import xws_pi_bezb.models.StavkaPrenosa;
 import xws_pi_bezb.xml.secutiry.DocumentLoader;
