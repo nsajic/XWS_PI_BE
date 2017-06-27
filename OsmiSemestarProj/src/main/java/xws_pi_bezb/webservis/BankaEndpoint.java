@@ -471,9 +471,12 @@ public class BankaEndpoint {
 
 		Date danasnjiDatum = java.sql.Date.valueOf(LocalDate.of(request.getZahtev().getDatum().getYear(), request.getZahtev().getDatum().getMonth(), request.getZahtev().getDatum().getDay()));
 		Racun racunDuz = racunService.findByBrojRacuna(request.getZahtev().getBrojRacuna());
-		DnevnoStanjeRacuna dnevnoStanjeRacunaDuznika = dnevnoStanjeRacunaService.findByRacunAndDatum(racunDuz, danasnjiDatum);
 		
+		DnevnoStanjeRacuna dnevnoStanjeRacunaDuznika = null;
 		
+		if(racunDuz != null){
+			dnevnoStanjeRacunaDuznika = dnevnoStanjeRacunaService.findByRacunAndDatum(racunDuz, danasnjiDatum);			
+		}
 		
 		if(dnevnoStanjeRacunaDuznika != null){
 			
