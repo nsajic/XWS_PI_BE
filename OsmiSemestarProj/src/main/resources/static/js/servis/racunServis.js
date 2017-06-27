@@ -50,6 +50,13 @@ racunServis.factory('racunServis', function($http) {
 		return $http.post('/racunKontroler/ucitajAnalitikeOdabranogDnevnogStanja', data);
 	}
 	
+	temp.zatvoriRacun = function(data) {
+		console.log(data);
+		return $http.post('/racunKontroler/zatvoriRacun', data);
+	}
+	
+	
+	
 	
 	
 	

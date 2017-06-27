@@ -18,7 +18,7 @@ public class Racun {
 	@GeneratedValue
 	private Long id;
 
-	@Column(name = "broj_racuna", nullable = false)
+	@Column(name = "broj_racuna", nullable = false, unique = true)
 	private String brojRacuna;
 
 	@Column(name = "status_racuna", nullable = false)

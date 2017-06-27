@@ -7,6 +7,9 @@ welcomeServis.factory('welcomeServis', function($http) {
 	temp.logOut = function(){
 		return $http.post('/contr/logout');
 	}
+	temp.posaljiKliring = function(){
+		return $http.post('/contr/posaljiKliring');
+	}
 	
 	return temp;
 })
