@@ -9,6 +9,7 @@ import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.List;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -35,6 +36,9 @@ import org.w3c.dom.Document;
 
 import bezbednost.poslovna.xml.ws.izvod.IzvodRequest;
 import bezbednost.poslovna.xml.ws.izvod.IzvodResponse;
+import bezbednost.poslovna.xml.ws.izvod.TStavkaPreseka;
+import bezbednost.poslovna.xml.ws.izvod.TZaglavljePreseka;
+import bezbednost.poslovna.xml.ws.izvod.TZahtev;
 import bezbednost.poslovna.xml.ws.mt102.MT102Request;
 import bezbednost.poslovna.xml.ws.mt102.MT102Response;
 import bezbednost.poslovna.xml.ws.mt102.TPojedinacnoPlacanje;
@@ -76,6 +80,7 @@ public class BankaEndpoint {
 	private static final String HTTP = "http://";
 	private static final String NAMESPACE_URI = "ws.xml.poslovna.bezbednost/";
 	private Logger logger = LoggerFactory.getLogger(LogRegKontroler.class);
+	private static final int presek = 2;
 
 	@Autowired
 	private IRacunService racunService;
@@ -457,6 +462,7 @@ public class BankaEndpoint {
 		return response;
 	}
 
+	@SuppressWarnings("deprecation")
 	@PayloadRoot(namespace = HTTP + "izvod." + NAMESPACE_URI, localPart = "IzvodRequest")
 	@ResponsePayload
 	public IzvodResponse izvod(@RequestPayload IzvodRequest request) {
@@ -465,9 +471,95 @@ public class BankaEndpoint {
 
 		Date danasnjiDatum = java.sql.Date.valueOf(LocalDate.of(request.getZahtev().getDatum().getYear(), request.getZahtev().getDatum().getMonth(), request.getZahtev().getDatum().getDay()));
 		Racun racunDuz = racunService.findByBrojRacuna(request.getZahtev().getBrojRacuna());
-		DnevnoStanjeRacuna dnevnoStanjeRacunaDuznika = dnevnoStanjeRacunaService.findByRacunAndDatum(racunDuz, danasnjiDatum);
+		
+		DnevnoStanjeRacuna dnevnoStanjeRacunaDuznika = null;
+		
+		if(racunDuz != null){
+			dnevnoStanjeRacunaDuznika = dnevnoStanjeRacunaService.findByRacunAndDatum(racunDuz, danasnjiDatum);			
+		}
 		
 		if(dnevnoStanjeRacunaDuznika != null){
+			
+			List<AnalitikaIzvoda> analitike = analitikaIzvodaService.findByDnevnoStanjeRacuna(dnevnoStanjeRacunaDuznika);
+			
+			int brPreseka = presek*request.getZahtev().getRedniBrojPreseka();
+			
+			for(int i = brPreseka; i <= brPreseka+1; i++){
+				AnalitikaIzvoda tempAnalitika = null;
+				try{
+					
+					tempAnalitika = analitike.get(i);
+				}catch(Exception ex){}
+				
+				if(tempAnalitika != null){
+					TStavkaPreseka tempStavka = new TStavkaPreseka();
+					tempStavka.setSmer(tempAnalitika.getSmer());
+					TNalog tempNalog = new TNalog();
+					tempNalog.setDuznik(tempAnalitika.getDuznikNalogodavac());
+					tempNalog.setSvrhaPlacanja(tempAnalitika.getSvrhaPlacanja());
+					tempNalog.setPrimalac(tempAnalitika.getPrimalacPoverilac());
+					
+					try {
+						tempNalog.setDatumNaloga(DatatypeFactory.newInstance().newXMLGregorianCalendarDate(tempAnalitika.getDatumNaloga().getYear(), tempAnalitika.getDatumNaloga().getMonth(), tempAnalitika.getDatumNaloga().getDay(), 1));
+					} catch (DatatypeConfigurationException e) {
+						e.printStackTrace();
+					}
+
+					try {
+						tempNalog.setDatumValute(DatatypeFactory.newInstance().newXMLGregorianCalendarDate(tempAnalitika.getDatumValute().getYear(), tempAnalitika.getDatumValute().getMonth(), tempAnalitika.getDatumValute().getDay(), 1));
+					} catch (DatatypeConfigurationException e) {
+						e.printStackTrace();
+					}
+					
+					TPodaciORacunu tPodaciORacunuDuzn = new TPodaciORacunu();
+					tPodaciORacunuDuzn.setRacun(tempAnalitika.getRacunDuznika());
+					tPodaciORacunuDuzn.setModel(tempAnalitika.getModelZaduzenja());
+					tPodaciORacunuDuzn.setPozivNaBroj(tempAnalitika.getPozivNaBrojZaduzenja());
+					
+					tempNalog.setDuznikRacun(tPodaciORacunuDuzn);
+					
+					TPodaciORacunu tPodaciORacunuPov = new TPodaciORacunu();
+					tPodaciORacunuPov.setRacun(tempAnalitika.getRacunPoverioca());
+					tPodaciORacunuPov.setModel(tempAnalitika.getModelOdobrenja());
+					tPodaciORacunuPov.setPozivNaBroj(tempAnalitika.getPozivNaBrojOdobrenja());
+					
+					tempNalog.setPoverilacRacun(tPodaciORacunuPov);
+					
+					tempNalog.setIznos(new BigDecimal(tempAnalitika.getIznos()));
+
+					tempStavka.setNalog(tempNalog);
+					
+					response.getStavkaPreseka().add(tempStavka);
+				}
+			}
+			
+			TZaglavljePreseka zaglavlje = new TZaglavljePreseka();
+			
+			TZahtev zahtev = new TZahtev();
+			zahtev.setBrojRacuna(request.getZahtev().getBrojRacuna());
+			zahtev.setDatum(request.getZahtev().getDatum());
+			zahtev.setRedniBrojPreseka(request.getZahtev().getRedniBrojPreseka());
+			
+			zaglavlje.setZahtev(zahtev);
+			zaglavlje.setPrethodnoStanje(new BigDecimal(dnevnoStanjeRacunaDuznika.getPrethodnoStanje()));
+			
+			if(analitikaIzvodaService.findBySmer("U") != null)
+				zaglavlje.setBrojPromenaUKorist(analitikaIzvodaService.findBySmer("U").size());
+			else
+				zaglavlje.setBrojPromenaUKorist(0);
+			
+			zaglavlje.setUkupnoUKorist(new BigDecimal(dnevnoStanjeRacunaDuznika.getPrometUKorist()));
+			
+			if(analitikaIzvodaService.findBySmer("I") != null)
+				zaglavlje.setBrojPromenaNaTeret(new BigDecimal(analitikaIzvodaService.findBySmer("I").size()));
+			else
+				zaglavlje.setBrojPromenaNaTeret(new BigDecimal(0));
+			
+			zaglavlje.setUkupnoNaTeret(new BigDecimal(dnevnoStanjeRacunaDuznika.getPrometNaTeret()));
+			zaglavlje.setNovoStanje(new BigDecimal(dnevnoStanjeRacunaDuznika.getNovoStanje()));
+			
+			response.setZaglavljePreseka(zaglavlje);
+		
 			
 		}else{
 			System.out.println("Nema dnevnog stanja.");

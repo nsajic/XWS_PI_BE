@@ -11,4 +11,6 @@ public interface IAnalitikaIzvodaService{
 	void save (AnalitikaIzvoda analitikaIzvoda);
 
 	List<AnalitikaIzvoda> findByDnevnoStanjeRacuna(DnevnoStanjeRacuna dnevnoStanjeRacuna);
+
+	List<AnalitikaIzvoda> findBySmer(String string);
 }

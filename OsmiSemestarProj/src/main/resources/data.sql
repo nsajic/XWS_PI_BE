@@ -88,34 +88,43 @@ insert into valuta (sifra_valute, naziv_valute) values ('JEN', 'Japanski jen');
 insert into valuta (sifra_valute, naziv_valute) values ('USD', 'Americki dolar');
 insert into valuta (sifra_valute, naziv_valute) values ('RSD', 'Srpski dinar');
 
---insert into korisnik (tip_klijenta, ime, prezime, broj_licne_karte, telefon, adresa, jmbg, rola_id, email) values ('F','Sima1', 'Simic1', 112345, '1111', 'adresa1', 11111, 1, 'k1@k1.com');
---insert into korisnik (tip_klijenta, ime, prezime, broj_licne_karte, telefon, adresa, jmbg, rola_id, email) values ('F','SimaF', 'SimicF', 112344, '1111', 'adresaF1', 11111, 1, 'k1F@k1.com');
+INSERT INTO `xws_pi_bezb`.`klijent` (`tip_klijenta`, `id`, `adresa`, `broj_licne_karte`, `email`, `ime`, `klijent_tip`, `prezime`, `telefon`) VALUES ('F', '1', 'jjjjjj', '324234', 'kk@g.com', 'stefan', 0, 'bubanj', '34');
+INSERT INTO `xws_pi_bezb`.`fizicko_lice` (`ime_roditelja`,`jmbg`, `id`) values ('Nebo', '1233', '1');
 
---insert into korisnik (ime, prezime, broj_licne_karte, telefon, adresa, jmbg, rola_id, email, pib, maticni_broj, fax) values (false, 'P','Sima2', 'Simic2', 112345, '1111', 'adresa1', 11111, 2, 'k2@k2.com', '$2a$12$/eDioOpiKrGQnDv53hPxIe8XDCJWP/Xe1fF6E5IrTVxuBozu9EX9G', 'kor', true, true, 25254525, 2332221, 'fax.fax');
---insert into korisnik (ime, prezime, broj_licne_karte, telefon, adresa, jmbg, rola_id, email, pib, maticni_broj, fax) values (false, 'P','SimaP2', 'SimicP2', 112345, '1111', 'adresaP1', 11111, 2, 'k2P@k2.com', '$2a$12$/eDioOpiKrGQnDv53hPxIe8XDCJWP/Xe1fF6E5IrTVxuBozu9EX9G', 'kor', true, true, 25254525, 2332221, 'fax.fax');
-
---insert into racun (broj_racuna, status_racuna, banka_id, klijent_id, valuta_id) values ('111-2223334445556-78', 1, 1, 1, 1);
---insert into racun (broj_racuna, status_racuna, banka_id, klijent_id, valuta_id) values ('111-2223334445556-87', 1, 1, 2, 1);
---insert into racun (broj_racuna, status_racuna, banka_id, klijent_id, valuta_id) values ('222-2223334445556-78', 1, 2, 3, 1);
+INSERT INTO `xws_pi_bezb`.`klijent` (`tip_klijenta`, `id`, `adresa`, `broj_licne_karte`, `email`, `ime`, `klijent_tip`, `prezime`, `telefon`) VALUES ('P', '2', 'iiooi', '34234', 'kk@g.com', 'sasa', 1, 'momc', '44');
+INSERT INTO `xws_pi_bezb`.`pravno_lice` (`pib`, `fax`, `maticni_broj`, `naziv`, `web`, `id`, `delatnost_id`) VALUES ('9889', '8998', '898989', 'jjjjj', 'www', '2', '1');
 
 
---insert into racun (broj_racuna, status_racuna, banka_id, klijent_id, valuta_id) values ('111-2223334445556-78', 1, 1, null, 1);
---insert into racun (broj_racuna, status_racuna, banka_id, klijent_id, valuta_id) values ('111-2223334445556-87', 1, 1, null, 1);
---insert into racun (broj_racuna, status_racuna, banka_id, klijent_id, valuta_id) values ('222-2223334445556-78', 1, 2, null, 1);
+insert into racun (broj_racuna, status_racuna, banka_id, klijent_id, valuta_id, rezervisano) values ('111-2223334445556-78', 1, 1, 1, 1, 0);
+insert into racun (broj_racuna, status_racuna, banka_id, klijent_id, valuta_id, rezervisano) values ('111-2223334445556-87', 1, 1, 1, 1, 0);
+insert into racun (broj_racuna, status_racuna, banka_id, klijent_id, valuta_id, rezervisano) values ('222-2223334445556-78', 1, 2, 2, 1, 0);
 
-insert into racun (broj_racuna, status_racuna, banka_id, klijent_id, valuta_id, rezervisano) values ('111-2223334445556-78', 1, 1, null, 1, 0);
-insert into racun (broj_racuna, status_racuna, banka_id, klijent_id, valuta_id, rezervisano) values ('111-2223334445556-87', 1, 1, null, 1, 0);
-insert into racun (broj_racuna, status_racuna, banka_id, klijent_id, valuta_id, rezervisano) values ('222-2223334445556-78', 1, 2, null, 1, 0);
+insert into dnevno_stanje_racuna (datum, novo_stanje, prethodno_stanje, promet_na_teret, promet_u_korist, racun_id) values ('2017-04-15', 10000, 8000, 200, 500, 1);
+insert into dnevno_stanje_racuna (datum, novo_stanje, prethodno_stanje, promet_na_teret, promet_u_korist, racun_id) values ('2017-04-18', 10000, 8000, 200, 500, 1);
+insert into dnevno_stanje_racuna (datum, novo_stanje, prethodno_stanje, promet_na_teret, promet_u_korist, racun_id) values ('2017-04-19', 10000, 8000, 200, 500, 2);
+insert into dnevno_stanje_racuna (datum, novo_stanje, prethodno_stanje, promet_na_teret, promet_u_korist, racun_id) values ('2017-04-20', 10000, 8000, 200, 500, 2);
 
-insert into dnevno_stanje_racuna (datum, novo_stanje, prethodno_stanje, promet_na_teret, promet_u_korist, racun_id) 
-	values ('2017-04-15', 10000, 8000, 200, 500, 1);
-insert into dnevno_stanje_racuna (datum, novo_stanje, prethodno_stanje, promet_na_teret, promet_u_korist, racun_id) 
-	values ('2017-04-18', 10000, 8000, 200, 500, 1);
---insert into dnevno_stanje_racuna (datum, novo_stanje, prethodno_stanje, promet_na_teret, promet_u_korist, racun_id) 
-	--values ('2017-04-19', 10000, 8000, 200, 500, 1);
---insert into dnevno_stanje_racuna (datum, novo_stanje, prethodno_stanje, promet_na_teret, promet_u_korist, racun_id) 
-	--values ('2017-04-20', 10000, 8000, 200, 500, 1);
 	
-insert into analitika_izvoda (datum_analitike, datum_naloga, datum_valute, duznik_nalogodavac, iznos, model_odobrenja, poziv_na_broj_odobrenja, poziv_na_broj_zaduzenja, primalac_poverilac, racun_duznika, racun_poverioca, smer, svrha_placanja, dnevno_stanje_racuna_id, valuta_id)
-	values ('2017-04-15', '2017-04-15', '2017-04-15', 'Pera Peric', 3000, 97, '8954-745826', '789655-4577', 'Sima Simic', '435-34543324-453', '321-4423254-324', 'izv', 'Kupljene stolice', 1, 1);
+
+insert into analitika_izvoda (datum_analitike, datum_naloga, datum_valute, duznik_nalogodavac, iznos, model_odobrenja, model_zaduzenja, poziv_na_broj_odobrenja, poziv_na_broj_zaduzenja, primalac_poverilac, racun_duznika, racun_poverioca, smer, svrha_placanja, dnevno_stanje_racuna_id, valuta_id)
+	values ('2017-04-15', '2017-04-15', '2017-04-15', 'Pera Peric', 3000, 97, 98,'111-2223334445556-78', '78945655-45767', 'Sima Simic', '435-34543324-453', '321-4423254-324', 'izv', 'Kupljene stolice', 1, 1);
+	
+insert into analitika_izvoda (datum_analitike, datum_naloga, datum_valute, duznik_nalogodavac, iznos, model_odobrenja, model_zaduzenja, poziv_na_broj_odobrenja, poziv_na_broj_zaduzenja, primalac_poverilac, racun_duznika, racun_poverioca, smer, svrha_placanja, dnevno_stanje_racuna_id, valuta_id)
+	values ('2017-04-15', '2017-04-15', '2017-04-15', 'Pera Peric', 5000, 97, 98,'876-7467768826', '111-2223334445556-78', 'Djura Djuric', '65-76876-453', '321-4423254-324', 'izv', 'Kupljene papuce', 1, 1);
+	
+insert into analitika_izvoda (datum_analitike, datum_naloga, datum_valute, duznik_nalogodavac, iznos, model_odobrenja, model_zaduzenja, poziv_na_broj_odobrenja, poziv_na_broj_zaduzenja, primalac_poverilac, racun_duznika, racun_poverioca, smer, svrha_placanja, dnevno_stanje_racuna_id, valuta_id)
+	values ('2017-04-15', '2017-04-15', '2017-04-15', 'Pera Peric', 7000, 97, 98,'111-2223334445556-78', '78948655-464577', 'Sara Saric', '435-567-453', '321-4423254-324', 'izv', 'Kupljene majice', 1, 1);
+	
+insert into analitika_izvoda (datum_analitike, datum_naloga, datum_valute, duznik_nalogodavac, iznos, model_odobrenja, model_zaduzenja, poziv_na_broj_odobrenja, poziv_na_broj_zaduzenja, primalac_poverilac, racun_duznika, racun_poverioca, smer, svrha_placanja, dnevno_stanje_racuna_id, valuta_id)
+	values ('2017-04-15', '2017-04-15', '2017-04-15', 'Pera Peric', 8000, 97, 98,'111-2223334445556-78', '78689655-448577', 'Siki Sikic', '435-577857-453', '321-4423254-324', 'izv', 'Kupljene kape', 1, 1);
+	
+insert into analitika_izvoda (datum_analitike, datum_naloga, datum_valute, duznik_nalogodavac, iznos, model_odobrenja, model_zaduzenja, poziv_na_broj_odobrenja, poziv_na_broj_zaduzenja, primalac_poverilac, racun_duznika, racun_poverioca, smer, svrha_placanja, dnevno_stanje_racuna_id, valuta_id)
+	values ('2017-04-15', '2017-04-15', '2017-04-15', 'Pera Peric', 9000, 97, 98,'895454-74584526', '111-2223334445556-78', 'Saki Sakic', '45-8766-453', '321-4423254-324', 'izv', 'Kupljene cigle', 1, 1);
+
+
+
+
+--insert into dnevno_stanje_racuna (datum, novo_stanje, prethodno_stanje, promet_na_teret, promet_u_korist, racun_id) values ('2017-04-15', 10000, 8000, 200, 500, 1);
+
+
 

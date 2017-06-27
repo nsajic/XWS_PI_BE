@@ -77,12 +77,8 @@ public class RacunKontroler {
 		racun.setStatusRacuna(1);
 		racun.setBrojRacuna(racun.getBrojRacuna().trim());
 		racun.setBanka(bankaService.findOne(sluzbenik.getBanka().getId()));
-		
-		
-		
-		
+
 		racunService.save(racun);
-		System.out.println(racunService.findOne(racun.getId()).getBanka().getNazivBanke());
 		dnevnoStanjeRacunaService.save(dsr);
 		return new ResponseEntity<Object>(HttpStatus.OK);
 	}
