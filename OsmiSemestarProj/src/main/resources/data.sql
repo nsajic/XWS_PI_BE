@@ -89,4 +89,7 @@ insert into valuta (sifra_valute, naziv_valute) values ('JEN', 'Japanski jen');
 insert into valuta (sifra_valute, naziv_valute) values ('USD', 'Americki dolar');
 insert into valuta (sifra_valute, naziv_valute) values ('RSD', 'Srpski dinar');
 
---insert into racun (broj_racuna, status_racuna, banka_id, fizicko_lice_id, pravno_lice_id, valuta_id) values ('111-2223334445556-78', 1, 1, null, null, 1)
+
+insert into racun (broj_racuna, status_racuna, banka_id, klijent_id, valuta_id) values ('111-2223334445556-78', 1, 1, null, 1);
+insert into racun (broj_racuna, status_racuna, banka_id, klijent_id, valuta_id) values ('111-2223334445556-87', 1, 1, null, 1);
+insert into racun (broj_racuna, status_racuna, banka_id, klijent_id, valuta_id) values ('222-2223334445556-78', 1, 2, null, 1);

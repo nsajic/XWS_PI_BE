@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Component;
 
 import xws_pi_bezb.models.Banka;
+import xws_pi_bezb.models.Racun;
 
 public interface IBankaService {
 
@@ -17,6 +18,8 @@ public interface IBankaService {
 	void delete(Long id);
 	
 	List<Banka> getBySearch(Banka banka);
+
+	Banka findByRacun(Racun racunDuz);
 
 	
 }

@@ -46,6 +46,13 @@ public class DnevnoStanjeRacuna implements Serializable {
 	@OneToMany(mappedBy = "dnevnoStanjeRacuna")
 	private Set<AnalitikaIzvoda> analitikeIzvoda;
 
+	
+	
+	public DnevnoStanjeRacuna() {
+		super();
+	}
+
+	
 	public Date getDatum() {
 		return datum;
 	}

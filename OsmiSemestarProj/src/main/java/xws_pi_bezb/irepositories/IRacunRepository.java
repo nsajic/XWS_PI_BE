@@ -10,21 +10,18 @@ import org.springframework.stereotype.Repository;
 import xws_pi_bezb.models.Banka;
 import xws_pi_bezb.models.Racun;
 
-
 @Repository
 @Transactional
-public interface IRacunRepository extends JpaRepository<Racun, Long>{
-	
+public interface IRacunRepository extends JpaRepository<Racun, Long> {
+
 	Racun findById(Long id);
 
-	
 	Racun findByBrojRacuna(String brojRacuna);
 
 	List<Racun> findByBanka(Banka banka);
-	
-	List<Racun> findAll();
-	
-	List<Racun> findByBankaId(Long id);
 
+	List<Racun> findAll();
+
+	List<Racun> findByBankaId(Long id);
 
 }

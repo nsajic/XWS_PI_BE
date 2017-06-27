@@ -11,7 +11,6 @@ import xws_pi_bezb.irepositories.IPravnoLiceRepository;
 import xws_pi_bezb.irepositories.IRacunRepository;
 import xws_pi_bezb.iservices.IPravnaLicaService;
 import xws_pi_bezb.models.Delatnost;
-import xws_pi_bezb.models.Klijent;
 import xws_pi_bezb.models.PravnoLice;
 import xws_pi_bezb.models.Racun;
 
@@ -315,7 +314,7 @@ public class PravnaLicaService implements IPravnaLicaService {
 	
 	@Override
 	public PravnoLice findOne(Long id) {
-		return pravnoLiceRepository.findById(id);
+		return pravnoLiceRepository.findOne(id);
 	}
 	
 

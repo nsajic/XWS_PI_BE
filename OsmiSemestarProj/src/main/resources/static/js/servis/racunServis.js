@@ -44,7 +44,20 @@ racunServis.factory('racunServis', function($http) {
 	temp.ucitajDnevnaStanjaOdabranogRacuna = function(data) {
 		return $http.post('/racunKontroler/ucitajDnevnaStanjaOdabranogRacuna', data);
 	}
-
+	
+	temp.ucitajAnalitikeOdabranogDnevnogStanja = function(data) {
+		console.log(data);
+		return $http.post('/racunKontroler/ucitajAnalitikeOdabranogDnevnogStanja', data);
+	}
+	
+	temp.zatvoriRacun = function(data) {
+		console.log(data);
+		return $http.post('/racunKontroler/zatvoriRacun', data);
+	}
+	
+	
+	
+	
 	
 	
 

@@ -10,6 +10,7 @@ import xws_pi_bezb.helpers.Helpers;
 import xws_pi_bezb.irepositories.IBankaRepository;
 import xws_pi_bezb.iservices.IBankaService;
 import xws_pi_bezb.models.Banka;
+import xws_pi_bezb.models.Racun;
 
 @Service
 public class BankaService implements IBankaService {
@@ -90,5 +91,10 @@ public class BankaService implements IBankaService {
 		}return banke;
 
 }
+
+	@Override
+	public Banka findByRacun(Racun racunDuz) {
+		return bankaRepository.findByRacuni(racunDuz);
+	}
 
 }

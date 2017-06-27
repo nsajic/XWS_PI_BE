@@ -21,6 +21,8 @@ public class StavkaPrenosa implements Serializable{
 	@ManyToOne
 	private AnalitikaIzvoda analitikaIzvoda;
 	
+	public StavkaPrenosa (){}
+	
 	public AnalitikaIzvoda getAnalitikaIzvoda() {
 		return analitikaIzvoda;
 	}

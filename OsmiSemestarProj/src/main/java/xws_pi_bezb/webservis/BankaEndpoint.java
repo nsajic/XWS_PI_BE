@@ -12,6 +12,8 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
+import javax.xml.datatype.DatatypeConfigurationException;
+import javax.xml.datatype.DatatypeFactory;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerConfigurationException;
 import javax.xml.transform.TransformerException;
@@ -34,16 +36,22 @@ import bezbednost.poslovna.xml.ws.mt102.MT102Request;
 import bezbednost.poslovna.xml.ws.mt102.MT102Response;
 import bezbednost.poslovna.xml.ws.mt103.MT103Request;
 import bezbednost.poslovna.xml.ws.mt103.MT103Response;
+import bezbednost.poslovna.xml.ws.mt103.TSWIFTIRacun;
 import bezbednost.poslovna.xml.ws.mt900.MT900Request;
 import bezbednost.poslovna.xml.ws.mt900.MT900Response;
 import bezbednost.poslovna.xml.ws.nalogzaprenos.NalogZaPrenosRequest;
 import bezbednost.poslovna.xml.ws.nalogzaprenos.NalogZaPrenosResponse;
+import bezbednost.poslovna.xml.ws.nalogzaprenos.TNalog;
 import bezbednost.poslovna.xml.ws.nalogzaprenos.TPodaciORacunu;
+import xws_pi_bezb.BankaKlijentSamoTest;
 import xws_pi_bezb.controllers.LogRegKontroler;
+import xws_pi_bezb.iservices.IAnalitikaIzvodaService;
+import xws_pi_bezb.iservices.IBankaService;
 import xws_pi_bezb.iservices.IDnevnoStanjeRacunaService;
 import xws_pi_bezb.iservices.IRacunService;
 import xws_pi_bezb.iservices.IValutaService;
 import xws_pi_bezb.models.AnalitikaIzvoda;
+import xws_pi_bezb.models.Banka;
 import xws_pi_bezb.models.DnevnoStanjeRacuna;
 import xws_pi_bezb.models.Racun;
 import xws_pi_bezb.xml.secutiry.DocumentLoader;
@@ -65,6 +73,12 @@ public class BankaEndpoint {
 
 	@Autowired
 	private IValutaService valutaService;
+	
+	@Autowired
+	private IBankaService bankaService;
+	
+	@Autowired
+	private IAnalitikaIzvodaService analitikaIzvodaService;
 
 	@Autowired
 	public BankaEndpoint() {
@@ -87,11 +101,219 @@ public class BankaEndpoint {
 
 		if (racunDuznik != null && racunPoverilac != null) {
 
+			String brojRacunaDuznik = racunDuznik.getRacun();
+			Racun racunDuz = racunService.findByBrojRacuna(brojRacunaDuznik);
+			String brojRacunaPoverilac = racunPoverilac.getRacun();
+			Racun racunPov = racunService.findByBrojRacuna(brojRacunaPoverilac);
+			
+			if(racunDuz == null){
+				response.setOdgovor("Racun duznika ne postoji!");
+				return response;
+			}
+			
+			if(racunPov == null){
+				response.setOdgovor("Racun poverioca ne postoji!");
+				return response;
+			}
+			
+			if (racunDuz.getStatusRacuna() == 2) {
+				response.setOdgovor("Racun duznika je zatvoren!");
+				return response;
+			}
+			
+			if (racunPov.getStatusRacuna() == 2) {
+				response.setOdgovor("Racun poverioca je zatvoren!");
+				return response;
+			}
+			
+			// provera da li ima sredstava
+			DnevnoStanjeRacuna poslednjeDnevnoStanje = dnevnoStanjeRacunaService.findTopByRacunOrderByDatum(racunDuz);
+
+			if (poslednjeDnevnoStanje == null) {
+				response.setOdgovor("Na racunu 0...!");
+				return response;
+			}
+
+			// provera da li ima sredstava
+			if (poslednjeDnevnoStanje.getNovoStanje() >= request.getNalog().getIznos().doubleValue()) {
+			
+				// provera da li su racuni iz iste banke
+				if(racunDuz.getBanka().getId().equals(racunPov.getBanka().getId())){
+					
+					// pravimo analitiku za oba
+					int godina = Calendar.getInstance().get(Calendar.YEAR);
+					int mesec = Calendar.getInstance().get(Calendar.MONTH) + 1;
+					int dan = Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
+					Date danasnjiDatum = java.sql.Date.valueOf(LocalDate.of(godina, mesec, dan));
+					
+					AnalitikaIzvoda analitikaIzvoda = new AnalitikaIzvoda();
+					analitikaIzvoda.setDatumAnalitike(danasnjiDatum);
+					analitikaIzvoda.setSmer("P");
+					analitikaIzvoda.setDuznikNalogodavac(request.getNalog().getDuznik());
+					analitikaIzvoda.setSvrhaPlacanja(request.getNalog().getSvrhaPlacanja());
+					analitikaIzvoda.setPrimalacPoverilac(request.getNalog().getPrimalac());
+					analitikaIzvoda.setDatumNaloga(request.getNalog().getDatumNaloga().toGregorianCalendar().getTime());
+					analitikaIzvoda.setDatumValute(request.getNalog().getDatumValute().toGregorianCalendar().getTime());
+					analitikaIzvoda.setRacunDuznika(brojRacunaDuznik);
+					analitikaIzvoda.setModelZaduzenja(racunDuznik.getModel());
+					analitikaIzvoda.setPozivNaBrojZaduzenja(racunDuznik.getPozivNaBroj());
+					analitikaIzvoda.setRacunPoverioca(brojRacunaPoverilac);
+					analitikaIzvoda.setModelOdobrenja(racunPoverilac.getModel());
+					analitikaIzvoda.setPozivNaBrojOdobrenja(racunPoverilac.getPozivNaBroj());
+					analitikaIzvoda.setIznos(request.getNalog().getIznos().doubleValue());
+					analitikaIzvoda.setValuta(valutaService.findBySifraValute(request.getOznakaValute()));
+
+					// menjamo dnevno stanje za oba
+					
+					DnevnoStanjeRacuna dnevnoStanjeRacunaDuznika = dnevnoStanjeRacunaService.findByRacunAndDatum(racunDuz, danasnjiDatum);
+					if (dnevnoStanjeRacunaDuznika == null) {
+						dnevnoStanjeRacunaDuznika = new DnevnoStanjeRacuna();
+						dnevnoStanjeRacunaDuznika.setDatum(danasnjiDatum);
+						dnevnoStanjeRacunaDuznika.setRacun(racunDuz);
+						dnevnoStanjeRacunaDuznika.setPrometNaTeret(request.getNalog().getIznos().doubleValue());
+						dnevnoStanjeRacunaDuznika.setPrometUKorist(0);
+						dnevnoStanjeRacunaDuznika.setPrethodnoStanje(poslednjeDnevnoStanje.getNovoStanje());
+						dnevnoStanjeRacunaDuznika.setNovoStanje(dnevnoStanjeRacunaDuznika.getPrethodnoStanje() - dnevnoStanjeRacunaDuznika.getPrometNaTeret());
+					} else {
+						dnevnoStanjeRacunaDuznika.setPrometNaTeret(dnevnoStanjeRacunaDuznika.getPrometNaTeret() + request.getNalog().getIznos().doubleValue());
+						// dnevnoStanjeRacuna.setPrethodnoStanje(dnevnoStanjeRacuna.getNovoStanje());
+						dnevnoStanjeRacunaDuznika.setNovoStanje(dnevnoStanjeRacunaDuznika.getPrethodnoStanje() + dnevnoStanjeRacunaDuznika.getPrometUKorist() - dnevnoStanjeRacunaDuznika.getPrometNaTeret());
+					}
+					
+					DnevnoStanjeRacuna dnevnoStanjeRacunaPoverioca = dnevnoStanjeRacunaService.findByRacunAndDatum(racunPov, danasnjiDatum);
+					DnevnoStanjeRacuna poslednjeDnevnoStanjePoverilac = dnevnoStanjeRacunaService.findTopByRacunOrderByDatum(racunDuz);
+					if (dnevnoStanjeRacunaPoverioca == null) {
+						dnevnoStanjeRacunaPoverioca = new DnevnoStanjeRacuna();
+						dnevnoStanjeRacunaPoverioca.setDatum(danasnjiDatum);
+						dnevnoStanjeRacunaPoverioca.setRacun(racunPov);
+						dnevnoStanjeRacunaPoverioca.setPrometNaTeret(0);
+						dnevnoStanjeRacunaPoverioca.setPrometUKorist(request.getNalog().getIznos().doubleValue());
+						if(poslednjeDnevnoStanjePoverilac != null)
+							dnevnoStanjeRacunaPoverioca.setPrethodnoStanje(poslednjeDnevnoStanjePoverilac.getNovoStanje());
+						else
+							dnevnoStanjeRacunaPoverioca.setPrethodnoStanje(0);
+						
+						dnevnoStanjeRacunaPoverioca.setNovoStanje(dnevnoStanjeRacunaPoverioca.getPrethodnoStanje() - dnevnoStanjeRacunaPoverioca.getPrometNaTeret());
+					} else {
+						dnevnoStanjeRacunaPoverioca.setPrometUKorist(dnevnoStanjeRacunaDuznika.getPrometNaTeret() + request.getNalog().getIznos().doubleValue());
+						// dnevnoStanjeRacuna.setPrethodnoStanje(poslednjeDnevnoStanjePoverilac.getNovoStanje());
+						dnevnoStanjeRacunaPoverioca.setNovoStanje(dnevnoStanjeRacunaPoverioca.getPrethodnoStanje() + dnevnoStanjeRacunaPoverioca.getPrometUKorist() - dnevnoStanjeRacunaPoverioca.getPrometNaTeret());
+					}
+					
+					dnevnoStanjeRacunaService.save(dnevnoStanjeRacunaDuznika);
+					dnevnoStanjeRacunaService.save(dnevnoStanjeRacunaPoverioca);
+					
+					analitikaIzvoda.setDnevnoStanjeRacuna(dnevnoStanjeRacunaDuznika);
+					analitikaIzvodaService.save(analitikaIzvoda);
+					analitikaIzvoda.setDnevnoStanjeRacuna(dnevnoStanjeRacunaPoverioca);
+					analitikaIzvodaService.save(analitikaIzvoda);
+
+				}else{	
+					
+					// pravimo analitiku za racun u nasoj
+					int godina = Calendar.getInstance().get(Calendar.YEAR);
+					int mesec = Calendar.getInstance().get(Calendar.MONTH) + 1;
+					int dan = Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
+					Date danasnjiDatum = java.sql.Date.valueOf(LocalDate.of(godina, mesec, dan));
+					
+					AnalitikaIzvoda analitikaIzvoda = new AnalitikaIzvoda();
+					analitikaIzvoda.setDatumAnalitike(danasnjiDatum);
+					analitikaIzvoda.setSmer("P");
+					analitikaIzvoda.setDuznikNalogodavac(request.getNalog().getDuznik());
+					analitikaIzvoda.setSvrhaPlacanja(request.getNalog().getSvrhaPlacanja());
+					analitikaIzvoda.setPrimalacPoverilac(request.getNalog().getPrimalac());
+					analitikaIzvoda.setDatumNaloga(request.getNalog().getDatumNaloga().toGregorianCalendar().getTime());
+					analitikaIzvoda.setDatumValute(request.getNalog().getDatumValute().toGregorianCalendar().getTime());
+					analitikaIzvoda.setRacunDuznika(brojRacunaDuznik);
+					analitikaIzvoda.setModelZaduzenja(racunDuznik.getModel());
+					analitikaIzvoda.setPozivNaBrojZaduzenja(racunDuznik.getPozivNaBroj());
+					analitikaIzvoda.setRacunPoverioca(brojRacunaPoverilac);
+					analitikaIzvoda.setModelOdobrenja(racunPoverilac.getModel());
+					analitikaIzvoda.setPozivNaBrojOdobrenja(racunPoverilac.getPozivNaBroj());
+					analitikaIzvoda.setIznos(request.getNalog().getIznos().doubleValue());
+					analitikaIzvoda.setValuta(valutaService.findBySifraValute(request.getOznakaValute()));
+
+					// menjamo dnevno stanje za racun u nasoj
+					
+					DnevnoStanjeRacuna dnevnoStanjeRacunaDuznika = dnevnoStanjeRacunaService.findByRacunAndDatum(racunDuz, danasnjiDatum);
+					if (dnevnoStanjeRacunaDuznika == null) {
+						dnevnoStanjeRacunaDuznika = new DnevnoStanjeRacuna();
+						dnevnoStanjeRacunaDuznika.setDatum(danasnjiDatum);
+						dnevnoStanjeRacunaDuznika.setRacun(racunDuz);
+						dnevnoStanjeRacunaDuznika.setPrometNaTeret(request.getNalog().getIznos().doubleValue());
+						dnevnoStanjeRacunaDuznika.setPrometUKorist(0);
+						dnevnoStanjeRacunaDuznika.setPrethodnoStanje(poslednjeDnevnoStanje.getNovoStanje());
+						dnevnoStanjeRacunaDuznika.setNovoStanje(dnevnoStanjeRacunaDuznika.getPrethodnoStanje() - dnevnoStanjeRacunaDuznika.getPrometNaTeret());
+					} else {
+						dnevnoStanjeRacunaDuznika.setPrometNaTeret(dnevnoStanjeRacunaDuznika.getPrometNaTeret() + request.getNalog().getIznos().doubleValue());
+						// dnevnoStanjeRacuna.setPrethodnoStanje(dnevnoStanjeRacuna.getNovoStanje());
+						dnevnoStanjeRacunaDuznika.setNovoStanje(dnevnoStanjeRacunaDuznika.getPrethodnoStanje() + dnevnoStanjeRacunaDuznika.getPrometUKorist() - dnevnoStanjeRacunaDuznika.getPrometNaTeret());
+					}
+					
+					dnevnoStanjeRacunaService.save(dnevnoStanjeRacunaDuznika);
+					
+					analitikaIzvoda.setDnevnoStanjeRacuna(dnevnoStanjeRacunaDuznika);
+					analitikaIzvodaService.save(analitikaIzvoda);
+					
+
+					// provera da li je preko 250000 ili hitno
+					
+					if(request.getNalog().getIznos().doubleValue() >= 250000 || request.isHitno()){
+						// mt103 - rtgs...
+						MT103Request mt103Request = new MT103Request();
+						
+						Banka bankaDuznika = bankaService.findByRacun(racunDuz);
+						Banka bankaPoverilac = bankaService.findByRacun(racunPov);
+						
+						TSWIFTIRacun swiftDuznik = new TSWIFTIRacun();
+						swiftDuznik.setObracunskiRacun(bankaDuznika.getObracunskiRacun());
+						swiftDuznik.setSWIFT(bankaDuznika.getSwiftKod());
+						
+						TSWIFTIRacun swiftPoverilac = new TSWIFTIRacun();
+						swiftPoverilac.setObracunskiRacun(bankaPoverilac.getObracunskiRacun());
+						swiftPoverilac.setSWIFT(bankaPoverilac.getSwiftKod());
+						
+						TNalog nalog = new TNalog();
+						nalog.setDuznik(request.getNalog().getDuznik());
+						nalog.setPrimalac(request.getNalog().getPrimalac());
+						nalog.setSvrhaPlacanja(request.getNalog().getSvrhaPlacanja());
+						nalog.setDuznikRacun(request.getNalog().getDuznikRacun());
+						nalog.setPoverilacRacun(request.getNalog().getPoverilacRacun());
+						nalog.setIznos(request.getNalog().getIznos());
+						nalog.setDatumNaloga(request.getNalog().getDatumNaloga());
+						nalog.setDatumValute(request.getNalog().getDatumValute());
+						
+						mt103Request.setIDPoruke("MT 102");
+						mt103Request.setBankaDuznika(swiftDuznik);
+						mt103Request.setBankaPoverioca(swiftPoverilac);
+						mt103Request.setNalog(nalog);
+						mt103Request.setSifraValute(request.getOznakaValute());
+						
+						//TODO: proveriti da li treba rezervacija sredstava
+						
+						BankaKlijentSamoTest bankaKlijent = new BankaKlijentSamoTest();
+						bankaKlijent.posaljiMT103(mt103Request);
+					}else{
+						// mt102 - clearing...
+						
+						
+						
+					}
+
+				}
+			
+			}
+
 		} else if (racunDuznik != null) { // isplata
 			String brojRacuna = racunDuznik.getRacun();
 			Racun racunD = racunService.findByBrojRacuna(brojRacuna);
 
 			// TODO: if(racunD.getBanka() == ulogovanaBanka)
+			
+			if(racunD == null){
+				response.setOdgovor("Racun ne postoji!");
+				return response;
+			}
 
 			if (racunD.getStatusRacuna() == 1) {
 				DnevnoStanjeRacuna poslednjeDnevnoStanje = dnevnoStanjeRacunaService.findTopByRacunOrderByDatum(racunD);
@@ -102,7 +324,7 @@ public class BankaEndpoint {
 				}
 
 				// provera da li ima sredstava
-				if (poslednjeDnevnoStanje.getNovoStanje() > request.getNalog().getIznos().doubleValue()) {
+				if (poslednjeDnevnoStanje.getNovoStanje() >= request.getNalog().getIznos().doubleValue()) {
 					// pravimo analitiku
 					int godina = Calendar.getInstance().get(Calendar.YEAR);
 					int mesec = Calendar.getInstance().get(Calendar.MONTH) + 1;
@@ -146,7 +368,7 @@ public class BankaEndpoint {
 
 					analitikaIzvoda.setDnevnoStanjeRacuna(dnevnoStanjeRacuna);
 
-					// TODO: save(analitikaIzvoda)
+					analitikaIzvodaService.save(analitikaIzvoda);
 
 				} else {
 					response.setOdgovor("Nema se para!");
@@ -169,7 +391,7 @@ public class BankaEndpoint {
 
 				// pravimo analitiku
 				int godina = Calendar.getInstance().get(Calendar.YEAR);
-				int mesec = Calendar.getInstance().get(Calendar.MONTH);
+				int mesec = Calendar.getInstance().get(Calendar.MONTH) + 1;
 				int dan = Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
 				Date danasnjiDatum = java.sql.Date.valueOf(LocalDate.of(godina, mesec, dan));
 
@@ -208,7 +430,7 @@ public class BankaEndpoint {
 
 				analitikaIzvoda.setDnevnoStanjeRacuna(dnevnoStanjeRacuna);
 
-				// TODO: save(analitikaIzvoda)
+				analitikaIzvodaService.save(analitikaIzvoda);
 
 			} else {
 				response.setOdgovor("Racun je zatvoren!");
@@ -219,53 +441,6 @@ public class BankaEndpoint {
 			response.setOdgovor("Nije unet racun!");
 			return response;
 		}
-		// provera da li je nasa banka
-
-		// provera da li je unet i racun o poveriocu i o duzniku
-
-		// if(duznik) -> isplata
-
-		// provera da li ima sredstava
-
-		// pravimo analitiku
-
-		// umanjujemo dnevno stanje -> NEJASNO
-
-		// else if(poverilac) -> uplata
-
-		// pravimo analitiku
-
-		// povecavamo dnevno stanje -> NEJASNO
-
-		// else if(oba)
-
-		// provera da li ima sredstava
-
-		// provera da li su racuni iz iste banke
-
-		// if(jesu)
-
-		// pravimo analitiku za oba
-
-		// menjamo dnevno stanje za oba
-
-		// else
-
-		// pravimo analitiku za racun u nasoj
-
-		// menjamo dnevno stanje za racun u nasoj
-
-		// provera da li je preko 250000 ili hitno
-
-		// if(jeste)
-
-		// mt103 - rtgs...
-
-		// else
-
-		// mt102 - clearing...
-
-		// else -> ne valja!
 
 		response.setOdgovor("Povratna poruka!");
 		return response;
@@ -334,10 +509,10 @@ public class BankaEndpoint {
 		}
 
 		Document document = DocumentLoader.loadDocument(file);
-		boolean res12 = sigUtility.verifySignature(document);
+		//boolean res12 = sigUtility.verifySignature(document);
 
 		Document doc = DocumentLoader.loadDocument("univerzitet_signed.xml");
-		boolean res = sigUtility.verifySignature(doc);
+		//boolean res = sigUtility.verifySignature(doc);
 
 		if (true) {
 			PrivateKey privateKey = ksReader.readPrivateKey("./primer.jks", "primer", "primer", "primer");
@@ -379,41 +554,4 @@ public class BankaEndpoint {
 		return nalogZaPrenosRequest;
 	}
 
-	/*
-	 * @PayloadRoot(namespace = HTTP + "mt102." + NAMESPACE_URI, localPart =
-	 * "NalogZaPrenosRequest")
-	 * 
-	 * @ResponsePayload public NalogZaPrenosResponse mt102(@RequestPayload
-	 * NalogZaPrenosRequest request) {
-	 * System.out.println("Usao endpoint - banka"); NalogZaPrenosResponse
-	 * response = new NalogZaPrenosResponse();
-	 * response.setOdgovor("Povratna poruka!"); return response; }
-	 * 
-	 * @PayloadRoot(namespace = HTTP + "mt103." + NAMESPACE_URI, localPart =
-	 * "NalogZaPrenosRequest")
-	 * 
-	 * @ResponsePayload public NalogZaPrenosResponse mt103(@RequestPayload
-	 * NalogZaPrenosRequest request) {
-	 * System.out.println("Usao endpoint - banka"); NalogZaPrenosResponse
-	 * response = new NalogZaPrenosResponse();
-	 * response.setOdgovor("Povratna poruka!"); return response; }
-	 * 
-	 * @PayloadRoot(namespace = HTTP + "mt900." + NAMESPACE_URI, localPart =
-	 * "NalogZaPrenosRequest")
-	 * 
-	 * @ResponsePayload public NalogZaPrenosResponse mt900(@RequestPayload
-	 * NalogZaPrenosRequest request) {
-	 * System.out.println("Usao endpoint - banka"); NalogZaPrenosResponse
-	 * response = new NalogZaPrenosResponse();
-	 * response.setOdgovor("Povratna poruka!"); return response; }
-	 * 
-	 * @PayloadRoot(namespace = HTTP + "mt910." + NAMESPACE_URI, localPart =
-	 * "NalogZaPrenosRequest")
-	 * 
-	 * @ResponsePayload public NalogZaPrenosResponse mt910(@RequestPayload
-	 * NalogZaPrenosRequest request) {
-	 * System.out.println("Usao endpoint - banka"); NalogZaPrenosResponse
-	 * response = new NalogZaPrenosResponse();
-	 * response.setOdgovor("Povratna poruka!"); return response; }
-	 */
 }

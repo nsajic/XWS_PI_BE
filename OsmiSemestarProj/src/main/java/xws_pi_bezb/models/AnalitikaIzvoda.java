@@ -29,13 +29,13 @@ public class AnalitikaIzvoda implements Serializable {
 	@Column(name = "smer", nullable = false)
 	private String smer;
 
-	@Column(name = "duznik_nalogodavac", nullable = false)
+	@Column(name = "duznik_nalogodavac", nullable = true)
 	private String duznikNalogodavac;
 
 	@Column(name = "svrha_placanja", nullable = false)
 	private String svrhaPlacanja;
 
-	@Column(name = "primalac_poverilac", nullable = false)
+	@Column(name = "primalac_poverilac", nullable = true)
 	private String primalacPoverilac;
 
 	@Column(name = "datum_naloga", nullable = false)

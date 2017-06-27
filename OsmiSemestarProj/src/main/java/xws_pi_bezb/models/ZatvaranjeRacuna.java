@@ -31,7 +31,6 @@ public class ZatvaranjeRacuna implements Serializable{
 	@ManyToOne
 	private AnalitikaIzvoda analitikaIzvoda;
 
-	
 	public ZatvaranjeRacuna (){}
 	
 	public AnalitikaIzvoda getAnalitikaIzvoda() {
