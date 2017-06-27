@@ -89,7 +89,12 @@ insert into valuta (sifra_valute, naziv_valute) values ('JEN', 'Japanski jen');
 insert into valuta (sifra_valute, naziv_valute) values ('USD', 'Americki dolar');
 insert into valuta (sifra_valute, naziv_valute) values ('RSD', 'Srpski dinar');
 
+--insert into korisnik (tip_klijenta, ime, prezime, broj_licne_karte, telefon, adresa, jmbg, rola_id, email) values ('F','Sima1', 'Simic1', 112345, '1111', 'adresa1', 11111, 1, 'k1@k1.com');
+--insert into korisnik (tip_klijenta, ime, prezime, broj_licne_karte, telefon, adresa, jmbg, rola_id, email) values ('F','SimaF', 'SimicF', 112344, '1111', 'adresaF1', 11111, 1, 'k1F@k1.com');
 
-insert into racun (broj_racuna, status_racuna, banka_id, klijent_id, valuta_id) values ('111-2223334445556-78', 1, 1, null, 1);
-insert into racun (broj_racuna, status_racuna, banka_id, klijent_id, valuta_id) values ('111-2223334445556-87', 1, 1, null, 1);
-insert into racun (broj_racuna, status_racuna, banka_id, klijent_id, valuta_id) values ('222-2223334445556-78', 1, 2, null, 1);
+--insert into korisnik (ime, prezime, broj_licne_karte, telefon, adresa, jmbg, rola_id, email, pib, maticni_broj, fax) values (false, 'P','Sima2', 'Simic2', 112345, '1111', 'adresa1', 11111, 2, 'k2@k2.com', '$2a$12$/eDioOpiKrGQnDv53hPxIe8XDCJWP/Xe1fF6E5IrTVxuBozu9EX9G', 'kor', true, true, 25254525, 2332221, 'fax.fax');
+--insert into korisnik (ime, prezime, broj_licne_karte, telefon, adresa, jmbg, rola_id, email, pib, maticni_broj, fax) values (false, 'P','SimaP2', 'SimicP2', 112345, '1111', 'adresaP1', 11111, 2, 'k2P@k2.com', '$2a$12$/eDioOpiKrGQnDv53hPxIe8XDCJWP/Xe1fF6E5IrTVxuBozu9EX9G', 'kor', true, true, 25254525, 2332221, 'fax.fax');
+
+--insert into racun (broj_racuna, status_racuna, banka_id, klijent_id, valuta_id) values ('111-2223334445556-78', 1, 1, 1, 1);
+--insert into racun (broj_racuna, status_racuna, banka_id, klijent_id, valuta_id) values ('111-2223334445556-87', 1, 1, 2, 1);
+--insert into racun (broj_racuna, status_racuna, banka_id, klijent_id, valuta_id) values ('222-2223334445556-78', 1, 2, 3, 1);

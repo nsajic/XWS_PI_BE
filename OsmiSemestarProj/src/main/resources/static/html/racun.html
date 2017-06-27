@@ -116,8 +116,8 @@
 						</td>
 						
 						<td style = "width:190px; heigth: 70px">
-							<div ng-show = "racun.klijent.rola.naziv == 'PravnoLice'">{{racun.klijent.naziv}}</div>
-							<div ng-show = "racun.klijent.rola.naziv == 'FizickoLice'">{{racun.klijent.ime}} {{racun.klijent.prezime}}</div>
+							<div ng-show = "racun.klijent.klijentTip == 'PravnoLice'">{{racun.klijent.naziv}}</div>
+							<div ng-show = "racun.klijent.klijentTip == 'FizickoLice'">{{racun.klijent.ime}} {{racun.klijent.prezime}}</div>
 						</td>
 						<td style = "width:130px; heigth: 70px">{{racun.valuta.nazivValute}}</td>
 						<td ng-show="hasPrivilege('Racun:Obrisi')"><button ng-show = "racun.statusRacuna == 1" ng-click="obrisiRacun(racun.id)">Obrisi</button></td>
@@ -136,18 +136,25 @@
 						<td>Broj racuna:</td>
 						<td><input type=text ng-model="brojRacuna"></td>
 					</tr>
-
+					<tr>
+						<td>Tip klijenta:</td>
+						<td>
+							<input type="radio" ng-change = "promenjenCheck('F')" ng-model = 'tipKlijentaModel' value=1> Fizicko
+							<input type="radio" ng-change = "promenjenCheck('P')" ng-model = 'tipKlijentaModel' value=2> Pravno
+						</td>
+					</tr>
 					<tr>
 						<td>Klijent:</td>
-						<td>
-							<select style="width: 180px" ng-options="klijent.id for klijent in klijenti" ng-model="klijentRacuna"></select>
+						<td  ng-show = 'kojaLicaDaPrikaze == "P"'>
+							<select style="width: 180px" ng-options="pravnoLice.naziv for pravnoLice in pravnaLica" ng-model="pravnoLiceRacuna"></select>
+						</td>
+						<td ng-show = 'kojaLicaDaPrikaze == "F"'>
+							<select style="width: 180px" ng-options="fizickoLice.ime for fizickoLice in fizickaLica" ng-model="fizickoLiceRacuna"></select>
 						</td>
 						<td>
 							<button class="btn" ng-click="prikaziKlijenteBool = true">Prikazi klijente</button>
 						</td>
 					</tr>
-
-
 					<tr>
 						<td>Valute:</td>
 						<td>
@@ -162,10 +169,41 @@
 				
 				<div ng-show = "prikaziKlijenteBool == true" >
 					<hr>
-					<table  ng-repeat='klijent in klijenti'>
+					
+					
+					<table ng-show = 'kojaLicaDaPrikaze == "F"'>
 						<tr >
-							<td style = "width:120px; heigth: 70px">{{klijent.id}}</td>
-							<td><button ng-click="odaberiKlijenta(klijent)">Odaberi</button></td>
+							<td style = "width:120px; heigth: 70px">Ime</td>
+							<td style = "width:120px; heigth: 70px">Prezime</td>
+							<td style = "width:120px; heigth: 70px">Email</td>
+							<td style = "width:120px; heigth: 70px">Adresa</td>
+							<td style = "width:120px; heigth: 70px">JMBG</td>
+						</tr>
+						<tr ng-repeat='fizickoLice in fizickaLica' >
+							<td style = "width:120px; heigth: 70px">{{fizickoLice.ime}}</td>
+							<td style = "width:120px; heigth: 70px">{{fizickoLice.prezime}}</td>
+							<td style = "width:120px; heigth: 70px">{{fizickoLice.email}}</td>
+							<td style = "width:120px; heigth: 70px">{{fizickoLice.adresa}}</td>
+							<td style = "width:120px; heigth: 70px">{{fizickoLice.jmbg}}</td>
+							<td><button ng-click="odaberiKlijenta(fizickoLice)">Odaberi</button></td>
+						</tr>
+					</table>
+
+					<table ng-show = 'kojaLicaDaPrikaze == "P"'  >
+						<tr >
+							<td style = "width:120px; heigth: 70px">Naziv</td>
+							<td style = "width:120px; heigth: 70px">Email</td>
+							<td style = "width:120px; heigth: 70px">Adresa</td>
+							<td style = "width:120px; heigth: 70px">PIB</td>
+							<td style = "width:120px; heigth: 70px">Maticni broj</td>
+						</tr>
+						<tr ng-repeat='pravnoLice in pravnaLica' >
+							<td style = "width:120px; heigth: 70px">{{pravnoLice.naziv}}</td>
+							<td style = "width:120px; heigth: 70px">{{pravnoLice.email}}</td>
+							<td style = "width:120px; heigth: 70px">{{pravnoLice.adresa}}</td>
+							<td style = "width:120px; heigth: 70px">{{pravnoLice.pib}}</td>
+							<td style = "width:120px; heigth: 70px">{{pravnoLice.maticniBroj}}</td>
+							<td><button ng-click="odaberiKlijenta(pravnoLice)">Odaberi</button></td>
 						</tr>
 					</table>
 					<hr>
