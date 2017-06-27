@@ -30,5 +30,13 @@ public class StavkaPrenosa implements Serializable{
 	public void setAnalitikaIzvoda(AnalitikaIzvoda analitikaIzvoda) {
 		this.analitikaIzvoda = analitikaIzvoda;
 	}
+	
+	public MedjubankarskiPrenos getMedjubankarskiPrenos() {
+		return medjubankarskiPrenos;
+	}
+	
+	public void setMedjubankarskiPrenos(MedjubankarskiPrenos medjubankarskiPrenos) {
+		this.medjubankarskiPrenos = medjubankarskiPrenos;
+	}
 }
 

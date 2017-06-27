@@ -94,6 +94,9 @@ public class MT102Request {
     @XmlElement(name = "Datum", required = true)
     protected XMLGregorianCalendar datum;
     
+    @XmlElement(name = "PojedinacnoPlacanje", required = true)
+    protected List<TPojedinacnoPlacanje> pojedinacnoPlacanje;
+    
   
 
     /**
@@ -286,6 +289,13 @@ public class MT102Request {
      * 
      * 
      */
+
+    public List<TPojedinacnoPlacanje> getPojedinacnoPlacanje() {
+        if (pojedinacnoPlacanje == null) {
+            pojedinacnoPlacanje = new ArrayList<TPojedinacnoPlacanje>();
+        }
+        return this.pojedinacnoPlacanje;
+    }
  
 
 }
