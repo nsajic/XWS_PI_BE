@@ -105,7 +105,7 @@ insert into dnevno_stanje_racuna (datum, novo_stanje, prethodno_stanje, promet_n
 insert into dnevno_stanje_racuna (datum, novo_stanje, prethodno_stanje, promet_na_teret, promet_u_korist, racun_id) values ('2017-04-20', 10000, 8000, 200, 500, 2);
 
 	
-<<<<<<< HEAD
+
 insert into analitika_izvoda (datum_analitike, datum_naloga, datum_valute, duznik_nalogodavac, iznos, model_odobrenja, model_zaduzenja, poziv_na_broj_odobrenja, poziv_na_broj_zaduzenja, primalac_poverilac, racun_duznika, racun_poverioca, smer, svrha_placanja, dnevno_stanje_racuna_id, valuta_id)
 	values ('2017-04-15', '2017-04-15', '2017-04-15', 'Pera Peric', 3000, 97, 98,'111-2223334445556-78', '78945655-45767', 'Sima Simic', '435-34543324-453', '321-4423254-324', 'izv', 'Kupljene stolice', 1, 1);
 	
@@ -123,14 +123,8 @@ insert into analitika_izvoda (datum_analitike, datum_naloga, datum_valute, duzni
 
 
 
-=======
+
 --insert into dnevno_stanje_racuna (datum, novo_stanje, prethodno_stanje, promet_na_teret, promet_u_korist, racun_id) values ('2017-04-15', 10000, 8000, 200, 500, 1);
 
-
-
-
-insert into analitika_izvoda (datum_analitike, datum_naloga, datum_valute, duznik_nalogodavac, iznos, model_odobrenja, model_zaduzenja, poziv_na_broj_odobrenja, poziv_na_broj_zaduzenja, primalac_poverilac, racun_duznika, racun_poverioca, smer, svrha_placanja, dnevno_stanje_racuna_id, valuta_id)
-	values ('2017-04-15', '2017-04-15', '2017-04-15', 'Pera Peric', 3000, 97, 98,'8954-745826', '789655-4577', 'Sima Simic', '435-34543324-453', '321-4423254-324', 'izv', 'Kupljene stolice', 1, 1);
->>>>>>> ea374cfd4dd95beefa163043435c759196ca5965
 
 
