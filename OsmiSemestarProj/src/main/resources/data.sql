@@ -87,6 +87,15 @@ insert into valuta (sifra_valute, naziv_valute) values ('USD', 'Americki dolar')
 insert into valuta (sifra_valute, naziv_valute) values ('RSD', 'Srpski dinar');
 
 
---insert into racun (broj_racuna, status_racuna, banka_id, klijent_id, valuta_id) values ('111-2223334445556-78', 1, 1, null, 1);
---insert into racun (broj_racuna, status_racuna, banka_id, klijent_id, valuta_id) values ('111-2223334445556-87', 1, 1, null, 1);
---insert into racun (broj_racuna, status_racuna, banka_id, klijent_id, valuta_id) values ('222-2223334445556-78', 1, 2, null, 1);
+insert into racun (broj_racuna, status_racuna, banka_id, klijent_id, valuta_id) values ('111-2223334445556-78', 1, 1, null, 1);
+insert into racun (broj_racuna, status_racuna, banka_id, klijent_id, valuta_id) values ('111-2223334445556-87', 1, 1, null, 1);
+insert into racun (broj_racuna, status_racuna, banka_id, klijent_id, valuta_id) values ('222-2223334445556-78', 1, 2, null, 1);
+
+insert into dnevno_stanje_racuna (datum, novo_stanje, prethodno_stanje, promet_na_teret, promet_u_korist, racun_id) 
+	values ('2017-04-15', 10000, 8000, 200, 500, 1);
+insert into dnevno_stanje_racuna (datum, novo_stanje, prethodno_stanje, promet_na_teret, promet_u_korist, racun_id) 
+	values ('2017-04-18', 10000, 8000, 200, 500, 1);
+--insert into dnevno_stanje_racuna (datum, novo_stanje, prethodno_stanje, promet_na_teret, promet_u_korist, racun_id) 
+	--values ('2017-04-19', 10000, 8000, 200, 500, 1);
+--insert into dnevno_stanje_racuna (datum, novo_stanje, prethodno_stanje, promet_na_teret, promet_u_korist, racun_id) 
+	--values ('2017-04-20', 10000, 8000, 200, 500, 1);

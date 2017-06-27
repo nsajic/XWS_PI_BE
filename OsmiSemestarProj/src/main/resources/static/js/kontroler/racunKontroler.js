@@ -221,8 +221,21 @@ racunKontroler.controller('racunCtrl', function($scope, racunServis, $window, $l
 	}
 	
 	
-	$scope.prebaciSredstvaNaRacun = function(){
-		// TODO: Implementirati prebacivanje sredstava i zatvaranje racuna
+	$scope.prebaciSredstva = function(){
+		
+		var racun = {
+			idRacunKojiGasim : $scope.idRacunaZaZatvaranje,
+			brojRacunaNaKojiPrebacujem : $scope.racunGdePrebacujem
+		}
+		racunServis.zatvoriRacun(racun).success(function (data){
+			$scope.izlistajRacune();
+			$scope.nazadNaRacune();
+		}).error(function (data){
+			$scope.izlistajRacune();
+			alert("Nemoguc prenos");
+			
+			$scope.nazadNaRacune();
+		});
 	}
 	
 	$scope.nazadNaRacune = function (){
@@ -335,5 +348,8 @@ racunKontroler.controller('racunCtrl', function($scope, racunServis, $window, $l
 	$scope.skloniValuteIzmena =function (){
 		$scope.prikaziValuteBoolIzmena = false;
 	}	
+	
+	
+	
 
 });

@@ -10,7 +10,14 @@
 		<a href="promenaLozinke">Promeni lozinku</a>&nbsp &nbsp
 		<a ng-click="logOut()" href="">Izloguj se</a>
 		<hr/>
+	
+			
+		<a href="" ng-click = "kliknuoKliring()">Izvrsi clearing</a>
+			
+				
+		<hr/>
 		<div>
+		
 			<div ng-show="hasPrivilege('Klijent:View')"> <a href="pravnoLice">Pravna lica</a></div>
 			<div ng-show="hasPrivilege('Klijent:View')"><a href="fizickoLice">Fizicka lica</a></div>
 			<div ng-show="hasPrivilege('Racun:View')"><a href="racun">Racuni</a></div>
