@@ -7,7 +7,6 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import xws_pi_bezb.models.MT102;
-import xws_pi_bezb.models.PojedinacnoPlacanje;
 
 @Repository
 @Transactional

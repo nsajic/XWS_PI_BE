@@ -1,5 +1,7 @@
 package xws_pi_bezb.services;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,5 +20,11 @@ public class MedjubankarskiPrenosService implements IMedjubankarskiPrenosService
 	public void save(MedjubankarskiPrenos medjubankarskiPrenos) {
 		medjubankarskiPrenosRepository.save(medjubankarskiPrenos);
 		
+	}
+
+	@Override
+	public List<MedjubankarskiPrenos> getAll() {
+		
+		return medjubankarskiPrenosRepository.findAll();
 	}	
 }
