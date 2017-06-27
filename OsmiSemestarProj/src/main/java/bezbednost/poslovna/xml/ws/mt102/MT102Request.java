@@ -11,6 +11,13 @@ package bezbednost.poslovna.xml.ws.mt102;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -18,6 +25,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.datatype.XMLGregorianCalendar;
+
 import bezbednost.poslovna.xml.ws.mt103.TSWIFTIRacun;
 
 
@@ -47,6 +55,7 @@ import bezbednost.poslovna.xml.ws.mt103.TSWIFTIRacun;
  * 
  * 
  */
+
 @XmlRootElement(name="MT102Request", namespace="http://MT102.ws.xml.poslovna.bezbednost/")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "MT102Request", propOrder = {
@@ -59,26 +68,36 @@ import bezbednost.poslovna.xml.ws.mt103.TSWIFTIRacun;
     "datum",
     "pojedinacnoPlacanje"
 }, namespace="http://MT102.ws.xml.poslovna.bezbednost/")
-public class MT102Request {
 
-    @XmlElement(name = "IDPoruke", required = true)
+public class MT102Request {
+	
+
+	
+    @XmlElement(name = "IDPoruke", required = true) 
     protected String idPoruke;
+    
     @XmlElement(name = "BankaDuznika", required = true)
     protected TSWIFTIRacun bankaDuznika;
+    
     @XmlElement(name = "BankaPoverioca", required = true)
     protected TSWIFTIRacun bankaPoverioca;
+    
     @XmlElement(name = "UkupanIznos", required = true)
     protected BigDecimal ukupanIznos;
+    
     @XmlElement(name = "SifraValute", required = true)
     protected String sifraValute;
+    
     @XmlElement(name = "DatumValute", required = true)
-    @XmlSchemaType(name = "date")
     protected XMLGregorianCalendar datumValute;
+    
     @XmlElement(name = "Datum", required = true)
-    @XmlSchemaType(name = "date")
     protected XMLGregorianCalendar datum;
+    
     @XmlElement(name = "PojedinacnoPlacanje", required = true)
     protected List<TPojedinacnoPlacanje> pojedinacnoPlacanje;
+    
+  
 
     /**
      * Gets the value of the idPoruke property.
@@ -270,11 +289,13 @@ public class MT102Request {
      * 
      * 
      */
+
     public List<TPojedinacnoPlacanje> getPojedinacnoPlacanje() {
         if (pojedinacnoPlacanje == null) {
             pojedinacnoPlacanje = new ArrayList<TPojedinacnoPlacanje>();
         }
         return this.pojedinacnoPlacanje;
     }
+ 
 
 }
