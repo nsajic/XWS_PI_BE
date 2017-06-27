@@ -24,7 +24,7 @@ public class Racun {
 	@Column(name = "status_racuna", nullable = false)
 	private int statusRacuna;
 	
-	@Column(name = "rezervisano")
+	@Column(name = "rezervisano", nullable = false)
 	private double rezervisano;
 
 	@ManyToOne
