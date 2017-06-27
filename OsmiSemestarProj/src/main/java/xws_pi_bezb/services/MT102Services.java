@@ -3,11 +3,12 @@ package xws_pi_bezb.services;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import xws_pi_bezb.irepositories.IMT102Repository;
 import xws_pi_bezb.iservices.IMT102Services;
 import xws_pi_bezb.models.MT102;
-
+@Service
 public class MT102Services implements IMT102Services{
 
 	@Autowired 
