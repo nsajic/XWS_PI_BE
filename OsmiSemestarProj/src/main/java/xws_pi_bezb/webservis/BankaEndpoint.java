@@ -8,11 +8,16 @@ import java.security.PrivateKey;
 import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
+
+import javax.xml.datatype.DatatypeConfigurationException;
+import javax.xml.datatype.DatatypeFactory;
+import javax.xml.datatype.XMLGregorianCalendar;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerConfigurationException;
 import javax.xml.transform.TransformerException;
@@ -509,22 +514,107 @@ public class BankaEndpoint {
 
 	@PayloadRoot(namespace = HTTP + "MT910." + NAMESPACE_URI, localPart = "MT910Request")
 	@ResponsePayload
-	public MT900Response mt910(@RequestPayload MT900Request request) {
+	public MT900Response mt910(@RequestPayload MT900Request request) throws DatatypeConfigurationException {
 		MT900Response response = new MT900Response();
 		String odgovor = "";
 		MT103 mt103 = mt103Servis.findByIdPoruke(request.getIDPorukeNaloga());
 		MT102 mt102 = mt102Servis.findByIdPoruke(request.getIDPorukeNaloga());
 		
 		if(mt103 != null){
-			//odgovor = uradiObracun910Mt103(mt103);
+			odgovor = uradiObracun910Mt103(konvertujMT103(mt103));
 		}else if(mt102 != null){
-			//odgovor = uradiObracun910Mt102(mt102);
+			odgovor = uradiObracun910Mt102(konvertujMT102(mt102));
+
 		}else{
 			odgovor = "MT910 - Nesto ne valja";
 		}
 		
 		response.setOdgovor(odgovor);
 		return response;
+	}
+
+	private MT102Request konvertujMT102(MT102 mt102) throws DatatypeConfigurationException {
+
+		MT102Request req = new MT102Request();
+		
+		req.setIDPoruke(mt102.getIdPoruke());
+		
+		req.getBankaDuznika().setSWIFT(mt102.getSwiftDuznik());
+		req.getBankaDuznika().setObracunskiRacun(mt102.getObracunskiRacunDuznik());
+		
+		req.getBankaPoverioca().setSWIFT(mt102.getSwiftPoverilac());
+		req.getBankaPoverioca().setObracunskiRacun(mt102.getObracunskiRacunPoverilac());
+		
+		req.setUkupanIznos(mt102.getUkupanIznos());
+		req.setSifraValute(mt102.getSifraValute());
+		
+		 GregorianCalendar gcal = (GregorianCalendar) GregorianCalendar.getInstance();
+		 gcal.setTime(mt102.getDatumValute());
+		 
+	      XMLGregorianCalendar xgcal = DatatypeFactory.newInstance()
+	            .newXMLGregorianCalendar(gcal);
+
+		
+		req.setDatumValute(xgcal);
+		
+		gcal = (GregorianCalendar) GregorianCalendar.getInstance();
+		 gcal.setTime(mt102.getDatum());
+		 
+		  xgcal = DatatypeFactory.newInstance()
+		            .newXMLGregorianCalendar(gcal);
+
+		req.setDatum(xgcal);
+		
+	for(int i=0; i<mt102.getPojedinacnoPlacanje().size(); i++){
+		req.getPojedinacnoPlacanje().get(i).
+		setIDNalogaZaPlacanje(mt102.getPojedinacnoPlacanje().get(i).getIdNalogaZaPlacanje());
+		
+		req.getPojedinacnoPlacanje().get(i).
+		setDuznik(mt102.getPojedinacnoPlacanje().get(i).getDuznik());
+		
+		req.getPojedinacnoPlacanje().get(i).
+		setSvrhaPlacanja(mt102.getPojedinacnoPlacanje().get(i).getSvrhaPlacanja());
+		
+		gcal = (GregorianCalendar) GregorianCalendar.getInstance();
+		 gcal.setTime(mt102.getPojedinacnoPlacanje().get(i).getDatumNaloga());
+		 
+		  xgcal = DatatypeFactory.newInstance()
+		            .newXMLGregorianCalendar(gcal);
+		
+		
+		req.getPojedinacnoPlacanje().get(i).setDatumNaloga(xgcal);
+		
+		req.getPojedinacnoPlacanje().get(i).getDuznikRacun().setPozivNaBroj(
+				mt102.getPojedinacnoPlacanje().get(i).getPozivNaBrojDuznik());
+		req.getPojedinacnoPlacanje().get(i).getDuznikRacun().setModel(
+				mt102.getPojedinacnoPlacanje().get(i).getModelDuznik());
+		req.getPojedinacnoPlacanje().get(i).getDuznikRacun().setRacun(
+				mt102.getPojedinacnoPlacanje().get(i).getRacunDruznik());
+		
+		
+		req.getPojedinacnoPlacanje().get(i).getPoverilacRacun().setPozivNaBroj(
+				mt102.getPojedinacnoPlacanje().get(i).getPozivNaBrojPoverilac());
+		req.getPojedinacnoPlacanje().get(i).getPoverilacRacun().setModel(
+				mt102.getPojedinacnoPlacanje().get(i).getModelDuznik());
+		req.getPojedinacnoPlacanje().get(i).getPoverilacRacun().setRacun(
+				mt102.getPojedinacnoPlacanje().get(i).getRacunPoverilac());
+		
+		
+	}
+		
+		
+		
+	
+		
+		
+		
+		
+		return null;
+	}
+
+	private MT103Request konvertujMT103(MT103 mt103) {
+		
+		return null;
 	}
 
 	private String uradiObracun910Mt102(MT102Request request) {

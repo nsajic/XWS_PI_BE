@@ -61,6 +61,8 @@ racunKontroler.controller('racunCtrl', function($scope, racunServis, $window, $l
 		if(newTab == 1){
 			$scope.ucitajValute();
 			$scope.ucitajKlijente();
+			$scope.izlistajFizickaLica();
+			$scope.izlistajPravnaLica();
 		}
 		if(newTab == 2){
 			if($scope.idRacunaZaIzmenu == -1){
@@ -85,16 +87,38 @@ racunKontroler.controller('racunCtrl', function($scope, racunServis, $window, $l
 		}).error(function(data) {
 			alert("Nemoguce ucitati klijente");
 		});
+	}	
+
+	
+	$scope.izlistajFizickaLica = function (){
+		klijentServis.izlistajFizickaLica().success(function(data) {
+			console.log(data + " FIzicka ");
+			$scope.fizickaLica = data;
+		}).error(function(data) {
+			alert("Nemoguce ucitati klijente");
+		});
+	}	
+	$scope.izlistajPravnaLica = function (){
+		klijentServis.izlistajPravnaLica().success(function(data) {
+			console.log(data + " Pravna ");
+			$scope.pravnaLica = data;
+		}).error(function(data) {
+			alert("Nemoguce ucitati klijente");
+		});
 	}
 
 	//INIT START
 	$scope.setTab(0);
 	$scope.valute = [];
 	$scope.klijenti = [];
+	$scope.pravnaLica = [];
+	$scope.fizickaLica= [];
 	$scope.idRacunaZaIzmenu = -1;
 	$scope.idRacunaZaZatvaranje = -1;
 	$scope.idRacunaZaDnevnaStanja = -1;
 	$scope.idDnevnogStanjaZaAnalitiku = -1;
+	$scope.kojaLicaDaPrikaze = "F";
+	$scope.tipKlijentaModel = 1;
 	$scope.dnevnaStanjaOdabranogRacuna = [];
 	$scope.analitikeOdabranogDnevnogStanja = [];
 	
@@ -119,12 +143,21 @@ racunKontroler.controller('racunCtrl', function($scope, racunServis, $window, $l
 	}
 	
 	$scope.dodajRacun = function() {
-
-		var racun = {
-				brojRacuna : $scope.brojRacuna,
-				statusRacuna : $scope.statusRacuna,
-				klijent : $scope.klijentRacuna,
-				valuta : $scope.valutaRacuna
+		if($scope.kojaLicaDaPrikaze == "F"){
+			var racun = {
+					brojRacuna : $scope.brojRacuna,
+					statusRacuna : $scope.statusRacuna,
+					klijent : $scope.fizickoLiceRacuna,
+					valuta : $scope.valutaRacuna
+			}			
+			
+		} else if ($scope.kojaLicaDaPrikaze == "P"){
+			var racun = {
+					brojRacuna : $scope.brojRacuna,
+					statusRacuna : $scope.statusRacuna,
+					klijent : $scope.pravnoLiceRacuna,
+					valuta : $scope.valutaRacuna
+			}
 		}
 		racunServis.dodajRacun(racun).success(function(data) {
 			$scope.izlistajRacune();
@@ -206,6 +239,13 @@ racunKontroler.controller('racunCtrl', function($scope, racunServis, $window, $l
 			alert("Nemoguce ucitati dnevna stanja racuna");
 		});
 	}
+	
+	$scope.promenjenCheck = function(tipLica){
+		console.log("tip lica izmenjen = " + tipLica);
+		$scope.kojaLicaDaPrikaze = tipLica;
+		$scope.izlistajFizickaLica();
+		$scope.izlistajPravnaLica();
+	}
 
 	
 	
@@ -275,14 +315,22 @@ racunKontroler.controller('racunCtrl', function($scope, racunServis, $window, $l
 
 	$scope.odaberiKlijenta = function (klijent){
 		if (klijent != null) {
-			for (var i = 0; i < $scope.klijenti.length; i++) {
-				if ($scope.klijenti[i].id == klijent.id) {
-					$scope.klijentRacuna = $scope.klijenti[i];
+			
+			if($scope.kojaLicaDaPrikaze == "F"){
+				for (var i = 0; i < $scope.fizickaLica.length; i++) {
+					if ($scope.fizickaLica[i].id == klijent.id) {
+						$scope.fizickoLiceRacuna = $scope.fizickaLica[i];
+					}
 				}
+			} else if ($scope.kojaLicaDaPrikaze == "P") {
+				for (var i = 0; i < $scope.pravnaLica.length; i++) {
+					if ($scope.pravnaLica[i].id == klijent.id) {
+						$scope.pravnoLiceRacuna = $scope.pravnaLica[i];
+					}
+				}				
 			}
-		} else {
-			controller.klijentRacunaIzmena = null;
 		}
+		controller.klijentRacunaIzmena = null;
 		$scope.prikaziKlijenteBool = false;
 		
 	}
@@ -303,7 +351,7 @@ racunKontroler.controller('racunCtrl', function($scope, racunServis, $window, $l
 	
 	
 	$scope.skloniKlijente =function (){
-		$scope.prikaziklijenteBool = false;
+		$scope.prikaziKlijenteBool = false;
 	}	
 
 	$scope.skloniKlijenteIzmena =function (){

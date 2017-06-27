@@ -117,6 +117,22 @@ public class MT102 {
 		return sifraValute;
 	}
 
+	public Date getDatumValute() {
+		return datumValute;
+	}
+
+	public void setDatumValute(Date datumValute) {
+		this.datumValute = datumValute;
+	}
+
+	public Date getDatum() {
+		return datum;
+	}
+
+	public void setDatum(Date datum) {
+		this.datum = datum;
+	}
+
 	public void setSifraValute(String sifraValute) {
 		this.sifraValute = sifraValute;
 	}

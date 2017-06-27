@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import xws_pi_bezb.annotations.InterceptorAnnotation;
+import xws_pi_bezb.helpers.KlijentTip;
 import xws_pi_bezb.iservices.IBankarskiSluzbenikService;
 import xws_pi_bezb.iservices.IDelatnostService;
 import xws_pi_bezb.iservices.IFizickaLicaService;
@@ -60,6 +61,7 @@ public class KlijentKontroler {
 	@RequestMapping(value = "/dodajPravnoLice", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
 	@InterceptorAnnotation("Klijent:DodajPravnoFizicko")
 	public ResponseEntity<List<PravnoLice>> dodajPravnoLice(@RequestBody PravnoLice pravnoLice) {
+		pravnoLice.setKlijentTip(KlijentTip.PravnoLice);
 		pravnaLicaService.save(pravnoLice);
 		return new ResponseEntity<List<PravnoLice>>(pravnaLicaService.getPravnaLica(), HttpStatus.OK);
 	}
@@ -129,7 +131,7 @@ public class KlijentKontroler {
 	// ISPOD FIZICKA
 
 	@RequestMapping(value = "/dodajFizickoLice", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-	@InterceptorAnnotation("Klijent:DodajPravnoFizicko")
+	//@InterceptorAnnotation("Klijent:DodajPravnoFizicko")
 	public ResponseEntity<Object> dodajFizickoLice(@RequestBody FizickoLice fizickoLice) {
 		//String randomPassword = Helpers.generatePassword();
 		
@@ -142,6 +144,7 @@ public class KlijentKontroler {
 				*/
 		
 
+		fizickoLice.setKlijentTip(KlijentTip.FizickoLice);
 		fizickaLicaService.save(fizickoLice);
 		return new ResponseEntity<Object>(HttpStatus.OK);
 	}
