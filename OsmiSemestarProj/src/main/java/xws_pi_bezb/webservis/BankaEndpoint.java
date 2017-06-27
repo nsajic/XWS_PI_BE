@@ -461,8 +461,15 @@ public class BankaEndpoint {
 		System.out.println("Usao endpoint - izvod");
 		IzvodResponse response = new IzvodResponse();
 
-		logger.info("[Zahtev izvoda: " + request.toString());
-
+		Date danasnjiDatum = java.sql.Date.valueOf(LocalDate.of(request.getZahtev().getDatum().getYear(), request.getZahtev().getDatum().getMonth(), request.getZahtev().getDatum().getDay()));
+		Racun racunDuz = racunService.findByBrojRacuna(request.getZahtev().getBrojRacuna());
+		DnevnoStanjeRacuna dnevnoStanjeRacunaDuznika = dnevnoStanjeRacunaService.findByRacunAndDatum(racunDuz, danasnjiDatum);
+		
+		if(dnevnoStanjeRacunaDuznika != null){
+			
+		}else{
+			System.out.println("Nema dnevnog stanja.");
+		}
 		// response.
 		return response;
 	}

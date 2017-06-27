@@ -17,4 +17,33 @@
     <OznakaValute>RSD</OznakaValute>
     <Hitno>false</Hitno>
 
+<<<<<<< HEAD
+    <ns3:Signature>
+        <ns3:SignedInfo>
+            <ns3:CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315"/>
+            <ns3:SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1"/>
+            <ns3:Reference URI="">
+                <ns3:Transforms>
+                    <ns3:Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/>
+                    <ns3:Transform Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315#WithComments"/>
+                </ns3:Transforms>
+                <ns3:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"/>
+                <ns3:DigestValue>LNvXLViV0bsDsiV0uK/543xpqdI=</ns3:DigestValue>
+            </ns3:Reference>
+        </ns3:SignedInfo>
+        <ns3:SignatureValue>fojBXGCyBVj/3EAgb3tL9seY40ipx9LrpQK2eHlLBoEEACt/AHuLvIX4MbPbFQakTM15GCxCb1EcH18VqiejFlRVowhWqec1ugvJFsbLMvXgwoQCj3xiTXA/k0WZHAmA9IZZ//swCyOr+GyeeS9t4xXxHTDbCMmFEb0c0dLr1JI=</ns3:SignatureValue>
+        <ns3:KeyInfo>
+            <ns3:KeyValue>
+                <ns3:RSAKeyValue>
+                    <ns3:Modulus>zQ9KJLShafi/S2HkWlfnRpKcuLB4BgeJ5y2wBafGRRNz5kss0gjzzQZIDf684gwQ2WYEDlH2s+OXfbX4v6KTKJ4ug0wfY05sciJ7Dx+HOPUw6KU5aWvbBIKAXJE+MCSaO/FSk+ujgXSZAY/epUsSqBo2EZgUl90oEpTRbV+xX8E=</ns3:Modulus>
+                    <ns3:Exponent>AQAB</ns3:Exponent>
+                </ns3:RSAKeyValue>
+            </ns3:KeyValue>
+            <ns3:X509Data>
+                <ns3:X509Certificate>MIIBtjCCAR8CBEZasCQwDQYJKoZIhvcNAQEFBQAwIjEPMA0GA1UECwwGcHJpbWVyMQ8wDQYDVQQDDAZwcmltZXIwHhcNMDcwNTI4MTAzNDEyWhcNMjcwNTIzMTAzNDEyWjAiMQ8wDQYDVQQLDAZwcmltZXIxDzANBgNVBAMMBnByaW1lcjCBnzANBgkqhkiG9w0BAQEFAAOBjQAwgYkCgYEAzQ9KJLShafi/S2HkWlfnRpKcuLB4BgeJ5y2wBafGRRNz5kss0gjzzQZIDf684gwQ2WYEDlH2s+OXfbX4v6KTKJ4ug0wfY05sciJ7Dx+HOPUw6KU5aWvbBIKAXJE+MCSaO/FSk+ujgXSZAY/epUsSqBo2EZgUl90oEpTRbV+xX8ECAwEAATANBgkqhkiG9w0BAQUFAAOBgQB2HjPI427zRaVfLTaeNVcjH9hoTkl9OUJAAmEa6EQdbdqZ75ca3IfuLHJFJ8zzyBP4LUGSxgA4OpnKs6Ej5w2n0GHmu0g4YqxInfpv/kCwswoia4Oza17te8mMamffCn3ySX5yZzEex5nueNAyhJkmWBcBCOvJw4+U+gSK50Xbcw==</ns3:X509Certificate>
+            </ns3:X509Data>
+        </ns3:KeyInfo>
+    </ns3:Signature>
+=======
+>>>>>>> 46bd7b2517de80dac4f0fb5f20d64892ac15d664
 </ns4:NalogZaPrenosRequest>

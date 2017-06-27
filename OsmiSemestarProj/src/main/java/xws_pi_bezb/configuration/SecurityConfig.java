@@ -37,7 +37,7 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter {
 	public void configAuthentication(AuthenticationManagerBuilder auth) throws Exception {	
 		auth.authenticationProvider(authProvider());		
 	}	
-	
+
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests().antMatchers("/**").permitAll().and().csrf().disable();
@@ -46,6 +46,11 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter {
         	.csrf().csrfTokenRepository(csrfTokenRepository())
         	.and().logout();*/
 	}
+	
+	/*@Override
+	protected void configure(HttpSecurity http) throws Exception {
+		http.authorizeRequests().antMatchers("/**").permitAll().and().csrf().disable();
+	}*/
 	
 	private CsrfTokenRepository csrfTokenRepository() {
 		HttpSessionCsrfTokenRepository repository = new HttpSessionCsrfTokenRepository();
