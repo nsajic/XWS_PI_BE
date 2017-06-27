@@ -49,7 +49,27 @@
 			</div>
 			
 			<div ng-show = "getIdDnevnogStanjaZaAnalitiku() !== -1">
-				Analitike dnevnog stanja
+				<table>	
+					<tr>
+						<td style = "width:100px; heigth: 70px">Datum analitike:</td>
+						<td style = "width:130px; heigth: 70px">Smer</td>
+						<td style = "width:100px; heigth: 70px">Datum naloga</td>
+						<td style = "width:150px; heigth: 70px">Racun duznika</td>
+						<td style = "width:150px; heigth: 70px">Racun poverioca</td>
+						<td style = "width:130px; heigth: 70px">Iznos</td>
+					</tr>
+					<tr  ng-repeat='dnevnoStanje in analitikeOdabranogDnevnogStanja'>
+						<td style = "width:100px; heigth: 70px"ž>{{dnevnoStanje.datumAnalitike  | date }}</td>
+						<td style = "width:130px; heigth: 70px">{{dnevnoStanje.smer}}</td>
+						<td style = "width:100px; heigth: 70px">{{dnevnoStanje.datumNaloga  | date}}</td>
+						<td style = "width:150px; heigth: 70px">{{dnevnoStanje.racunDuznika}}</td>
+						<td style = "width:150px; heigth: 70px">{{dnevnoStanje.racunPoverioca}}</td>
+						<td style = "width:130px; heigth: 70px">{{dnevnoStanje.iznos}}</td>
+						<td><button ng-click="">neko dugme</button> </td>
+					</tr>
+				</table>
+				<button ng-click="nazadNaDnevnaStanja()">Nazad</button>	
+				
 			</div>
 			
 			<div ng-show = "getPrikaziSveRacune()" >
