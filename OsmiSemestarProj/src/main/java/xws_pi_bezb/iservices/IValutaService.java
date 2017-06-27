@@ -16,4 +16,6 @@ public interface IValutaService {
 	void delete(Long id);
 
 	List<Valuta> getBySearch(Valuta valuta);
+
+	Valuta findBySifraValute(String oznakaValute);
 }

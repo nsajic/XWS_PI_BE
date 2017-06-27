@@ -1,4 +1,4 @@
-/*package xws_pi_bezb.models;
+package xws_pi_bezb.models;
 
 import java.util.Date;
 import java.util.Set;
@@ -12,58 +12,53 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 //NE TREBA CRUD
- 
+
 @Entity
 @Table(name = "medjubankarski_prenos")
 public class MedjubankarskiPrenos {
-	
+
 	@Id
 	@GeneratedValue
 	private Long id;
-	
+
 	@Column(name = "vrsta_poruke", nullable = false)
 	private String vrstaPoruke;
-	
+
 	@Column(name = "datum", nullable = false)
 	private Date datum;
-	
+
 	@Column(name = "iznos", nullable = false)
 	private Double iznos;
-	
+
 	@Column(name = "swift_kod_banke_duznika", nullable = false)
 	private String swiftKodBankeDuznika;
-	
+
 	@Column(name = "obracunski_period_banke_duznika", nullable = false)
 	private String obracunskiPeriodBankeDuznika;
-	
+
 	@Column(name = "swift_kod_banke_poverioca", nullable = false)
 	private String swiftKodBankePoverioca;
-	
+
 	@Column(name = "obracunski_period_banke_poverioca", nullable = false)
 	private String obracunskiPeriodBankePoverioca;
-	
+
 	@Column(name = "datum_valute", nullable = false)
 	private Date datumValute;
-	
+
 	@ManyToOne
 	private Banka bankaPrimalac;
-	
+
 	@ManyToOne
 	private Banka bankaPosiljalac;
-	
+
 	@ManyToOne
 	private Valuta valuta;
-	
+
 	@OneToMany(mappedBy = "medjubankarskiPrenos")
 	private Set<StavkaPrenosa> stavkePrenosa;
+	
+	public MedjubankarskiPrenos(){}
 
-	public MedjubankarskiPrenos()
-	{
-		
-		
-	}
-	
-	
 	public Long getId() {
 		return id;
 	}
@@ -124,8 +119,7 @@ public class MedjubankarskiPrenos {
 		return obracunskiPeriodBankePoverioca;
 	}
 
-	public void setObracunskiPeriodBankePoverioca(
-			String obracunskiPeriodBankePoverioca) {
+	public void setObracunskiPeriodBankePoverioca(String obracunskiPeriodBankePoverioca) {
 		this.obracunskiPeriodBankePoverioca = obracunskiPeriodBankePoverioca;
 	}
 
@@ -159,10 +153,6 @@ public class MedjubankarskiPrenos {
 
 	public void setValuta(Valuta valuta) {
 		this.valuta = valuta;
-	} 
-	
-	
-	
-	
+	}
+
 }
-*/

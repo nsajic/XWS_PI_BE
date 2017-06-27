@@ -18,14 +18,15 @@
 
 		<div ng-show="isSet(0)">
 		
-			<div ng-show = "getIdRacunaZaZatvaranje() != -1">
-				Unesite racun na koji zelite da prebacite sredstva <input type = "text" ng-model = "racunGdePrebacujem"/>
+			<div ng-show = "getIdRacunaZaZatvaranje() !== -1">
+				Unesite racun na koji zelite da prebacite sredstva 
+				<input type = "text" ng-model = "racunGdePrebacujem"/>
 				<button ng-click="prebaciSredstva()">Prebaci</button>
 				<br>
 				<button ng-click="nazadNaRacune()">Nazad</button>
 			</div>
 		
-			<div ng-show = "getIdRacuna() != -1">
+			<div ng-show = "getIdRacuna() !== -1">
 				<table>	
 					<tr>
 						<td style = "width:130px; heigth: 70px">Datum:</td>
@@ -41,13 +42,17 @@
 						<td style = "width:130px; heigth: 70px">{{dnevnoStanje.prometNaTeret}}</td>
 						<td style = "width:130px; heigth: 70px">{{dnevnoStanje.prometUKorist}}</td>
 						<td style = "width:130px; heigth: 70px">{{dnevnoStanje.novoStanje}}</td>
+						<td><button ng-click="setDnevnoStanjeRacunaNext(dnevnoStanje)">Analitike izvoda</button> </td>
 					</tr>
 				</table>
 				<button ng-click="nazadNaRacune()">Nazad</button>			
 			</div>
-		
-		
-			<div ng-show = "getIdRacuna() === -1 && getIdRacunaZaZatvaranje() === -1">
+			
+			<div ng-show = "getIdDnevnogStanjaZaAnalitiku() !== -1">
+				Analitike dnevnog stanja
+			</div>
+			
+			<div ng-show = "getPrikaziSveRacune()" >
 				<h2>Racuni</h2>
 					
 				<button ng-show = "(racuni.length != 0 || prikaziPretraguRacuni) && hasPrivilege('Racun:IzlistajPretrazi')" ng-click="prikaziPretraguRacuni = true">Pretraga</button>
@@ -73,12 +78,7 @@
 							<td>
 						</tr>
 						
-						<tr>
-							<td>Banka:</td>
-							<td>
-								<select style="width: 100px" ng-options="delatnost.nazivDelatnosti for delatnost in delatnosti" ng-model="delatnostRacunaPretraga"></select></td>
-							<td>
-						</tr>
+					
 						<tr>
 							<td>Valuta:</td>
 							<td>
@@ -105,7 +105,6 @@
 						<td style = "width:130px; heigth: 70px">Broj racuna:</td>
 						<td style = "width:130px; heigth: 70px">Status racuna</td>
 						<td style = "width:190px; heigth: 70px">Klijent</td>
-						<td style = "width:130px; heigth: 70px">Banka</td>
 						<td style = "width:130px; heigth: 70px">Valuta</td>
 
 					</tr>
@@ -120,7 +119,6 @@
 							<div ng-show = "racun.klijent.rola.naziv == 'PravnoLice'">{{racun.klijent.naziv}}</div>
 							<div ng-show = "racun.klijent.rola.naziv == 'FizickoLice'">{{racun.klijent.ime}} {{racun.klijent.prezime}}</div>
 						</td> 
-						<td style = "width:130px; heigth: 70px">{{racun.banka.nazivBanke}}</td>
 						<td style = "width:130px; heigth: 70px">{{racun.valuta.nazivValute}}</td>
 						<td ng-show="hasPrivilege('Racun:Obrisi')"><button ng-click="obrisiRacun(racun.id)">Obrisi</button></td>
 						<td ng-show="hasPrivilege('Racun:Izmeni')"><button ng-click="setRacunZaIzmenu(racun)">Izmeni</button></td>
@@ -131,21 +129,12 @@
 			</div>
 		</div>
 		<div ng-show="isSet(1)">
-
-		
 			<div>
 				<h2>Unesite podatke o racunu:</h2>
 				<table>
 					<tr>
 						<td>Broj racuna:</td>
 						<td><input type=text ng-model="brojRacuna"></td>
-					</tr>
-					<tr>
-						<td>Status racuna:</td>
-						<td>	
-							<input type="radio" ng-model="statusRacuna" value=0> Aktivan
-							<input type="radio" ng-model="statusRacuna" value=1> Zatvoren
-						</td>
 					</tr>
 
 					<tr>
@@ -158,15 +147,6 @@
 						</td>
 					</tr>
 
-					<tr>
-						<td>Banka:</td>
-						<td>
-							<select style="width: 180px" ng-options="banka.nazivBanke for banka in banke" ng-model="bankaRacuna"></select>
-						</td>
-						<td>
-							<button class="btn" ng-click="prikaziBankeBool = true">Prikazi banke</button>
-						</td>
-					</tr>
 
 					<tr>
 						<td>Valute:</td>
@@ -191,37 +171,7 @@
 					<hr>
 					<button ng-click="skloniKlijente()">Skloni</button>
 				</div>
-				
-				<div ng-show = "prikaziBankeBool == true" >
-					<hr>
-					<table>
-						<tr>
-							<td style = "width:120px; heigth: 70px">
-								Naziv
-							</td>
-							<td style = "width:120px; heigth: 70px">
-								Sifra
-							</td>
-							<td style = "width:120px; heigth: 70px">
-								Swift kod
-							</td>
-							<td style = "width:120px; heigth: 70px">
-								Obracunski racun
-							</td>
-						</tr>
-					</table>
-					<table  ng-repeat='banka in banke'>
-						<tr >
-							<td style = "width:120px; heigth: 70px">{{banka.nazivBanke}}</td>
-							<td style = "width:120px; heigth: 70px">{{banka.sifraBanke}}</td>
-							<td style = "width:120px; heigth: 70px">{{banka.swiftKod}}</td>
-							<td style = "width:120px; heigth: 70px">{{banka.obracunskiRacun}}</td>
-							<td><button ng-click="odaberiBanku(banka)">Odaberi</button></td>
-						</tr>
-					</table>
-					<hr>
-					<button ng-click="skloniBanke()">Skloni</button>
-				</div>
+			
 				
 				<div ng-show = "prikaziValuteBool == true" >
 					<hr>
@@ -256,15 +206,6 @@
 						<td>Broj racuna:</td>
 						<td><input type=text ng-model="$ctrl.brojRacunaIzmena"></td>
 					</tr>
-					<tr>
-						<td>Status racuna:</td>
-						<td>
-							<div>
-								<input checked = "$ctrl.statusRacunaIzmena == 0" type="radio" ng-model="$ctrl.statusRacunaIzmena" value=0> Aktivan
-								<input checked = "$ctrl.statusRacunaIzmena == 1" type="radio" ng-model="$ctrl.statusRacunaIzmena" value=1> Zatvoren
-							</div>
-						</td>
-					</tr>
 
 					<tr>
 						<td>Klijenti:</td>
@@ -273,16 +214,6 @@
 						</td>
 						<td>
 							<button class="btn" ng-click="prikaziKlijenteBoolIzmena = true">Prikazi klijente</button>
-						</td>
-					</tr>
-
-					<tr>
-						<td>Banka:</td>
-						<td>
-							<select style="width: 180px" ng-options="banka.nazivBanke for banka in banke" ng-model="$ctrl.bankaRacunaIzmena"></select>
-						</td>
-						<td>
-							<button class="btn" ng-click="prikaziBankeBoolIzmena = true">Prikazi banke</button>
 						</td>
 					</tr>
 
@@ -310,37 +241,7 @@
 					<hr>
 					<button ng-click="skloniKlijenteIzmena()">Skloni</button>
 				</div>
-				
-				<div ng-show = "prikaziBankeBoolIzmena == true" >
-					<hr>
-					<table>
-						<tr>
-							<td style = "width:120px; heigth: 70px">
-								Naziv
-							</td>
-							<td style = "width:120px; heigth: 70px">
-								Sifra
-							</td>
-							<td style = "width:120px; heigth: 70px">
-								Swift kod
-							</td>
-							<td style = "width:120px; heigth: 70px">
-								Obracunski racun
-							</td>
-						</tr>
-					</table>
-					<table  ng-repeat='banka in banke'>
-						<tr >
-							<td style = "width:120px; heigth: 70px">{{banka.nazivBanke}}</td>
-							<td style = "width:120px; heigth: 70px">{{banka.sifraBanke}}</td>
-							<td style = "width:120px; heigth: 70px">{{banka.swiftKod}}</td>
-							<td style = "width:120px; heigth: 70px">{{banka.obracunskiRacun}}</td>
-							<td><button ng-click="odaberiBankuIzmena(banka)">Odaberi</button></td>
-						</tr>
-					</table>
-					<hr>
-					<button ng-click="skloniBankeIzmena()">Skloni</button>
-				</div>
+	
 				
 				<div ng-show = "prikaziValuteBoolIzmena == true" >
 					<hr>

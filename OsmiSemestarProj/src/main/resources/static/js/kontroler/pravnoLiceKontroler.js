@@ -19,8 +19,6 @@ pravnoLiceKontroler
 						$scope.webPravnogLicaPretraga = null;
 						$scope.maticniBrojPravnogLicaPretraga = null;
 						$scope.faxPravnogLicaPretraga = null;
-						$scope.aprPravnogLicaPretraga = null;
-						$scope.opPravnogLicaPretraga = null;
 					}
 
 					$scope.resetujPoljaDodavanjePravnaLica = function() {
@@ -37,8 +35,6 @@ pravnoLiceKontroler
 						$scope.webPravnogLica = null;
 						$scope.maticniBrojPravnogLica = null;
 						$scope.faxPravnogLica = null;
-						$scope.aprPravnogLica = null;
-						$scope.opPravnogLica = null;
 					}
 
 					$scope.resetujPoljaIzmenaPravnaLica = function() {
@@ -52,8 +48,6 @@ pravnoLiceKontroler
 						$scope.webPravnogLicaIzmena = null;
 						$scope.maticniBrojPravnogLicaIzmena = null;
 						$scope.faxPravnogLicaIzmena = null;
-						$scope.aprPravnogLicaIzmena = null;
-						$scope.opPravnogLicaIzmena = null;
 					}
 
 					$scope.privileges = [];
@@ -71,8 +65,8 @@ pravnoLiceKontroler
 							return false;
 					};
 
-					$scope.izlistajPravnaLica = function() {
-						klijentServis.izlistajPravnaLica().success(
+					$scope.izlistajPravnaLicaBanke = function() {
+						klijentServis.izlistajPravnaLicaBanke().success(
 								function(data) {
 									$scope.pravnaLica = data;
 								}).error(function(data) {
@@ -84,7 +78,7 @@ pravnoLiceKontroler
 					$scope.setTab = function(newTab) {
 						if (newTab == 0) {
 							$scope.resetujPoljaPretragaPravnaLica();
-							$scope.izlistajPravnaLica();
+							$scope.izlistajPravnaLicaBanke();
 						}
 
 						if (newTab == 1) {
@@ -125,7 +119,7 @@ pravnoLiceKontroler
 					$scope.obrisiPravnoLice = function(id) {
 						klijentServis.izbrisiPravnoLice(id).success(
 								function(data) {
-									$scope.izlistajPravnaLica();
+									$scope.izlistajPravnaLicaBanke();
 									$location.path('/pravnoLice');
 								}).error(function(data) {
 							alert("Nemoguce obrisati klijenta");
@@ -152,13 +146,11 @@ pravnoLiceKontroler
 							web : $scope.webPravnogLica,
 							maticniBroj : $scope.maticniBrojPravnogLica,
 							fax : $scope.faxPravnogLica,
-							apr : $scope.aprPravnogLica,
-							op : $scope.opPravnogLica,
 							delatnost : $scope.delatnostPravnogLica
 						}
 						klijentServis.dodajPravnoLice(pravnoLice).success(
 								function(data) {
-									$scope.izlistajPravnaLica();
+									$scope.izlistajPravnaLicaBanke();
 									$location.path('/pravnoLice');
 									$scope.resetujPoljaDodavanjePravnaLica();
 									$scope.setTab(0);
@@ -181,13 +173,11 @@ pravnoLiceKontroler
 							web : controller.webPravnogLicaIzmena,
 							maticniBroj : controller.maticniBrojPravnogLicaIzmena,
 							fax : controller.faxPravnogLicaIzmena,
-							apr : controller.aprPravnogLicaIzmena,
-							op : controller.opPravnogLicaIzmena,
 							delatnost : controller.delatnostPravnogLicaIzmena
 						}
 						klijentServis.izmeniPravnoLice(pravnoLice).success(
 								function(data) {
-									$scope.izlistajPravnaLica();
+									$scope.izlistajPravnaLicaBanke();
 									$location.path('/pravnoLice');
 									$scope.idPravnogLicaZaIzmenu = -1;
 									$scope.setTab(0);
@@ -212,8 +202,6 @@ pravnoLiceKontroler
 						controller.webPravnogLicaIzmena = pravnoLice.web;
 						controller.maticniBrojPravnogLicaIzmena = pravnoLice.maticniBroj;
 						controller.faxPravnogLicaIzmena = pravnoLice.fax;
-						controller.aprPravnogLicaIzmena = pravnoLice.apr;
-						controller.opPravnogLicaIzmena = pravnoLice.op;
 						controller.delatnostPravnogLicaIzmena = pravnoLice.delatnost;
 
 						$scope.setTab(2);
@@ -260,12 +248,10 @@ pravnoLiceKontroler
 							email : $scope.emailPravnogLicaPretraga,
 							web : $scope.webPravnogLicaPretraga,
 							maticniBroj : $scope.maticniBrojPravnogLicaPretraga,
-							fax : $scope.faxPravnogLicaPretraga,
-							apr : $scope.aprPravnogLicaPretraga,
-							op : $scope.opPravnogLicaPretraga
+							fax : $scope.faxPravnogLicaPretraga
 						}
 						console.log(pravnoLice);
-						klijentServis.pretragaPravnihLicaDelatnosti(pravnoLice)
+						klijentServis.pretragaPravnihLica(pravnoLice)
 								.success(function(data) {
 									$scope.pravnaLica = data;
 									$scope.idPravnogLicaZaIzmenu = -1;
@@ -275,7 +261,7 @@ pravnoLiceKontroler
 					}
 
 					$scope.ponistiPretraguPravnihLica = function() {
-						$scope.izlistajPravnaLica();
+						$scope.izlistajPravnaLicaBanke();
 					}
 
 					// ZOOM

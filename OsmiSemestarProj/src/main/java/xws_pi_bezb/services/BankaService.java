@@ -10,6 +10,7 @@ import xws_pi_bezb.helpers.Helpers;
 import xws_pi_bezb.irepositories.IBankaRepository;
 import xws_pi_bezb.iservices.IBankaService;
 import xws_pi_bezb.models.Banka;
+import xws_pi_bezb.models.Racun;
 
 @Service
 public class BankaService implements IBankaService {
@@ -43,12 +44,6 @@ public class BankaService implements IBankaService {
 		List<Banka> banke = new ArrayList<Banka>();
 
 		String sifraString = (banka.getSifraBanke() == 0) ? null : Integer.toString(banka.getSifraBanke());
-
-		System.out.println("NAZIV : " + banka.getNazivBanke());
-		System.out.println("SIFRA : " + sifraString);
-		System.out.println("SWIFT : " + banka.getSwiftKod());
-		System.out.println("OBRAC : " + banka.getObracunskiRacun());
-		
 		
 		boolean praznaPretraga = true;
 
@@ -96,5 +91,10 @@ public class BankaService implements IBankaService {
 		}return banke;
 
 }
+
+	@Override
+	public Banka findByRacun(Racun racunDuz) {
+		return bankaRepository.findByRacuni(racunDuz);
+	}
 
 }

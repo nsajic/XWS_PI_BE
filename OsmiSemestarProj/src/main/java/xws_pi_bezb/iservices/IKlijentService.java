@@ -14,28 +14,22 @@ public interface IKlijentService extends UserDetailsService {
 	
 	List<Klijent> findAll();
 	
-	List<PravnoLice> getPravnaLica();
-	
-	List<FizickoLice> getFizickaLica();
-	
-	Klijent findOne(Long id);
-
-	void save(Klijent klijent);
-
-	void delete(Long id);
-
-	List<PravnoLice> getPravnaLicaBySearch(PravnoLice pravnoLice);
-	
-	List<FizickoLice> getFizickaLicaBySearch(FizickoLice fizickoLice);
-
-	Klijent findByEmail(String email);
-
-	List<PravnoLice> findByDelatnost(Long id);
-
-	List<PravnoLice> getPravnaLicaBySearchAndDelatnost(PravnoLice pravnoLice, Delatnost delatnost);
 	
 	UserDetails loadUserByUsername(String username);
 	
 	void logoutKorisnik();
+	
+	
+
+
+	Klijent findByEmail(String email);
+
+	
+
+	//ide i ovo
+	//List<PravnoLice> getPravnaLicaBySearchAndDelatnost(PravnoLice pravnoLice, Delatnost delatnost);
+	
+
+
 	
 }

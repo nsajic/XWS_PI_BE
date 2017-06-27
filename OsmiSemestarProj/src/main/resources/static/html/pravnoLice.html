@@ -33,10 +33,6 @@
 							<td><input type=text ng-model="prezimePravnogLicaPretraga"></td>
 						</tr>
 						<tr>
-							<td>Username:</td>
-							<td><input type=text ng-model="usernamePravnogLicaPretraga"></td>
-						</tr>
-						<tr>
 							<td>Email:</td>
 							<td><input type=text ng-model="emailPravnogLicaPretraga"></td>
 						</tr>
@@ -52,10 +48,9 @@
 							<td>Adresa:</td>
 							<td><input type="text" ng-model="adresaPravnogLicaPretraga"></td>
 						</tr>
-						<!-- KRAJ ZAJEDNICKOG -->
 						<tr>
 							<td>PIB:</td>
-							<td><input type="number" ng-model="pibPravnogLicaPretraga"></td>
+							<td><input type="text" ng-model="pibPravnogLicaPretraga"></td>
 						</tr>
 						<tr>
 							<td>Naziv:</td>
@@ -72,26 +67,6 @@
 						<tr>
 							<td>FAX:</td>
 							<td><input type="text" ng-model="faxPravnogLicaPretraga"></td>
-						</tr>
-						<tr>
-							<td>APR:</td>
-							<td>
-								<form>
-									<input type="radio" ng-model="aprPravnogLicaPretraga" value = "true" />True
-									<input type="radio" ng-model="aprPravnogLicaPretraga" value = "false"/>False
-									<input class = btn type="reset"/>
-								</form>
-							</td>
-						</tr>
-						<tr>
-							<td>OP:</td>
-							<td>
-								<form>
-									<input type="radio" ng-model="opPravnogLicaPretraga" value = "true" />True
-									<input type="radio" ng-model="opPravnogLicaPretraga" value = "false" />False
-									<input type="reset"/>
-								</form>
-							</td>
 						</tr>
 						<tr>
 							<td>Delatnosti:</td>
@@ -157,10 +132,6 @@
 							<td>{{pravnoLiceZaDetalje.prezime}}</td>
 						</tr>
 						<tr>
-							<td>Username:</td>
-							<td>{{pravnoLiceZaDetalje.username}}</td>
-						</tr>
-						<tr>
 							<td>Email:</td>
 							<td>{{pravnoLiceZaDetalje.email}}</td>
 						</tr>
@@ -198,14 +169,6 @@
 							<td>{{pravnoLiceZaDetalje.fax}}</td>
 						</tr>
 						<tr>
-							<td>APR:</td>
-							<td>{{pravnoLiceZaDetalje.apr}}</td>
-						</tr>
-						<tr>
-							<td>OP:</td>
-							<td>{{pravnoLiceZaDetalje.op}}</td>
-						</tr>
-						<tr>
 							<td>Delatnost:</td>
 							<td>{{pravnoLiceZaDetalje.delatnost.nazivDelatnosti}}</td>
 						</tr>
@@ -228,16 +191,8 @@
 						<td><input type=text ng-model="prezimePravnogLica"></td>
 					</tr>
 					<tr>
-						<td>Username:</td>
-						<td><input type=text ng-model="usernamePravnogLica"></td>
-					</tr>
-					<tr>
 						<td>Email:</td>
 						<td><input type=email ng-model="emailPravnogLica"></td>
-					</tr>
-					<tr>
-						<td>Sifra:</td>
-						<td><input type=password ng-model="sifraPravnogLica"></td>
 					</tr>
 					<tr>
 						<td>Broj licne karte vlasnika:</td>
@@ -251,10 +206,9 @@
 						<td>Adresa:</td>
 						<td><input type="text" ng-model="adresaPravnogLica"></td>
 					</tr>
-					<!-- KRAJ ZAJEDNICKOG -->
 					<tr>
 						<td>PIB:</td>
-						<td><input type="number" ng-model="pibPravnogLica"></td>
+						<td><input type="text" ng-model="pibPravnogLica"></td>
 					</tr>
 					<tr>
 						<td>Naziv:</td>
@@ -271,14 +225,6 @@
 					<tr>
 						<td>FAX:</td>
 						<td><input type="text" ng-model="faxPravnogLica"></td>
-					</tr>
-					<tr>
-						<td>APR:</td>
-						<td><input type="checkbox" ng-model="aprPravnogLica"></td>
-					</tr>
-					<tr>
-						<td>OP:</td>
-						<td><input type="checkbox" ng-model="opPravnogLica"></td>
 					</tr>
 					<tr>
 						<td>Delatnosti:</td>
@@ -340,7 +286,7 @@
 					<!-- KRAJ ZAJEDNICKOG -->
 					<tr>
 						<td>PIB:</td>
-						<td><input type="number" ng-model="$ctrl.pibPravnogLicaIzmena"></td>
+						<td><input type="text" ng-model="$ctrl.pibPravnogLicaIzmena"></td>
 					</tr>
 					<tr>
 						<td>Naziv:</td>
@@ -357,14 +303,6 @@
 					<tr>
 						<td>FAX:</td>
 						<td><input type="text" ng-model="$ctrl.faxPravnogLicaIzmena"></td>
-					</tr>
-					<tr>
-						<td>APR:</td>
-						<td><input type="checkbox" ng-model="$ctrl.aprPravnogLicaIzmena"></td>
-					</tr>
-					<tr>
-						<td>OP:</td>
-						<td><input type="checkbox" ng-model="$ctrl.opPravnogLicaIzmena"></td>
 					</tr>
 					<tr>
 						<td>Delatnosti:</td>

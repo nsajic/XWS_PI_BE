@@ -1,5 +1,7 @@
 package xws_pi_bezb.models;
 
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorType;
@@ -8,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
@@ -17,7 +20,7 @@ import org.springframework.stereotype.Component;
 @Entity
 @Table(name = "klijent")
 @Component
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@Inheritance(strategy = InheritanceType.JOINED)
 @DiscriminatorColumn(name="tip_klijenta", discriminatorType=DiscriminatorType.STRING)
 public class Klijent {
 	
@@ -43,6 +46,9 @@ public class Klijent {
 	
 	@Column(name = "adresa", nullable = false)
 	private String adresa;
+	
+	@OneToMany(mappedBy = "klijent")
+	private Set<Racun> racuni;
 
 
 	public Klijent() {}

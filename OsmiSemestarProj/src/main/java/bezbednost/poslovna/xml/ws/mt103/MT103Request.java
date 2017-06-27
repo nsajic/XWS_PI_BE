@@ -11,6 +11,7 @@ package bezbednost.poslovna.xml.ws.mt103;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 import bezbednost.poslovna.xml.ws.nalogzaprenos.TNalog;
 
@@ -38,6 +39,7 @@ import bezbednost.poslovna.xml.ws.nalogzaprenos.TNalog;
  * 
  * 
  */
+@XmlRootElement(name="MT103Request", namespace="http://MT103.ws.xml.poslovna.bezbednost/")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "MT103Request", propOrder = {
     "idPoruke",
@@ -45,7 +47,7 @@ import bezbednost.poslovna.xml.ws.nalogzaprenos.TNalog;
     "bankaPoverioca",
     "nalog",
     "sifraValute"
-})
+}, namespace="http://MT103.ws.xml.poslovna.bezbednost/")
 public class MT103Request {
 
     @XmlElement(name = "IDPoruke", required = true)

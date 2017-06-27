@@ -18,25 +18,21 @@ public class DelatnostService implements IDelatnostService{
 	
 	@Override
 	public List<Delatnost> findAll() {
-		// TODO Auto-generated method stub
 		return delatnostRepository.findAll();
 	}
 
 	@Override
 	public Delatnost findOne(Long id) {
-		// TODO Auto-generated method stub
 		return delatnostRepository.findById(id);
 	}
 
 	@Override
 	public void save(Delatnost delatnost) {
-		// TODO Auto-generated method stub
 		delatnostRepository.save(delatnost);
 	}
 
 	@Override
 	public void delete(Long id) {
-		// TODO Auto-generated method stub
 		delatnostRepository.delete(id);
 	}
 
