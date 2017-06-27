@@ -3,11 +3,12 @@ package xws_pi_bezb.services;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import xws_pi_bezb.irepositories.INalogZaPrenosRepository;
 import xws_pi_bezb.iservices.INalogZaPrenosServices;
 import xws_pi_bezb.models.NalogZaPrenos;
-
+@Service
 public class NalogZaPrenosServices implements INalogZaPrenosServices{
 
 	@Autowired
