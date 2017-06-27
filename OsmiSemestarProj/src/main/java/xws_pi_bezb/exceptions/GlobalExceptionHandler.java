@@ -58,7 +58,6 @@ public class GlobalExceptionHandler {
 	@ResponseStatus(value = HttpStatus.BAD_REQUEST, reason = "Exception occured")
 	@ExceptionHandler(Exception.class)
 	public void handleException(HttpServletRequest req, Exception e) {	
-		e.printStackTrace();
 		logger.error("ERROR: " + req.getRequestURI() + ", MESSAGE: " + e.getMessage());
 	}
 
