@@ -1,0 +1,134 @@
+<div ng-cloak 		ng-controller="medjubankarskiKontroler as $ctrl">
+	<div>
+		<h1>Medjubankarski prenos</h1>
+		<!--<a ng-click="logOut()" href="">Izloguj se</a>-->
+	</div>
+
+	<div>
+		<div id="tabs">
+		
+		</div>
+
+		<div>
+			<div ng-show ="idFizickogLicaZaDetalje == -1" >
+				<h2>Medjubankarski prenos</h2>
+					
+				<button>Pretraga</button>
+				<div ng-show = "prikaziPretraguFizickaLica">
+					<h2>Unesite podatke o klijentu:</h2>
+					<table>
+						<tr>
+							<td>Ime:</td>
+							<td><input type=text ng-model="vrstaPoruke"></td>
+						</tr>
+						<tr>
+							<td>Prezime:</td>
+							<td><input type=text ng-model="datum"></td>
+						</tr>
+						<tr>
+							<td>Email:</td>
+							<td><input type=text ng-model="iznos"></td>
+						</tr>
+						<tr>
+							<td>Broj licne karte:</td>
+							<td><input type=number ng-model="swiftKodBankeDuznika"></td>
+						</tr>
+						<tr>
+							<td>Telefon:</td>
+							<td><input type="text" ng-model="obracunskiPeriodBankeDuznika"></td>
+						</tr>
+						<tr>
+							<td>Adresa:</td>
+							<td><input type="text" ng-model="swiftKodBankePoverioca"></td>
+						</tr>
+						<tr>
+							<td>JMBG:</td>
+							<td><input type="text" ng-model="obracunskiPeriodBankePoverioca"></td>
+						</tr>
+						<tr>
+							<td>Ime roditelja:</td>
+							<td><input type="text" ng-model="datumValute"></td>
+						</tr>					
+						<tr>
+							<td>
+							<td>
+							<td>
+								<button ng-click="pretragaFizickihLicaPoPoljima()">Pretrazi</button>
+								
+							</td>
+							<td>
+								<button ng-click="prikaziPretraguFizickaLica = false; ponistiPretraguFizickihLica()">Iskljuci</button>
+							</td>
+						</tr>
+					</table>
+				</div>
+						
+				<table>
+					<tr>
+						<td style = "width:130px; heigth: 70px">Ime</td>
+						<td style = "width:130px; heigth: 70px">Prezime</td>
+						<td style = "width:130px; heigth: 70px">Telefon</td>
+						<td style = "width:130px; heigth: 70px">Adresa</td>
+					</tr>
+					<tr  ng-repeat='fizickoLice in fizickaLica'>
+						<td style = "width:130px; heigth: 70px">{{fizickoLice.ime}}</td>
+						<td style = "width:130px; heigth: 70px">{{fizickoLice.prezime}}</td>
+						<td style = "width:130px; heigth: 70px">{{fizickoLice.telefon}}</td>
+						<td style = "width:130px; heigth: 70px">{{fizickoLice.adresa}}</td>
+						<td><button ng-click="obrisiFizickoLice(fizickoLice.id)" ng-show="hasPrivilege('Klijent:ObrisiPravnoFizicko')">Obrisi</button></td>
+						<td><button ng-click="setFizickoLiceZaIzmenu(fizickoLice)" ng-show="hasPrivilege('Klijent:IzmeniPravnoFizicko')">Izmeni</button></td>
+						<td><button ng-click="setFizickoLiceZaDetalje(fizickoLice)" ng-show="hasPrivilege('Klijent:IzlistajPretraziPravnoFizicko')">Detalji</button></td>
+						<!-- <td><button ng-click="setFizickoLiceZaNext(fizickoLice)">Next</button></td> -->
+					</tr>
+	
+					<tr ng-show = 'idFizickogLicaZaNext == fizickoLice.id'>
+						<td>
+							TODO 1: Implementirati
+						<td>
+					</tr>
+				</table>
+			</div>
+			<div ng-show = "idFizickogLicaZaDetalje != -1">
+				<table>
+						<tr>
+							<td>Ime:</td>
+							<td>{{fizickoLiceZaDetalje.ime}}</td>
+						</tr>
+						<tr>
+							<td>Prezime:</td>
+							<td>{{fizickoLiceZaDetalje.prezime}}</td>
+						</tr>
+						<tr>
+							<td>Email:</td>
+							<td>{{fizickoLiceZaDetalje.email}}</td>
+						</tr>
+						<tr>
+							<td>Broj licne karte:</td>
+							<td>{{fizickoLiceZaDetalje.brojLicneKarte}}</td>
+						</tr>
+						<tr>
+							<td>Telefon:</td>
+							<td>{{fizickoLiceZaDetalje.telefon}}</td>
+						</tr>
+						<tr>
+							<td>Adresa:</td>
+							<td>{{fizickoLiceZaDetalje.adresa}}</td>
+						</tr>
+						<tr>
+							<td>JMBG:</td>
+							<td>{{fizickoLiceZaDetalje.jmbg}}</td>
+						</tr>
+						<tr>
+							<td>Ime roditelja:</td>
+							<td>{{fizickoLiceZaDetalje.imeRoditelja}}</td>
+						</tr>						
+					</table>
+			
+			 	<button ng-click = "idFizickogLicaZaDetalje = -1; fizickoLiceZaDetalje = null;">Nazad</button>
+			</div>
+		</div>
+		
+		
+		
+	</div>
+</div>

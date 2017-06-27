@@ -28,6 +28,8 @@ app.config(function($routeProvider, $locationProvider) {
     })
     .when("/promenaLozinke", {
         templateUrl : "html/promenaLozinke.html"
+    }).when("/medjubankarski", {
+        templateUrl : "html/medjubankarski.html"
     });
 
     $locationProvider.html5Mode(true);

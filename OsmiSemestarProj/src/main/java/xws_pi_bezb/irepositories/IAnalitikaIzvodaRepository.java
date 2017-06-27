@@ -16,6 +16,8 @@ public interface IAnalitikaIzvodaRepository extends JpaRepository<AnalitikaIzvod
 	AnalitikaIzvoda findById(Long id);
 
 	List<AnalitikaIzvoda> findByDnevnoStanjeRacuna(DnevnoStanjeRacuna dnevnoStanjeRacuna);
+
+	List<AnalitikaIzvoda> findBySmer(String string);
 	
 	
 }

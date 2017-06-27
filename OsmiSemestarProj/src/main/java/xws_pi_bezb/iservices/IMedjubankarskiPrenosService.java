@@ -1,5 +1,7 @@
 package xws_pi_bezb.iservices;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import xws_pi_bezb.models.MedjubankarskiPrenos;
@@ -7,5 +9,5 @@ import xws_pi_bezb.models.MedjubankarskiPrenos;
 public interface IMedjubankarskiPrenosService {
 
 	void save(MedjubankarskiPrenos medjubankarskiPrenos);
-	
+	List<MedjubankarskiPrenos> getAll();
 }
