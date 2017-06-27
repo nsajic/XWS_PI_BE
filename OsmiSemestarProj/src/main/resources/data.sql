@@ -1,12 +1,9 @@
 insert into banka (naziv_banke, sifra_banke, swift_kod, obracunski_racun) values ('Banka1', 111, '111', '111');
 insert into banka (naziv_banke, sifra_banke, swift_kod, obracunski_racun) values ('Banka2', 222, '222', '222');
 
-
 insert into rola (naziv) values ('aaaa');
 insert into rola (naziv) values ('bbbb');
 insert into rola (naziv) values ('BankarskiSluzbenik');
-
-
 
 insert into privilegija (naziv) values ('Banka:View');	--1
 insert into privilegija (naziv) values ('Banka:Dodaj');  --2
