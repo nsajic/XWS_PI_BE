@@ -11,7 +11,7 @@ import bezbednost.poslovna.xml.ws.mt103.MT103Response;
 //OVO CE SE RADITI - POVEZIVATI IZ KONTROLERA!
 public class BankaKlijentSamoTest extends WebServiceGatewaySupport {
 
-	// poziva se iz kontrolera - for petlja...
+	// TODO:A poziva se iz kontrolera - for petlja...
 	public void posaljiMT102(MT102Request request) {
 		Jaxb2Marshaller marshaller = new Jaxb2Marshaller();
 		marshaller.setClassesToBeBound(MT102Request.class, MT102Response.class);
