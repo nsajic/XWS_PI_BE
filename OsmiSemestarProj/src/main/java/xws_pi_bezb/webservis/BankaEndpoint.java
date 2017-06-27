@@ -130,12 +130,12 @@ public class BankaEndpoint {
 			DnevnoStanjeRacuna poslednjeDnevnoStanje = dnevnoStanjeRacunaService.findTopByRacunOrderByDatum(racunDuz);
 
 			if (poslednjeDnevnoStanje == null) {
-				response.setOdgovor("Na racunu 0...!");
+				response.setOdgovor("Na racunu 0 - duznik!");
 				return response;
 			}
 
-			// provera da li ima sredstava
-			if (poslednjeDnevnoStanje.getNovoStanje() >= request.getNalog().getIznos().doubleValue()) {
+			// provera da li ima dovoljno sredstava
+			if ((poslednjeDnevnoStanje.getNovoStanje() - racunDuz.getRezervisano()) >= request.getNalog().getIznos().doubleValue()) {
 			
 				// provera da li su racuni iz iste banke
 				if(racunDuz.getBanka().getId().equals(racunPov.getBanka().getId())){
@@ -210,6 +210,8 @@ public class BankaEndpoint {
 
 				}else{	
 					
+					// OVO RADIMO KADA STIGNE ODGOVOR CB
+					/* 
 					// pravimo analitiku za racun u nasoj
 					int godina = Calendar.getInstance().get(Calendar.YEAR);
 					int mesec = Calendar.getInstance().get(Calendar.MONTH) + 1;
@@ -254,11 +256,15 @@ public class BankaEndpoint {
 					
 					analitikaIzvoda.setDnevnoStanjeRacuna(dnevnoStanjeRacunaDuznika);
 					analitikaIzvodaService.save(analitikaIzvoda);
-					
+					*/
 
 					// provera da li je preko 250000 ili hitno
 					
 					if(request.getNalog().getIznos().doubleValue() >= 250000 || request.isHitno()){
+						// rezervisemo sredstva
+						racunDuz.setRezervisano(request.getNalog().getIznos().doubleValue());
+						racunService.save(racunDuz);
+						
 						// mt103 - rtgs...
 						MT103Request mt103Request = new MT103Request();
 						
@@ -283,7 +289,7 @@ public class BankaEndpoint {
 						nalog.setDatumNaloga(request.getNalog().getDatumNaloga());
 						nalog.setDatumValute(request.getNalog().getDatumValute());
 						
-						mt103Request.setIDPoruke("MT 102");
+						mt103Request.setIDPoruke("MT103");
 						mt103Request.setBankaDuznika(swiftDuznik);
 						mt103Request.setBankaPoverioca(swiftPoverilac);
 						mt103Request.setNalog(nalog);
@@ -478,6 +484,58 @@ public class BankaEndpoint {
 	@ResponsePayload
 	public MT900Response mt900(@RequestPayload MT900Request request) {
 		MT900Response response = new MT900Response();
+		/*
+		Object obj = .
+		
+			
+		
+		// pravimo analitiku za racun u nasoj
+		int godina = Calendar.getInstance().get(Calendar.YEAR);
+		int mesec = Calendar.getInstance().get(Calendar.MONTH) + 1;
+		int dan = Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
+		Date danasnjiDatum = java.sql.Date.valueOf(LocalDate.of(godina, mesec, dan));
+		
+		AnalitikaIzvoda analitikaIzvoda = new AnalitikaIzvoda();
+		analitikaIzvoda.setDatumAnalitike(danasnjiDatum);
+		analitikaIzvoda.setSmer("P");
+		analitikaIzvoda.setDuznikNalogodavac(request.getNalog().getDuznik());
+		analitikaIzvoda.setSvrhaPlacanja(request.getNalog().getSvrhaPlacanja());
+		analitikaIzvoda.setPrimalacPoverilac(request.getNalog().getPrimalac());
+		analitikaIzvoda.setDatumNaloga(request.getNalog().getDatumNaloga().toGregorianCalendar().getTime());
+		analitikaIzvoda.setDatumValute(request.getNalog().getDatumValute().toGregorianCalendar().getTime());
+		analitikaIzvoda.setRacunDuznika(brojRacunaDuznik);
+		analitikaIzvoda.setModelZaduzenja(racunDuznik.getModel());
+		analitikaIzvoda.setPozivNaBrojZaduzenja(racunDuznik.getPozivNaBroj());
+		analitikaIzvoda.setRacunPoverioca(brojRacunaPoverilac);
+		analitikaIzvoda.setModelOdobrenja(racunPoverilac.getModel());
+		analitikaIzvoda.setPozivNaBrojOdobrenja(racunPoverilac.getPozivNaBroj());
+		analitikaIzvoda.setIznos(request.getNalog().getIznos().doubleValue());
+		analitikaIzvoda.setValuta(valutaService.findBySifraValute(request.getOznakaValute()));
+
+		// menjamo dnevno stanje za racun u nasoj
+		
+		DnevnoStanjeRacuna dnevnoStanjeRacunaDuznika = dnevnoStanjeRacunaService.findByRacunAndDatum(racunDuz, danasnjiDatum);
+		if (dnevnoStanjeRacunaDuznika == null) {
+			dnevnoStanjeRacunaDuznika = new DnevnoStanjeRacuna();
+			dnevnoStanjeRacunaDuznika.setDatum(danasnjiDatum);
+			dnevnoStanjeRacunaDuznika.setRacun(racunDuz);
+			dnevnoStanjeRacunaDuznika.setPrometNaTeret(request.getNalog().getIznos().doubleValue());
+			dnevnoStanjeRacunaDuznika.setPrometUKorist(0);
+			dnevnoStanjeRacunaDuznika.setPrethodnoStanje(poslednjeDnevnoStanje.getNovoStanje());
+			dnevnoStanjeRacunaDuznika.setNovoStanje(dnevnoStanjeRacunaDuznika.getPrethodnoStanje() - dnevnoStanjeRacunaDuznika.getPrometNaTeret());
+		} else {
+			dnevnoStanjeRacunaDuznika.setPrometNaTeret(dnevnoStanjeRacunaDuznika.getPrometNaTeret() + request.getNalog().getIznos().doubleValue());
+			// dnevnoStanjeRacuna.setPrethodnoStanje(dnevnoStanjeRacuna.getNovoStanje());
+			dnevnoStanjeRacunaDuznika.setNovoStanje(dnevnoStanjeRacunaDuznika.getPrethodnoStanje() + dnevnoStanjeRacunaDuznika.getPrometUKorist() - dnevnoStanjeRacunaDuznika.getPrometNaTeret());
+		}
+		
+		dnevnoStanjeRacunaService.save(dnevnoStanjeRacunaDuznika);
+		
+		analitikaIzvoda.setDnevnoStanjeRacuna(dnevnoStanjeRacunaDuznika);
+		analitikaIzvodaService.save(analitikaIzvoda);
+		
+		*/
+		
 		response.setOdgovor("MT900 - odgovor");
 		return response;
 	}

@@ -23,6 +23,9 @@ public class Racun {
 
 	@Column(name = "status_racuna", nullable = false)
 	private int statusRacuna;
+	
+	@Column(name = "rezervisano")
+	private double rezervisano;
 
 	@ManyToOne
 	private Klijent klijent;
@@ -94,6 +97,14 @@ public class Racun {
 
 	public void setKlijent(Klijent klijent) {
 		this.klijent = klijent;
+	}
+	
+	public double getRezervisano() {
+		return rezervisano;
+	}
+	
+	public void setRezervisano(double rezervisano) {
+		this.rezervisano = rezervisano;
 	}
 	/*
 	 * public FizickoLice getFizickoLice() { return fizickoLice; }
