@@ -30,7 +30,7 @@ public class ZatvaranjeRacuna implements Serializable{
 	
 	@ManyToOne
 	private AnalitikaIzvoda analitikaIzvoda;
-<<<<<<< HEAD
+
 	
 	public ZatvaranjeRacuna (){}
 	
@@ -64,6 +64,5 @@ public class ZatvaranjeRacuna implements Serializable{
 	public void setRacun(Racun racun) {
 		this.racun = racun;
 	}
-=======
->>>>>>> 6a2049b2460a21eacd29281815512b2e88cf75b8
+
 }
