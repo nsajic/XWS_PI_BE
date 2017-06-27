@@ -15,7 +15,6 @@ public interface IPojedinacnoPlacanje extends JpaRepository<PojedinacnoPlacanje,
 
 	List<PojedinacnoPlacanje> findAll();
 	PojedinacnoPlacanje findById(Long id);
-	
-	
+	PojedinacnoPlacanje save(PojedinacnoPlacanje pp);
 	
 }

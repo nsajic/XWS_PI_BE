@@ -6,12 +6,12 @@ import xws_pi_bezb.models.PojedinacnoPlacanje;
 
 public interface IPojedinacnoPlacanjeService {
 
-	
-	
-	void save(PojedinacnoPlacanje pp);
+	PojedinacnoPlacanje save(PojedinacnoPlacanje pp);
+
 	void delete(PojedinacnoPlacanje pp);
-	
+
 	List<PojedinacnoPlacanje> findAll();
+
 	PojedinacnoPlacanje findOne(Long id);
-	
+
 }

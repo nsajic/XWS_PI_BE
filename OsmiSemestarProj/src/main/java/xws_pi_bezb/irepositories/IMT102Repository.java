@@ -15,6 +15,8 @@ public interface IMT102Repository extends JpaRepository<MT102, Long>{
 
 	List<MT102> findAll();
 	MT102 findById(Long id);
+	MT102 findByIdPoruke(String idPorukeNaloga);
+	MT102 findBySwiftDuznikAndSwiftPoverilacAndPoslat(String swiftKod, String swiftKod2, boolean poslat);
 	
 	
 	

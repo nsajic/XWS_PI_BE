@@ -102,10 +102,7 @@ public class Racun {
 	public double getRezervisano() {
 		return rezervisano;
 	}
-	
-	public void setRezervisano(double rezervisano) {
-		this.rezervisano = rezervisano;
-	}
+
 	/*
 	 * public FizickoLice getFizickoLice() { return fizickoLice; }
 	 * 
@@ -117,4 +114,9 @@ public class Racun {
 	 * public void setPravnoLice(PravnoLice pravnoLice) { this.pravnoLice =
 	 * pravnoLice; }
 	 */
+
+	public void setRezervisano(double doubleValue) {
+		
+		this.rezervisano = rezervisano;
+	}
 }
