@@ -11,66 +11,61 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlElement;
 
-import bezbednost.poslovna.xml.ws.mt102.MT102Request;
-
 @Entity
 @Table(name = "pojedinacno_placanje")
 public class PojedinacnoPlacanje {
-	
+
 	@Id
 	@GeneratedValue
 	private Long id;
-	
-	 @Column(name = "idNalogaZaPlacanje", nullable = false)
-	 protected String idNalogaZaPlacanje;
-	 
-	
+
+	@Column(name = "idNalogaZaPlacanje", nullable = false)
+	protected String idNalogaZaPlacanje;
 
 	@Column(name = "duznik", nullable = false)
-	 protected String duznik;
-	 
-	 @Column(name = "svrhaPlacanja", nullable = false)
-	 protected String svrhaPlacanja;
-	 
-	 @Column(name = "primalac", nullable = false)
-	 protected String primalac;
-	 
-	 @Column(name = "idPoruke", nullable = false)
-	 protected Date datumNaloga;
-	 
-	 
-	 @Column(name = "racunDruznik", nullable = false)
-	 protected String racunDruznik;
-	 
-	 @XmlElement(name = "modelDuznik")
-	 protected int modelDuznik;
-	 
-	 @XmlElement(name = "PozivNaBrojDuznik", required = true)
-	 protected String PozivNaBrojDuznik;
-	 
-	 @Column(name = "racunPoverilac", nullable = false)
-	 protected String racunPoverilac;
-	 
-	 @Column(name = "modelPoverilac", nullable = false)
-	 protected int modelPoverilac;
-	 
-	 @Column(name = "PozivNaBrojPoverilac", nullable = false)
-	 protected String PozivNaBrojPoverilac;
+	protected String duznik;
 
-		@Column(name = "iznos", nullable = false)
-		 protected BigDecimal iznos;
-		 
-		 @Column(name = "sifraValute", nullable = false)
-		 protected String sifraValute;
-	 
-	  @ManyToOne
-	  public MT102 mt102;
-	 
-	 public PojedinacnoPlacanje() {
-			super();
-		}
-	 
-	 public Long getId() {
+	@Column(name = "svrhaPlacanja", nullable = false)
+	protected String svrhaPlacanja;
+
+	@Column(name = "primalac", nullable = false)
+	protected String primalac;
+
+	@Column(name = "idPoruke", nullable = false)
+	protected Date datumNaloga;
+
+	@Column(name = "racunDruznik", nullable = false)
+	protected String racunDruznik;
+
+	@XmlElement(name = "modelDuznik")
+	protected int modelDuznik;
+
+	@XmlElement(name = "PozivNaBrojDuznik", required = true)
+	protected String PozivNaBrojDuznik;
+
+	@Column(name = "racunPoverilac", nullable = false)
+	protected String racunPoverilac;
+
+	@Column(name = "modelPoverilac", nullable = false)
+	protected int modelPoverilac;
+
+	@Column(name = "PozivNaBrojPoverilac", nullable = false)
+	protected String PozivNaBrojPoverilac;
+
+	@Column(name = "iznos", nullable = false)
+	protected BigDecimal iznos;
+
+	@Column(name = "sifraValute", nullable = false)
+	protected String sifraValute;
+
+	@ManyToOne
+	public MT102 mt102;
+
+	public PojedinacnoPlacanje() {
+		super();
+	}
+
+	public Long getId() {
 		return id;
 	}
 
@@ -181,9 +176,5 @@ public class PojedinacnoPlacanje {
 	public void setSifraValute(String sifraValute) {
 		this.sifraValute = sifraValute;
 	}
-
-
-	 
-
 
 }

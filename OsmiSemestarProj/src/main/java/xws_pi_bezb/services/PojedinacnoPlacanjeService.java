@@ -18,9 +18,8 @@ public class PojedinacnoPlacanjeService implements IPojedinacnoPlacanjeService{
 	
 	
 	@Override
-	public void save(PojedinacnoPlacanje pp) {
-		repo.save(pp);
-		
+	public PojedinacnoPlacanje save(PojedinacnoPlacanje pp) {
+		return repo.save(pp);
 	}
 
 	@Override
