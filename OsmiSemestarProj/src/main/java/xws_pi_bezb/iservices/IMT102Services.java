@@ -18,4 +18,6 @@ public interface IMT102Services {
 
 	MT102 findBySwiftDuznikAndSwiftPoverilacAndPoslat(String swiftKod, String swiftKod2, boolean poslat);
 
+	List<MT102> findBySwiftDuznikOrSwiftPoverilacAndPoslat(String swiftKod, String swiftKod2, boolean b);
+
 }

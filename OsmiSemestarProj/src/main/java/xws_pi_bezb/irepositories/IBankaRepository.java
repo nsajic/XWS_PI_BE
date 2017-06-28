@@ -14,4 +14,6 @@ public interface IBankaRepository extends JpaRepository<Banka, Long>{
 	Banka findById(Long id);
 
 	Banka findByRacuni(Racun racuni);
+
+	Banka findBySwiftKod(String swift);
 }

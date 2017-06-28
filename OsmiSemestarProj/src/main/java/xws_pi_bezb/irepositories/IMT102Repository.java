@@ -7,17 +7,19 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import xws_pi_bezb.models.MT102;
-import xws_pi_bezb.models.PojedinacnoPlacanje;
 
 @Repository
 @Transactional
-public interface IMT102Repository extends JpaRepository<MT102, Long>{
+public interface IMT102Repository extends JpaRepository<MT102, Long> {
 
 	List<MT102> findAll();
+
 	MT102 findById(Long id);
+
 	MT102 findByIdPoruke(String idPorukeNaloga);
+
 	MT102 findBySwiftDuznikAndSwiftPoverilacAndPoslat(String swiftKod, String swiftKod2, boolean poslat);
-	
-	
-	
+
+	List<MT102> findBySwiftDuznikOrSwiftPoverilacAndPoslat(String swiftKod, String swiftKod2, boolean b);
+
 }

@@ -103,20 +103,7 @@ public class Racun {
 		return rezervisano;
 	}
 
-	/*
-	 * public FizickoLice getFizickoLice() { return fizickoLice; }
-	 * 
-	 * public void setFizickoLice(FizickoLice fizickoLice) { this.fizickoLice =
-	 * fizickoLice; }
-	 * 
-	 * public PravnoLice getPravnoLice() { return pravnoLice; }
-	 * 
-	 * public void setPravnoLice(PravnoLice pravnoLice) { this.pravnoLice =
-	 * pravnoLice; }
-	 */
-
-	public void setRezervisano(double doubleValue) {
-		
+	public void setRezervisano(double rezervisano) {
 		this.rezervisano = rezervisano;
 	}
 }

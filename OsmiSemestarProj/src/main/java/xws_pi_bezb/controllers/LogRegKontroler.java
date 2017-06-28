@@ -1,8 +1,11 @@
 package xws_pi_bezb.controllers;
 
-import java.util.concurrent.TimeUnit;
+import java.util.GregorianCalendar;
 
 import javax.servlet.http.HttpSession;
+import javax.xml.datatype.DatatypeConfigurationException;
+import javax.xml.datatype.DatatypeFactory;
+import javax.xml.datatype.XMLGregorianCalendar;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,10 +20,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import bezbednost.poslovna.xml.ws.mt102.MT102Request;
+import bezbednost.poslovna.xml.ws.mt102.TPojedinacnoPlacanje;
+import bezbednost.poslovna.xml.ws.mt103.TSWIFTIRacun;
+import xws_pi_bezb.BankaKlijentSamoTest;
 import xws_pi_bezb.helpers.Poruka;
 import xws_pi_bezb.iservices.IBankaService;
 import xws_pi_bezb.iservices.IBankarskiSluzbenikService;
+import xws_pi_bezb.iservices.IMT102Services;
 import xws_pi_bezb.models.Banka;
+import xws_pi_bezb.models.MT102;
 import xws_pi_bezb.models.korisnici.BankarskiSluzbenik;
 import xws_pi_bezb.password_security.Password;
 import xws_pi_bezb.password_security.PasswordValidator;
@@ -36,6 +45,9 @@ public class LogRegKontroler {
 
 	@Autowired
 	private IBankaService bankaService;
+	
+	@Autowired
+	private IMT102Services mt102Services;
 
 	/*
 	 * @Autowired private PasswordEncoder passwordEncoder;
@@ -156,10 +168,95 @@ public class LogRegKontroler {
 		BankarskiSluzbenik kor = (BankarskiSluzbenik) session.getAttribute("ulogovanKorisnik");
 		Banka banka = bankaService.findOne(kor.getBanka().getId());
 		
+		BankaKlijentSamoTest klijent = new BankaKlijentSamoTest();
 		
-		//TODO Coa kliring
+		for(MT102 mt102 : mt102Services.findBySwiftDuznikOrSwiftPoverilacAndPoslat(banka.getSwiftKod(), banka.getSwiftKod(), false)){
+			MT102Request mt102Request = konvertujMT102(mt102);
+			
+			klijent.posaljiMT102(mt102Request);
+			
+			mt102.setPoslat(true);
+			mt102Services.save(mt102);
+		}
 		
 		return new ResponseEntity<Poruka>(HttpStatus.ACCEPTED);
+	}
+	
+	private MT102Request konvertujMT102(MT102 mt102) {
+
+		MT102Request req = new MT102Request();
+
+		req.setIDPoruke(mt102.getIdPoruke());
+		TSWIFTIRacun sw = new TSWIFTIRacun();
+		sw.setSWIFT(mt102.getSwiftDuznik());
+		sw.setObracunskiRacun(mt102.getObracunskiRacunDuznik());
+		req.setBankaDuznika(sw);
+
+		sw.setSWIFT(mt102.getSwiftPoverilac());
+		sw.setObracunskiRacun(mt102.getObracunskiRacunPoverilac());
+		req.setBankaPoverioca(sw);
+		
+		req.setUkupanIznos(mt102.getUkupanIznos());
+		req.setSifraValute(mt102.getSifraValute());
+
+		GregorianCalendar gcal = (GregorianCalendar) GregorianCalendar.getInstance();
+		gcal.setTime(mt102.getDatumValute());
+
+		XMLGregorianCalendar xgcal;
+		try {
+			xgcal = DatatypeFactory.newInstance().newXMLGregorianCalendar(gcal);
+			req.setDatumValute(xgcal);
+		} catch (DatatypeConfigurationException e) {
+			e.printStackTrace();
+		}
+
+		gcal = (GregorianCalendar) GregorianCalendar.getInstance();
+		gcal.setTime(mt102.getDatum());
+
+		try {
+			xgcal = DatatypeFactory.newInstance().newXMLGregorianCalendar(gcal);
+			req.setDatum(xgcal);
+		} catch (DatatypeConfigurationException e) {
+			e.printStackTrace();
+		}
+
+		for (int i = 0; i < mt102.getPojedinacnoPlacanje().size(); i++) {
+			TPojedinacnoPlacanje pojed = new TPojedinacnoPlacanje();
+			req.getPojedinacnoPlacanje().get(i)
+					.setIDNalogaZaPlacanje(mt102.getPojedinacnoPlacanje().get(i).getIdNalogaZaPlacanje());
+
+			req.getPojedinacnoPlacanje().get(i).setDuznik(mt102.getPojedinacnoPlacanje().get(i).getDuznik());
+
+			req.getPojedinacnoPlacanje().get(i)
+					.setSvrhaPlacanja(mt102.getPojedinacnoPlacanje().get(i).getSvrhaPlacanja());
+
+			gcal = (GregorianCalendar) GregorianCalendar.getInstance();
+			gcal.setTime(mt102.getPojedinacnoPlacanje().get(i).getDatumNaloga());
+
+			try {
+				xgcal = DatatypeFactory.newInstance().newXMLGregorianCalendar(gcal);
+				req.getPojedinacnoPlacanje().get(i).setDatumNaloga(xgcal);
+			} catch (DatatypeConfigurationException e) {
+				e.printStackTrace();
+			}
+
+			req.getPojedinacnoPlacanje().get(i).getDuznikRacun()
+					.setPozivNaBroj(mt102.getPojedinacnoPlacanje().get(i).getPozivNaBrojDuznik());
+			req.getPojedinacnoPlacanje().get(i).getDuznikRacun()
+					.setModel(mt102.getPojedinacnoPlacanje().get(i).getModelDuznik());
+			req.getPojedinacnoPlacanje().get(i).getDuznikRacun()
+					.setRacun(mt102.getPojedinacnoPlacanje().get(i).getRacunDruznik());
+
+			req.getPojedinacnoPlacanje().get(i).getPoverilacRacun()
+					.setPozivNaBroj(mt102.getPojedinacnoPlacanje().get(i).getPozivNaBrojPoverilac());
+			req.getPojedinacnoPlacanje().get(i).getPoverilacRacun()
+					.setModel(mt102.getPojedinacnoPlacanje().get(i).getModelDuznik());
+			req.getPojedinacnoPlacanje().get(i).getPoverilacRacun()
+					.setRacun(mt102.getPojedinacnoPlacanje().get(i).getRacunPoverilac());
+
+		}
+
+		return req;
 	}
 	
 }

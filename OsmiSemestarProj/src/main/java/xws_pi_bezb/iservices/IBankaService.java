@@ -21,5 +21,7 @@ public interface IBankaService {
 
 	Banka findByRacun(Racun racunDuz);
 
+	Banka findBySwiftKod(String swift);
+
 	
 }
