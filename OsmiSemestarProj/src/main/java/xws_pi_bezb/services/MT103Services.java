@@ -41,8 +41,7 @@ public class MT103Services implements IMT103Services {
 
 	@Override
 	public MT103 findByIdPoruke(String idPorukeNaloga) {
-		// TODO Auto-generated method stub
-		return null;
+		return repo.findByIdPoruke(idPorukeNaloga);
 	}
 
 }

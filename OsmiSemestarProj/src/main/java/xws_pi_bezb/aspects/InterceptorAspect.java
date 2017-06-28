@@ -29,7 +29,6 @@ public class InterceptorAspect{
 		ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
 		BankarskiSluzbenik korisnik = (BankarskiSluzbenik) attr.getRequest().getSession().getAttribute("ulogovanKorisnik");
 
-		// TODO: Ko je radio ovo, kad zakomentarisujem role, jer mi ne trebaju nzm sta u ifu da stavim i ima li svrhe ova klasa
 		if(!privilegijaService.getByRole(korisnik.getRola()).contains(privilegijaService.getByNaziv(interceptorAnnotation.value()))){
 			response.sendError(401, "Unauthorized request");
 			//throw new Throwable();			

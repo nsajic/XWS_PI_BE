@@ -24,7 +24,6 @@ public class DnevnoStanjeRacuna implements Serializable {
 	@GeneratedValue
 	private Long id;
 	
-	//TODO: Da kombinacija datuma(danasnjeg dana) i racuna bude unique
 	@Column(name = "datum", nullable = false)
 	private Date datum;
 

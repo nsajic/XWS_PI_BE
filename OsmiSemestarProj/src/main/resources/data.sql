@@ -107,33 +107,29 @@ insert into racun (broj_racuna, status_racuna, banka_id, klijent_id, valuta_id, 
 
 	
 
-insert into analitika_izvoda (datum_analitike, datum_naloga, datum_valute, duznik_nalogodavac, iznos, model_odobrenja, model_zaduzenja, poziv_na_broj_odobrenja, poziv_na_broj_zaduzenja, primalac_poverilac, racun_duznika, racun_poverioca, smer, svrha_placanja, dnevno_stanje_racuna_id, valuta_id)
-	values ('2017-04-15', '2017-04-15', '2017-04-15', 'Pera Peric', 3000, 97, 98,'111-2223334445556-78', '78945655-45767', 'Sima Simic', '435-34543324-453', '321-4423254-324', 'izv', 'Kupljene stolice', 1, 1);
-	
-insert into analitika_izvoda (datum_analitike, datum_naloga, datum_valute, duznik_nalogodavac, iznos, model_odobrenja, model_zaduzenja, poziv_na_broj_odobrenja, poziv_na_broj_zaduzenja, primalac_poverilac, racun_duznika, racun_poverioca, smer, svrha_placanja, dnevno_stanje_racuna_id, valuta_id)
-	values ('2017-04-15', '2017-04-15', '2017-04-15', 'Pera Peric', 5000, 97, 98,'876-7467768826', '111-2223334445556-78', 'Djura Djuric', '65-76876-453', '321-4423254-324', 'izv', 'Kupljene papuce', 1, 1);
-	
-insert into analitika_izvoda (datum_analitike, datum_naloga, datum_valute, duznik_nalogodavac, iznos, model_odobrenja, model_zaduzenja, poziv_na_broj_odobrenja, poziv_na_broj_zaduzenja, primalac_poverilac, racun_duznika, racun_poverioca, smer, svrha_placanja, dnevno_stanje_racuna_id, valuta_id)
-	values ('2017-04-15', '2017-04-15', '2017-04-15', 'Pera Peric', 7000, 97, 98,'111-2223334445556-78', '78948655-464577', 'Sara Saric', '435-567-453', '321-4423254-324', 'izv', 'Kupljene majice', 1, 1);
-	
-insert into analitika_izvoda (datum_analitike, datum_naloga, datum_valute, duznik_nalogodavac, iznos, model_odobrenja, model_zaduzenja, poziv_na_broj_odobrenja, poziv_na_broj_zaduzenja, primalac_poverilac, racun_duznika, racun_poverioca, smer, svrha_placanja, dnevno_stanje_racuna_id, valuta_id)
-	values ('2017-04-15', '2017-04-15', '2017-04-15', 'Pera Peric', 8000, 97, 98,'111-2223334445556-78', '78689655-448577', 'Siki Sikic', '435-577857-453', '321-4423254-324', 'izv', 'Kupljene kape', 1, 1);
-	
-insert into analitika_izvoda (datum_analitike, datum_naloga, datum_valute, duznik_nalogodavac, iznos, model_odobrenja, model_zaduzenja, poziv_na_broj_odobrenja, poziv_na_broj_zaduzenja, primalac_poverilac, racun_duznika, racun_poverioca, smer, svrha_placanja, dnevno_stanje_racuna_id, valuta_id)
-	values ('2017-04-15', '2017-04-15', '2017-04-15', 'Pera Peric', 9000, 97, 98,'895454-74584526', '111-2223334445556-78', 'Saki Sakic', '45-8766-453', '321-4423254-324', 'izv', 'Kupljene cigle', 1, 1);
+--insert into analitika_izvoda (datum_analitike, datum_naloga, datum_valute, duznik_nalogodavac, iznos, model_odobrenja, model_zaduzenja, poziv_na_broj_odobrenja, poziv_na_broj_zaduzenja, primalac_poverilac, racun_duznika, racun_poverioca, smer, svrha_placanja, dnevno_stanje_racuna_id, valuta_id)
+--	values ('2017-04-15', '2017-04-15', '2017-04-15', 'Pera Peric', 3000, 97, 98,'111-2223334445556-78', '78945655-45767', 'Sima Simic', '435-34543324-453', '321-4423254-324', 'izv', 'Kupljene stolice', 1, 1);
+--	
+--insert into analitika_izvoda (datum_analitike, datum_naloga, datum_valute, duznik_nalogodavac, iznos, model_odobrenja, model_zaduzenja, poziv_na_broj_odobrenja, poziv_na_broj_zaduzenja, primalac_poverilac, racun_duznika, racun_poverioca, smer, svrha_placanja, dnevno_stanje_racuna_id, valuta_id)
+--	values ('2017-04-15', '2017-04-15', '2017-04-15', 'Pera Peric', 5000, 97, 98,'876-7467768826', '111-2223334445556-78', 'Djura Djuric', '65-76876-453', '321-4423254-324', 'izv', 'Kupljene papuce', 1, 1);
+--	
+--insert into analitika_izvoda (datum_analitike, datum_naloga, datum_valute, duznik_nalogodavac, iznos, model_odobrenja, model_zaduzenja, poziv_na_broj_odobrenja, poziv_na_broj_zaduzenja, primalac_poverilac, racun_duznika, racun_poverioca, smer, svrha_placanja, dnevno_stanje_racuna_id, valuta_id)
+--	values ('2017-04-15', '2017-04-15', '2017-04-15', 'Pera Peric', 7000, 97, 98,'111-2223334445556-78', '78948655-464577', 'Sara Saric', '435-567-453', '321-4423254-324', 'izv', 'Kupljene majice', 1, 1);
+--	
+--insert into analitika_izvoda (datum_analitike, datum_naloga, datum_valute, duznik_nalogodavac, iznos, model_odobrenja, model_zaduzenja, poziv_na_broj_odobrenja, poziv_na_broj_zaduzenja, primalac_poverilac, racun_duznika, racun_poverioca, smer, svrha_placanja, dnevno_stanje_racuna_id, valuta_id)
+--	values ('2017-04-15', '2017-04-15', '2017-04-15', 'Pera Peric', 8000, 97, 98,'111-2223334445556-78', '78689655-448577', 'Siki Sikic', '435-577857-453', '321-4423254-324', 'izv', 'Kupljene kape', 1, 1);
+--	
+--insert into analitika_izvoda (datum_analitike, datum_naloga, datum_valute, duznik_nalogodavac, iznos, model_odobrenja, model_zaduzenja, poziv_na_broj_odobrenja, poziv_na_broj_zaduzenja, primalac_poverilac, racun_duznika, racun_poverioca, smer, svrha_placanja, dnevno_stanje_racuna_id, valuta_id)
+--	values ('2017-04-15', '2017-04-15', '2017-04-15', 'Pera Peric', 9000, 97, 98,'895454-74584526', '111-2223334445556-78', 'Saki Sakic', '45-8766-453', '321-4423254-324', 'izv', 'Kupljene cigle', 1, 1);
 
 
 
-INSERT INTO `xws_pi_bezb`.`medjubankarski_prenos` (`id`, `datum`, `datum_valute`, `iznos`, `obracunski_period_banke_duznika`, `obracunski_period_banke_poverioca`, `swift_kod_banke_duznika`, `swift_kod_banke_poverioca`, `vrsta_poruke`, `banka_posiljalac_id`, `banka_primalac_id`, `valuta_id`) VALUES ('1', '2017-04-15', '2017-04-15', '123', '123', '3454353', '234234', '56765', '334', '1', '2', '1');
-
+--INSERT INTO `xws_pi_bezb`.`medjubankarski_prenos` (`id`, `datum`, `datum_valute`, `iznos`, `obracunski_period_banke_duznika`, `obracunski_period_banke_poverioca`, `swift_kod_banke_duznika`, `swift_kod_banke_poverioca`, `vrsta_poruke`, `banka_posiljalac_id`, `banka_primalac_id`, `valuta_id`) VALUES ('1', '2017-04-15', '2017-04-15', '123', '123', '3454353', '234234', '56765', '334', '1', '2', '1');
 
 
 --insert into dnevno_stanje_racuna (datum, novo_stanje, prethodno_stanje, promet_na_teret, promet_u_korist, racun_id) values ('2017-04-15', 10000, 8000, 200, 500, 1);
 
-<<<<<<< HEAD
 --insert into analitika_izvoda (datum_analitike, datum_naloga, datum_valute, duznik_nalogodavac, iznos, model_odobrenja, model_zaduzenja, poziv_na_broj_odobrenja, poziv_na_broj_zaduzenja, primalac_poverilac, racun_duznika, racun_poverioca, smer, svrha_placanja, dnevno_stanje_racuna_id, valuta_id)
 --	values ('2017-04-15', '2017-04-15', '2017-04-15', 'Pera Peric', 3000, 97, 98,'8954-745826', '789655-4577', 'Sima Simic', '435-34543324-453', '321-4423254-324', 'izv', 'Kupljene stolice', 1, 1);
-=======
->>>>>>> 0cce4f2eb1d0b5daa9292163941556e2cacf4b81
 
 
