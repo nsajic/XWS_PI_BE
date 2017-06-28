@@ -562,7 +562,7 @@ public class BankaEndpoint {
 		
 			
 		}else{
-			System.out.println("Nema dnevnog stanja.");
+			return null;
 		}
 		// response.
 		return response;
@@ -701,6 +701,32 @@ public class BankaEndpoint {
 		
 		
 		return null;
+	}
+	
+	private MT103 konvertujMT103Request(MT103Request mt103req){
+		
+		MT103 mt103 = new MT103();
+		
+		mt103.setIdPoruke(mt103req.getIDPoruke());
+		mt103.setSwiftDuznik(mt103req.getBankaDuznika().getSWIFT());
+		mt103.setObracunskiRacunDuznik(mt103req.getBankaDuznika().getObracunskiRacun());
+		mt103.setSwiftPoverilac(mt103req.getBankaPoverioca().getSWIFT());
+		mt103.setObracunskiRacunPoverilac(mt103req.getBankaPoverioca().getObracunskiRacun());
+		mt103.setDuznik(mt103req.getNalog().getDuznik());
+		mt103.setSvrhaPlacanja(mt103req.getNalog().getSvrhaPlacanja());
+		mt103.setPrimalac(mt103req.getNalog().getPrimalac());
+		mt103.setDatumNaloga(mt103req.getNalog().getDatumNaloga().toGregorianCalendar().getTime());
+		mt103.setDatumValute(mt103req.getNalog().getDatumValute().toGregorianCalendar().getTime());
+		mt103.setRacunDuznik(mt103req.getNalog().getDuznikRacun().getRacun());
+		mt103.setModelDuznik(mt103req.getNalog().getDuznikRacun().getModel());
+		mt103.setPozivNaBrojDuznik(mt103req.getNalog().getDuznikRacun().getPozivNaBroj());
+		mt103.setRacunPoverilac(mt103req.getNalog().getPoverilacRacun().getRacun());
+		mt103.setModelPoverilac(mt103req.getNalog().getPoverilacRacun().getModel());
+		mt103.setPozivNaBrojPoverilac(mt103req.getNalog().getPoverilacRacun().getPozivNaBroj());
+		mt103.setIznos(mt103req.getNalog().getIznos());
+		mt103.setSifraValute(mt103req.getSifraValute());
+		
+		return mt103;	
 	}
 
 	private MT103Request konvertujMT103(MT103 mt103) throws DatatypeConfigurationException {
