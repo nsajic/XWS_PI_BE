@@ -13,4 +13,5 @@ public interface IAnalitikaIzvodaService{
 	List<AnalitikaIzvoda> findByDnevnoStanjeRacuna(DnevnoStanjeRacuna dnevnoStanjeRacuna);
 
 	List<AnalitikaIzvoda> findBySmer(String string);
+
 }

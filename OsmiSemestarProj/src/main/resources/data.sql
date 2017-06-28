@@ -123,6 +123,9 @@ insert into analitika_izvoda (datum_analitike, datum_naloga, datum_valute, duzni
 
 
 
+INSERT INTO `xws_pi_bezb`.`medjubankarski_prenos` (`id`, `datum`, `datum_valute`, `iznos`, `obracunski_period_banke_duznika`, `obracunski_period_banke_poverioca`, `swift_kod_banke_duznika`, `swift_kod_banke_poverioca`, `vrsta_poruke`, `banka_posiljalac_id`, `banka_primalac_id`, `valuta_id`) VALUES ('1', '2017-04-15', '2017-04-15', '123', '123', '3454353', '234234', '56765', '334', '1', '2', '1');
+
+
 
 --insert into dnevno_stanje_racuna (datum, novo_stanje, prethodno_stanje, promet_na_teret, promet_u_korist, racun_id) values ('2017-04-15', 10000, 8000, 200, 500, 1);
 

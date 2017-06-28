@@ -7,8 +7,8 @@ medjubankarskiServis.factory('medjubankarskiServis', function($http) {
 
 	var temp = {};
 
-	temp.izlistaj = function(data) {
-		return $http.get('/bankaKontroler/izlistajMedjubankarski');
+	temp.izlistajMedjubankarskePrenose = function(data) {
+		return $http.get('/medjubankarskiPrenosKontroler/izlistajMedjubankarskePrenose');
 	}
 
 	return temp;
