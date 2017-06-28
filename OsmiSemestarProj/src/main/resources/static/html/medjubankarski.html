@@ -1,0 +1,43 @@
+<div ng-cloak ng-controller="medjubankarskiKontroler as $ctrl">
+	<div>
+		<h1>Medjubankarski</h1>
+		<!--<a ng-click="logOut()" href="">Izloguj se</a>-->
+	</div>
+
+	<div>
+		<div id="tabs">
+			<ul>
+				<li ng-class="{active: isSet(0)}"><a ng-click="setTab(0);" href=""><span>Valute</span></a></li>
+			</ul>
+		</div>
+
+		<div ng-show="isSet(0)">
+			<h2>Valute</h2>	
+			
+			<table ng-show = "valute.length != 0">
+				<tr>
+					<td style = "width:120px; heigth: 70px">Vrsta poruke</td>
+					<td style = "width:120px; heigth: 70px">Datum</td>
+					<td style = "width:120px; heigth: 70px">Iznos</td>
+					<td style = "width:120px; heigth: 70px">Swift banke duznika</td>
+					<td style = "width:120px; heigth: 70px">Swift banke poverioca</td>
+					<td style = "width:120px; heigth: 70px">Swift banke duznika</td>
+					<td style = "width:120px; heigth: 70px">Swift banke poverioca</td>
+					<td style = "width:120px; heigth: 70px">Datum valute</td>
+				</tr>
+			</table>		
+			<table ng-repeat='mBankarski in medjubankarskiBanke'>
+				<tr>
+					<td style = "width:120px; heigth: 70px">{{mBankarski.vrstaPoruke}}</td>
+					<td style = "width:120px; heigth: 70px">{{mBankarski.datum | date}}</td>
+					<td style = "width:120px; heigth: 70px">{{mBankarski.iznos}}</td>
+					<td style = "width:120px; heigth: 70px">{{mBankarski.swiftKodBankeDuznika}}</td>
+					<td style = "width:120px; heigth: 70px">{{mBankarski.swiftKodBankePoverioca}}</td>
+					<td style = "width:120px; heigth: 70px">{{mBankarski.obracunskiPeriodBankeDuznika}}</td>
+					<td style = "width:120px; heigth: 70px">{{mBankarski.obracunskiPeriodBankePoverioca}}</td>
+					<td style = "width:120px; heigth: 70px">{{mBankarski.datumValute | date}}</td>
+				</tr>
+			</table>
+		</div>
+	</div>
+</div>

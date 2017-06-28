@@ -27,4 +27,10 @@ public class AnalitikaIzvodaService implements IAnalitikaIzvodaService
 		return analitikaRepository.findByDnevnoStanjeRacuna(dnevnoStanjeRacuna);
 	}
 
+	@Override
+	public List<AnalitikaIzvoda> findBySmer(String string) {
+		
+		return analitikaRepository.findBySmer(string);
+	}
+
 }
