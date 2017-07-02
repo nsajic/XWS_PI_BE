@@ -12,4 +12,6 @@ public interface IMedjubankarskiPrenosService {
 	List<MedjubankarskiPrenos> getAll();
 
 	List<MedjubankarskiPrenos> findByBanke(Banka banka);
+
+	List<MedjubankarskiPrenos> findByAnalitikaIzvodaId(Long id);
 }
