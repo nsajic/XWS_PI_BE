@@ -30,7 +30,9 @@ app.config(function($routeProvider, $locationProvider) {
         templateUrl : "html/promenaLozinke.html"
     }).when("/medjubankarski", {
         templateUrl : "html/medjubankarski.html"
-    });
+    }).when("/izvodi", {
+    templateUrl : "html/izvodi.html"
+	});
 
     $locationProvider.html5Mode(true);
 });

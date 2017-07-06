@@ -2,6 +2,7 @@ package xws_pi_bezb.controllers;
 
 import java.util.GregorianCalendar;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.DatatypeFactory;
@@ -34,6 +35,7 @@ import xws_pi_bezb.models.MT102;
 import xws_pi_bezb.models.korisnici.BankarskiSluzbenik;
 import xws_pi_bezb.password_security.Password;
 import xws_pi_bezb.password_security.PasswordValidator;
+import xws_pi_bezb.view_models.IzvodiViewModel;
 import xws_pi_bezb.view_models.PromenaLozinkeViewModel;
 
 @Controller
@@ -267,9 +269,15 @@ public class LogRegKontroler {
 	}
 
 	@RequestMapping(value = "/spisakRacuna", method = RequestMethod.POST)
-	public ResponseEntity<Poruka> spisakRacuna() {
+	public ResponseEntity<Poruka> spisakRacuna(HttpServletResponse response) {
 		
 		return new ResponseEntity<Poruka>(new Poruka("Spisak exportovan.", null), HttpStatus.ACCEPTED);
+	}
+	
+	@RequestMapping(value = "/zatraziIzvode", method = RequestMethod.POST)
+	public ResponseEntity<Poruka> zatraziIzvode(@RequestBody IzvodiViewModel izvodiVM) {
+		
+		return new ResponseEntity<Poruka>(new Poruka("Promeni ovde kakvo obavestenje treba biti.", null), HttpStatus.ACCEPTED);
 	}
 	
 }
