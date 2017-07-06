@@ -10,6 +10,9 @@ welcomeServis.factory('welcomeServis', function($http) {
 	temp.posaljiKliring = function(){
 		return $http.post('/contr/posaljiKliring');
 	}
+	temp.spisakRacuna = function(){
+		return $http.post('/contr/spisakRacuna');
+	}
 	
 	return temp;
 })

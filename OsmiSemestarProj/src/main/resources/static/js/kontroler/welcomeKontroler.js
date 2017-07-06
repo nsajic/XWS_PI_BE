@@ -27,6 +27,13 @@ welcomeKontroler.controller('welcomeCtrl', function($scope, $location, $window, 
 		});
 	}
 	
+	$scope.spisakRacuna = function(){
+
+		welcomeServis.spisakRacuna().success(function(data) {
+				alert(data.message);		
+		});
+	}
+	
 	
 	$scope.ulogovanKorisnik = new Object();
 	$scope.zabraniPrikaz = false;

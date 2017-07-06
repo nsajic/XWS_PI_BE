@@ -162,4 +162,10 @@ public class LogRegKontroler {
 		return new ResponseEntity<Poruka>(HttpStatus.ACCEPTED);
 	}
 	
+	@RequestMapping(value = "/spisakRacuna", method = RequestMethod.POST)
+	public ResponseEntity<Poruka> spisakRacuna() {
+		
+		return new ResponseEntity<Poruka>(new Poruka("Spisak exportovan.", null), HttpStatus.ACCEPTED);
+	}
+	
 }
