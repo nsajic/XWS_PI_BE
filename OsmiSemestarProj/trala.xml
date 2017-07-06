@@ -8,48 +8,12 @@
 <ns2:EncryptedKey>
                 <ns2:EncryptionMethod Algorithm="http://www.w3.org/2001/04/xmlenc#rsa-1_5"/>
                 <ns2:CipherData>
-<<<<<<< HEAD
-                    <ns2:CipherValue>F4HDanspc2aSEZOR5T2r7WVAZfBM3eqJlaFjos1DuNQ5++BDfIK2Vfdr2qZhPUsfw6+9XrI6NShlHlzeCv7uVlA0BCL1HyuHaTjihopmX4uny5ASc9Hfuk0Np7L6Plla+TD//vgiF1q4i4FKYxjiaQ8/hsK5ESG7InqnPwF5kBU=</ns2:CipherValue>
-=======
-                    <ns2:CipherValue>JvwmxEb6+lktV3PuNGDS2yVc2vvDyEhlNO2FqnR4iyL9EsBhEY7eUks95XpuH5aI8GVWi4N8lfMCS5v/Pddq2ofXGHQ5KJYIV6h7+IxueenlItqig4+aibr4uqaq7+0BgujfOrT5AVQaMK5x9f4qs/Cs9AiVTftHp+qRat8p9UA=</ns2:CipherValue>
->>>>>>> 46bd7b2517de80dac4f0fb5f20d64892ac15d664
+                    <ns2:CipherValue>tNBs1/WtB8j47Nk+Ad+XdPoPRCr4nUiq8r8XgDcN6IOwkcZ8LXhV9hg3zDcvjK+buK3apPr3B03ZvTvIBLUM8e/wo8OU9vui50XV6VgmF0QcyLdZ3usmQp0Mn3BtoGzrWwumBpEgMQBA8hxRFL0HOZuLLZqYywHd1UGU2VbiTdY=</ns2:CipherValue>
                 </ns2:CipherData>
             </ns2:EncryptedKey>
         </ns3:KeyInfo>
         <ns2:CipherData>
-<<<<<<< HEAD
-            <ns2:CipherValue>6YgXjhFBDVaX65mSF1E+R0QBg2RdcfBdr9VI3zbX6X10dF+rU8Sr3+6RCaQ8hiMqsXplUwjMzFrkXnbJz4XLCiQMazJDE4uGSTsiPiGxyNFmg6oFRvnuEvgxqs8W82DjWxKOccK61ciF98esPIhUVmOjmRHkYZvXea6n8rn5WWvbRW6Fp556OHDG0fsf4ajp+OpHBXiHhkR5p7iBtSJ7N+UNN5d1rMwWwlB4NEnTvZdnRIAwFCKOzSFqmJ3WeCJdQaVjADUjHVeK3EEL5fgWUI9TK9AE4Lnz5PmFqkRys4QCUaB8Vov/Lm7GDitZMG5sWqjcnQAOxmJnWUzNf3vsJBSj2h1EJcQ611IlJcrCbT2+O5x8pHORjrnx/VRYu+gpIpqaUYaRnqlQMFdgU+cfTNGmng6cp1f7X7Ms8drkQTFxsoySHFpiOxhBzg85ebgBi8vtRUAkYb3kD+6iKDH1UERmW3PBQe971ajjGhG/KtR+VGTl0TNUz1UfVD0EzC/ASuyFG/wZjsyT93+RzfAlcM+6cjbmeIKJz11UrElg/2MtzrtnyIohTpryDccyAbwqkS5bOqVZoxd6IQlnQpxzOsJu55LrQnM3zIaGSXJdQ79No8xuLq911nrsQK/3s3fguRmXI3X32eoRFdpenXlR+TmMaIQSuMfVwKhskZzPz+LHTixP1TBg7EzGDxMs5+RaycKevovMPmVEunuK7E+RELTx8aHmZpdXTDeIMI9zhoMUWxvLZ1ugs+GdYJUl0rgN01/TH9dar11RCXVEzvGTFcJuhZNR36U3mlFzIDWW9giqv2LP/WC03Iq6Bx0parNp4IC3IJKyCxNyBo/Qyn3UNao20IU8WSCjQPYU+LlxIYS76kqB8ivGdzHfM7/uYr1MayTNKh5wYdBao3jmz9VKI2+30F0/tnnozO/sKntCY6RTNnsCbv/caRKhnxFxt0EAQYkS1+R82wKpIq6HUA3M11qUZkYJ849QGH14xpZxz0lXdBaZLSAjt1eMJP1BVeBcsuGCYAEswT1O7eyGmSG7ozXdQLzg47mc</ns2:CipherValue>
+            <ns2:CipherValue>FcZopAxhYBNVeuKBIilC8JLQXprYvJbG/j4k7/bK8pTL+w+cu1QYttIMtj4eJcyHkJmw7zPaJ/QAItjLAMAcdnl56nf2Tjvr26irrRA+lZNVbYQ8BOPGphGlDIOAVUIjFLD5Ba2IVjMQx/xLfCDSA+NPR5gOIXwEtGiZR98Fgirae1ptldl9Et4AmRpp04JOQxhasXSMfr+MEjo5wYYE8dLe/fCetgshBA6/DNlQ/E3S/63QN9faytc/FJs+jRhm54OHo4J+dRiRLe/xpV84kvJWZHKD904AesEWK7B+qXJZlPCPymi2/U9ZVStrG5BqaU5vCr41xB+w1yi+K69as4D68Zjz2V2LeUeSJx1AtL3PRQx21Gen2eQvBVOoYUWELdIPktrGhnF5AD1l1eb4RcaNnVrcfpJWkKYKCQslbe9PZIk9kYP1LXlAAJ8C5Aj9t43GM3sHSX2//2aKqjFr2+PIsuwO2qYssjhSfcyzRJICVKqXEl0YyO//s7pDv+Z0enoR15cuHDSxTI6z/RP9QBoHNEuvCP5bkahn4d64u06Rc8xoDGmS22doaeTit2h/E4AugRVi3FLGyAbxAF+zTDQFYIp4l7Elaw94be8cMo6DWEt3FKJG3EspAKvKpulvrd1TdVmWkr62fMkELXrU3ddKMsPYHtKrmiPBf2LG3BlooHNT0+Lwu7Obs5P7b0gVaAPO3S1rGQuMvXktSJk9Ib0AtzGJjOhoT0jM+VfGxAliUruMCF2MC/Rbk7kka5hE/SxAY/VXAK6mv0WpxWpyWjF6YVS2a2wtn69ZRRUuGESe3g76XYJcFJR4+suCqMur7f3So6TW6ADzuwTtp1poQ4p31hjmkPgLCwVL+lIXm41jwZeL5/0t1zD74gZ/T51k680FLc+T7tpTgjPwlylLVondQfF2E7f4OFvt/e8W3fVNMqanr4xSd/Zlz7oUOcPJsjdDVMIV2zYGq+4lcHWoGswWMduLmhyf/roB9P6YQMHiYQkSCyxixqSSmHLgJwJE</ns2:CipherValue>
         </ns2:CipherData>
     </ns2:EncryptedData>
-    <ns3:Signature>
-        <ns3:SignedInfo>
-            <ns3:CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315"/>
-            <ns3:SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1"/>
-            <ns3:Reference URI="">
-                <ns3:Transforms>
-                    <ns3:Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/>
-                    <ns3:Transform Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315#WithComments"/>
-                </ns3:Transforms>
-                <ns3:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"/>
-                <ns3:DigestValue>LNvXLViV0bsDsiV0uK/543xpqdI=</ns3:DigestValue>
-            </ns3:Reference>
-        </ns3:SignedInfo>
-        <ns3:SignatureValue>fojBXGCyBVj/3EAgb3tL9seY40ipx9LrpQK2eHlLBoEEACt/AHuLvIX4MbPbFQakTM15GCxCb1EcH18VqiejFlRVowhWqec1ugvJFsbLMvXgwoQCj3xiTXA/k0WZHAmA9IZZ//swCyOr+GyeeS9t4xXxHTDbCMmFEb0c0dLr1JI=</ns3:SignatureValue>
-        <ns3:KeyInfo>
-            <ns3:KeyValue>
-                <ns3:RSAKeyValue>
-                    <ns3:Modulus>zQ9KJLShafi/S2HkWlfnRpKcuLB4BgeJ5y2wBafGRRNz5kss0gjzzQZIDf684gwQ2WYEDlH2s+OXfbX4v6KTKJ4ug0wfY05sciJ7Dx+HOPUw6KU5aWvbBIKAXJE+MCSaO/FSk+ujgXSZAY/epUsSqBo2EZgUl90oEpTRbV+xX8E=</ns3:Modulus>
-                    <ns3:Exponent>AQAB</ns3:Exponent>
-                </ns3:RSAKeyValue>
-            </ns3:KeyValue>
-            <ns3:X509Data>
-                <ns3:X509Certificate>MIIBtjCCAR8CBEZasCQwDQYJKoZIhvcNAQEFBQAwIjEPMA0GA1UECwwGcHJpbWVyMQ8wDQYDVQQDDAZwcmltZXIwHhcNMDcwNTI4MTAzNDEyWhcNMjcwNTIzMTAzNDEyWjAiMQ8wDQYDVQQLDAZwcmltZXIxDzANBgNVBAMMBnByaW1lcjCBnzANBgkqhkiG9w0BAQEFAAOBjQAwgYkCgYEAzQ9KJLShafi/S2HkWlfnRpKcuLB4BgeJ5y2wBafGRRNz5kss0gjzzQZIDf684gwQ2WYEDlH2s+OXfbX4v6KTKJ4ug0wfY05sciJ7Dx+HOPUw6KU5aWvbBIKAXJE+MCSaO/FSk+ujgXSZAY/epUsSqBo2EZgUl90oEpTRbV+xX8ECAwEAATANBgkqhkiG9w0BAQUFAAOBgQB2HjPI427zRaVfLTaeNVcjH9hoTkl9OUJAAmEa6EQdbdqZ75ca3IfuLHJFJ8zzyBP4LUGSxgA4OpnKs6Ej5w2n0GHmu0g4YqxInfpv/kCwswoia4Oza17te8mMamffCn3ySX5yZzEex5nueNAyhJkmWBcBCOvJw4+U+gSK50Xbcw==</ns3:X509Certificate>
-            </ns3:X509Data>
-        </ns3:KeyInfo>
-    </ns3:Signature>
-=======
-            <ns2:CipherValue>MpOh7GLNA+EnB8d6uW+DnTkl5Sc0XXYM+HAyEzzqrH1yANaOs6rCw3AJAD+0nYzQXfaDRK1csn3GnJEcK8HGUxqt1JB2q2DgDE+HdUWM4OFlVaJ/RulU4Ci9Pde32d6eRmWHBiVTZt5tq8V7nHOqxbc3tSfEAI0gUXvvWsp+V9czk/sDUEDdQWo6WH7kDwuTpfGULba0CAxXrHswzaDYFrvQ99amWkUeKpb63L89h8JoO2kdcqaPD4sEJdCwuYqcE5byam49pVJdD6hFiKp4nKdS9Mc4JBoDuCU2E32Bkelxz7a0ApRkbMq03a6MILYBkCD0JLgWSEf/MIE0/AzLyOA4NqbkJK8NI1sqswGJ78jEwVKWHDfDpsjTypFGZHtIWB0FkPKBq6lhHFL3kz6gwgZTwd+LwMbXUlW+rnerxGZT7BUY8NNsSNnuRWHwA2tjaJ0Vol8RwQbcgr5YOy4Kg8UJW602SpIKph3G4zDwcX57CiPJ7WVDnUq8Oh7mRzLRPaLAWKyHMNGtm5A4I3VrtpfxX3t4szE13lUoCjIs71jcjaq/8DLF5hf0aS2Ys+e22AbZ7yCuLrypv/aYf7zJIRxrB5UrwWBPsJxn/vWExu2VM8BgGvWT6akNUjS4lBCphdw8UviWLCYwd06CfM5SV1ac5aNKXRtVuvhkbnW7OUOkfRkdgMjs0XLv6fuxDXgf2pEn5FX+lyGCs6Laotar1TOwF2bOGinttHAhyer2TJg=</ns2:CipherValue>
-        </ns2:CipherData>
-    </ns2:EncryptedData>
->>>>>>> 46bd7b2517de80dac4f0fb5f20d64892ac15d664
 </ns4:NalogZaPrenosRequest>

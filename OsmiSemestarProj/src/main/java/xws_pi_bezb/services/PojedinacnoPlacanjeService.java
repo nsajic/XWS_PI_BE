@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import xws_pi_bezb.irepositories.IPojedinacnoPlacanje;
 import xws_pi_bezb.iservices.IPojedinacnoPlacanjeService;
+import xws_pi_bezb.models.MT102;
 import xws_pi_bezb.models.PojedinacnoPlacanje;
 
 @Service
@@ -38,6 +39,11 @@ public class PojedinacnoPlacanjeService implements IPojedinacnoPlacanjeService{
 	public PojedinacnoPlacanje findOne(Long id) {
 		
 		return repo.findById(id);
+	}
+
+	@Override
+	public List<PojedinacnoPlacanje> findByMt102(MT102 mt102) {
+		return repo.findByMt102(mt102);
 	}
 
 }

@@ -30,7 +30,7 @@ public class AnalitikaIzvodaService implements IAnalitikaIzvodaService
 	@Override
 	public List<AnalitikaIzvoda> findBySmer(String string) {
 		
-		return analitikaRepository.findBySmer(string) ;
+		return analitikaRepository.findBySmer(string);
 	}
 
 }

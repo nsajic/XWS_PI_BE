@@ -29,25 +29,27 @@ public class MT102Services implements IMT102Services {
 
 	@Override
 	public List<MT102> findAll() {
-
 		return repo.findAll();
 	}
 
 	@Override
 	public MT102 findOne(Long id) {
-
 		return repo.findById(id);
 	}
 
 	@Override
 	public MT102 findByIdPoruke(String idPorukeNaloga) {
-		// TODO Auto-generated method stub
 		return repo.findByIdPoruke(idPorukeNaloga);
 	}
 
 	@Override
 	public MT102 findBySwiftDuznikAndSwiftPoverilacAndPoslat(String swiftKod, String swiftKod2, boolean poslat) {
 		return repo.findBySwiftDuznikAndSwiftPoverilacAndPoslat(swiftKod, swiftKod2, poslat);
+	}
+
+	@Override
+	public List<MT102> findBySwiftDuznikOrSwiftPoverilacAndPoslat(String swiftKod, String swiftKod2, boolean b) {
+		return repo.findBySwiftDuznikOrSwiftPoverilacAndPoslat(swiftKod, swiftKod2, b);
 	}
 
 }

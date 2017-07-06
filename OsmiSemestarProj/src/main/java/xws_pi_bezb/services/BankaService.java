@@ -97,4 +97,9 @@ public class BankaService implements IBankaService {
 		return bankaRepository.findByRacuni(racunDuz);
 	}
 
+	@Override
+	public Banka findBySwiftKod(String swift) {
+		return bankaRepository.findBySwiftKod(swift);
+	}
+
 }

@@ -12,13 +12,11 @@ import xws_pi_bezb.models.DnevnoStanjeRacuna;
 
 @Repository
 @Transactional
-public interface IAnalitikaIzvodaRepository extends JpaRepository<AnalitikaIzvoda, Long>{
+public interface IAnalitikaIzvodaRepository extends JpaRepository<AnalitikaIzvoda, Long> {
 	AnalitikaIzvoda findById(Long id);
 
 	List<AnalitikaIzvoda> findByDnevnoStanjeRacuna(DnevnoStanjeRacuna dnevnoStanjeRacuna);
 
 	List<AnalitikaIzvoda> findBySmer(String string);
 
-	
-	
 }

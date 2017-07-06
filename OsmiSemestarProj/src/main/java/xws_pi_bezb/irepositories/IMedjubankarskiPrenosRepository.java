@@ -12,11 +12,13 @@ import xws_pi_bezb.models.MedjubankarskiPrenos;
 
 @Repository
 @Transactional
-public interface IMedjubankarskiPrenosRepository extends JpaRepository<MedjubankarskiPrenos, Long>{
+public interface IMedjubankarskiPrenosRepository extends JpaRepository<MedjubankarskiPrenos, Long> {
 
 	List<MedjubankarskiPrenos> findByBankaPrimalacOrBankaPosiljalac(Banka banka, Banka banka2);
 
 	List<MedjubankarskiPrenos> findByBankaPrimalac(Banka banka);
 
-	List<MedjubankarskiPrenos> findByBankaPosiljalac(Banka banka);	
+	List<MedjubankarskiPrenos> findByBankaPosiljalac(Banka banka);
+
+
 }
