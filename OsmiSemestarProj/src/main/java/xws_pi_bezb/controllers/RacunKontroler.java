@@ -180,6 +180,10 @@ public class RacunKontroler {
 		if(naKojiPrebacujem.getStatusRacuna() == 2){
 			return new ResponseEntity<Object>("Uneli ste racun koji je zatvoren." ,HttpStatus.BAD_REQUEST);
 		}
+		if(naKojiPrebacujem.getValuta().getId() == saKogPrebacujem.getValuta().getId()){
+			return new ResponseEntity<Object>("Uneli ste racun koji nije u istoj valuti." ,HttpStatus.BAD_REQUEST);
+		}
+		
 
 		saKogPrebacujem.setStatusRacuna(2);
 		
