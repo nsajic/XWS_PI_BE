@@ -70,6 +70,7 @@ public class KlijentKontroler {
 	@InterceptorAnnotation("Klijent:IzmeniPravnoFizicko")
 	public ResponseEntity<List<PravnoLice>> izmeniKlijenta(@RequestBody PravnoLice pravnoLice) {
 		pravnoLice.setEmail(pravnaLicaService.findOne(pravnoLice.getId()).getEmail());
+		pravnoLice.setKlijentTip(KlijentTip.PravnoLice);
 		pravnaLicaService.save(pravnoLice);
 		return new ResponseEntity<List<PravnoLice>>(pravnaLicaService.getPravnaLica(), HttpStatus.OK);
 	}
@@ -153,6 +154,7 @@ public class KlijentKontroler {
 	@InterceptorAnnotation("Klijent:IzmeniPravnoFizicko")
 	public ResponseEntity<List<FizickoLice>> izmeniKlijenta(@RequestBody FizickoLice fizickoLice) {
 		fizickoLice.setEmail(fizickaLicaService.findOne(fizickoLice.getId()).getEmail());
+		fizickoLice.setKlijentTip(KlijentTip.FizickoLice);
 		//fizickoLice.setUsername(klijentService.findOne(fizickoLice.getId()).getUsername());
 		//fizickoLice.setSifra(klijentService.findOne(fizickoLice.getId()).getSifra());
 		fizickaLicaService.save(fizickoLice);

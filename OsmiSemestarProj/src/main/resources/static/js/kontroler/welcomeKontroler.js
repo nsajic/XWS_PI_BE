@@ -34,6 +34,13 @@ welcomeKontroler.controller('welcomeCtrl', function($scope, $location, $window, 
 		});
 	}
 	
+	$scope.izvodiUXML = function(){
+
+		welcomeServis.izvodiUXML().success(function(data) {
+				alert(data.message);		
+		});
+	}
+	
 	
 	$scope.ulogovanKorisnik = new Object();
 	$scope.zabraniPrikaz = false;

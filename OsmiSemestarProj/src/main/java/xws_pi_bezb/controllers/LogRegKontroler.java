@@ -269,7 +269,7 @@ public class LogRegKontroler {
 	}
 
 	@RequestMapping(value = "/spisakRacuna", method = RequestMethod.POST)
-	public ResponseEntity<Poruka> spisakRacuna(HttpServletResponse response) {
+	public ResponseEntity<Poruka> spisakRacuna() {
 		
 		return new ResponseEntity<Poruka>(new Poruka("Spisak exportovan.", null), HttpStatus.ACCEPTED);
 	}
@@ -280,4 +280,9 @@ public class LogRegKontroler {
 		return new ResponseEntity<Poruka>(new Poruka("Promeni ovde kakvo obavestenje treba biti.", null), HttpStatus.ACCEPTED);
 	}
 	
+	@RequestMapping(value = "/izvodiUXML", method = RequestMethod.POST)
+	public ResponseEntity<Poruka> izvodiUXML() {
+		
+		return new ResponseEntity<Poruka>(new Poruka("Spisak izvoda u XML exportovan.", null), HttpStatus.ACCEPTED);
+	}	
 }
