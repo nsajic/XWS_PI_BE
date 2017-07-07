@@ -202,5 +202,6 @@ public class NalogZaPrenosRequest {
     public void setSignature(SignatureType value) {
         this.signature = value;
     }
+   
 
 }

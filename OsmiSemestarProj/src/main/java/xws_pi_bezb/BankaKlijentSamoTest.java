@@ -1,5 +1,7 @@
 package xws_pi_bezb;
 
+import java.util.List;
+
 import org.springframework.oxm.jaxb.Jaxb2Marshaller;
 import org.springframework.ws.client.core.support.WebServiceGatewaySupport;
 
@@ -7,6 +9,7 @@ import bezbednost.poslovna.xml.ws.mt102.MT102Request;
 import bezbednost.poslovna.xml.ws.mt102.MT102Response;
 import bezbednost.poslovna.xml.ws.mt103.MT103Request;
 import bezbednost.poslovna.xml.ws.mt103.MT103Response;
+import xws_pi_bezb.models.Izvodi;
 
 //OVO CE SE RADITI - POVEZIVATI IZ KONTROLERA!
 public class BankaKlijentSamoTest extends WebServiceGatewaySupport {
@@ -36,5 +39,9 @@ public class BankaKlijentSamoTest extends WebServiceGatewaySupport {
 		MT103Response response = (MT103Response) o;
 		System.out.println("CB primljen MT103:  " + response.getOdgovor());
 
+	}
+	
+	public void posaljiIzvod(List<Izvodi> izvodi){
+		
 	}
 }

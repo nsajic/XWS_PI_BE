@@ -5,7 +5,6 @@
 // Generated on: 2017.06.20 at 12:51:42 AM CEST 
 //
 
-
 package bezbednost.poslovna.xml.ws.mt102;
 
 import java.math.BigDecimal;
@@ -28,11 +27,13 @@ import javax.xml.datatype.XMLGregorianCalendar;
 
 import bezbednost.poslovna.xml.ws.mt103.TSWIFTIRacun;
 
-
 /**
- * <p>Java class for MT102Request complex type.
+ * <p>
+ * Java class for MT102Request complex type.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * <p>
+ * The following schema fragment specifies the expected content contained within
+ * this class.
  * 
  * <pre>
  * &lt;complexType name="MT102Request">
@@ -56,246 +57,214 @@ import bezbednost.poslovna.xml.ws.mt103.TSWIFTIRacun;
  * 
  */
 
-@XmlRootElement(name="MT102Request", namespace="http://MT102.ws.xml.poslovna.bezbednost/")
+@XmlRootElement(name = "MT102Request", namespace = "http://MT102.ws.xml.poslovna.bezbednost/")
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "MT102Request", propOrder = {
-    "idPoruke",
-    "bankaDuznika",
-    "bankaPoverioca",
-    "ukupanIznos",
-    "sifraValute",
-    "datumValute",
-    "datum",
-    "pojedinacnoPlacanje"
-}, namespace="http://MT102.ws.xml.poslovna.bezbednost/")
+@XmlType(name = "MT102Request", propOrder = { "idPoruke", "bankaDuznika", "bankaPoverioca", "ukupanIznos",
+		"sifraValute", "datumValute", "datum",
+		"pojedinacnoPlacanje" }, namespace = "http://MT102.ws.xml.poslovna.bezbednost/")
 
 public class MT102Request {
-	
 
-	
-    @XmlElement(name = "IDPoruke", required = true) 
-    protected String idPoruke;
-    
-    @XmlElement(name = "BankaDuznika", required = true)
-    protected TSWIFTIRacun bankaDuznika;
-    
-    @XmlElement(name = "BankaPoverioca", required = true)
-    protected TSWIFTIRacun bankaPoverioca;
-    
-    @XmlElement(name = "UkupanIznos", required = true)
-    protected BigDecimal ukupanIznos;
-    
-    @XmlElement(name = "SifraValute", required = true)
-    protected String sifraValute;
-    
-    @XmlElement(name = "DatumValute", required = true)
-    protected XMLGregorianCalendar datumValute;
-    
-    @XmlElement(name = "Datum", required = true)
-    protected XMLGregorianCalendar datum;
-    
-    @XmlElement(name = "PojedinacnoPlacanje", required = true)
-    protected List<TPojedinacnoPlacanje> pojedinacnoPlacanje;
-    
-  
+	@XmlElement(name = "IDPoruke", required = true)
+	protected String idPoruke;
 
-    /**
-     * Gets the value of the idPoruke property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getIDPoruke() {
-        return idPoruke;
-    }
+	@XmlElement(name = "BankaDuznika", required = true)
+	protected TSWIFTIRacun bankaDuznika;
 
-    /**
-     * Sets the value of the idPoruke property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setIDPoruke(String value) {
-        this.idPoruke = value;
-    }
+	@XmlElement(name = "BankaPoverioca", required = true)
+	protected TSWIFTIRacun bankaPoverioca;
 
-    /**
-     * Gets the value of the bankaDuznika property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link TSWIFTIRacun }
-     *     
-     */
-    public TSWIFTIRacun getBankaDuznika() {
-        return bankaDuznika;
-    }
+	@XmlElement(name = "UkupanIznos", required = true)
+	protected BigDecimal ukupanIznos;
 
-    /**
-     * Sets the value of the bankaDuznika property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link TSWIFTIRacun }
-     *     
-     */
-    public void setBankaDuznika(TSWIFTIRacun value) {
-        this.bankaDuznika = value;
-    }
+	@XmlElement(name = "SifraValute", required = true)
+	protected String sifraValute;
 
-    /**
-     * Gets the value of the bankaPoverioca property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link TSWIFTIRacun }
-     *     
-     */
-    public TSWIFTIRacun getBankaPoverioca() {
-        return bankaPoverioca;
-    }
+	@XmlElement(name = "DatumValute", required = true)
+	protected XMLGregorianCalendar datumValute;
 
-    /**
-     * Sets the value of the bankaPoverioca property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link TSWIFTIRacun }
-     *     
-     */
-    public void setBankaPoverioca(TSWIFTIRacun value) {
-        this.bankaPoverioca = value;
-    }
+	@XmlElement(name = "Datum", required = true)
+	protected XMLGregorianCalendar datum;
 
-    /**
-     * Gets the value of the ukupanIznos property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
-     */
-    public BigDecimal getUkupanIznos() {
-        return ukupanIznos;
-    }
+	@XmlElement(name = "PojedinacnoPlacanje", required = true)
+	protected List<TPojedinacnoPlacanje> pojedinacnoPlacanje;
 
-    /**
-     * Sets the value of the ukupanIznos property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
-     */
-    public void setUkupanIznos(BigDecimal value) {
-        this.ukupanIznos = value;
-    }
+	/**
+	 * Gets the value of the idPoruke property.
+	 * 
+	 * @return possible object is {@link String }
+	 * 
+	 */
+	public String getIDPoruke() {
+		return idPoruke;
+	}
 
-    /**
-     * Gets the value of the sifraValute property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getSifraValute() {
-        return sifraValute;
-    }
+	/**
+	 * Sets the value of the idPoruke property.
+	 * 
+	 * @param value
+	 *            allowed object is {@link String }
+	 * 
+	 */
+	public void setIDPoruke(String value) {
+		this.idPoruke = value;
+	}
 
-    /**
-     * Sets the value of the sifraValute property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setSifraValute(String value) {
-        this.sifraValute = value;
-    }
+	/**
+	 * Gets the value of the bankaDuznika property.
+	 * 
+	 * @return possible object is {@link TSWIFTIRacun }
+	 * 
+	 */
+	public TSWIFTIRacun getBankaDuznika() {
+		return bankaDuznika;
+	}
 
-    /**
-     * Gets the value of the datumValute property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link XMLGregorianCalendar }
-     *     
-     */
-    public XMLGregorianCalendar getDatumValute() {
-        return datumValute;
-    }
+	/**
+	 * Sets the value of the bankaDuznika property.
+	 * 
+	 * @param value
+	 *            allowed object is {@link TSWIFTIRacun }
+	 * 
+	 */
+	public void setBankaDuznika(TSWIFTIRacun value) {
+		this.bankaDuznika = value;
+	}
 
-    /**
-     * Sets the value of the datumValute property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link XMLGregorianCalendar }
-     *     
-     */
-    public void setDatumValute(XMLGregorianCalendar value) {
-        this.datumValute = value;
-    }
+	/**
+	 * Gets the value of the bankaPoverioca property.
+	 * 
+	 * @return possible object is {@link TSWIFTIRacun }
+	 * 
+	 */
+	public TSWIFTIRacun getBankaPoverioca() {
+		return bankaPoverioca;
+	}
 
-    /**
-     * Gets the value of the datum property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link XMLGregorianCalendar }
-     *     
-     */
-    public XMLGregorianCalendar getDatum() {
-        return datum;
-    }
+	/**
+	 * Sets the value of the bankaPoverioca property.
+	 * 
+	 * @param value
+	 *            allowed object is {@link TSWIFTIRacun }
+	 * 
+	 */
+	public void setBankaPoverioca(TSWIFTIRacun value) {
+		this.bankaPoverioca = value;
+	}
 
-    /**
-     * Sets the value of the datum property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link XMLGregorianCalendar }
-     *     
-     */
-    public void setDatum(XMLGregorianCalendar value) {
-        this.datum = value;
-    }
+	/**
+	 * Gets the value of the ukupanIznos property.
+	 * 
+	 * @return possible object is {@link BigDecimal }
+	 * 
+	 */
+	public BigDecimal getUkupanIznos() {
+		return ukupanIznos;
+	}
 
-    /**
-     * Gets the value of the pojedinacnoPlacanje property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the pojedinacnoPlacanje property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getPojedinacnoPlacanje().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link TPojedinacnoPlacanje }
-     * 
-     * 
-     */
+	/**
+	 * Sets the value of the ukupanIznos property.
+	 * 
+	 * @param value
+	 *            allowed object is {@link BigDecimal }
+	 * 
+	 */
+	public void setUkupanIznos(BigDecimal value) {
+		this.ukupanIznos = value;
+	}
 
-    public List<TPojedinacnoPlacanje> getPojedinacnoPlacanje() {
-        if (pojedinacnoPlacanje == null) {
-            pojedinacnoPlacanje = new ArrayList<TPojedinacnoPlacanje>();
-        }
-        return this.pojedinacnoPlacanje;
-    }
- 
+	/**
+	 * Gets the value of the sifraValute property.
+	 * 
+	 * @return possible object is {@link String }
+	 * 
+	 */
+	public String getSifraValute() {
+		return sifraValute;
+	}
+
+	/**
+	 * Sets the value of the sifraValute property.
+	 * 
+	 * @param value
+	 *            allowed object is {@link String }
+	 * 
+	 */
+	public void setSifraValute(String value) {
+		this.sifraValute = value;
+	}
+
+	/**
+	 * Gets the value of the datumValute property.
+	 * 
+	 * @return possible object is {@link XMLGregorianCalendar }
+	 * 
+	 */
+	public XMLGregorianCalendar getDatumValute() {
+		return datumValute;
+	}
+
+	/**
+	 * Sets the value of the datumValute property.
+	 * 
+	 * @param value
+	 *            allowed object is {@link XMLGregorianCalendar }
+	 * 
+	 */
+	public void setDatumValute(XMLGregorianCalendar value) {
+		this.datumValute = value;
+	}
+
+	/**
+	 * Gets the value of the datum property.
+	 * 
+	 * @return possible object is {@link XMLGregorianCalendar }
+	 * 
+	 */
+	public XMLGregorianCalendar getDatum() {
+		return datum;
+	}
+
+	/**
+	 * Sets the value of the datum property.
+	 * 
+	 * @param value
+	 *            allowed object is {@link XMLGregorianCalendar }
+	 * 
+	 */
+	public void setDatum(XMLGregorianCalendar value) {
+		this.datum = value;
+	}
+
+	/**
+	 * Gets the value of the pojedinacnoPlacanje property.
+	 * 
+	 * <p>
+	 * This accessor method returns a reference to the live list, not a
+	 * snapshot. Therefore any modification you make to the returned list will
+	 * be present inside the JAXB object. This is why there is not a
+	 * <CODE>set</CODE> method for the pojedinacnoPlacanje property.
+	 * 
+	 * <p>
+	 * For example, to add a new item, do as follows:
+	 * 
+	 * <pre>
+	 * getPojedinacnoPlacanje().add(newItem);
+	 * </pre>
+	 * 
+	 * 
+	 * <p>
+	 * Objects of the following type(s) are allowed in the list
+	 * {@link TPojedinacnoPlacanje }
+	 * 
+	 * 
+	 */
+
+	public List<TPojedinacnoPlacanje> getPojedinacnoPlacanje() {
+		if (pojedinacnoPlacanje == null) {
+			pojedinacnoPlacanje = new ArrayList<TPojedinacnoPlacanje>();
+		}
+		return this.pojedinacnoPlacanje;
+	}
 
 }

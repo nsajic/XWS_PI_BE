@@ -123,13 +123,15 @@ public class BankaEndpoint {
 	@PayloadRoot(namespace = HTTP + "nalogzaprenos." + NAMESPACE_URI, localPart = "NalogZaPrenosRequest")
 	@ResponsePayload
 	public NalogZaPrenosResponse nalogZaPrenos(@RequestPayload NalogZaPrenosRequest request1) {
-		// System.out.println(request.toString());
+		
 		NalogZaPrenosResponse response = new NalogZaPrenosResponse();
 		NalogZaPrenosRequest request = checkSignAndEnc(request1);
 		if (request == null) {
 			response.setOdgovor("Potpis ili enkripcija nije u redu!");
 			return response;
 		}
+		//System.out.println("*** Stigao je nalog za prenos u PB");
+		//System.out.println(request.toString());
 
 		TPodaciORacunu racunDuznik = request.getNalog().getDuznikRacun();
 		TPodaciORacunu racunPoverilac = request.getNalog().getPoverilacRacun();
@@ -623,6 +625,10 @@ public class BankaEndpoint {
 	@ResponsePayload
 	public MT102Response mt102(@RequestPayload MT102Request request) {
 		MT102Response response = new MT102Response();
+		
+		System.out.println("*** Stigao je MT102 u PB poverioca");
+		System.out.println(request.toString());
+		
 		response.setOdgovor("PB: MT102 - odgovor");
 		return response;
 	}
@@ -631,6 +637,10 @@ public class BankaEndpoint {
 	@ResponsePayload
 	public MT103Response mt103(@RequestPayload MT103Request request) {
 		MT103Response response = new MT103Response();
+		
+		System.out.println("*** Stigao je MT103 u PB poverioca");
+		System.out.println(request.toString());
+		
 		response.setOdgovor("PB: MT103 - odgovor");
 		return response;
 	}
@@ -638,6 +648,7 @@ public class BankaEndpoint {
 	@PayloadRoot(namespace = HTTP + "MT900." + NAMESPACE_URI, localPart = "MT900Request")
 	@ResponsePayload
 	public MT900Response mt900(@RequestPayload MT900Request request) throws DatatypeConfigurationException {
+		
 		MT900Response response = new MT900Response();
 		String odgovor = "";
 		MT103 mt103 = mt103Servis.findByIdPoruke(request.getIDPorukeNaloga());
@@ -669,6 +680,7 @@ public class BankaEndpoint {
 	@PayloadRoot(namespace = HTTP + "MT910." + NAMESPACE_URI, localPart = "MT910Request")
 	@ResponsePayload
 	public MT900Response mt910(@RequestPayload MT900Request request) throws DatatypeConfigurationException {
+		
 		MT900Response response = new MT900Response();
 		String odgovor = "";
 		MT103 mt103 = mt103Servis.findByIdPoruke(request.getIDPorukeNaloga());

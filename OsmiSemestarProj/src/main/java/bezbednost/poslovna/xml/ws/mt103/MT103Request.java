@@ -5,7 +5,6 @@
 // Generated on: 2017.06.20 at 12:51:42 AM CEST 
 //
 
-
 package bezbednost.poslovna.xml.ws.mt103;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -15,11 +14,13 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 import bezbednost.poslovna.xml.ws.nalogzaprenos.TNalog;
 
-
 /**
- * <p>Java class for MT103Request complex type.
+ * <p>
+ * Java class for MT103Request complex type.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * <p>
+ * The following schema fragment specifies the expected content contained within
+ * this class.
  * 
  * <pre>
  * &lt;complexType name="MT103Request">
@@ -39,146 +40,126 @@ import bezbednost.poslovna.xml.ws.nalogzaprenos.TNalog;
  * 
  * 
  */
-@XmlRootElement(name="MT103Request", namespace="http://MT103.ws.xml.poslovna.bezbednost/")
+@XmlRootElement(name = "MT103Request", namespace = "http://MT103.ws.xml.poslovna.bezbednost/")
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "MT103Request", propOrder = {
-    "idPoruke",
-    "bankaDuznika",
-    "bankaPoverioca",
-    "nalog",
-    "sifraValute"
-}, namespace="http://MT103.ws.xml.poslovna.bezbednost/")
+@XmlType(name = "MT103Request", propOrder = { "idPoruke", "bankaDuznika", "bankaPoverioca", "nalog",
+		"sifraValute" }, namespace = "http://MT103.ws.xml.poslovna.bezbednost/")
 public class MT103Request {
 
-    @XmlElement(name = "IDPoruke", required = true)
-    protected String idPoruke;
-    @XmlElement(name = "BankaDuznika", required = true)
-    protected TSWIFTIRacun bankaDuznika;
-    @XmlElement(name = "BankaPoverioca", required = true)
-    protected TSWIFTIRacun bankaPoverioca;
-    @XmlElement(name = "Nalog", required = true)
-    protected TNalog nalog;
-    @XmlElement(name = "SifraValute", required = true)
-    protected String sifraValute;
+	@XmlElement(name = "IDPoruke", required = true)
+	protected String idPoruke;
+	@XmlElement(name = "BankaDuznika", required = true)
+	protected TSWIFTIRacun bankaDuznika;
+	@XmlElement(name = "BankaPoverioca", required = true)
+	protected TSWIFTIRacun bankaPoverioca;
+	@XmlElement(name = "Nalog", required = true)
+	protected TNalog nalog;
+	@XmlElement(name = "SifraValute", required = true)
+	protected String sifraValute;
 
-    /**
-     * Gets the value of the idPoruke property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getIDPoruke() {
-        return idPoruke;
-    }
+	/**
+	 * Gets the value of the idPoruke property.
+	 * 
+	 * @return possible object is {@link String }
+	 * 
+	 */
+	public String getIDPoruke() {
+		return idPoruke;
+	}
 
-    /**
-     * Sets the value of the idPoruke property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setIDPoruke(String value) {
-        this.idPoruke = value;
-    }
+	/**
+	 * Sets the value of the idPoruke property.
+	 * 
+	 * @param value
+	 *            allowed object is {@link String }
+	 * 
+	 */
+	public void setIDPoruke(String value) {
+		this.idPoruke = value;
+	}
 
-    /**
-     * Gets the value of the bankaDuznika property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link TSWIFTIRacun }
-     *     
-     */
-    public TSWIFTIRacun getBankaDuznika() {
-        return bankaDuznika;
-    }
+	/**
+	 * Gets the value of the bankaDuznika property.
+	 * 
+	 * @return possible object is {@link TSWIFTIRacun }
+	 * 
+	 */
+	public TSWIFTIRacun getBankaDuznika() {
+		return bankaDuznika;
+	}
 
-    /**
-     * Sets the value of the bankaDuznika property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link TSWIFTIRacun }
-     *     
-     */
-    public void setBankaDuznika(TSWIFTIRacun value) {
-        this.bankaDuznika = value;
-    }
+	/**
+	 * Sets the value of the bankaDuznika property.
+	 * 
+	 * @param value
+	 *            allowed object is {@link TSWIFTIRacun }
+	 * 
+	 */
+	public void setBankaDuznika(TSWIFTIRacun value) {
+		this.bankaDuznika = value;
+	}
 
-    /**
-     * Gets the value of the bankaPoverioca property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link TSWIFTIRacun }
-     *     
-     */
-    public TSWIFTIRacun getBankaPoverioca() {
-        return bankaPoverioca;
-    }
+	/**
+	 * Gets the value of the bankaPoverioca property.
+	 * 
+	 * @return possible object is {@link TSWIFTIRacun }
+	 * 
+	 */
+	public TSWIFTIRacun getBankaPoverioca() {
+		return bankaPoverioca;
+	}
 
-    /**
-     * Sets the value of the bankaPoverioca property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link TSWIFTIRacun }
-     *     
-     */
-    public void setBankaPoverioca(TSWIFTIRacun value) {
-        this.bankaPoverioca = value;
-    }
+	/**
+	 * Sets the value of the bankaPoverioca property.
+	 * 
+	 * @param value
+	 *            allowed object is {@link TSWIFTIRacun }
+	 * 
+	 */
+	public void setBankaPoverioca(TSWIFTIRacun value) {
+		this.bankaPoverioca = value;
+	}
 
-    /**
-     * Gets the value of the nalog property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link TNalog }
-     *     
-     */
-    public TNalog getNalog() {
-        return nalog;
-    }
+	/**
+	 * Gets the value of the nalog property.
+	 * 
+	 * @return possible object is {@link TNalog }
+	 * 
+	 */
+	public TNalog getNalog() {
+		return nalog;
+	}
 
-    /**
-     * Sets the value of the nalog property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link TNalog }
-     *     
-     */
-    public void setNalog(TNalog value) {
-        this.nalog = value;
-    }
+	/**
+	 * Sets the value of the nalog property.
+	 * 
+	 * @param value
+	 *            allowed object is {@link TNalog }
+	 * 
+	 */
+	public void setNalog(TNalog value) {
+		this.nalog = value;
+	}
 
-    /**
-     * Gets the value of the sifraValute property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getSifraValute() {
-        return sifraValute;
-    }
+	/**
+	 * Gets the value of the sifraValute property.
+	 * 
+	 * @return possible object is {@link String }
+	 * 
+	 */
+	public String getSifraValute() {
+		return sifraValute;
+	}
 
-    /**
-     * Sets the value of the sifraValute property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setSifraValute(String value) {
-        this.sifraValute = value;
-    }
+	/**
+	 * Sets the value of the sifraValute property.
+	 * 
+	 * @param value
+	 *            allowed object is {@link String }
+	 * 
+	 */
+	public void setSifraValute(String value) {
+		this.sifraValute = value;
+	}
 
 }

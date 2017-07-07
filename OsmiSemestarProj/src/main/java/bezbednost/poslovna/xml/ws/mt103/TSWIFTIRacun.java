@@ -5,7 +5,6 @@
 // Generated on: 2017.06.20 at 12:51:42 AM CEST 
 //
 
-
 package bezbednost.poslovna.xml.ws.mt103;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -13,11 +12,13 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
-
 /**
- * <p>Java class for TSWIFTIRacun complex type.
+ * <p>
+ * Java class for TSWIFTIRacun complex type.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * <p>
+ * The following schema fragment specifies the expected content contained within
+ * this class.
  * 
  * <pre>
  * &lt;complexType name="TSWIFTIRacun">
@@ -35,63 +36,54 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "TSWIFTIRacun", propOrder = {
-    "swift",
-    "obracunskiRacun"
-})
+@XmlType(name = "TSWIFTIRacun", propOrder = { "swift", "obracunskiRacun" })
 public class TSWIFTIRacun {
 
-    @XmlElement(name = "SWIFT", required = true)
-    protected String swift;
-    @XmlElement(name = "ObracunskiRacun", required = true)
-    protected String obracunskiRacun;
+	@XmlElement(name = "SWIFT", required = true)
+	protected String swift;
+	@XmlElement(name = "ObracunskiRacun", required = true)
+	protected String obracunskiRacun;
 
-    /**
-     * Gets the value of the swift property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getSWIFT() {
-        return swift;
-    }
+	/**
+	 * Gets the value of the swift property.
+	 * 
+	 * @return possible object is {@link String }
+	 * 
+	 */
+	public String getSWIFT() {
+		return swift;
+	}
 
-    /**
-     * Sets the value of the swift property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setSWIFT(String value) {
-        this.swift = value;
-    }
+	/**
+	 * Sets the value of the swift property.
+	 * 
+	 * @param value
+	 *            allowed object is {@link String }
+	 * 
+	 */
+	public void setSWIFT(String value) {
+		this.swift = value;
+	}
 
-    /**
-     * Gets the value of the obracunskiRacun property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getObracunskiRacun() {
-        return obracunskiRacun;
-    }
+	/**
+	 * Gets the value of the obracunskiRacun property.
+	 * 
+	 * @return possible object is {@link String }
+	 * 
+	 */
+	public String getObracunskiRacun() {
+		return obracunskiRacun;
+	}
 
-    /**
-     * Sets the value of the obracunskiRacun property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setObracunskiRacun(String value) {
-        this.obracunskiRacun = value;
-    }
+	/**
+	 * Sets the value of the obracunskiRacun property.
+	 * 
+	 * @param value
+	 *            allowed object is {@link String }
+	 * 
+	 */
+	public void setObracunskiRacun(String value) {
+		this.obracunskiRacun = value;
+	}
 
 }
