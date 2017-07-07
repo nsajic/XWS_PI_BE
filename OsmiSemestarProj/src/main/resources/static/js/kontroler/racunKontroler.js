@@ -1,6 +1,6 @@
 var racunKontroler = angular.module('xws_pi_bezb.racunKontroler', []);
 
-racunKontroler.controller('racunCtrl', function($scope, racunServis, $window, $location, klijentServis) {
+racunKontroler.controller('racunCtrl', function($scope, racunServis, $window, $location, klijentServis, medjubankarskiServis) {
 
 	$scope.resetujPoljaPretragaRacuni = function(){
 		$scope.brojRacunaPretraga = null;
@@ -25,6 +25,7 @@ racunKontroler.controller('racunCtrl', function($scope, racunServis, $window, $l
 		$scope.idRacunaZaZatvaranje = -1;
 		$scope.idRacunaZaDnevnaStanja = -1;
 		$scope.idDnevnogStanjaZaAnalitiku = -1;
+		$scope.idAnalitikeZaMedjubankarskePrenose = -1;
 	}
 	
 	$scope.izlistajRacune = function (){
@@ -117,10 +118,12 @@ racunKontroler.controller('racunCtrl', function($scope, racunServis, $window, $l
 	$scope.idRacunaZaZatvaranje = -1;
 	$scope.idRacunaZaDnevnaStanja = -1;
 	$scope.idDnevnogStanjaZaAnalitiku = -1;
+	$scope.idAnalitikeZaMedjubankarskePrenose = -1;
 	$scope.kojaLicaDaPrikaze = "F";
 	$scope.tipKlijentaModel = 1;
 	$scope.dnevnaStanjaOdabranogRacuna = [];
-	$scope.analitikeOdabranogDnevnogStanja = [];
+	$scope.analitikeOdabranogDnevnogStanja = []
+	$scope.medjubankarskiOdabraneAnalitike = [];
 	
 
 	
@@ -188,8 +191,10 @@ racunKontroler.controller('racunCtrl', function($scope, racunServis, $window, $l
 		});
 	}
 	
+	
+	
 	$scope.getPrikaziSveRacune = function (){
-		return $scope.idRacunaZaIzmenu == -1 && $scope.idRacunaZaZatvaranje == -1 && $scope.idDnevnogStanjaZaAnalitiku == -1 && $scope.idRacunaZaDnevnaStanja == -1;
+		return $scope.idAnalitikeZaMedjubankarskePrenose == -1 && $scope.idRacunaZaIzmenu == -1 && $scope.idRacunaZaZatvaranje == -1 && $scope.idDnevnogStanjaZaAnalitiku == -1 && $scope.idRacunaZaDnevnaStanja == -1;
 	}
 	
 	$scope.getIdRacunaZaZatvaranje = function (){
@@ -198,6 +203,10 @@ racunKontroler.controller('racunCtrl', function($scope, racunServis, $window, $l
 	
 	$scope.getIdDnevnogStanjaZaAnalitiku = function (){
 		return $scope.idDnevnogStanjaZaAnalitiku;
+	}
+	
+	$scope.getIdAnalitikeZaMedjubankarskePrenose = function (){
+		return $scope.idAnalitikeZaMedjubankarskePrenose;
 	}
 	
 	$scope.getIdRacuna = function (){
@@ -256,6 +265,18 @@ racunKontroler.controller('racunCtrl', function($scope, racunServis, $window, $l
 		});
 	}
 	
+	$scope.setAnalitikaZaNext = function(analitika){
+		$scope.resetujZaView();
+		$scope.idAnalitikeZaMedjubankarskePrenose = analitika.id
+		
+		medjubankarskiServis.ucitajMedjubankarskeOdabraneAnalitike(analitika).success(function(data) {
+			alert('ssssssssss');
+			$scope.medjubankarskiOdabraneAnalitike = data;
+		}).error(function(data) {
+			alert("Nemoguce ucitati analitike");
+		});
+	}
+	
 	
 	$scope.prebaciSredstva = function(){
 		var racun = {
@@ -280,6 +301,10 @@ racunKontroler.controller('racunCtrl', function($scope, racunServis, $window, $l
 	$scope.nazadNaDnevnaStanja = function (){
 		$scope.resetujZaView();
 		$scope.idRacunaZaDnevnaStanja = 0;
+	}
+	$scope.nazadNaAnalitike = function (){
+		$scope.resetujZaView();
+		$scope.idDnevnogStanjaZaAnalitiku= 0;
 	}
 
 

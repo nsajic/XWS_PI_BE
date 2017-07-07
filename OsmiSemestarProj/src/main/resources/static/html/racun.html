@@ -58,18 +58,45 @@
 						<td style = "width:150px; heigth: 70px">Racun poverioca</td>
 						<td style = "width:130px; heigth: 70px">Iznos</td>
 					</tr>
-					<tr  ng-repeat='dnevnoStanje in analitikeOdabranogDnevnogStanja'>
-						<td style = "width:100px; heigth: 70px"ž>{{dnevnoStanje.datumAnalitike  | date }}</td>
-						<td style = "width:130px; heigth: 70px">{{dnevnoStanje.smer}}</td>
-						<td style = "width:100px; heigth: 70px">{{dnevnoStanje.datumNaloga  | date}}</td>
-						<td style = "width:150px; heigth: 70px">{{dnevnoStanje.racunDuznika}}</td>
-						<td style = "width:150px; heigth: 70px">{{dnevnoStanje.racunPoverioca}}</td>
-						<td style = "width:130px; heigth: 70px">{{dnevnoStanje.iznos}}</td>
-						<td><button ng-click="">neko dugme</button> </td>
+					<tr  ng-repeat='analitika in analitikeOdabranogDnevnogStanja'>
+						<td style = "width:100px; heigth: 70px">{{analitika.datumAnalitike  | date }}</td>
+						<td style = "width:130px; heigth: 70px">{{analitika.smer}}</td>
+						<td style = "width:100px; heigth: 70px">{{analitika.datumNaloga  | date}}</td>
+						<td style = "width:150px; heigth: 70px">{{analitika.racunDuznika}}</td>
+						<td style = "width:150px; heigth: 70px">{{analitika.racunPoverioca}}</td>
+						<td style = "width:130px; heigth: 70px">{{analitika.iznos}}</td>
+						<td><button ng-click="setAnalitikaZaNext(analitika)">Medjubankarski</button> </td>
 					</tr>
 				</table>
 				<button ng-click="nazadNaDnevnaStanja()">Nazad</button>	
-				
+			</div>
+			
+			<div ng-show = "getIdAnalitikeZaMedjubankarskePrenose() !== -1">
+				<table ng-show = "medjubankarskiOdabraneAnalitike.length != 0">
+					<tr>
+						<td style = "width:120px; heigth: 70px">Vrsta poruke</td>
+						<td style = "width:120px; heigth: 70px">Datum</td>
+						<td style = "width:120px; heigth: 70px">Iznos</td>
+						<td style = "width:120px; heigth: 70px">Swift banke duznika</td>
+						<td style = "width:120px; heigth: 70px">Swift banke poverioca</td>
+						<td style = "width:120px; heigth: 70px">Swift banke duznika</td>
+						<td style = "width:120px; heigth: 70px">Swift banke poverioca</td>
+						<td style = "width:120px; heigth: 70px">Datum valute</td>
+					</tr>
+				</table>		
+				<table ng-repeat='mBankarski in medjubankarskiOdabraneAnalitike'>
+					<tr>
+						<td style = "width:120px; heigth: 70px">{{mBankarski.vrstaPoruke}}</td>
+						<td style = "width:120px; heigth: 70px">{{mBankarski.datum | date}}</td>
+						<td style = "width:120px; heigth: 70px">{{mBankarski.iznos}}</td>
+						<td style = "width:120px; heigth: 70px">{{mBankarski.swiftKodBankeDuznika}}</td>
+						<td style = "width:120px; heigth: 70px">{{mBankarski.swiftKodBankePoverioca}}</td>
+						<td style = "width:120px; heigth: 70px">{{mBankarski.obracunskiPeriodBankeDuznika}}</td>
+						<td style = "width:120px; heigth: 70px">{{mBankarski.obracunskiPeriodBankePoverioca}}</td>
+						<td style = "width:120px; heigth: 70px">{{mBankarski.datumValute | date}}</td>
+					</tr>
+				</table>
+				<button ng-click="nazadNaAnalitike()">Nazad</button>	
 			</div>
 			
 			<div ng-show = "getPrikaziSveRacune()" >

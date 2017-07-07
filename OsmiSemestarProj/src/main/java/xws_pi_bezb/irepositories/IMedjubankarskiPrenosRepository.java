@@ -20,4 +20,5 @@ public interface IMedjubankarskiPrenosRepository extends JpaRepository<Medjubank
 
 	List<MedjubankarskiPrenos> findByBankaPosiljalac(Banka banka);
 
+
 }

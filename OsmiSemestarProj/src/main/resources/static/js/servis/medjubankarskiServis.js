@@ -10,6 +10,13 @@ medjubankarskiServis.factory('medjubankarskiServis', function($http) {
 	temp.izlistajMedjubankarskePrenose = function(data) {
 		return $http.get('/medjubankarskiPrenosKontroler/izlistajMedjubankarskePrenose');
 	}
+	
+	temp.ucitajMedjubankarskeOdabraneAnalitike = function(data) {
+		console.log('sssss');
+		console.log(data);
+		console.log('sssss');
+		return $http.post('/medjubankarskiPrenosKontroler/ucitajMedjubankarskeOdabraneAnalitike', data);
+	}
 
 	return temp;
 
