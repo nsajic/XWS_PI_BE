@@ -17,4 +17,6 @@ public interface IDnevnoStanjeRacunaService {
 	DnevnoStanjeRacuna findTopByRacunOrderByDatum(Racun racun);
 
 	DnevnoStanjeRacuna findByRacunAndDatum(Racun racunD, Date date);
+
+	List<DnevnoStanjeRacuna> findByRacunAndDatumBetween(Racun getiDrac, Date datumOd, Date datumDo);
 }

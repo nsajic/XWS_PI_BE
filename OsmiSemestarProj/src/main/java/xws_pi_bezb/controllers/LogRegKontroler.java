@@ -1,8 +1,10 @@
 package xws_pi_bezb.controllers;
 
+import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.GregorianCalendar;
+import java.util.List;
 
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.DatatypeFactory;
@@ -24,14 +26,23 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import bezbednost.poslovna.xml.ws.mt102.MT102Request;
 import bezbednost.poslovna.xml.ws.mt102.TPojedinacnoPlacanje;
 import bezbednost.poslovna.xml.ws.mt103.TSWIFTIRacun;
+import bezbednost.poslovna.xml.ws.nalogzaprenos.TNalog;
 import bezbednost.poslovna.xml.ws.nalogzaprenos.TPodaciORacunu;
 import xws_pi_bezb.BankaKlijentSamoTest;
 import xws_pi_bezb.helpers.Poruka;
+import xws_pi_bezb.iservices.IAnalitikaIzvodaService;
 import xws_pi_bezb.iservices.IBankaService;
 import xws_pi_bezb.iservices.IBankarskiSluzbenikService;
+import xws_pi_bezb.iservices.IDnevnoStanjeRacunaService;
 import xws_pi_bezb.iservices.IMT102Services;
+import xws_pi_bezb.iservices.IRacunService;
+import xws_pi_bezb.models.AnalitikaIzvoda;
+import xws_pi_bezb.models.AnalitikaIzvodaXML;
 import xws_pi_bezb.models.Banka;
+import xws_pi_bezb.models.DnevnoStanjeRacuna;
+import xws_pi_bezb.models.Izvodi;
 import xws_pi_bezb.models.MT102;
+import xws_pi_bezb.models.Racun;
 import xws_pi_bezb.models.korisnici.BankarskiSluzbenik;
 import xws_pi_bezb.password_security.Password;
 import xws_pi_bezb.password_security.PasswordValidator;
@@ -44,6 +55,9 @@ import xws_pi_bezb.view_models.PromenaLozinkeViewModel;
 public class LogRegKontroler {
 
 	@Autowired
+	private IRacunService racunService;
+	
+	@Autowired
 	private IBankarskiSluzbenikService bankarskiSluzbenikService;
 
 	@Autowired
@@ -51,6 +65,12 @@ public class LogRegKontroler {
 
 	@Autowired
 	private IMT102Services mt102Services;
+
+	@Autowired
+	private IAnalitikaIzvodaService analitikaIzvodaService;
+
+	@Autowired
+	private IDnevnoStanjeRacunaService dnevnoStanjeRacunaService;
 
 	/*
 	 * @Autowired private PasswordEncoder passwordEncoder;
@@ -175,7 +195,8 @@ public class LogRegKontroler {
 
 		BankaKlijentSamoTest klijent = new BankaKlijentSamoTest();
 
-		for (MT102 mt102 : mt102Services.findBySwiftDuznikOrSwiftPoverilacAndPoslat(banka.getSwiftKod(),banka.getSwiftKod(), false)) {
+		for (MT102 mt102 : mt102Services.findBySwiftDuznikOrSwiftPoverilacAndPoslat(banka.getSwiftKod(),
+				banka.getSwiftKod(), false)) {
 			MT102Request mt102Request = konvertujMT102(mt102);
 
 			klijent.posaljiMT102(mt102Request);
@@ -258,7 +279,7 @@ public class LogRegKontroler {
 			rac1.setModel(mt102.getPojedinacnoPlacanje().get(i).getModelPoverilac());
 			rac1.setRacun(mt102.getPojedinacnoPlacanje().get(i).getRacunPoverilac());
 			pojed.setPoverilacRacun(rac1);
-			
+
 			pojed.setIznos(mt102.getPojedinacnoPlacanje().get(i).getIznos());
 			pojed.setSifraValute(mt102.getPojedinacnoPlacanje().get(i).getSifraValute());
 
@@ -270,19 +291,98 @@ public class LogRegKontroler {
 
 	@RequestMapping(value = "/spisakRacuna", method = RequestMethod.POST)
 	public ResponseEntity<Poruka> spisakRacuna() {
-		
+
 		return new ResponseEntity<Poruka>(new Poruka("Spisak exportovan.", null), HttpStatus.ACCEPTED);
 	}
-	
+
 	@RequestMapping(value = "/zatraziIzvode", method = RequestMethod.POST)
 	public ResponseEntity<Poruka> zatraziIzvode(@RequestBody IzvodiViewModel izvodiVM) {
-		
-		return new ResponseEntity<Poruka>(new Poruka("Promeni ovde kakvo obavestenje treba biti.", null), HttpStatus.ACCEPTED);
+
+		return new ResponseEntity<Poruka>(new Poruka("Promeni ovde kakvo obavestenje treba biti.", null),
+				HttpStatus.ACCEPTED);
 	}
-	
+
 	@RequestMapping(value = "/izvodiUXML", method = RequestMethod.POST)
-	public ResponseEntity<Poruka> izvodiUXML() {
+	public ResponseEntity<Poruka> izvodiUXML(@RequestBody IzvodiViewModel izvodiVM) {
+
+		List<AnalitikaIzvodaXML> analitikaXML = new ArrayList<AnalitikaIzvodaXML>();
 		
+		Racun r = racunService.findOne(izvodiVM.getiDrac());
+		
+		List<DnevnoStanjeRacuna> dsr = dnevnoStanjeRacunaService.findByRacunAndDatumBetween(r,izvodiVM.getDatumOd(), izvodiVM.getDatumDo());
+		DnevnoStanjeRacuna poslednjeDSR = dsr.get(dsr.size() - 1);
+
+		for (DnevnoStanjeRacuna dnevnoStanje : dsr) {
+			List<AnalitikaIzvoda> analitikeIzvoda = analitikaIzvodaService.findByDnevnoStanjeRacuna(dnevnoStanje);
+			for (AnalitikaIzvoda ai : analitikeIzvoda) {
+				AnalitikaIzvodaXML analitikaIzvXML = new AnalitikaIzvodaXML();
+
+				analitikaIzvXML.setSmer(ai.getSmer());
+
+				GregorianCalendar gcal = (GregorianCalendar) GregorianCalendar.getInstance();
+				gcal.setTime(ai.getDatumAnalitike());
+				XMLGregorianCalendar xgcal;
+				try {
+					xgcal = DatatypeFactory.newInstance().newXMLGregorianCalendar(gcal);
+					analitikaIzvXML.setDatumAnalitike(xgcal);
+				} catch (DatatypeConfigurationException e) {
+					e.printStackTrace();
+				}
+
+				TNalog nalog = new TNalog();
+				
+				gcal = (GregorianCalendar) GregorianCalendar.getInstance();
+				gcal.setTime(ai.getDatumNaloga());
+				try {
+					xgcal = DatatypeFactory.newInstance().newXMLGregorianCalendar(gcal);
+					nalog.setDatumNaloga(xgcal);
+				} catch (DatatypeConfigurationException e1) {
+					e1.printStackTrace();
+				}
+
+				gcal = (GregorianCalendar) GregorianCalendar.getInstance();
+				gcal.setTime(ai.getDatumValute());
+				try {
+					xgcal = DatatypeFactory.newInstance().newXMLGregorianCalendar(gcal);
+					nalog.setDatumValute(xgcal);
+				} catch (DatatypeConfigurationException e) {
+					e.printStackTrace();
+				}
+				
+				nalog.setDuznik(ai.getDuznikNalogodavac());
+				nalog.setIznos(BigDecimal.valueOf(ai.getIznos()));
+				nalog.setPrimalac(ai.getPrimalacPoverilac());
+				nalog.setSvrhaPlacanja(ai.getSvrhaPlacanja());
+				
+				TPodaciORacunu duznik = new TPodaciORacunu();
+				duznik.setModel(ai.getModelZaduzenja());
+				duznik.setPozivNaBroj(ai.getPozivNaBrojZaduzenja());
+				duznik.setRacun(ai.getRacunDuznika());
+				
+				TPodaciORacunu poverilac = new TPodaciORacunu();
+				poverilac.setModel(ai.getModelOdobrenja());
+				poverilac.setPozivNaBroj(ai.getPozivNaBrojOdobrenja());
+				poverilac.setRacun(ai.getRacunPoverioca());
+				
+				nalog.setDuznikRacun(duznik);
+				nalog.setPoverilacRacun(poverilac);
+				
+				analitikaIzvXML.setNalog(nalog);
+				analitikaXML.add(analitikaIzvXML);
+
+			}
+		}
+		
+		Izvodi izvodi = new Izvodi();
+		izvodi.setAnalitike(analitikaXML);
+		izvodi.setNovoStanje(BigDecimal.valueOf(poslednjeDSR.getNovoStanje()));
+		izvodi.setPrethodnoStanje(BigDecimal.valueOf(poslednjeDSR.getPrethodnoStanje()));
+		izvodi.setUkupnoNaTeret(BigDecimal.valueOf(poslednjeDSR.getPrometNaTeret()));
+		izvodi.setUkupnoUKorist(BigDecimal.valueOf(poslednjeDSR.getPrometUKorist()));
+		
+		BankaKlijentSamoTest klijent = new BankaKlijentSamoTest();
+		klijent.posaljiIzvod(izvodi);
+
 		return new ResponseEntity<Poruka>(new Poruka("Spisak izvoda u XML exportovan.", null), HttpStatus.ACCEPTED);
-	}	
+	}
 }

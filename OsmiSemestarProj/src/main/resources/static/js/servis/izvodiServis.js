@@ -8,6 +8,10 @@ izvodiServis.factory('izvodiServis', function($http) {
 		return $http.post('/contr/zatraziIzvode', data);
 	}
 	
+	temp.izvodiUXML = function(data){
+		return $http.post('/contr/izvodiUXML', data);
+	}
+	
 	return temp;
 	
 });

@@ -14,9 +14,7 @@ welcomeServis.factory('welcomeServis', function($http) {
 		return $http.post('/contr/spisakRacuna');
 	}
 
-	temp.izvodiUXML = function(){
-		return $http.post('/contr/izvodiUXML');
-	}
+	
 	
 	return temp;
 })

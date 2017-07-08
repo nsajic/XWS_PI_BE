@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?><ns4:NalogZaPrenosRequest xmlns:ns4="http://nalogzaprenos.ws.xml.poslovna.bezbednost/" xmlns:ns2="http://www.w3.org/2001/04/xmlenc#" xmlns:ns3="http://www.w3.org/2000/09/xmldsig#">
     <Hitno>false</Hitno>
     
-    <IDPoruke>NalogPlacanje-17</IDPoruke>
+    <IDPoruke>NalogPlacanje-15</IDPoruke>
     <Nalog>
         <Duznik>Duznik 33</Duznik>
-        <SvrhaPlacanja>Svrha placanja - kl 4</SvrhaPlacanja>
+        <SvrhaPlacanja>Svrha placanja - 5</SvrhaPlacanja>
         <Primalac>Primalac12313</Primalac>
         <DatumNaloga>2017-06-15+00:01</DatumNaloga>
         <DatumValute>2017-06-10+00:01</DatumValute>
@@ -18,9 +18,9 @@
             <Model>90</Model>
             <PozivNaBroj>neki broj...3121</PozivNaBroj>
         </PoverilacRacun>
-        <Iznos>200000</Iznos>
+        <Iznos>100000</Iznos>
     </Nalog>
     <OznakaValute>RSD</OznakaValute>
-    <Hitno>false</Hitno>
+    <Hitno>true</Hitno>
 
 </ns4:NalogZaPrenosRequest>

@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ns2:AnalitikeIzvod xmlns:ns2="http://analitikeizvod.ws.xml.poslovna.bezbednost/">
+    <PrethodnoStanje>8000.0</PrethodnoStanje>
+    <UkupnoUKorist>500.0</UkupnoUKorist>
+    <UkupnoNaTeret>200.0</UkupnoNaTeret>
+    <NovoStanje>10000.0</NovoStanje>
+    <Analitike>
+        <DatumAnalitike>2017-04-15+02:00</DatumAnalitike>
+        <Nalog>
+            <Duznik>Pera Peric</Duznik>
+            <SvrhaPlacanja>Kupljene stolice</SvrhaPlacanja>
+            <Primalac>Sima Simic</Primalac>
+            <DatumNaloga>2017-04-15+02:00</DatumNaloga>
+            <DatumValute>2017-04-15+02:00</DatumValute>
+            <DuznikRacun>
+                <Racun>435-34543324-453</Racun>
+                <Model>98</Model>
+                <PozivNaBroj>78945655-45767</PozivNaBroj>
+            </DuznikRacun>
+            <PoverilacRacun>
+                <Racun>321-4423254-324</Racun>
+                <Model>97</Model>
+                <PozivNaBroj>111-2223334445556-78</PozivNaBroj>
+            </PoverilacRacun>
+            <Iznos>3000.0</Iznos>
+        </Nalog>
+        <Smer>izv</Smer>
+    </Analitike>
+    <Analitike>
+        <DatumAnalitike>2017-04-15+02:00</DatumAnalitike>
+        <Nalog>
+            <Duznik>Pera Peric</Duznik>
+            <SvrhaPlacanja>Kupljene papuce</SvrhaPlacanja>
+            <Primalac>Djura Djuric</Primalac>
+            <DatumNaloga>2017-04-15+02:00</DatumNaloga>
+            <DatumValute>2017-04-15+02:00</DatumValute>
+            <DuznikRacun>
+                <Racun>65-76876-453</Racun>
+                <Model>98</Model>
+                <PozivNaBroj>111-2223334445556-78</PozivNaBroj>
+            </DuznikRacun>
+            <PoverilacRacun>
+                <Racun>321-4423254-324</Racun>
+                <Model>97</Model>
+                <PozivNaBroj>876-7467768826</PozivNaBroj>
+            </PoverilacRacun>
+            <Iznos>5000.0</Iznos>
+        </Nalog>
+        <Smer>izv</Smer>
+    </Analitike>
+    <Analitike>
+        <DatumAnalitike>2017-04-15+02:00</DatumAnalitike>
+        <Nalog>
+            <Duznik>Pera Peric</Duznik>
+            <SvrhaPlacanja>Kupljene majice</SvrhaPlacanja>
+            <Primalac>Sara Saric</Primalac>
+            <DatumNaloga>2017-04-15+02:00</DatumNaloga>
+            <DatumValute>2017-04-15+02:00</DatumValute>
+            <DuznikRacun>
+                <Racun>435-567-453</Racun>
+                <Model>98</Model>
+                <PozivNaBroj>78948655-464577</PozivNaBroj>
+            </DuznikRacun>
+            <PoverilacRacun>
+                <Racun>321-4423254-324</Racun>
+                <Model>97</Model>
+                <PozivNaBroj>111-2223334445556-78</PozivNaBroj>
+            </PoverilacRacun>
+            <Iznos>7000.0</Iznos>
+        </Nalog>
+        <Smer>izv</Smer>
+    </Analitike>
+    <Analitike>
+        <DatumAnalitike>2017-04-15+02:00</DatumAnalitike>
+        <Nalog>
+            <Duznik>Pera Peric</Duznik>
+            <SvrhaPlacanja>Kupljene kape</SvrhaPlacanja>
+            <Primalac>Siki Sikic</Primalac>
+            <DatumNaloga>2017-04-15+02:00</DatumNaloga>
+            <DatumValute>2017-04-15+02:00</DatumValute>
+            <DuznikRacun>
+                <Racun>435-577857-453</Racun>
+                <Model>98</Model>
+                <PozivNaBroj>78689655-448577</PozivNaBroj>
+            </DuznikRacun>
+            <PoverilacRacun>
+                <Racun>321-4423254-324</Racun>
+                <Model>97</Model>
+                <PozivNaBroj>111-2223334445556-78</PozivNaBroj>
+            </PoverilacRacun>
+            <Iznos>8000.0</Iznos>
+        </Nalog>
+        <Smer>izv</Smer>
+    </Analitike>
+    <Analitike>
+        <DatumAnalitike>2017-04-15+02:00</DatumAnalitike>
+        <Nalog>
+            <Duznik>Pera Peric</Duznik>
+            <SvrhaPlacanja>Kupljene cigle</SvrhaPlacanja>
+            <Primalac>Saki Sakic</Primalac>
+            <DatumNaloga>2017-04-15+02:00</DatumNaloga>
+            <DatumValute>2017-04-15+02:00</DatumValute>
+            <DuznikRacun>
+                <Racun>45-8766-453</Racun>
+                <Model>98</Model>
+                <PozivNaBroj>111-2223334445556-78</PozivNaBroj>
+            </DuznikRacun>
+            <PoverilacRacun>
+                <Racun>321-4423254-324</Racun>
+                <Model>97</Model>
+                <PozivNaBroj>895454-74584526</PozivNaBroj>
+            </PoverilacRacun>
+            <Iznos>9000.0</Iznos>
+        </Nalog>
+        <Smer>izv</Smer>
+    </Analitike>
+</ns2:AnalitikeIzvod>

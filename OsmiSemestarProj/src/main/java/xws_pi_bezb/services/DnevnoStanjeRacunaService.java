@@ -43,4 +43,9 @@ public class DnevnoStanjeRacunaService implements IDnevnoStanjeRacunaService {
 		return dnevnoStanjeRacunaRepository.findByRacunAndDatum(racunD, date);
 	}
 
+	@Override
+	public List<DnevnoStanjeRacuna> findByRacunAndDatumBetween(Racun getiDrac, Date datumOd, Date datumDo) {
+		return dnevnoStanjeRacunaRepository.findByRacunAndDatumBetween(getiDrac, datumOd, datumDo);
+	}
+
 }
